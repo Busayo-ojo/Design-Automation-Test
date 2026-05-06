@@ -1,43 +1,26 @@
-import { Meta, Typeset } from '@storybook/blocks';
+import { Meta } from '@storybook/blocks';
+import { TypographyShowcase } from '../components/Typography';
 
-<Meta title="Foundations/Typography Token" />
+<Meta title="Typography" />
 
-# Typography Tokens
+# Typography
 
-Typography variables dictate consistent type scaling and legibility throughout the FMDQ application environment. Note: See the **Typography** under the Components section for React component documentation.
+Typography is the foundation of the FMDQ digital experience. It dictates legibility, hierarchy, and brand personality across all platforms. We utilize **DM Sans** as our primary typeface for its modern, clean, and professional aesthetic.
 
-<p style={{ padding: '8px 0', marginBottom: '8px' }}>
-  <a href="https://fonts.google.com/specimen/DM+Sans" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: 'inherit' }}>
+<div style={{ display: 'flex', gap: '16px', marginBottom: '48px', marginTop: '24px' }}>
+  <a href="https://fonts.google.com/specimen/DM+Sans" target="_blank" rel="noopener noreferrer" style={{ 
+    padding: '12px 24px', 
+    backgroundColor: '#183972', 
+    color: 'white', 
+    borderRadius: '8px', 
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    fontSize: '14px',
+    transition: 'opacity 0.2s ease'
+  }}>
     Download DM Sans from Google Fonts
   </a>
-</p>
+</div>
 
-## Font Family
-`--font-family-primary`: 'DM Sans', sans-serif;
+<TypographyShowcase />
 
-## Font Scale
-Current established tokens in the root:
-- `--font-size-display-lg`: 56px
-- `--font-size-display-sm`: 48px
-- `--font-size-h1`: 40px
-- `--font-size-h2`: 36px
-- `--font-size-h3`: 32px
-- `--font-size-h4`: 28px
-- `--font-size-h5`: 24px
-- `--font-size-h6`: 20px
-- `--font-size-p-lg`: 18px
-- `--font-size-p-md`: 16px
-- `--font-size-p-sm`: 14px
-- `--font-size-p-xs`: 12px
-- `--font-size-caption-lg`: 14px
-- `--font-size-caption-sm`: 12px
-- `--font-size-caption-xs`: 10px
-
-<br />
-
-<Typeset 
-  fontSizes={[10, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48, 56]} 
-  fontWeight="400" 
-  sampleText="The quick brown fox jumps over the lazy dog." 
-  fontFamily="'DM Sans', sans-serif" 
-/>
