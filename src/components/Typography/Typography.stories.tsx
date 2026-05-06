@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react-vite';
 import { Heading, Text, Label } from './index';
 
 const meta: Meta = {
-  title: 'Typography/Components',
+  title: 'Components/Typography',
   parameters: {
     layout: 'padded',
   },
