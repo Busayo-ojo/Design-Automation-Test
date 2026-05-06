@@ -36,7 +36,7 @@ export const Default: Story = {
         </div>
       </CardBody>
       <CardFooter style={{ justifyContent: 'flex-end' }}>
-        <Button variant="grey" outline>Decline</Button>
+        <Button variant="grey" buttonType="outlined">Decline</Button>
         <Button variant="primary">Approve Trade</Button>
       </CardFooter>
     </Card>

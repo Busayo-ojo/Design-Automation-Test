@@ -22,7 +22,7 @@ const sampleItems = [
 
 export const Default: Story = {
   args: {
-    trigger: <Button label="Actions (Click Me)" variant="secondary" outline />,
+    trigger: <Button label="Actions (Click Me)" variant="secondary" buttonType="outlined" />,
     items: sampleItems,
   },
 };

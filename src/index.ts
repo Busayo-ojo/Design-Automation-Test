@@ -1,5 +1,5 @@
 // Elements
-export * from './elements/Avatar';
+export * from './elements/Avatar/Avatar';
 export * from './elements/Button';
 export * from './elements/ButtonGroup';
 export * from './elements/Input';
@@ -19,7 +19,7 @@ export * from './components/Tabs';
 export * from './components/NavMenu';
 export * from './components/Modal';
 export * from './components/Card';
-export * from './components/Toast';
+// export * from './components/Toast';
 export * from './components/Drawer';
 
 // Layout

@@ -27,9 +27,9 @@ export const Default: Story = {
               Select an action below to manage the selected record.
             </Text>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <Button variant="secondary" outline>Download Report</Button>
-              <Button variant="secondary" outline>Share Record</Button>
-              <Button variant="destructive" outline>Delete Record</Button>
+              <Button variant="secondary" buttonType="outlined">Download Report</Button>
+              <Button variant="secondary" buttonType="outlined">Share Record</Button>
+              <Button variant="destructive" buttonType="outlined">Delete Record</Button>
             </div>
           </DrawerBody>
         </Drawer>
@@ -54,7 +54,7 @@ export const WithForm: Story = {
             </div>
           </DrawerBody>
           <DrawerFooter>
-            <Button variant="grey" outline onClick={() => setIsOpen(false)}>Cancel</Button>
+            <Button variant="grey" buttonType="outlined" onClick={() => setIsOpen(false)}>Cancel</Button>
             <Button variant="primary" onClick={() => setIsOpen(false)}>Save Changes</Button>
           </DrawerFooter>
         </Drawer>

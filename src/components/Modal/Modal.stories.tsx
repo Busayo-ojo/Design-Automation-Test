@@ -26,7 +26,7 @@ export const Default: Story = {
             Are you sure you want to delete this item? This action cannot be undone.
           </ModalBody>
           <ModalFooter>
-            <Button variant="grey" outline onClick={() => setIsOpen(false)}>Cancel</Button>
+            <Button variant="grey" buttonType="outlined" onClick={() => setIsOpen(false)}>Cancel</Button>
             <Button variant="destructive" onClick={() => setIsOpen(false)}>Delete</Button>
           </ModalFooter>
         </Modal>
@@ -51,7 +51,7 @@ export const WithForm: Story = {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button variant="grey" outline onClick={() => setIsOpen(false)}>Cancel</Button>
+            <Button variant="grey" buttonType="outlined" onClick={() => setIsOpen(false)}>Cancel</Button>
             <Button variant="primary" onClick={() => setIsOpen(false)}>Create</Button>
           </ModalFooter>
         </Modal>

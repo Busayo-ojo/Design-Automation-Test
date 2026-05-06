@@ -69,14 +69,14 @@ export const Default: Story = {
         <div style={{ position: 'relative' }}>
           <Button variant="text" iconStyle="icon-only" icon={<BellIcon />} />
           <div style={{ position: 'absolute', top: '0', right: '0' }}>
-            <Badge variant="destructive" size="sm" rounded>3</Badge>
+            <Badge color="error" size="sm">3</Badge>
           </div>
         </div>
         
         <Dropdown
           align="right"
           trigger={
-            <Button variant="secondary" outline>
+            <Button variant="secondary" buttonType="outlined">
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: 'var(--color-primary-default)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 'bold' }}>
                   BI

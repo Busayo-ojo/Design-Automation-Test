@@ -72,7 +72,7 @@
 
 /* Blue */
 .qasah-badge--color-blue.qasah-badge--type-filled {
-  background-color: #1671D9; /* extracted rgb(22, 113, 217) */
+  background-color: var(--color-fmdq-blue, #1D326D);
   color: #FFFFFF;
 }
 .qasah-badge--color-blue.qasah-badge--type-accent {

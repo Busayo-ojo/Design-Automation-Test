@@ -37,7 +37,7 @@ export const Default: Story = {
     ],
     actions: (
       <div style={{ display: 'flex', gap: '8px' }}>
-        <Button variant="secondary" outline icon={<ExportIcon />} iconStyle="leading icon">Export Data</Button>
+        <Button variant="secondary" buttonType="outlined" icon={<ExportIcon />} iconStyle="leading icon">Export Data</Button>
         <Button variant="primary" icon={<PlusIcon />} iconStyle="leading icon">New Trade</Button>
       </div>
     )

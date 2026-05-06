@@ -7,41 +7,116 @@
 .qasah-tab-list {
   display: flex;
   align-items: center;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.04);
   gap: var(--spacing-24);
   overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.qasah-tab-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Line Style List */
+.qasah-tab-list--line {
+  gap: 0;
+  border-bottom: 1px solid var(--color-neutral-200);
+}
+
+/* Pill Style List */
+.qasah-tab-list--pill {
+  gap: var(--spacing-8);
+  padding-bottom: var(--spacing-4);
+}
+
+.qasah-tab-list--full-width {
+  width: 100%;
+  display: flex;
+}
+
+.qasah-tab--full-width {
+  flex: 1;
 }
 
 .qasah-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
   background: none;
   border: none;
-  border-bottom: 2px solid transparent;
-  padding: var(--spacing-12) 0;
-  margin-bottom: -2px;
+  padding: 0;
   font-family: var(--font-family-primary);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-p-sm);
   font-weight: 500;
-  color: var(--color-grey-default);
+  color: var(--color-neutral-700);
   cursor: pointer;
   transition: all var(--transition-fast);
   white-space: nowrap;
+  outline: none;
 }
 
-.qasah-tab:hover:not(:disabled) {
-  color: var(--color-primary-hover);
-  transform: translateY(-1px);
+/* Line Style Tab */
+.qasah-tab--line {
+  padding: var(--spacing-16) var(--spacing-16) 15px var(--spacing-16);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
 }
 
-.qasah-tab--active {
-  color: var(--color-primary-default);
-  border-bottom-color: var(--color-primary-default);
+.qasah-tab--line:hover:not(:disabled) {
+  border-bottom-color: var(--color-neutral-500);
 }
 
+.qasah-tab--line.qasah-tab--active {
+  color: var(--color-primary-800);
+  border-bottom-color: var(--color-primary-800);
+}
+
+/* Pill Style Tab */
+.qasah-tab--pill {
+  border-radius: 6px;
+  border: 1px solid var(--color-neutral-200);
+  padding: var(--spacing-8) var(--spacing-12);
+}
+
+.qasah-tab--pill:hover:not(:disabled) {
+  background-color: var(--color-neutral-50);
+  border-color: var(--color-neutral-300);
+}
+
+.qasah-tab--pill.qasah-tab--active {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-800);
+  border-color: transparent;
+}
+
+/* Common States */
 .qasah-tab:disabled {
-  color: var(--color-grey-deactivated);
+  color: var(--color-neutral-300);
   cursor: not-allowed;
 }
 
+.qasah-tab--line:disabled {
+  border-bottom-color: var(--color-neutral-200);
+  opacity: 0.6;
+}
+
+.qasah-tab--pill:disabled {
+  background-color: var(--color-neutral-50);
+  border-color: var(--color-neutral-200);
+  opacity: 0.6;
+}
+
+.qasah-tab__icon {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.qasah-tab__number-tag {
+  pointer-events: none;
+}
+
+/* Tab Panel Animation */
 @keyframes tabPanelFadeIn {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
@@ -49,8 +124,8 @@
 
 .qasah-tab-panel {
   padding: var(--spacing-24) 0;
-  color: var(--color-grey-focused);
+  color: var(--color-neutral-700);
   font-family: var(--font-family-primary);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-p-sm);
   animation: tabPanelFadeIn 0.3s var(--transition-smooth) backwards;
 }
