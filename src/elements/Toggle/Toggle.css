@@ -1,0 +1,202 @@
+@import '../../tokens.css';
+
+/* ─── Brand colours (from Figma spec) ──────────────────────────────── */
+/* Active fill:   rgb(29, 50, 109)  → #1D326D  */
+/* Inactive border: rgb(208, 213, 221) → #D0D5DD */
+/* Switch off bg: rgb(228, 231, 236) → #E4E7EC  */
+
+/* ─── Base container ────────────────────────────────────────────────── */
+.qasah-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* Visually-hidden native input — keeps full keyboard & a11y support */
+.qasah-toggle__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.qasah-toggle--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.qasah-toggle--disabled .qasah-toggle__input {
+  cursor: not-allowed;
+}
+
+/* ─── Shared track base ─────────────────────────────────────────────── */
+.qasah-toggle__track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+  pointer-events: none; /* clicks go through to the hidden input */
+}
+
+/* ─── Focus ring on keyboard navigation ─────────────────────────────── */
+.qasah-toggle__input:focus-visible ~ .qasah-toggle__track {
+  outline: 2px solid #1D326D;
+  outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RADIO  —  24×24 circle
+   Figma: outer circle 24px, stroke 1.5px
+          inner circle 12px filled brand colour (active only)
+   ══════════════════════════════════════════════════════════════════════ */
+.qasah-toggle--radio {
+  width: 24px;
+  height: 24px;
+}
+
+.qasah-toggle__track--radio {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1.5px solid #D0D5DD;
+}
+
+/* Active state: border goes brand blue */
+.qasah-toggle__input:checked ~ .qasah-toggle__track--radio {
+  border-color: #1D326D;
+}
+
+/* Inner dot */
+.qasah-toggle__radio-inner {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+}
+
+.qasah-toggle__input:checked ~ .qasah-toggle__track--radio .qasah-toggle__radio-inner {
+  background-color: #1D326D;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CHECKBOX  —  24×24 rounded-square (r=4)
+   Figma: inactive = white bg, 1.5px #D0D5DD border
+          active   = #1D326D bg, no border, white check
+   ══════════════════════════════════════════════════════════════════════ */
+.qasah-toggle--checkbox {
+  width: 24px;
+  height: 24px;
+}
+
+.qasah-toggle__track--checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: 1.5px solid #D0D5DD;
+}
+
+.qasah-toggle__input:checked ~ .qasah-toggle__track--checkbox {
+  background-color: #1D326D;
+  border-color: #1D326D;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CHECKCIRCLE  —  24×24 full-circle (r=100 → 50%)
+   Same visual logic as Checkbox but fully rounded
+   ══════════════════════════════════════════════════════════════════════ */
+.qasah-toggle--checkcircle {
+  width: 24px;
+  height: 24px;
+}
+
+.qasah-toggle__track--checkcircle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1.5px solid #D0D5DD;
+}
+
+.qasah-toggle__input:checked ~ .qasah-toggle__track--checkcircle {
+  background-color: #1D326D;
+  border-color: #1D326D;
+}
+
+/* ── Shared check icon (used by Checkbox & Checkcircle) ──────────────── */
+.qasah-toggle__check-icon {
+  width: 13px;
+  height: 10px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.15s ease, transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.qasah-toggle__input:checked ~ .qasah-toggle__track--checkbox .qasah-toggle__check-icon,
+.qasah-toggle__input:checked ~ .qasah-toggle__track--checkcircle .qasah-toggle__check-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   SWITCH  —  39×24 pill
+   Figma: inactive bg = #E4E7EC (228,231,236), knob 21×21 white, offset left
+          active  bg = #1D326D,                knob 21×21 white, offset right
+   ══════════════════════════════════════════════════════════════════════ */
+.qasah-toggle--switch {
+  width: 39px;
+  height: 24px;
+}
+
+.qasah-toggle__track--switch {
+  width: 39px;
+  height: 24px;
+  border-radius: 27px; /* Figma cornerRadius 27.375 → ~27px */
+  background-color: #E4E7EC;
+  position: relative;
+  padding: 0;
+}
+
+.qasah-toggle__input:checked ~ .qasah-toggle__track--switch {
+  background-color: #1D326D;
+}
+
+/* Knob */
+.qasah-toggle__knob {
+  position: absolute;
+  top: 50%;
+  left: 1.5px;
+  transform: translateY(-50%);
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.qasah-toggle__input:checked ~ .qasah-toggle__track--switch .qasah-toggle__knob {
+  left: calc(39px - 21px - 1.5px); /* = 16.5px */
+}
+
+/* ── Hover feedback ─────────────────────────────────────────────────── */
+.qasah-toggle:not(.qasah-toggle--disabled) .qasah-toggle__input:not(:disabled):hover ~ .qasah-toggle__track--radio,
+.qasah-toggle:not(.qasah-toggle--disabled) .qasah-toggle__input:not(:disabled):hover ~ .qasah-toggle__track--checkbox,
+.qasah-toggle:not(.qasah-toggle--disabled) .qasah-toggle__input:not(:disabled):hover ~ .qasah-toggle__track--checkcircle {
+  border-color: #1D326D;
+}
+
+.qasah-toggle:not(.qasah-toggle--disabled) .qasah-toggle__input:not(:disabled):hover ~ .qasah-toggle__track--switch {
+  filter: brightness(0.94);
+}

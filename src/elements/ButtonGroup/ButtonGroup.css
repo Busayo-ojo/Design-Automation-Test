@@ -1,0 +1,112 @@
+@import '../../tokens.css';
+
+/* ── Group Container ── */
+.qasah-btn-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ── Individual Segment ── */
+.qasah-btn-group__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 10px 16px;
+  border: 1px solid var(--color-neutral-300);
+  background-color: var(--color-neutral-white);
+  color: var(--color-neutral-600);
+  font-family: var(--font-family-primary);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  border-radius: 0;
+  outline: none;
+}
+
+/* Collapse double borders between adjacent items */
+.qasah-btn-group__item + .qasah-btn-group__item {
+  margin-left: -1px;
+}
+
+/* Ensure focused/hovered items render on top so their borders show correctly */
+.qasah-btn-group__item:hover,
+.qasah-btn-group__item--hover,
+.qasah-btn-group__item--focused {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Position Variants ── */
+.qasah-btn-group__item--first {
+  border-radius: 12px 0 0 12px;
+}
+
+.qasah-btn-group__item--last {
+  border-radius: 0 12px 12px 0;
+}
+
+.qasah-btn-group__item--middle,
+.qasah-btn-group__item--more {
+  border-radius: 0;
+}
+
+/* ── States ── */
+
+/* Regular (default) — already set above */
+
+/* Hover */
+.qasah-btn-group__item--hover,
+.qasah-btn-group__item:not(:disabled):hover {
+  background-color: var(--color-neutral-100);
+  border-color: var(--color-neutral-300);
+  color: var(--color-neutral-600);
+}
+
+/* Focused / Selected */
+.qasah-btn-group__item--focused {
+  background-color: var(--color-fmdq-blue);
+  border-color: var(--color-fmdq-blue);
+  color: var(--color-neutral-white);
+}
+
+.qasah-btn-group__item--focused:hover {
+  background-color: var(--color-fmdq-blue);
+  border-color: var(--color-fmdq-blue);
+  color: var(--color-neutral-white);
+}
+
+/* Disabled */
+.qasah-btn-group__item--disabled,
+.qasah-btn-group__item:disabled {
+  background-color: var(--color-neutral-white);
+  border-color: var(--color-neutral-300);
+  color: var(--color-neutral-300);
+  cursor: not-allowed;
+}
+
+/* ── Icon Slots ── */
+.qasah-btn-group__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.qasah-btn-group__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Label ── */
+.qasah-btn-group__label {
+  display: inline-flex;
+  align-items: center;
+}

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PageHeader } from './PageHeader';
-import { Button } from '../Button';
+import { Button } from '../../elements/Button';
 
 const meta: Meta<typeof PageHeader> = {
   title: 'Layout/PageHeader',

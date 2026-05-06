@@ -9,94 +9,76 @@
     transition: all var(--transition-fast);
     font-family: var(--font-family-primary);
     font-weight: 600;
-    letter-spacing: var(--font-letter-spacing-tight);
-    gap: var(--spacing-gap-10);
+    letter-spacing: var(--font-letter-spacing-paragraph);
+    gap: 10px;
     box-sizing: border-box;
     text-decoration: none;
     outline: none;
+    border-radius: var(--radius-12);
 }
 
 .qasah-button:active:not(:disabled) {
     transform: scale(0.98);
 }
 
-.qasah-button:hover:not(:disabled):not(.qasah-button--text) {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
-}
-
-/* --- Sizes & Corner Radii --- */
+/* --- Sizes --- */
 .qasah-button--sm {
-    height: 35px;
-    font-size: var(--font-size-sm);
-    border-radius: var(--radius-8);
+    height: 36px;
+    font-size: 14px;
 }
 
 .qasah-button--lg {
-    height: 44px;
-    font-size: var(--font-size-lg);
-    border-radius: var(--radius-16);
+    height: 56px;
+    font-size: 18px;
 }
 
-/* --- Padding Logic (per icon-style) --- */
+/* --- Padding & Width (per icon-style) --- */
 /* sm */
 .qasah-button--sm.qasah-button--icon-none {
-    padding: var(--spacing-8) var(--spacing-16);
+    padding: 8px 16px;
 }
-
-.qasah-button--sm.qasah-button--icon-leading\ icon,
-.qasah-button--sm.qasah-button--icon-trailing\ icon {
-    padding: var(--spacing-8) var(--spacing-12);
+.qasah-button--sm.qasah-button--icon-leading-icon,
+.qasah-button--sm.qasah-button--icon-trailing-icon {
+    padding: 8px 12px;
 }
-
 .qasah-button--sm.qasah-button--icon-icon-only {
-    padding: var(--spacing-8);
-    width: 35px;
+    padding: 8px;
+    width: 36px;
 }
 
 /* lg */
 .qasah-button--lg.qasah-button--icon-none {
-    padding: var(--spacing-16) var(--spacing-24);
-    height: 48px;
+    padding: 16px 24px;
 }
-
-.qasah-button--lg.qasah-button--icon-leading\ icon,
-.qasah-button--lg.qasah-button--icon-trailing\ icon,
+.qasah-button--lg.qasah-button--icon-leading-icon,
+.qasah-button--lg.qasah-button--icon-trailing-icon,
 .qasah-button--lg.qasah-button--icon-icon-only {
-    padding: var(--spacing-16);
-    height: 48px;
+    padding: 16px;
 }
-
 .qasah-button--lg.qasah-button--icon-icon-only {
-    width: 48px;
+    width: 56px;
 }
 
-/* --- Variants --- */
+/* --- Base Variants --- */
 
 /* Primary */
 .qasah-button--primary {
-    background-color: var(--color-primary-default);
-    color: #ffffff;
+    background-color: var(--color-fmdq-blue);
+    color: #FFFFFF;
 }
-
-.qasah-button--primary.qasah-button--lg {
-    background: var(--gradient-primary-lg);
+.qasah-button--primary:hover:not(:disabled),
+.qasah-button--primary.qasah-button--state-hover {
+    background-color: #012657;
 }
-
-.qasah-button--primary:hover:not(:disabled) {
-    background-color: var(--color-primary-hover);
-}
-
-.qasah-button--primary.qasah-button--lg:hover:not(:disabled) {
-    background: var(--gradient-primary-lg-alt);
-}
-
-.qasah-button--primary:focus-visible {
+.qasah-button--primary:focus-visible,
+.qasah-button--primary.qasah-button--state-focused {
+    background-color: #001633;
     box-shadow: var(--shadow-glow-primary);
 }
-
-.qasah-button--primary:disabled {
-    background-color: var(--color-primary-deactivated);
+.qasah-button--primary:disabled,
+.qasah-button--primary.qasah-button--state-de-activated {
+    background-color: #D0D5DD;
+    color: #FFFFFF;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
@@ -104,80 +86,102 @@
 
 /* Secondary */
 .qasah-button--secondary {
-    background-color: #ffffff;
-    color: var(--color-secondary-text);
-    border: 1.5px solid var(--color-secondary-border);
+    background-color: #FFFFFF;
+    color: #034592;
+    border: 1.5px solid #034592;
 }
-
-.qasah-button--secondary:hover:not(:disabled) {
-    background-color: var(--color-secondary-hover-bg);
+.qasah-button--secondary:hover:not(:disabled),
+.qasah-button--secondary.qasah-button--state-hover {
+    background-color: #E6EEF6; /* Light blue from primary-50 approx */
 }
-
-.qasah-button--secondary:focus-visible {
-    box-shadow: var(--shadow-glow-primary);
+.qasah-button--secondary:focus-visible,
+.qasah-button--secondary.qasah-button--state-focused {
+    background-color: #D0E0EF;
+}
+.qasah-button--secondary:disabled {
+    background-color: #F9FAFB;
+    color: #D0D5DD;
+    border-color: #F0F2F5;
 }
 
 /* Destructive */
-.qasah-button--destructive {
-    background-color: var(--color-destructive-default);
-    color: #ffffff;
+.qasah-button--destructive.qasah-button--type-solid {
+    background-color: #CB1A14;
+    color: #FFFFFF;
 }
-
-.qasah-button--destructive.qasah-button--outline {
+.qasah-button--destructive.qasah-button--type-solid:hover:not(:disabled) {
+    background-color: #A01511;
+}
+.qasah-button--destructive.qasah-button--type-solid:disabled {
+    background-color: #D0D5DD;
+    color: #FFFFFF;
+}
+.qasah-button--destructive.qasah-button--type-outlined {
     background-color: transparent;
-    color: var(--color-destructive-default);
-    border: 1.5px solid var(--color-destructive-default);
+    color: #CB1A14;
+    border: 1.5px solid #CB1A14;
 }
-
-.qasah-button--destructive:hover:not(:disabled) {
-    background-color: var(--color-destructive-hover);
+.qasah-button--destructive.qasah-button--type-outlined:hover:not(:disabled) {
+    background-color: #FFECE5;
 }
-
-.qasah-button--destructive:focus-visible {
-    box-shadow: var(--shadow-glow-destructive);
+.qasah-button--destructive.qasah-button--type-outlined:disabled {
+    border-color: #F0F2F5;
+    color: #D0D5DD;
 }
 
 /* Grey */
-.qasah-button--grey {
-    background-color: var(--color-grey-default);
-    color: #ffffff;
-    border-radius: var(--radius-24);
+.qasah-button--grey.qasah-button--type-solid {
+    background-color: #667185;
+    color: #FFFFFF;
 }
-
-.qasah-button--grey.qasah-button--outline {
+.qasah-button--grey.qasah-button--type-outlined {
     background-color: transparent;
-    color: var(--color-grey-default);
-    border: 1.5px solid var(--color-grey-default);
+    color: #667185;
+    border: 1.5px solid #667185;
 }
 
-/* Text */
+/* Text Variants */
 .qasah-button--text {
-    background: transparent;
+    background: transparent !important;
     padding: 0 !important;
-    height: auto;
-    box-shadow: none !important;
-    transform: none !important;
+    height: auto !important;
+    border-radius: 0 !important;
+    border: none !important;
 }
+.qasah-button--text.qasah-button--type-primary { color: #0D5EBA; }
+.qasah-button--text.qasah-button--type-secondary { color: #667185; }
+.qasah-button--text.qasah-button--type-destructive { color: #D42620; }
 
 .qasah-button--text:hover:not(:disabled) {
     text-decoration: underline;
 }
 
-.qasah-button--text-primary {
-    color: var(--color-text-primary);
+/* Special Buttons */
+.qasah-button--success {
+    background-color: #04802E;
+    color: #FFFFFF;
+}
+.qasah-button--warning {
+    background-color: #F3A218;
+    color: #000000;
+}
+.qasah-button--info {
+    background-color: #0D5EBA;
+    color: #FFFFFF;
 }
 
-.qasah-button--text-secondary {
-    color: var(--color-text-secondary);
-}
-
-/* Icons */
+/* --- Icons --- */
 .qasah-button__icon {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 20px;
     height: 20px;
+}
+
+.qasah-button--lg .qasah-button__icon {
+    width: 24px;
+    height: 24px;
 }
 
 .qasah-button__icon svg {

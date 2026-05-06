@@ -13,6 +13,11 @@
   --color-primary-800: #051A2C;
   --color-primary-900: #020D15;
 
+  /* ── Brand Colors ── */
+  --color-fmdq-blue: #1D326D;
+  --color-fmdq-gold: #CC9933;
+  --color-fmdq-grey: #969898;
+
   /* ── Secondary ── */
   --color-secondary-50: #FDF9EE;
   --color-secondary-100: #FDF2DA;
@@ -125,4 +130,11 @@
   /* ── Focus Rings ── */
   --shadow-glow-primary: 0 0 0 3px rgba(3, 69, 145, 0.15);
   --shadow-glow-destructive: 0 0 0 3px rgba(203, 26, 20, 0.15);
+}
+
+/* ── Global Base ── */
+body {
+  font-family: var(--font-family-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

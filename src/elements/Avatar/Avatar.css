@@ -1,0 +1,161 @@
+.qasah-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  overflow: visible;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* ── Sizes ── */
+.qasah-avatar--size-xs { width: 24px; height: 24px; }
+.qasah-avatar--size-sm { width: 32px; height: 32px; }
+.qasah-avatar--size-md { width: 40px; height: 40px; }
+.qasah-avatar--size-lg { width: 48px; height: 48px; }
+.qasah-avatar--size-xl { width: 56px; height: 56px; }
+.qasah-avatar--size-2xl { width: 64px; height: 64px; }
+
+/* ── Content Types ── */
+.qasah-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-full);
+}
+
+.qasah-avatar__initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-50);
+  color: var(--color-grey-900, var(--color-neutral-900));
+  font-family: var(--font-family-primary);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+}
+
+.qasah-avatar--size-xs .qasah-avatar__initials { 
+  font-size: 10px; 
+  font-family: var(--font-family-secondary, 'Inter', sans-serif);
+}
+.qasah-avatar--size-sm .qasah-avatar__initials { font-size: 14px; }
+.qasah-avatar--size-md .qasah-avatar__initials { font-size: 16px; }
+.qasah-avatar--size-lg .qasah-avatar__initials { font-size: 18px; }
+.qasah-avatar--size-xl .qasah-avatar__initials { font-size: 18px; }
+.qasah-avatar--size-2xl .qasah-avatar__initials { font-size: 20px; }
+
+.qasah-avatar__icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-50);
+  border-radius: var(--radius-full);
+}
+
+.qasah-avatar__icon svg {
+  width: 60%;
+  height: 60%;
+  color: var(--color-grey-900, var(--color-neutral-900));
+}
+
+/* ── Status Indicators ── */
+.qasah-avatar__status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-neutral-white);
+  box-sizing: border-box;
+}
+
+.qasah-avatar__status--online { background-color: var(--color-success-500); }
+.qasah-avatar__status--offline { background-color: var(--color-neutral-300); }
+.qasah-avatar__status--verified { 
+  background-color: transparent;
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Status sizes mapping */
+.qasah-avatar--size-xs .qasah-avatar__status { width: 8px; height: 8px; }
+.qasah-avatar--size-sm .qasah-avatar__status { width: 10px; height: 10px; }
+.qasah-avatar--size-md .qasah-avatar__status { width: 12px; height: 12px; }
+.qasah-avatar--size-lg .qasah-avatar__status { width: 14px; height: 14px; }
+.qasah-avatar--size-xl .qasah-avatar__status { width: 16px; height: 16px; }
+.qasah-avatar--size-2xl .qasah-avatar__status { width: 18px; height: 18px; }
+
+.qasah-avatar__status--verified svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Editable Overlay ── */
+.qasah-avatar__editable-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.qasah-avatar:hover .qasah-avatar__editable-overlay {
+  opacity: 1;
+}
+
+.qasah-avatar__editable-overlay svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── Avatar Group ── */
+.qasah-avatar-group {
+  display: flex;
+  align-items: center;
+}
+
+.qasah-avatar-group .qasah-avatar {
+  border: 2px solid var(--color-neutral-white);
+}
+
+.qasah-avatar-group--size-sm .qasah-avatar {
+  margin-left: -6px;
+}
+
+.qasah-avatar-group--size-md .qasah-avatar {
+  margin-left: -6px;
+}
+
+.qasah-avatar-group--size-lg .qasah-avatar {
+  margin-left: -11px;
+}
+
+.qasah-avatar-group .qasah-avatar:first-child {
+  margin-left: 0;
+  z-index: 10;
+}
+
+.qasah-avatar-group .qasah-avatar:nth-child(2) { z-index: 9; }
+.qasah-avatar-group .qasah-avatar:nth-child(3) { z-index: 8; }
+.qasah-avatar-group .qasah-avatar:nth-child(4) { z-index: 7; }
+.qasah-avatar-group .qasah-avatar:nth-child(5) { z-index: 6; }
+.qasah-avatar-group .qasah-avatar:nth-child(6) { z-index: 5; }
+.qasah-avatar-group .qasah-avatar:nth-child(7) { z-index: 4; }
+.qasah-avatar-group .qasah-avatar:nth-child(8) { z-index: 3; }
+.qasah-avatar-group .qasah-avatar:nth-child(9) { z-index: 2; }
+.qasah-avatar-group .qasah-avatar:nth-child(10) { z-index: 1; }

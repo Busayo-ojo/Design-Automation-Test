@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TopBar } from './TopBar';
-import { Input } from '../Input';
-import { Button } from '../Button';
-import { Badge } from '../Badge';
-import { Dropdown } from '../Dropdown';
+import { Input } from '../../elements/Input';
+import { Button } from '../../elements/Button';
+import { Badge } from '../../elements/Badge';
+import { Dropdown } from '../../components/Dropdown';
 
 const meta: Meta<typeof TopBar> = {
   title: 'Layout/TopBar',

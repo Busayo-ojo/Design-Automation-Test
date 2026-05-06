@@ -5,57 +5,165 @@
   font-family: var(--font-family-primary);
   font-weight: 500;
   white-space: nowrap;
-  border-radius: var(--radius-8);
+  border-radius: var(--radius-12, 12px);
   border: 1px solid transparent;
+  gap: var(--spacing-8, 8px);
+  box-sizing: border-box;
 }
 
-.qasah-badge--rounded {
-  border-radius: 9999px;
+.qasah-badge__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qasah-badge__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.qasah-badge__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.qasah-badge__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Sizes */
-.qasah-badge--sm {
-  font-size: 11px;
-  padding: 2px 6px;
-}
-
-.qasah-badge--md {
+.qasah-badge--size-sm {
   font-size: 12px;
-  padding: 4px 8px;
+  padding: 0px 8px;
+  height: 20px; /* derived to fit the padding and icons if needed */
 }
 
-.qasah-badge--lg {
+.qasah-badge--size-md {
   font-size: 14px;
-  padding: 6px 12px;
+  padding: 2px 12px;
+  height: 24px;
 }
 
-/* Variants */
-.qasah-badge--grey {
-  background-color: var(--color-grey-deactivated, #e4e7ec);
-  color: var(--color-grey-focused, #101928);
+.qasah-badge--size-lg {
+  font-size: 14px;
+  padding: 4px 12px;
+  height: 28px;
 }
 
-.qasah-badge--primary {
-  background-color: #e0f2fe;
-  color: var(--color-primary-default, #034591);
+/* Base Types */
+.qasah-badge--type-filled {
+  border-color: transparent;
+}
+.qasah-badge--type-accent {
+  border-color: transparent;
+}
+.qasah-badge--type-outline {
+  background-color: transparent;
 }
 
-.qasah-badge--success {
-  background-color: #d1fae5;
-  color: #065f46;
+/* --- Colors --- */
+
+/* Blue */
+.qasah-badge--color-blue.qasah-badge--type-filled {
+  background-color: #1671D9; /* extracted rgb(22, 113, 217) */
+  color: #FFFFFF;
+}
+.qasah-badge--color-blue.qasah-badge--type-accent {
+  background-color: var(--color-primary-50, #E6EEF6);
+  color: var(--color-fmdq-blue, #1D326D);
+}
+.qasah-badge--color-blue.qasah-badge--type-outline {
+  border-color: var(--color-fmdq-blue, #1D326D);
+  color: var(--color-fmdq-blue, #1D326D);
 }
 
-.qasah-badge--warning {
-  background-color: #fef3c7;
-  color: #92400e;
+/* Orange */
+.qasah-badge--color-orange.qasah-badge--type-filled {
+  background-color: #F3A218; 
+  color: #FFFFFF;
+}
+.qasah-badge--color-orange.qasah-badge--type-accent {
+  background-color: #FEF6E7;
+  color: #865503;
+}
+.qasah-badge--color-orange.qasah-badge--type-outline {
+  border-color: #865503;
+  color: #865503;
 }
 
-.qasah-badge--destructive {
-  background-color: #fee2e2;
-  color: var(--color-destructive-default, #cb1a14);
+/* Success */
+.qasah-badge--color-success.qasah-badge--type-filled {
+  background-color: var(--color-success-400, #0F973D);
+  color: #FFFFFF;
+}
+.qasah-badge--color-success.qasah-badge--type-accent {
+  background-color: var(--color-success-50, #E7F6EC);
+  color: var(--color-success-700, #036B26);
+}
+.qasah-badge--color-success.qasah-badge--type-outline {
+  border-color: var(--color-success-700, #036B26);
+  color: var(--color-success-700, #036B26);
 }
 
-.qasah-badge--info {
-  background-color: #e0e7ff;
-  color: #3730a3;
+/* Warning */
+.qasah-badge--color-warning.qasah-badge--type-filled {
+  background-color: #F56630;
+  color: #FFFFFF;
+}
+.qasah-badge--color-warning.qasah-badge--type-accent {
+  background-color: var(--color-warning-50, #FFECE5);
+  color: #AD3307;
+}
+.qasah-badge--color-warning.qasah-badge--type-outline {
+  border-color: #AD3307;
+  color: #AD3307;
+}
+
+/* Error */
+.qasah-badge--color-error.qasah-badge--type-filled {
+  background-color: #D42620;
+  color: #FFFFFF;
+}
+.qasah-badge--color-error.qasah-badge--type-accent {
+  background-color: #FBEAE9;
+  color: #9E0A05;
+}
+.qasah-badge--color-error.qasah-badge--type-outline {
+  border-color: #9E0A05;
+  color: #9E0A05;
+}
+
+/* Neutral */
+.qasah-badge--color-neutral.qasah-badge--type-filled {
+  background-color: var(--color-neutral-900, #101928);
+  color: #FFFFFF;
+}
+.qasah-badge--color-neutral.qasah-badge--type-accent {
+  background-color: var(--color-neutral-100, #F0F2F5);
+  color: var(--color-neutral-700, #344054);
+}
+.qasah-badge--color-neutral.qasah-badge--type-outline {
+  border-color: var(--color-neutral-700, #344054);
+  color: var(--color-neutral-700, #344054);
+}
+
+/* Disabled */
+.qasah-badge--color-disabled.qasah-badge--type-filled {
+  background-color: var(--color-neutral-400, #98A2B3);
+  color: var(--color-neutral-50, #F9FAFB);
+}
+.qasah-badge--color-disabled.qasah-badge--type-accent {
+  background-color: var(--color-neutral-300, #D0D5DD);
+  color: var(--color-neutral-700, #344054);
+}
+.qasah-badge--color-disabled.qasah-badge--type-outline {
+  border-color: var(--color-neutral-400, #98A2B3);
+  color: var(--color-neutral-400, #98A2B3);
 }

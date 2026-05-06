@@ -1,7 +1,7 @@
 import React from 'react';
 import type { HTMLAttributes, ReactNode } from 'react';
 import './PageHeader.css';
-import { Heading, Text } from '../Typography';
+import { Heading, Text } from '../../components/Typography';
 
 export interface BreadcrumbItem {
   label: string;

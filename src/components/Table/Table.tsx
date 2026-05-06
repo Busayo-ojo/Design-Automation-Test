@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import './Table.css';
 import { Button } from '../../elements/Button';
-import { Select } from '../../elements/Select';
+import { Input } from '../../elements/Input';
 
 // Base Components
 export const TableContainer: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
@@ -154,8 +154,12 @@ export function Table<T extends Record<string, unknown>>({
           <div className="qasah-table-pagination-controls">
             <div className="qasah-table-page-size">
               <span className="qasah-table-page-size-label">Rows per page:</span>
-              <Select
+              <Input
+                state="input dropdown"
                 size="sm"
+                hasLabel={false}
+                hasHelperText={false}
+                hasLeftIcon={false}
                 value={pageSize.toString()}
                 onChange={(e) => {
                   setPageSize(Number(e.target.value));

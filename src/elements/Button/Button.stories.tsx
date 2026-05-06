@@ -7,7 +7,6 @@ const meta: Meta<typeof Button> = {
     parameters: {
         layout: 'centered',
     },
-    tags: [],
     argTypes: {
         variant: {
             control: 'select',
@@ -17,13 +16,18 @@ const meta: Meta<typeof Button> = {
             control: 'radio',
             options: ['sm', 'lg'],
         },
+        buttonType: {
+            control: 'select',
+            options: ['solid', 'outlined', 'primary', 'secondary', 'destructive'],
+        },
         iconStyle: {
             control: 'select',
             options: ['none', 'leading icon', 'trailing icon', 'icon-only'],
         },
-        outline: {
-            control: 'boolean',
-        },
+        state: {
+            control: 'select',
+            options: ['default', 'hover', 'focused', 'de-activated'],
+        }
     },
 };
 
@@ -33,73 +37,110 @@ type Story = StoryObj<typeof Button>;
 export const Primary: Story = {
     args: {
         variant: 'primary',
-        label: 'Button',
+        label: 'Primary Button',
         size: 'sm',
-    },
-};
-
-export const LargeGradient: Story = {
-    args: {
-        variant: 'primary',
-        label: 'Large Button',
-        size: 'lg',
+        iconStyle: 'none',
     },
 };
 
 export const Secondary: Story = {
     args: {
         variant: 'secondary',
-        label: 'Button',
+        label: 'Secondary Button',
+        size: 'sm',
     },
 };
 
-export const Destructive: Story = {
+export const DestructiveSolid: Story = {
     args: {
         variant: 'destructive',
-        label: 'Delete',
+        buttonType: 'solid',
+        label: 'Destructive Solid',
     },
 };
 
-export const GreyRounded: Story = {
+export const DestructiveOutlined: Story = {
+    args: {
+        variant: 'destructive',
+        buttonType: 'outlined',
+        label: 'Destructive Outlined',
+    },
+};
+
+export const GreySolid: Story = {
     args: {
         variant: 'grey',
-        label: 'Select',
+        buttonType: 'solid',
+        label: 'Grey Solid',
     },
 };
 
-export const TextButton: Story = {
+export const GreyOutlined: Story = {
+    args: {
+        variant: 'grey',
+        buttonType: 'outlined',
+        label: 'Grey Outlined',
+    },
+};
+
+export const TextPrimary: Story = {
     args: {
         variant: 'text',
-        label: 'Click me',
+        buttonType: 'primary',
+        label: 'Text Primary',
+    },
+};
+
+export const TextSecondary: Story = {
+    args: {
+        variant: 'text',
+        buttonType: 'secondary',
+        label: 'Text Secondary',
     },
 };
 
 export const Success: Story = {
     args: {
         variant: 'success',
-        label: 'Confirmed',
+        label: 'Success Button',
     },
 };
 
-export const LeadingIcon: Story = {
+export const Warning: Story = {
     args: {
-        label: 'Download',
+        variant: 'warning',
+        label: 'Warning Button',
+    },
+};
+
+export const Information: Story = {
+    args: {
+        variant: 'info',
+        label: 'Info Button',
+    },
+};
+
+export const LargeWithIcon: Story = {
+    args: {
+        variant: 'primary',
+        size: 'lg',
+        label: 'Large Leading Icon',
         iconStyle: 'leading icon',
     },
 };
 
 export const IconOnly: Story = {
     args: {
+        variant: 'primary',
         iconStyle: 'icon-only',
-        'aria-label': 'Next',
+        'aria-label': 'Settings',
     },
 };
 
-export const TrailingIcon: Story = {
+export const Deactivated: Story = {
     args: {
         variant: 'primary',
-        label: 'Trailing Icon',
-        iconStyle: 'trailing icon',
-        icon: <span>→</span>,
+        label: 'Deactivated',
+        state: 'de-activated',
     },
 };

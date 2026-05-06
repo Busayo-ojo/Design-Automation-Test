@@ -2,25 +2,179 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Foundations/Spacing" />
 
-# Spacing Tokens
+# Spacing & Columns
 
-Systematic spacing regulates rhythm, balance, and grouping within UI structures.
+## Spacings
 
-Use the established CSS variables rather than hardcoding pixel values to ensure holistic scalability.
+A comprehensive spacing system proportional to a 4px scale which properly aligns to the layout and makes elements look harmonious. This spacing system guide is useful for annotating designs to make things easier for developers when implementing Figma designs.
 
-## Base Units
+<div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '24px' }}>
+  {[
+    { token: '1', size: '4px' },
+    { token: '2', size: '8px' },
+    { token: '3', size: '12px' },
+    { token: '4', size: '16px' },
+    { token: '5', size: '20px' },
+    { token: '6', size: '24px' },
+    { token: '7', size: '28px' },
+    { token: '8', size: '32px' },
+    { token: '10', size: '40px' },
+    { token: '12', size: '48px' },
+    { token: '16', size: '64px' },
+    { token: '20', size: '80px' },
+    { token: '24', size: '96px' },
+    { token: '32', size: '128px' },
+    { token: '40', size: '160px' },
+    { token: '48', size: '192px' },
+  ].map((item) => (
+    <div key={item.token} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style={{ width: '80px', fontWeight: 'bold' }}>{item.token}</div>
+      <div style={{ width: '80px', color: '#667185' }}>{item.size}</div>
+      <div style={{ 
+        width: item.size, 
+        height: '24px', 
+        backgroundColor: '#C6DDF7', 
+        borderRadius: '4px',
+        border: '1px solid #80BBFF'
+      }}></div>
+    </div>
+  ))}
+</div>
 
-| Token | Size | Example use Cases |
-| :--- | :--- | :--- |
-| `--spacing-8` | **8px** | Component internal padding, tight icon margins |
-| `--spacing-gap-10` | **10px** | Flexbox gaps |
-| `--spacing-12` | **12px** | Input padding, List item gaps |
-| `--spacing-16` | **16px** | Standard component padding, Layout gutters |
-| `--spacing-24` | **24px** | Section paddings, large component gaps |
+## Columns
 
-## Radii
+Library of layout columns options with various columns and sizes that fits any type of content perfectly in your web, tablet, and mobile screens.
 
-Corners are strictly governed by specific radii tokens:
-- `--radius-8`: **8px**
-- `--radius-16`: **16px**
-- `--radius-24`: **24px**
+### Small (320px - 599px)
+
+#### 4 Columns
+<div style={{ marginBottom: '24px' }}>
+  <div style={{ display: 'flex', gap: '24px', marginBottom: '16px', color: '#667185', fontSize: '14px' }}>
+    <div><strong>Margin:</strong> 16px</div>
+    <div><strong>Gutter:</strong> 12px</div>
+  </div>
+  <div style={{ width: '100%', maxWidth: '375px', backgroundColor: '#F9FAFB', border: '1px solid #E4E7EC', borderRadius: '8px', overflow: 'hidden' }}>
+    <div style={{ 
+      display: 'flex', 
+      padding: '0 16px', 
+      gap: '12px', 
+      height: '120px',
+      boxSizing: 'border-box'
+    }}>
+      {[...Array(4)].map((_, i) => (
+        <div key={i} style={{ flex: 1, backgroundColor: 'rgba(255, 0, 0, 0.1)', height: '100%' }}></div>
+      ))}
+    </div>
+  </div>
+</div>
+
+#### 6 Columns
+<div style={{ marginBottom: '32px' }}>
+  <div style={{ display: 'flex', gap: '24px', marginBottom: '16px', color: '#667185', fontSize: '14px' }}>
+    <div><strong>Margin:</strong> 16px</div>
+    <div><strong>Gutter:</strong> 12px</div>
+  </div>
+  <div style={{ width: '100%', maxWidth: '500px', backgroundColor: '#F9FAFB', border: '1px solid #E4E7EC', borderRadius: '8px', overflow: 'hidden' }}>
+    <div style={{ 
+      display: 'flex', 
+      padding: '0 16px', 
+      gap: '12px', 
+      height: '120px',
+      boxSizing: 'border-box'
+    }}>
+      {[...Array(6)].map((_, i) => (
+        <div key={i} style={{ flex: 1, backgroundColor: 'rgba(255, 0, 0, 0.1)', height: '100%' }}></div>
+      ))}
+    </div>
+  </div>
+</div>
+
+### Medium (600px - 1135px)
+
+#### 6 Columns
+<div style={{ marginBottom: '24px' }}>
+  <div style={{ display: 'flex', gap: '24px', marginBottom: '16px', color: '#667185', fontSize: '14px' }}>
+    <div><strong>Margin:</strong> 32px</div>
+    <div><strong>Gutter:</strong> 20px</div>
+  </div>
+  <div style={{ width: '100%', maxWidth: '768px', backgroundColor: '#F9FAFB', border: '1px solid #E4E7EC', borderRadius: '8px', overflow: 'hidden' }}>
+    <div style={{ 
+      display: 'flex', 
+      padding: '0 32px', 
+      gap: '20px', 
+      height: '120px',
+      boxSizing: 'border-box'
+    }}>
+      {[...Array(6)].map((_, i) => (
+        <div key={i} style={{ flex: 1, backgroundColor: 'rgba(255, 0, 0, 0.1)', height: '100%' }}></div>
+      ))}
+    </div>
+  </div>
+</div>
+
+#### 8 Columns
+<div style={{ marginBottom: '32px' }}>
+  <div style={{ display: 'flex', gap: '24px', marginBottom: '16px', color: '#667185', fontSize: '14px' }}>
+    <div><strong>Margin:</strong> 32px</div>
+    <div><strong>Gutter:</strong> 20px</div>
+  </div>
+  <div style={{ width: '100%', maxWidth: '1024px', backgroundColor: '#F9FAFB', border: '1px solid #E4E7EC', borderRadius: '8px', overflow: 'hidden' }}>
+    <div style={{ 
+      display: 'flex', 
+      padding: '0 32px', 
+      gap: '20px', 
+      height: '120px',
+      boxSizing: 'border-box'
+    }}>
+      {[...Array(8)].map((_, i) => (
+        <div key={i} style={{ flex: 1, backgroundColor: 'rgba(255, 0, 0, 0.1)', height: '100%' }}></div>
+      ))}
+    </div>
+  </div>
+</div>
+
+### Large (1136px & Larger)
+
+#### 12 Columns
+<div style={{ marginBottom: '32px' }}>
+  <div style={{ display: 'flex', gap: '24px', marginBottom: '16px', color: '#667185', fontSize: '14px' }}>
+    <div><strong>Margin:</strong> 112px</div>
+    <div><strong>Gutter:</strong> 32px</div>
+  </div>
+  <div style={{ width: '100%', maxWidth: '1200px', backgroundColor: '#F9FAFB', border: '1px solid #E4E7EC', borderRadius: '8px', overflow: 'hidden' }}>
+    <div style={{ 
+      display: 'flex', 
+      padding: '0 112px', 
+      gap: '32px', 
+      height: '120px',
+      boxSizing: 'border-box'
+    }}>
+      {[...Array(12)].map((_, i) => (
+        <div key={i} style={{ flex: 1, backgroundColor: 'rgba(255, 0, 0, 0.1)', height: '100%' }}></div>
+      ))}
+    </div>
+  </div>
+</div>
+
+### Fluid container / Layout
+
+#### 12 Columns (Auto)
+<div style={{ marginBottom: '32px' }}>
+  <div style={{ display: 'flex', gap: '24px', marginBottom: '16px', color: '#667185', fontSize: '14px' }}>
+    <div><strong>Margin:</strong> 24px</div>
+    <div><strong>Gutter:</strong> 24px</div>
+  </div>
+  <div style={{ width: '100%', backgroundColor: '#F9FAFB', border: '1px solid #E4E7EC', borderRadius: '8px', overflow: 'hidden' }}>
+    <div style={{ 
+      display: 'flex', 
+      padding: '0 24px', 
+      gap: '24px', 
+      height: '120px',
+      boxSizing: 'border-box'
+    }}>
+      {[...Array(12)].map((_, i) => (
+        <div key={i} style={{ flex: 1, backgroundColor: 'rgba(255, 0, 0, 0.1)', height: '100%' }}></div>
+      ))}
+    </div>
+  </div>
+</div>

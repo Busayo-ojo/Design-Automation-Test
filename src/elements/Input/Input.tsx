@@ -1,108 +1,242 @@
 import React, { forwardRef } from 'react';
 import './Input.css';
 
-export type InputVariant = 'default' | 'error';
+export type InputState =
+  | 'default'
+  | 'hover'
+  | 'active'
+  | 'typing'
+  | 'filled'
+  | 'success'
+  | 'error'
+  | 'read only'
+  | 'input dropdown';
+
 export type InputSize = 'sm' | 'lg';
 
-export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
-  /** The visual variant of the input */
-  variant?: InputVariant;
-  /** The size of the input, matching Button sizes */
-  size?: InputSize;
-  /** Optional icon to display on the left side */
-  leadingIcon?: React.ReactNode;
-  /** Optional icon to display on the right side */
-  trailingIcon?: React.ReactNode;
-  /** Error message to display below the input when variant is 'error' */
-  errorMessage?: string;
-  /** Additional helper text to display below the input */
-  helperText?: string;
-  /** Full width modifier */
-  fullWidth?: boolean;
+export interface InputOption {
+  value: string | number;
+  label: string;
+  disabled?: boolean;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement | HTMLSelectElement>, 'size'> {
+  /** Visual state of the input — maps 1:1 to Figma states */
+  state?: InputState;
+  /** Size variant: sm (36px) or lg (56px) */
+  size?: InputSize;
+  /** Field label rendered above the input */
+  label?: string;
+  /** Show/hide the label — maps to Figma "has label" boolean */
+  hasLabel?: boolean;
+  /** Helper or status message below the input */
+  helperText?: string;
+  /** Show/hide helper text — maps to Figma "has helper text" boolean */
+  hasHelperText?: boolean;
+  /** Icon rendered on the left side inside the input */
+  leadingIcon?: React.ReactNode;
+  /** Show/hide left icon — maps to Figma "has left-icon" boolean */
+  hasLeftIcon?: boolean;
+  /** Icon rendered on the right side inside the input */
+  trailingIcon?: React.ReactNode;
+  /** Show/hide right icon — maps to Figma "has right-icon" boolean */
+  hasRightIcon?: boolean;
+  /** Short add-on label rendered right of the input (e.g. "Add-on") */
+  rightLabel?: string;
+  /** Show/hide right add-on label — maps to Figma "has right-label" boolean */
+  hasRightLabel?: boolean;
+  /** Options for 'input dropdown' state */
+  options?: InputOption[];
+}
+
+// ─── Default SVG icons matching Figma ──────────────────────────────────────
+
+const SearchIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="9" cy="9" r="5.5" stroke="currentColor" strokeWidth="1.5"/>
+    <path d="M13 13L16.5 16.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+);
+
+const MailIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2.5" y="4.5" width="15" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+    <path d="M2.5 7.5L10 12L17.5 7.5" stroke="currentColor" strokeWidth="1.5"/>
+  </svg>
+);
+
+const ChevronDownIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const SuccessIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="10" cy="10" r="7.5" stroke="#04802E" strokeWidth="1.5"/>
+    <path d="M6.5 10L9 12.5L13.5 7.5" stroke="#04802E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const ErrorIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="10" cy="10" r="7.5" stroke="#CB1A14" strokeWidth="1.5"/>
+    <path d="M7.5 7.5L12.5 12.5M12.5 7.5L7.5 12.5" stroke="#CB1A14" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+);
+
+// ─── Component ─────────────────────────────────────────────────────────────
+
+export const Input = forwardRef<HTMLInputElement | HTMLSelectElement, InputProps>(
   (
     {
-      variant = 'default',
+      state = 'default',
       size = 'sm',
-      leadingIcon,
-      trailingIcon,
-      errorMessage,
+      label = 'Label',
+      hasLabel = true,
       helperText,
-      fullWidth = false,
+      hasHelperText = true,
+      leadingIcon,
+      hasLeftIcon = true,
+      trailingIcon,
+      hasRightIcon = true,
+      rightLabel,
+      hasRightLabel = false,
+      options = [],
       className = '',
       disabled,
+      readOnly,
       id,
+      placeholder = 'Placeholder',
       ...props
     },
     ref
   ) => {
-    // Determine dynamic classes based on props
-    const containerClasses = [
-      'qasah-input-container',
-      fullWidth ? 'qasah-input-container--full-width' : '',
-      disabled ? 'qasah-input-container--disabled' : '',
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+    // Derive actual disabled/readOnly from state prop too
+    const isDisabled = disabled || state === 'read only';
+    const isReadOnly = readOnly || state === 'read only';
 
-    const inputWrapperClasses = [
-      'qasah-input-wrapper',
-      `qasah-input-wrapper--${size}`,
-      `qasah-input-wrapper--${variant}`,
-      leadingIcon ? 'qasah-input-wrapper--has-leading-icon' : '',
-      trailingIcon ? 'qasah-input-wrapper--has-trailing-icon' : '',
-      disabled ? 'qasah-input-wrapper--disabled' : '',
-    ]
-      .filter(Boolean)
-      .join(' ');
+    // Resolve state-driven icons (trailing) when not explicitly provided
+    const resolvedTrailingIcon = (() => {
+      if (trailingIcon) return trailingIcon;
+      if (state === 'success') return <SuccessIcon />;
+      if (state === 'error') return <ErrorIcon />;
+      if (state === 'input dropdown') return <ChevronDownIcon />;
+      return <MailIcon />;
+    })();
+
+
+    const resolvedLeadingIcon = leadingIcon ?? <SearchIcon />;
 
     const generatedId = React.useId();
     const inputId = id ?? generatedId;
-    const helperId = `${inputId}-helper`;
-    const errorId = `${inputId}-error`;
+
+    // Helper text: state overrides
+    const resolvedHelperText = (() => {
+      if (helperText) return helperText;
+      if (state === 'success') return 'Success text';
+      if (state === 'error') return 'Error text';
+      return 'Helper text';
+    })();
+
+    const containerClasses = [
+      'qasah-input-container',
+      `qasah-input-container--${size}`,
+      className,
+    ].filter(Boolean).join(' ');
+
+    const wrapperClasses = [
+      'qasah-input-wrapper',
+      `qasah-input-wrapper--${size}`,
+      `qasah-input-wrapper--${state.replace(' ', '-')}`,
+      isDisabled ? 'qasah-input-wrapper--disabled' : '',
+    ].filter(Boolean).join(' ');
+
+    const helperClasses = [
+      'qasah-input__helper',
+      state === 'success' ? 'qasah-input__helper--success' : '',
+      state === 'error' ? 'qasah-input__helper--error' : '',
+    ].filter(Boolean).join(' ');
 
     return (
       <div className={containerClasses}>
-        <div className={inputWrapperClasses}>
-          {leadingIcon && (
+        {/* Label */}
+        {hasLabel && (
+          <label htmlFor={inputId} className="qasah-input__label">
+            {label}
+          </label>
+        )}
+
+        {/* Input field row */}
+        <div className={wrapperClasses}>
+          {/* Left icon */}
+          {hasLeftIcon && (
             <span className="qasah-input__icon qasah-input__icon--leading">
-              {leadingIcon}
+              {resolvedLeadingIcon}
             </span>
           )}
-          
-          <input
-            ref={ref}
-            id={inputId}
-            className="qasah-input"
-            disabled={disabled}
-            aria-invalid={variant === 'error'}
-            aria-describedby={[
-              helperText ? helperId : '',
-              variant === 'error' && errorMessage ? errorId : ''
-            ].filter(Boolean).join(' ') || undefined}
-            {...props}
-          />
-          
-          {trailingIcon && (
+
+          {state === 'input dropdown' ? (
+            <select
+              ref={ref as React.Ref<HTMLSelectElement>}
+              id={inputId}
+              className="qasah-input qasah-input--select"
+              disabled={isDisabled}
+              aria-invalid={false}
+              aria-describedby={hasHelperText ? `${inputId}-helper` : undefined}
+              {...(props as React.SelectHTMLAttributes<HTMLSelectElement>)}
+            >
+              {placeholder && (
+                <option value="" disabled hidden>
+                  {placeholder}
+                </option>
+              )}
+              {options.map((option, index) => (
+                <option
+                  key={`${option.value}-${index}`}
+                  value={option.value}
+                  disabled={option.disabled}
+                >
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              ref={ref as React.Ref<HTMLInputElement>}
+              id={inputId}
+              className="qasah-input"
+              disabled={isDisabled}
+              readOnly={isReadOnly}
+              placeholder={placeholder}
+              aria-invalid={state === 'error'}
+              aria-describedby={hasHelperText ? `${inputId}-helper` : undefined}
+              {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
+            />
+          )}
+
+          {/* Right add-on label */}
+          {hasRightLabel && (
+            <span className="qasah-input__right-label">
+              {rightLabel ?? 'Add-on'}
+            </span>
+          )}
+
+          {/* Right icon */}
+          {hasRightIcon && (
             <span className="qasah-input__icon qasah-input__icon--trailing">
-              {trailingIcon}
+              {resolvedTrailingIcon}
             </span>
           )}
         </div>
 
-        {/* Helper or Error Text */}
-        {variant === 'error' && errorMessage ? (
-          <div id={errorId} className="qasah-input__message qasah-input__message--error" role="alert">
-            {errorMessage}
-          </div>
-        ) : helperText ? (
-          <div id={helperId} className="qasah-input__message qasah-input__message--helper">
-            {helperText}
-          </div>
-        ) : null}
+
+        {/* Helper / status text */}
+        {hasHelperText && (
+          <span id={`${inputId}-helper`} className={helperClasses}>
+            {resolvedHelperText}
+          </span>
+        )}
       </div>
     );
   }
