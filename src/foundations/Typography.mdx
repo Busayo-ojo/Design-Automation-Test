@@ -1,26 +1,146 @@
-import { Meta } from '@storybook/blocks';
-import { TypographyShowcase } from '../components/Typography';
+import { Meta, Canvas, Source } from '@storybook/blocks';
+import { Button } from '../elements/Button';
+import { TypographyShowcase, TypographyPlayground, Heading, Text, Label } from '../components/Typography';
+import * as TypographyStories from '../components/Typography/Typography.stories';
 
-<Meta title="Foundations/Typography" />
+<Meta of={TypographyStories} />
 
 # Typography
 
 Typography is the foundation of the FMDQ digital experience. It dictates legibility, hierarchy, and brand personality across all platforms. We utilize **DM Sans** as our primary typeface for its modern, clean, and professional aesthetic.
 
-<div style={{ display: 'flex', gap: '16px', marginBottom: '48px', marginTop: '24px' }}>
-  <a href="https://fonts.google.com/specimen/DM+Sans" target="_blank" rel="noopener noreferrer" style={{ 
-    padding: '12px 24px', 
-    backgroundColor: '#183972', 
-    color: 'white', 
-    borderRadius: '8px', 
-    textDecoration: 'none',
-    fontWeight: 'bold',
-    fontSize: '14px',
-    transition: 'opacity 0.2s ease'
-  }}>
-    Download DM Sans from Google Fonts
-  </a>
+<div style={{ 
+  padding: '40px', 
+  backgroundColor: '#183972', 
+  borderRadius: '16px', 
+  color: 'white',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: '64px',
+  marginTop: '32px',
+  boxShadow: '0 8px 32px rgba(24, 57, 114, 0.15)'
+}}>
+  <div>
+    <h3 style={{ margin: 0, color: '#FFFFFF', fontSize: '24px', fontWeight: 'bold' }}>DM Sans Typeface</h3>
+  </div>
+  <Button 
+    label="Download Typeface" 
+    variant="secondary" 
+    size="lg"
+    onClick={() => window.open('https://fonts.google.com/specimen/DM+Sans', '_blank')}
+  />
 </div>
 
+## Typeface Showcase
+
+The complete typography scale for the FMDQ Design System 2026. This scale is designed to provide clear hierarchy and readability across all screen sizes, from massive displays to mobile captions.
+
 <TypographyShowcase />
+
+<div style={{ marginTop: '64px', marginBottom: '64px' }}>
+  ## Design Tokens
+
+  These are the core typography tokens used throughout the system. These tokens are mapped directly from our Figma design system to our CSS variables.
+
+  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginTop: '24px' }}>
+    <div style={{ backgroundColor: '#F9FAFB', padding: '24px', borderRadius: '12px', border: '1px solid #EAECF0' }}>
+      <h3 style={{ marginTop: 0, color: '#101828', fontSize: '18px' }}>Font Families</h3>
+      | Token | Value |
+      | :--- | :--- |
+      | `--font-family-primary` | `'DM Sans', sans-serif` |
+      | `--font-family-secondary` | `'DM Sans', sans-serif` |
+    </div>
+    <div style={{ backgroundColor: '#F9FAFB', padding: '24px', borderRadius: '12px', border: '1px solid #EAECF0' }}>
+      <h3 style={{ marginTop: 0, color: '#101828', fontSize: '18px' }}>Line Heights</h3>
+      | Category | Value |
+      | :--- | :--- |
+      | Display | `100%` |
+      | Heading | `120%` |
+      | Paragraph | `145%` |
+      | Caption | `120%` |
+    </div>
+  </div>
+
+  <div style={{ marginTop: '32px', backgroundColor: '#F9FAFB', padding: '32px', borderRadius: '12px', border: '1px solid #EAECF0' }}>
+    <h3 style={{ marginTop: 0, color: '#101828', fontSize: '18px' }}>Font Sizes</h3>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px' }}>
+      <div>
+        | Category | Token | Value |
+        | :--- | :--- | :--- |
+        | **Display** | `--font-size-display-lg` | `56px` |
+        | | `--font-size-display-sm` | `48px` |
+        | **Headings** | `--font-size-h1` | `40px` |
+        | | `--font-size-h2` | `36px` |
+        | | `--font-size-h3` | `32px` |
+        | | `--font-size-h4` | `28px` |
+        | | `--font-size-h5` | `24px` |
+        | | `--font-size-h6` | `20px` |
+      </div>
+      <div>
+        | Category | Token | Value |
+        | :--- | :--- | :--- |
+        | **Body** | `--font-size-p-lg` | `18px` |
+        | | `--font-size-p-md` | `16px` |
+        | | `--font-size-p-sm` | `14px` |
+        | | `--font-size-p-xs` | `12px` |
+        | **Caption** | `--font-size-cap-lg` | `14px` |
+        | | `--font-size-cap-sm` | `12px` |
+        | | `--font-size-cap-xs` | `10px` |
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+
+<div style={{ marginTop: '64px', marginBottom: '80px' }}>
+  ## Interactive Playground
+
+  Experience our typography in action. Adjust the text and select different styles to see how they render. Use the **Show Code** button to get the React implementation for your selection.
+
+  <TypographyPlayground />
+</div>
+
+---
+
+<div style={{ marginTop: '64px' }}>
+  ## Component API
+
+  Use these components to implement the typography scale in your applications. Each component is pre-configured to match our design system tokens.
+
+  ### Heading
+  Used for titles and section headers. Supports levels `display-lg`, `display-sm`, and `1-6`.
+  
+  <Canvas>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <Heading level="display-lg">Display Large</Heading>
+      <Heading level="1">Heading 1</Heading>
+      <Heading level="2">Heading 2</Heading>
+      <Heading level="3">Heading 3</Heading>
+    </div>
+  </Canvas>
+
+  ### Text
+  The workhorse component for all body text, paragraphs, and captions.
+  
+  <Canvas>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <Text size="lg">Large body text for emphasized paragraphs.</Text>
+      <Text size="md">Medium body text (Default) for standard content.</Text>
+      <Text size="sm">Small body text for secondary information.</Text>
+      <Text size="caption-lg" weight="semibold">CAPTION LARGE FOR UPPERCASE LABELS</Text>
+    </div>
+  </Canvas>
+
+  ### Label
+  Used for forms, metadata, and small UI annotations.
+  
+  <Canvas>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <Label size="md">Form Field Label</Label>
+      <Label size="sm">Small Annotation Label</Label>
+    </div>
+  </Canvas>
+</div>
 

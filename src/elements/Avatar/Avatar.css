@@ -40,7 +40,7 @@
 
 .qasah-avatar--size-xs .qasah-avatar__initials { 
   font-size: 10px; 
-  font-family: var(--font-family-secondary, 'Inter', sans-serif);
+  font-family: var(--font-family-secondary, 'DM Sans', sans-serif);
 }
 .qasah-avatar--size-sm .qasah-avatar__initials { font-size: 14px; }
 .qasah-avatar--size-md .qasah-avatar__initials { font-size: 16px; }
