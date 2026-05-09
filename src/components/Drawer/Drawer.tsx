@@ -43,9 +43,9 @@ export const Drawer: React.FC<DrawerProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="qasah-drawer-overlay" onClick={closeOnBackdropClick ? onClose : undefined}>
+    <div className="fmdqui-drawer-overlay" onClick={closeOnBackdropClick ? onClose : undefined}>
       <div 
-        className={`qasah-drawer-panel qasah-drawer-panel--${position} qasah-drawer-panel--${size} ${className}`}
+        className={`fmdqui-drawer-panel fmdqui-drawer-panel--${position} fmdqui-drawer-panel--${size} ${className}`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -57,12 +57,12 @@ export const Drawer: React.FC<DrawerProps> = ({
 };
 
 export const DrawerHeader: React.FC<{ title: string; onClose?: () => void; className?: string; children?: React.ReactNode }> = ({ title, onClose, className = '', children }) => (
-  <div className={`qasah-drawer-header ${className}`}>
-    <h3 className="qasah-drawer-title">{title}</h3>
-    <div className="qasah-drawer-header-actions">
+  <div className={`fmdqui-drawer-header ${className}`}>
+    <h3 className="fmdqui-drawer-title">{title}</h3>
+    <div className="fmdqui-drawer-header-actions">
       {children}
       {onClose && (
-        <button className="qasah-drawer-close-btn" onClick={onClose} aria-label="Close">
+        <button className="fmdqui-drawer-close-btn" onClick={onClose} aria-label="Close">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -74,13 +74,13 @@ export const DrawerHeader: React.FC<{ title: string; onClose?: () => void; class
 );
 
 export const DrawerBody: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
-  <div className={`qasah-drawer-body ${className}`} {...props}>
+  <div className={`fmdqui-drawer-body ${className}`} {...props}>
     {children}
   </div>
 );
 
 export const DrawerFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
-  <div className={`qasah-drawer-footer ${className}`} {...props}>
+  <div className={`fmdqui-drawer-footer ${className}`} {...props}>
     {children}
   </div>
 );

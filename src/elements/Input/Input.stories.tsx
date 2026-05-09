@@ -43,8 +43,8 @@ const meta: Meta<typeof Input> = {
     },
     size: {
       control: 'radio',
-      options: ['sm', 'lg'],
-      description: 'Size: sm (36px) or lg (56px)',
+      options: ['sm', 'lg', 'xl'],
+      description: 'Size: sm (36px), lg (56px), or xl (80px+ expandable textarea)',
       table: { category: 'Variant' },
     },
     // Boolean controls — matching Figma boolean properties exactly
@@ -144,45 +144,6 @@ export const InputDropdown: Story = {
   },
 };
 
-// ─── All States ────────────────────────────────────────────────────────────
-export const States: Story = {
-  name: 'All States',
-  parameters: { controls: { disable: true } },
-  render: () => {
-    const states = [
-      'default', 'hover', 'active', 'typing', 'filled',
-      'success', 'error', 'read only', 'input dropdown',
-    ] as const;
-
-    return (
-      <div style={gridStyle}>
-        {states.map((s) => (
-          <div key={s} style={rowStyle}>
-            <span style={sectionLabel}>{s}</span>
-            <Input
-              state={s}
-              size="lg"
-              label="Label"
-              placeholder={s === 'input dropdown' ? 'Choose option...' : 'Placeholder'}
-              hasLabel
-              hasHelperText
-              hasLeftIcon
-              hasRightIcon
-              hasRightLabel={false}
-              defaultValue={['filled', 'success', 'error', 'typing', 'active'].includes(s) ? 'Input' : undefined}
-              options={s === 'input dropdown' ? [
-                { value: '1', label: 'Dropdown Option 1' },
-                { value: '2', label: 'Dropdown Option 2' },
-              ] : undefined}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  },
-};
-
-
 // ─── Sizes ─────────────────────────────────────────────────────────────────
 export const Sizes: Story = {
   name: 'Sizes',
@@ -196,6 +157,10 @@ export const Sizes: Story = {
       <div style={rowStyle}>
         <span style={sectionLabel}>Small (36px)</span>
         <Input size="sm" state="default" />
+      </div>
+      <div style={rowStyle}>
+        <span style={sectionLabel}>XL (80px+ textarea)</span>
+        <Input size="xl" state="default" style={{ width: '490px' }} />
       </div>
     </div>
   ),
@@ -250,7 +215,7 @@ export const BooleanControls: Story = {
   ),
 };
 
-// ─── States – Small size ───────────────────────────────────────────────────
+// ─── States – All Sizes (bottom of nav) ────────────────────────────────────
 export const StatesSmall: Story = {
   name: 'All States (Small)',
   parameters: { controls: { disable: true } },
@@ -276,6 +241,75 @@ export const StatesSmall: Story = {
               hasRightIcon
               hasRightLabel={false}
               defaultValue={['filled', 'success', 'error', 'typing', 'active'].includes(s) ? 'Input' : undefined}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
+
+export const States: Story = {
+  name: 'All States (Large)',
+  parameters: { controls: { disable: true } },
+  render: () => {
+    const states = [
+      'default', 'hover', 'active', 'typing', 'filled',
+      'success', 'error', 'read only', 'input dropdown',
+    ] as const;
+
+    return (
+      <div style={gridStyle}>
+        {states.map((s) => (
+          <div key={s} style={rowStyle}>
+            <span style={sectionLabel}>{s}</span>
+            <Input
+              state={s}
+              size="lg"
+              label="Label"
+              placeholder={s === 'input dropdown' ? 'Choose option...' : 'Placeholder'}
+              hasLabel
+              hasHelperText
+              hasLeftIcon
+              hasRightIcon
+              hasRightLabel={false}
+              defaultValue={['filled', 'success', 'error', 'typing', 'active'].includes(s) ? 'Input' : undefined}
+              options={s === 'input dropdown' ? [
+                { value: '1', label: 'Dropdown Option 1' },
+                { value: '2', label: 'Dropdown Option 2' },
+              ] : undefined}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
+
+export const StatesXL: Story = {
+  name: 'All States (XL)',
+  parameters: { controls: { disable: true } },
+  render: () => {
+    const states = [
+      'default', 'hover', 'active', 'typing', 'filled',
+    ] as const;
+
+    return (
+      <div style={{ ...gridStyle, width: '490px' }}>
+        {states.map((s) => (
+          <div key={s} style={rowStyle}>
+            <span style={sectionLabel}>{s}</span>
+            <Input
+              state={s}
+              size="xl"
+              label="Label"
+              placeholder="Type your message here..."
+              hasLabel
+              hasHelperText
+              hasLeftIcon
+              hasRightIcon={false}
+              hasRightLabel={false}
+              defaultValue={['filled', 'typing', 'active'].includes(s) ? 'This is a longer input for detailed text entry.' : undefined}
             />
           </div>
         ))}

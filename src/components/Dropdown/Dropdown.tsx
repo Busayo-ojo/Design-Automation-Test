@@ -45,21 +45,21 @@ export const Dropdown: React.FC<DropdownProps> = ({
   };
 
   return (
-    <div className={`qasah-dropdown ${className}`} ref={dropdownRef}>
-      <div className="qasah-dropdown__trigger" onClick={handleToggle}>
+    <div className={`fmdqui-dropdown ${className}`} ref={dropdownRef}>
+      <div className="fmdqui-dropdown__trigger" onClick={handleToggle}>
         {trigger}
       </div>
       {isOpen && (
-        <div className={`qasah-dropdown__menu qasah-dropdown__menu--align-${align}`}>
-          <ul className="qasah-dropdown__list">
+        <div className={`fmdqui-dropdown__menu fmdqui-dropdown__menu--align-${align}`}>
+          <ul className="fmdqui-dropdown__list">
             {items.map((item) => (
               <li
                 key={item.id}
-                className={`qasah-dropdown__item ${item.disabled ? 'is-disabled' : ''} ${item.destructive ? 'is-destructive' : ''}`}
+                className={`fmdqui-dropdown__item ${item.disabled ? 'is-disabled' : ''} ${item.destructive ? 'is-destructive' : ''}`}
                 onClick={() => handleItemClick(item)}
               >
-                {item.icon && <span className="qasah-dropdown__item-icon">{item.icon}</span>}
-                <span className="qasah-dropdown__item-label">{item.label}</span>
+                {item.icon && <span className="fmdqui-dropdown__item-icon">{item.icon}</span>}
+                <span className="fmdqui-dropdown__item-label">{item.label}</span>
               </li>
             ))}
           </ul>

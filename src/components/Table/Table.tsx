@@ -5,43 +5,43 @@ import { Input } from '../../elements/Input';
 
 // Base Components
 export const TableContainer: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
-  <div className={`qasah-table-container ${className}`} {...props}>
+  <div className={`fmdqui-table-container ${className}`} {...props}>
     {children}
   </div>
 );
 
 export const TableElement: React.FC<React.TableHTMLAttributes<HTMLTableElement>> = ({ className = '', children, ...props }) => (
-  <table className={`qasah-table ${className}`} {...props}>
+  <table className={`fmdqui-table ${className}`} {...props}>
     {children}
   </table>
 );
 
 export const TableHead: React.FC<React.HTMLAttributes<HTMLTableSectionElement>> = ({ className = '', children, ...props }) => (
-  <thead className={`qasah-table-head ${className}`} {...props}>
+  <thead className={`fmdqui-table-head ${className}`} {...props}>
     {children}
   </thead>
 );
 
 export const TableBody: React.FC<React.HTMLAttributes<HTMLTableSectionElement>> = ({ className = '', children, ...props }) => (
-  <tbody className={`qasah-table-body ${className}`} {...props}>
+  <tbody className={`fmdqui-table-body ${className}`} {...props}>
     {children}
   </tbody>
 );
 
 export const TableRow: React.FC<React.HTMLAttributes<HTMLTableRowElement>> = ({ className = '', children, ...props }) => (
-  <tr className={`qasah-table-row ${className}`} {...props}>
+  <tr className={`fmdqui-table-row ${className}`} {...props}>
     {children}
   </tr>
 );
 
 export const TableHeader: React.FC<React.ThHTMLAttributes<HTMLTableHeaderCellElement>> = ({ className = '', children, ...props }) => (
-  <th className={`qasah-table-header-cell ${className}`} {...props}>
+  <th className={`fmdqui-table-header-cell ${className}`} {...props}>
     {children}
   </th>
 );
 
 export const TableCell: React.FC<React.TdHTMLAttributes<HTMLTableDataCellElement>> = ({ className = '', children, ...props }) => (
-  <td className={`qasah-table-cell ${className}`} {...props}>
+  <td className={`fmdqui-table-cell ${className}`} {...props}>
     {children}
   </td>
 );
@@ -90,7 +90,7 @@ export function Table<T extends Record<string, unknown>>({
   if (!data || !columns) {
     return (
       <TableContainer>
-        <TableElement className={`qasah-table--${variant} ${className}`} {...props}>
+        <TableElement className={`fmdqui-table--${variant} ${className}`} {...props}>
           {children}
         </TableElement>
       </TableContainer>
@@ -109,8 +109,8 @@ export function Table<T extends Record<string, unknown>>({
 
   return (
     <TableContainer>
-      <div className="qasah-table-scroll-wrapper">
-        <TableElement className={`qasah-table--${variant} ${className}`} {...props}>
+      <div className="fmdqui-table-scroll-wrapper">
+        <TableElement className={`fmdqui-table--${variant} ${className}`} {...props}>
           <TableHead>
             <TableRow>
               {columns.map((col, idx) => (
@@ -136,7 +136,7 @@ export function Table<T extends Record<string, unknown>>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="qasah-table-empty">
+                <TableCell colSpan={columns.length} className="fmdqui-table-empty">
                   {emptyMessage}
                 </TableCell>
               </TableRow>
@@ -146,14 +146,14 @@ export function Table<T extends Record<string, unknown>>({
       </div>
 
       {pagination && (
-        <div className="qasah-table-pagination">
-          <div className="qasah-table-pagination-info">
+        <div className="fmdqui-table-pagination">
+          <div className="fmdqui-table-pagination-info">
             Showing {Math.min((currentPage - 1) * pageSize + 1, totalItems)} to{' '}
             {Math.min(currentPage * pageSize, totalItems)} of {totalItems} results
           </div>
-          <div className="qasah-table-pagination-controls">
-            <div className="qasah-table-page-size">
-              <span className="qasah-table-page-size-label">Rows per page:</span>
+          <div className="fmdqui-table-pagination-controls">
+            <div className="fmdqui-table-page-size">
+              <span className="fmdqui-table-page-size-label">Rows per page:</span>
               <Input
                 state="input dropdown"
                 size="sm"
@@ -168,7 +168,7 @@ export function Table<T extends Record<string, unknown>>({
                 options={pageSizeOptions.map(opt => ({ label: opt.toString(), value: opt.toString() }))}
               />
             </div>
-            <div className="qasah-table-page-actions">
+            <div className="fmdqui-table-page-actions">
               <Button
                 variant="grey"
                 size="sm"
@@ -177,7 +177,7 @@ export function Table<T extends Record<string, unknown>>({
               >
                 Previous
               </Button>
-              <div className="qasah-table-page-current">
+              <div className="fmdqui-table-page-current">
                 Page {currentPage} of {totalPages}
               </div>
               <Button

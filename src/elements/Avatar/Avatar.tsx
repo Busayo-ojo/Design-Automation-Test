@@ -51,8 +51,8 @@ export const Avatar: React.FC<AvatarProps> = ({
   ...props
 }) => {
   const containerClasses = [
-    'qasah-avatar',
-    `qasah-avatar--size-${size}`,
+    'fmdqui-avatar',
+    `fmdqui-avatar--size-${size}`,
     className
   ].filter(Boolean).join(' ');
 
@@ -60,26 +60,26 @@ export const Avatar: React.FC<AvatarProps> = ({
     switch (type) {
       case 'Image':
         return imageUrl ? (
-          <img src={imageUrl} alt="Avatar" className="qasah-avatar__image" />
+          <img src={imageUrl} alt="Avatar" className="fmdqui-avatar__image" />
         ) : (
-          <div className="qasah-avatar__icon"><UserIcon /></div>
+          <div className="fmdqui-avatar__icon"><UserIcon /></div>
         );
       case 'Initials':
         return (
-          <div className="qasah-avatar__initials">
+          <div className="fmdqui-avatar__initials">
             {initials ? initials.substring(0, 2).toUpperCase() : '??'}
           </div>
         );
       case 'Icon':
       default:
-        return <div className="qasah-avatar__icon">{icon || <UserIcon />}</div>;
+        return <div className="fmdqui-avatar__icon">{icon || <UserIcon />}</div>;
     }
   };
 
   const showStatus = statusIcon !== 'None';
   const statusClasses = [
-    'qasah-avatar__status',
-    `qasah-avatar__status--${statusIcon}`
+    'fmdqui-avatar__status',
+    `fmdqui-avatar__status--${statusIcon}`
   ].filter(Boolean).join(' ');
 
   // Editable mode only for lg, xl, 2xl
@@ -96,7 +96,7 @@ export const Avatar: React.FC<AvatarProps> = ({
       )}
 
       {isEditable && canBeEditable && (
-        <div className="qasah-avatar__editable-overlay">
+        <div className="fmdqui-avatar__editable-overlay">
           <CameraIcon />
         </div>
       )}
@@ -116,8 +116,8 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   ...props
 }) => {
   const containerClasses = [
-    'qasah-avatar-group',
-    `qasah-avatar-group--size-${size}`,
+    'fmdqui-avatar-group',
+    `fmdqui-avatar-group--size-${size}`,
     className
   ].filter(Boolean).join(' ');
 

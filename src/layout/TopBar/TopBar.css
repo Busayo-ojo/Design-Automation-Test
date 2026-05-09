@@ -1,4 +1,4 @@
-.qasah-topbar {
+.fmdqui-topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 
-.qasah-topbar__left {
+.fmdqui-topbar__left {
   display: flex;
   align-items: center;
   flex: 1;
@@ -17,7 +17,7 @@
   gap: var(--spacing-16);
 }
 
-.qasah-topbar__center {
+.fmdqui-topbar__center {
   display: flex;
   align-items: center;
   flex: 1;
@@ -25,7 +25,7 @@
   gap: var(--spacing-16);
 }
 
-.qasah-topbar__right {
+.fmdqui-topbar__right {
   display: flex;
   align-items: center;
   flex: 1;

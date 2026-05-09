@@ -32,7 +32,7 @@ export const Tabs: React.FC<TabsProps> = ({
   
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab, style, fullWidth }}>
-      <div className={`qasah-tabs qasah-tabs--${style.toLowerCase()} ${fullWidth ? 'qasah-tabs--full-width' : ''} ${className}`}>
+      <div className={`fmdqui-tabs fmdqui-tabs--${style.toLowerCase()} ${fullWidth ? 'fmdqui-tabs--full-width' : ''} ${className}`}>
         {children}
       </div>
     </TabsContext.Provider>
@@ -46,7 +46,7 @@ export const TabList: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ classN
   
   return (
     <div 
-      className={`qasah-tab-list qasah-tab-list--${style.toLowerCase()} ${fullWidth ? 'qasah-tab-list--full-width' : ''} ${className}`} 
+      className={`fmdqui-tab-list fmdqui-tab-list--${style.toLowerCase()} ${fullWidth ? 'fmdqui-tab-list--full-width' : ''} ${className}`} 
       role="tablist" 
       {...props}
     >
@@ -83,10 +83,10 @@ export const Tab: React.FC<TabProps> = ({
   const { style, fullWidth } = context;
   
   const tabClasses = [
-    'qasah-tab',
-    `qasah-tab--${style.toLowerCase()}`,
-    isActive ? 'qasah-tab--active' : '',
-    fullWidth ? 'qasah-tab--full-width' : '',
+    'fmdqui-tab',
+    `fmdqui-tab--${style.toLowerCase()}`,
+    isActive ? 'fmdqui-tab--active' : '',
+    fullWidth ? 'fmdqui-tab--full-width' : '',
     className
   ].filter(Boolean).join(' ');
 
@@ -113,14 +113,14 @@ export const Tab: React.FC<TabProps> = ({
       onMouseLeave={() => setIsHovered(false)}
       {...props}
     >
-      {hasIcon && icon && <span className="qasah-tab__icon">{icon}</span>}
-      <span className="qasah-tab__label">{children}</span>
+      {hasIcon && icon && <span className="fmdqui-tab__icon">{icon}</span>}
+      <span className="fmdqui-tab__label">{children}</span>
       {hasNumberTag && (
         <Badge 
           size="sm" 
           type={badgeProps.type} 
           color={badgeProps.color}
-          className="qasah-tab__number-tag"
+          className="fmdqui-tab__number-tag"
         >
           {numberTag}
         </Badge>
@@ -140,7 +140,7 @@ export const TabPanel: React.FC<TabPanelProps> = ({ value, className = '', child
   if (context.activeTab !== value) return null;
   
   return (
-    <div className={`qasah-tab-panel ${className}`} role="tabpanel" {...props}>
+    <div className={`fmdqui-tab-panel ${className}`} role="tabpanel" {...props}>
       {children}
     </div>
   );

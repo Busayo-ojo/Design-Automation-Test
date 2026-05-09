@@ -53,9 +53,9 @@ export const ButtonGroupItem: React.FC<ButtonGroupItemProps> = ({
   const showTrailing = icon === 'left+right icon' || icon === 'right-icon';
 
   const classes = [
-    'qasah-btn-group__item',
-    `qasah-btn-group__item--${style}`,
-    `qasah-btn-group__item--${state}`,
+    'fmdqui-btn-group__item',
+    `fmdqui-btn-group__item--${style}`,
+    `fmdqui-btn-group__item--${state}`,
     className,
   ].filter(Boolean).join(' ');
 
@@ -66,13 +66,13 @@ export const ButtonGroupItem: React.FC<ButtonGroupItemProps> = ({
       onClick={onClick}
     >
       {showLeading && (
-        <span className="qasah-btn-group__icon">
+        <span className="fmdqui-btn-group__icon">
           {leadingIcon ?? <ArrowLeft />}
         </span>
       )}
-      <span className="qasah-btn-group__label">{label}</span>
+      <span className="fmdqui-btn-group__label">{label}</span>
       {showTrailing && (
-        <span className="qasah-btn-group__icon">
+        <span className="fmdqui-btn-group__icon">
           {trailingIcon ?? <ArrowRight />}
         </span>
       )}
@@ -82,7 +82,7 @@ export const ButtonGroupItem: React.FC<ButtonGroupItemProps> = ({
 
 export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className = '' }) => {
   return (
-    <div className={`qasah-btn-group ${className}`.trim()}>
+    <div className={`fmdqui-btn-group ${className}`.trim()}>
       {children}
     </div>
   );

@@ -1,4 +1,4 @@
-.qasah-modal-overlay {
+.fmdqui-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -18,7 +18,7 @@
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.qasah-modal-dialog {
+.fmdqui-modal-dialog {
   background-color: #ffffff;
   border-radius: var(--radius-16);
   box-shadow: var(--shadow-xl);
@@ -29,11 +29,11 @@
   animation: modalScaleIn 0.4s var(--transition-smooth) forwards;
 }
 
-.qasah-modal-dialog--sm { max-width: 400px; }
-.qasah-modal-dialog--md { max-width: 500px; }
-.qasah-modal-dialog--lg { max-width: 800px; }
+.fmdqui-modal-dialog--sm { max-width: 400px; }
+.fmdqui-modal-dialog--md { max-width: 500px; }
+.fmdqui-modal-dialog--lg { max-width: 800px; }
 
-.qasah-modal-header {
+.fmdqui-modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,7 +41,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.qasah-modal-title {
+.fmdqui-modal-title {
   margin: 0;
   font-family: var(--font-family-primary);
   font-size: 18px;
@@ -49,7 +49,7 @@
   color: var(--color-grey-focused);
 }
 
-.qasah-modal-close-btn {
+.fmdqui-modal-close-btn {
   background: none;
   border: none;
   cursor: pointer;
@@ -63,17 +63,17 @@
   transition: all var(--transition-fast);
 }
 
-.qasah-modal-close-btn:hover {
+.fmdqui-modal-close-btn:hover {
   background-color: var(--color-secondary-hover-bg, #f9fafb);
   color: var(--color-grey-focused);
 }
 
-.qasah-modal-close-btn svg {
+.fmdqui-modal-close-btn svg {
   width: 20px;
   height: 20px;
 }
 
-.qasah-modal-body {
+.fmdqui-modal-body {
   padding: var(--spacing-24);
   overflow-y: auto;
   font-family: var(--font-family-primary);
@@ -82,7 +82,7 @@
   line-height: var(--font-line-height-standard);
 }
 
-.qasah-modal-footer {
+.fmdqui-modal-footer {
   padding: var(--spacing-24);
   border-top: 1px solid rgba(0, 0, 0, 0.04);
   display: flex;

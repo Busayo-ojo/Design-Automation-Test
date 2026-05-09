@@ -30,9 +30,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ) => {
     // Container handles full-width and general text alignment
     const containerClasses = [
-      'qasah-textarea-container',
-      fullWidth ? 'qasah-textarea-container--full-width' : '',
-      disabled ? 'qasah-textarea-container--disabled' : '',
+      'fmdqui-textarea-container',
+      fullWidth ? 'fmdqui-textarea-container--full-width' : '',
+      disabled ? 'fmdqui-textarea-container--disabled' : '',
       className,
     ]
       .filter(Boolean)
@@ -40,9 +40,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     // Wrapper handles the border, hover, and focus states
     const wrapperClasses = [
-      'qasah-textarea-wrapper',
-      `qasah-textarea-wrapper--${variant}`,
-      disabled ? 'qasah-textarea-wrapper--disabled' : '',
+      'fmdqui-textarea-wrapper',
+      `fmdqui-textarea-wrapper--${variant}`,
+      disabled ? 'fmdqui-textarea-wrapper--disabled' : '',
     ]
       .filter(Boolean)
       .join(' ');
@@ -58,7 +58,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           <textarea
             ref={ref}
             id={textareaId}
-            className="qasah-textarea"
+            className="fmdqui-textarea"
             disabled={disabled}
             aria-invalid={variant === 'error'}
             aria-describedby={[
@@ -71,11 +71,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
         {/* Helper or Error Text */}
         {variant === 'error' && errorMessage ? (
-          <div id={errorId} className="qasah-textarea__message qasah-textarea__message--error" role="alert">
+          <div id={errorId} className="fmdqui-textarea__message fmdqui-textarea__message--error" role="alert">
             {errorMessage}
           </div>
         ) : helperText ? (
-          <div id={helperId} className="qasah-textarea__message qasah-textarea__message--helper">
+          <div id={helperId} className="fmdqui-textarea__message fmdqui-textarea__message--helper">
             {helperText}
           </div>
         ) : null}

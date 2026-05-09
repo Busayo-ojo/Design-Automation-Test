@@ -3,6 +3,8 @@
 .fmdq-heading, .fmdq-text, .fmdq-label {
     margin: 0;
     font-family: var(--font-family-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Align */
@@ -12,45 +14,49 @@
 .fmdq-typography--align-justify { text-align: justify; }
 
 /* Colors */
-.fmdq-typography--color-default { color: #101828; }
-.fmdq-typography--color-primary { color: var(--color-primary-default); }
-.fmdq-typography--color-secondary { color: var(--color-text-secondary); }
-.fmdq-typography--color-grey { color: var(--color-grey-default); }
+.fmdq-typography--color-default { color: var(--color-neutral-900); }
+.fmdq-typography--color-primary { color: var(--color-primary-500); }
+.fmdq-typography--color-secondary { color: var(--color-neutral-500); }
+.fmdq-typography--color-grey { color: var(--color-fmdq-grey); }
 .fmdq-typography--color-inherit { color: inherit; }
 
 /* Headings */
 .fmdq-heading {
+    display: block;
     letter-spacing: var(--font-letter-spacing-heading-large);
     line-height: var(--font-line-height-heading);
+    font-weight: 700;
 }
 
 .fmdq-heading--display-lg {
-    font-size: var(--font-size-display-lg);
-    line-height: var(--font-line-height-display);
-    letter-spacing: var(--font-letter-spacing-display);
+    font-size: var(--font-size-display-lg) !important;
+    line-height: var(--font-line-height-display) !important;
+    letter-spacing: var(--font-letter-spacing-display) !important;
 }
 .fmdq-heading--display-sm {
-    font-size: var(--font-size-display-sm);
-    line-height: var(--font-line-height-display);
-    letter-spacing: var(--font-letter-spacing-display);
+    font-size: var(--font-size-display-sm) !important;
+    line-height: var(--font-line-height-display) !important;
+    letter-spacing: var(--font-letter-spacing-display) !important;
 }
-.fmdq-heading--h1 { font-size: var(--font-size-h1); }
-.fmdq-heading--h2 { font-size: var(--font-size-h2); }
-.fmdq-heading--h3 { font-size: var(--font-size-h3); letter-spacing: var(--font-letter-spacing-heading-small); }
-.fmdq-heading--h4 { font-size: var(--font-size-h4); letter-spacing: var(--font-letter-spacing-heading-small); }
-.fmdq-heading--h5 { font-size: var(--font-size-h5); letter-spacing: var(--font-letter-spacing-heading-small); }
-.fmdq-heading--h6 { font-size: var(--font-size-h6); letter-spacing: var(--font-letter-spacing-heading-small); }
+.fmdq-heading--h1 { font-size: var(--font-size-h1) !important; }
+.fmdq-heading--h2 { font-size: var(--font-size-h2) !important; }
+.fmdq-heading--h3 { font-size: var(--font-size-h3) !important; letter-spacing: var(--font-letter-spacing-heading-small) !important; }
+.fmdq-heading--h4 { font-size: var(--font-size-h4) !important; letter-spacing: var(--font-letter-spacing-heading-small) !important; }
+.fmdq-heading--h5 { font-size: var(--font-size-h5) !important; letter-spacing: var(--font-letter-spacing-heading-small) !important; }
+.fmdq-heading--h6 { font-size: var(--font-size-h6) !important; letter-spacing: var(--font-letter-spacing-heading-small) !important; }
 
 /* Text Sizes */
 .fmdq-text {
+    display: block;
     line-height: var(--font-line-height-paragraph);
     letter-spacing: var(--font-letter-spacing-paragraph);
+    font-weight: 400;
 }
 
 .fmdq-text--size-lg { font-size: var(--font-size-p-lg); }
 .fmdq-text--size-md { font-size: var(--font-size-p-md); }
 .fmdq-text--size-sm { font-size: var(--font-size-p-sm); }
-.fmdq-text--size-xs { font-size: var(--font-size-p-xs); letter-spacing: var(--font-letter-spacing-paragraph-xs); }
+.fmdq-text--size-xs { font-size: var(--font-size-p-xs); }
 .fmdq-text--size-caption-lg { font-size: var(--font-size-caption-lg); line-height: var(--font-line-height-caption); letter-spacing: var(--font-letter-spacing-caption-lg-sm); }
 .fmdq-text--size-caption-sm { font-size: var(--font-size-caption-sm); line-height: var(--font-line-height-caption); letter-spacing: var(--font-letter-spacing-caption-lg-sm); }
 .fmdq-text--size-caption-xs { font-size: var(--font-size-caption-xs); line-height: var(--font-line-height-caption); letter-spacing: var(--font-letter-spacing-caption-xs); }
@@ -68,7 +74,7 @@
 
 /* Label Sizes and Weights */
 .fmdq-label { display: inline-block; line-height: var(--font-line-height-paragraph); }
-.fmdq-label--size-sm { font-size: var(--font-size-p-xs); letter-spacing: var(--font-letter-spacing-paragraph-xs); }
+.fmdq-label--size-sm { font-size: var(--font-size-p-xs); }
 .fmdq-label--size-md { font-size: var(--font-size-p-sm); letter-spacing: var(--font-letter-spacing-paragraph); }
 .fmdq-label--weight-regular { font-weight: 400; }
 .fmdq-label--weight-medium { font-weight: 500; }

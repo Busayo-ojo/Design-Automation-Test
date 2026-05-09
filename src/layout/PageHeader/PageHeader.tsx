@@ -25,10 +25,10 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   ...props 
 }) => {
   return (
-    <div className={`qasah-page-header ${className}`} {...props}>
-      <div className="qasah-page-header__left">
+    <div className={`fmdqui-page-header ${className}`} {...props}>
+      <div className="fmdqui-page-header__left">
         {breadcrumbs && breadcrumbs.length > 0 && (
-          <nav aria-label="Breadcrumb" className="qasah-page-header__breadcrumbs">
+          <nav aria-label="Breadcrumb" className="fmdqui-page-header__breadcrumbs">
             <ol>
               {breadcrumbs.map((crumb, index) => (
                 <li key={index}>
@@ -41,32 +41,32 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                           crumb.onClick();
                         }
                       }}
-                      className="qasah-page-header__breadcrumb-link"
+                      className="fmdqui-page-header__breadcrumb-link"
                     >
                       {crumb.label}
                     </a>
                   ) : (
-                    <span className="qasah-page-header__breadcrumb-current" aria-current="page">
+                    <span className="fmdqui-page-header__breadcrumb-current" aria-current="page">
                       {crumb.label}
                     </span>
                   )}
                   {index < breadcrumbs.length - 1 && (
-                    <span className="qasah-page-header__breadcrumb-separator">/</span>
+                    <span className="fmdqui-page-header__breadcrumb-separator">/</span>
                   )}
                 </li>
               ))}
             </ol>
           </nav>
         )}
-        <Heading level={2} className="qasah-page-header__title">{title}</Heading>
+        <Heading level={2} className="fmdqui-page-header__title">{title}</Heading>
         {description && (
-          <Text color="secondary" className="qasah-page-header__description">
+          <Text color="secondary" className="fmdqui-page-header__description">
             {description}
           </Text>
         )}
       </div>
       {actions && (
-        <div className="qasah-page-header__actions">
+        <div className="fmdqui-page-header__actions">
           {actions}
         </div>
       )}

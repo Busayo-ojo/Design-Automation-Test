@@ -1,7 +1,7 @@
 @import '../../tokens.css';
 
 /* ─── Container ─────────────────────────────────────────────────────── */
-.qasah-input-container {
+.fmdqui-input-container {
   display: inline-flex;
   flex-direction: column;
   gap: 4px;
@@ -11,7 +11,7 @@
 }
 
 /* ─── Label ──────────────────────────────────────────────────────────── */
-.qasah-input__label {
+.fmdqui-input__label {
   font-family: var(--font-family-primary);
   font-size: 14px;
   font-weight: 500;
@@ -21,7 +21,7 @@
 }
 
 /* ─── Input Wrapper ──────────────────────────────────────────────────── */
-.qasah-input-wrapper {
+.fmdqui-input-wrapper {
   display: flex;
   align-items: center;
   position: relative;
@@ -35,68 +35,75 @@
 }
 
 /* ── Sizes ── */
-.qasah-input-wrapper--sm {
+.fmdqui-input-wrapper--sm {
   height: 36px;
   padding: 8px 12px;
 }
 
-.qasah-input-wrapper--lg {
+.fmdqui-input-wrapper--lg {
   height: 56px;
   padding: 16px;
+}
+
+.fmdqui-input-wrapper--xl {
+  min-height: 80px;
+  height: auto;
+  padding: 12px;
+  align-items: flex-start;
 }
 
 /* ── States ── */
 /* default — no extra rule needed (base above is correct) */
 
-.qasah-input-wrapper--hover {
-  border-color: #F7D394;
+.fmdqui-input-wrapper--hover {
+  border-color: #034591;
 }
 
-.qasah-input-wrapper--active,
-.qasah-input-wrapper--typing,
-.qasah-input-wrapper--input-dropdown:focus-within {
-  border-color: #F7C164;
-  box-shadow: 0 0 0 3px rgba(247, 193, 100, 0.15);
+.fmdqui-input-wrapper--active,
+.fmdqui-input-wrapper--typing,
+.fmdqui-input-wrapper--input-dropdown:focus-within {
+  border-color: #034591;
+  box-shadow: 0 0 0 4px #E7E8F1, 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10);
 }
 
 /* JS focus state to support "typing" in real-time */
-.qasah-input-wrapper:focus-within:not(.qasah-input-wrapper--disabled):not(.qasah-input-wrapper--read-only):not(.qasah-input-wrapper--success):not(.qasah-input-wrapper--error) {
-  border-color: #F7C164;
-  box-shadow: 0 0 0 3px rgba(247, 193, 100, 0.15);
+.fmdqui-input-wrapper:focus-within:not(.fmdqui-input-wrapper--disabled):not(.fmdqui-input-wrapper--read-only):not(.fmdqui-input-wrapper--success):not(.fmdqui-input-wrapper--error) {
+  border-color: #034591;
+  box-shadow: 0 0 0 4px #E7E8F1, 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10);
 }
 
 
-.qasah-input-wrapper--filled {
+.fmdqui-input-wrapper--filled {
   border-color: #D0D5DD;
 }
 
-.qasah-input-wrapper--success {
+.fmdqui-input-wrapper--success {
   border-color: #5FC381;
 }
 
-.qasah-input-wrapper--success:focus-within {
+.fmdqui-input-wrapper--success:focus-within {
   border-color: #5FC381;
   box-shadow: 0 0 0 3px rgba(95, 195, 129, 0.15);
 }
 
-.qasah-input-wrapper--error {
+.fmdqui-input-wrapper--error {
   border-color: #E26E6A;
 }
 
-.qasah-input-wrapper--error:focus-within {
+.fmdqui-input-wrapper--error:focus-within {
   border-color: #E26E6A;
   box-shadow: 0 0 0 3px rgba(226, 110, 106, 0.15);
 }
 
-.qasah-input-wrapper--read-only,
-.qasah-input-wrapper--disabled {
+.fmdqui-input-wrapper--read-only,
+.fmdqui-input-wrapper--disabled {
   background-color: #F0F2F5;
   border-color: #D0D5DD;
   cursor: not-allowed;
 }
 
 /* ─── Actual <input> ─────────────────────────────────────────────────── */
-.qasah-input {
+.fmdqui-input {
   flex: 1;
   min-width: 0;
   border: none;
@@ -110,31 +117,38 @@
   padding: 0;
 }
 
-.qasah-input::placeholder {
+.fmdqui-input--textarea {
+  resize: vertical;
+  min-height: 56px;
+  line-height: 1.5;
+  overflow-y: auto;
+}
+
+.fmdqui-input::placeholder {
   color: var(--color-neutral-500);
 }
 
-.qasah-input:disabled,
-.qasah-input[readonly] {
+.fmdqui-input:disabled,
+.fmdqui-input[readonly] {
   cursor: not-allowed;
   color: var(--color-neutral-500);
 }
 
-.qasah-input--select {
+.fmdqui-input--select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
 }
 
-.qasah-input--select:invalid,
-.qasah-input--select option[value=""][disabled] {
+.fmdqui-input--select:invalid,
+.fmdqui-input--select option[value=""][disabled] {
   color: var(--color-neutral-500);
 }
 
 
 /* ─── Icons ──────────────────────────────────────────────────────────── */
-.qasah-input__icon {
+.fmdqui-input__icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,24 +158,24 @@
   height: 20px;
 }
 
-.qasah-input__icon svg {
+.fmdqui-input__icon svg {
   width: 20px;
   height: 20px;
 }
 
 /* sm icon scales */
-.qasah-input-wrapper--sm .qasah-input__icon {
+.fmdqui-input-wrapper--sm .fmdqui-input__icon {
   width: 16px;
   height: 16px;
 }
 
-.qasah-input-wrapper--sm .qasah-input__icon svg {
+.fmdqui-input-wrapper--sm .fmdqui-input__icon svg {
   width: 16px;
   height: 16px;
 }
 
 /* ─── Right add-on label ──────────────────────────────────────────────── */
-.qasah-input__right-label {
+.fmdqui-input__right-label {
   font-family: var(--font-family-primary);
   font-size: 14px;
   font-weight: 400;
@@ -172,7 +186,7 @@
 }
 
 /* ─── Helper / Status text ───────────────────────────────────────────── */
-.qasah-input__helper {
+.fmdqui-input__helper {
   font-family: var(--font-family-primary);
   font-size: 14px;
   font-weight: 400;
@@ -181,10 +195,10 @@
   display: block;
 }
 
-.qasah-input__helper--success {
+.fmdqui-input__helper--success {
   color: #04802E;
 }
 
-.qasah-input__helper--error {
+.fmdqui-input__helper--error {
   color: #CB1A14;
 }

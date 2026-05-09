@@ -6,7 +6,7 @@
 /* Switch off bg: rgb(228, 231, 236) → #E4E7EC  */
 
 /* ─── Base container ────────────────────────────────────────────────── */
-.qasah-toggle {
+.fmdqui-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,7 @@
 }
 
 /* Visually-hidden native input — keeps full keyboard & a11y support */
-.qasah-toggle__input {
+.fmdqui-toggle__input {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -28,17 +28,17 @@
   z-index: 2;
 }
 
-.qasah-toggle--disabled {
+.fmdqui-toggle--disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-.qasah-toggle--disabled .qasah-toggle__input {
+.fmdqui-toggle--disabled .fmdqui-toggle__input {
   cursor: not-allowed;
 }
 
 /* ─── Shared track base ─────────────────────────────────────────────── */
-.qasah-toggle__track {
+.fmdqui-toggle__track {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +48,7 @@
 }
 
 /* ─── Focus ring on keyboard navigation ─────────────────────────────── */
-.qasah-toggle__input:focus-visible ~ .qasah-toggle__track {
+.fmdqui-toggle__input:focus-visible ~ .fmdqui-toggle__track {
   outline: 2px solid #1D326D;
   outline-offset: 2px;
 }
@@ -58,12 +58,12 @@
    Figma: outer circle 24px, stroke 1.5px
           inner circle 12px filled brand colour (active only)
    ══════════════════════════════════════════════════════════════════════ */
-.qasah-toggle--radio {
+.fmdqui-toggle--radio {
   width: 24px;
   height: 24px;
 }
 
-.qasah-toggle__track--radio {
+.fmdqui-toggle__track--radio {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -72,12 +72,12 @@
 }
 
 /* Active state: border goes brand blue */
-.qasah-toggle__input:checked ~ .qasah-toggle__track--radio {
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--radio {
   border-color: #1D326D;
 }
 
 /* Inner dot */
-.qasah-toggle__radio-inner {
+.fmdqui-toggle__radio-inner {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -85,7 +85,7 @@
   transition: background-color 0.15s ease;
 }
 
-.qasah-toggle__input:checked ~ .qasah-toggle__track--radio .qasah-toggle__radio-inner {
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--radio .fmdqui-toggle__radio-inner {
   background-color: #1D326D;
 }
 
@@ -94,12 +94,12 @@
    Figma: inactive = white bg, 1.5px #D0D5DD border
           active   = #1D326D bg, no border, white check
    ══════════════════════════════════════════════════════════════════════ */
-.qasah-toggle--checkbox {
+.fmdqui-toggle--checkbox {
   width: 24px;
   height: 24px;
 }
 
-.qasah-toggle__track--checkbox {
+.fmdqui-toggle__track--checkbox {
   width: 24px;
   height: 24px;
   border-radius: 4px;
@@ -107,7 +107,7 @@
   border: 1.5px solid #D0D5DD;
 }
 
-.qasah-toggle__input:checked ~ .qasah-toggle__track--checkbox {
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkbox {
   background-color: #1D326D;
   border-color: #1D326D;
 }
@@ -116,12 +116,12 @@
    CHECKCIRCLE  —  24×24 full-circle (r=100 → 50%)
    Same visual logic as Checkbox but fully rounded
    ══════════════════════════════════════════════════════════════════════ */
-.qasah-toggle--checkcircle {
+.fmdqui-toggle--checkcircle {
   width: 24px;
   height: 24px;
 }
 
-.qasah-toggle__track--checkcircle {
+.fmdqui-toggle__track--checkcircle {
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -129,13 +129,13 @@
   border: 1.5px solid #D0D5DD;
 }
 
-.qasah-toggle__input:checked ~ .qasah-toggle__track--checkcircle {
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkcircle {
   background-color: #1D326D;
   border-color: #1D326D;
 }
 
 /* ── Shared check icon (used by Checkbox & Checkcircle) ──────────────── */
-.qasah-toggle__check-icon {
+.fmdqui-toggle__check-icon {
   width: 13px;
   height: 10px;
   opacity: 0;
@@ -143,8 +143,8 @@
   transition: opacity 0.15s ease, transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.qasah-toggle__input:checked ~ .qasah-toggle__track--checkbox .qasah-toggle__check-icon,
-.qasah-toggle__input:checked ~ .qasah-toggle__track--checkcircle .qasah-toggle__check-icon {
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkbox .fmdqui-toggle__check-icon,
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkcircle .fmdqui-toggle__check-icon {
   opacity: 1;
   transform: scale(1);
 }
@@ -154,12 +154,12 @@
    Figma: inactive bg = #E4E7EC (228,231,236), knob 21×21 white, offset left
           active  bg = #1D326D,                knob 21×21 white, offset right
    ══════════════════════════════════════════════════════════════════════ */
-.qasah-toggle--switch {
+.fmdqui-toggle--switch {
   width: 39px;
   height: 24px;
 }
 
-.qasah-toggle__track--switch {
+.fmdqui-toggle__track--switch {
   width: 39px;
   height: 24px;
   border-radius: 27px; /* Figma cornerRadius 27.375 → ~27px */
@@ -168,12 +168,12 @@
   padding: 0;
 }
 
-.qasah-toggle__input:checked ~ .qasah-toggle__track--switch {
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--switch {
   background-color: #1D326D;
 }
 
 /* Knob */
-.qasah-toggle__knob {
+.fmdqui-toggle__knob {
   position: absolute;
   top: 50%;
   left: 1.5px;
@@ -186,17 +186,17 @@
   transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.qasah-toggle__input:checked ~ .qasah-toggle__track--switch .qasah-toggle__knob {
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--switch .fmdqui-toggle__knob {
   left: calc(39px - 21px - 1.5px); /* = 16.5px */
 }
 
 /* ── Hover feedback ─────────────────────────────────────────────────── */
-.qasah-toggle:not(.qasah-toggle--disabled) .qasah-toggle__input:not(:disabled):hover ~ .qasah-toggle__track--radio,
-.qasah-toggle:not(.qasah-toggle--disabled) .qasah-toggle__input:not(:disabled):hover ~ .qasah-toggle__track--checkbox,
-.qasah-toggle:not(.qasah-toggle--disabled) .qasah-toggle__input:not(:disabled):hover ~ .qasah-toggle__track--checkcircle {
+.fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--radio,
+.fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--checkbox,
+.fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--checkcircle {
   border-color: #1D326D;
 }
 
-.qasah-toggle:not(.qasah-toggle--disabled) .qasah-toggle__input:not(:disabled):hover ~ .qasah-toggle__track--switch {
+.fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--switch {
   filter: brightness(0.94);
 }

@@ -27,7 +27,7 @@ export const NavMenu: React.FC<NavMenuProps> = ({ className = '', children, acti
   
   return (
     <NavMenuContext.Provider value={{ activeId, setActiveId: handleSetActiveId }}>
-      <nav className={`qasah-nav-menu ${className}`}>
+      <nav className={`fmdqui-nav-menu ${className}`}>
         {children}
       </nav>
     </NavMenuContext.Provider>
@@ -45,22 +45,22 @@ export const NavGroup: React.FC<NavGroupProps> = ({ title, className = '', child
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   
   return (
-    <div className={`qasah-nav-group ${className}`}>
+    <div className={`fmdqui-nav-group ${className}`}>
       <button 
-        className="qasah-nav-group-header" 
+        className="fmdqui-nav-group-header" 
         onClick={() => setIsExpanded(!isExpanded)}
         aria-expanded={isExpanded}
       >
-        <span className="qasah-nav-group-title">{title}</span>
+        <span className="fmdqui-nav-group-title">{title}</span>
         <svg 
-          className={`qasah-nav-group-icon ${isExpanded ? 'qasah-nav-group-icon--expanded' : ''}`} 
+          className={`fmdqui-nav-group-icon ${isExpanded ? 'fmdqui-nav-group-icon--expanded' : ''}`} 
           width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
         >
           <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
       </button>
       {isExpanded && (
-        <div className="qasah-nav-group-content">
+        <div className="fmdqui-nav-group-content">
           {children}
         </div>
       )}
@@ -85,15 +85,15 @@ export const NavItem: React.FC<NavItemProps> = ({ id, icon, className = '', chil
   };
   
   const classes = [
-    'qasah-nav-item',
-    isActive ? 'qasah-nav-item--active' : '',
+    'fmdqui-nav-item',
+    isActive ? 'fmdqui-nav-item--active' : '',
     className
   ].filter(Boolean).join(' ');
   
   return (
     <a href={href} className={classes} onClick={handleClick} {...props}>
-      {icon && <span className="qasah-nav-item-icon">{icon}</span>}
-      <span className="qasah-nav-item-label">{children}</span>
+      {icon && <span className="fmdqui-nav-item-icon">{icon}</span>}
+      <span className="fmdqui-nav-item-label">{children}</span>
     </a>
   );
 };

@@ -16,10 +16,10 @@ export const TopBar: React.FC<TopBarProps> = ({
   ...props 
 }) => {
   return (
-    <div className={`qasah-topbar ${className}`} {...props}>
-      <div className="qasah-topbar__left">{leftContent}</div>
-      <div className="qasah-topbar__center">{centerContent}</div>
-      <div className="qasah-topbar__right">{rightContent}</div>
+    <div className={`fmdqui-topbar ${className}`} {...props}>
+      <div className="fmdqui-topbar__left">{leftContent}</div>
+      <div className="fmdqui-topbar__center">{centerContent}</div>
+      <div className="fmdqui-topbar__right">{rightContent}</div>
     </div>
   );
 };

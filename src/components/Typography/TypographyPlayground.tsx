@@ -4,7 +4,7 @@ import './Typography.css';
 
 export const TypographyPlayground: React.FC = () => {
   const [inputText, setInputText] = useState('The quick brown fox jumps over the lazy dog');
-  const [selectedStyle, setSelectedStyle] = useState<string>('heading-1');
+  const [selectedStyle, setSelectedStyle] = useState<string>('1');
   const [showCode, setShowCode] = useState(false);
 
   const styles = [
@@ -27,12 +27,26 @@ export const TypographyPlayground: React.FC = () => {
 
   const currentStyle = styles.find(s => s.value === selectedStyle);
 
+  const handleStyleChange = (val: string) => {
+    setSelectedStyle(val);
+    const style = styles.find(s => s.value === val);
+    // If the input text is the default or matches a previous style label, update it to the new style label
+    if (style && (
+      inputText === 'The quick brown fox jumps over the lazy dog' || 
+      styles.some(s => s.label === inputText) ||
+      inputText === ''
+    )) {
+      setInputText(style.label);
+    }
+  };
+
   const renderPreview = () => {
     if (!currentStyle) return null;
 
     if (currentStyle.type === 'heading') {
+      const level = /^[1-6]$/.test(currentStyle.value) ? parseInt(currentStyle.value, 10) : currentStyle.value;
       return (
-        <Heading level={currentStyle.value as any}>
+        <Heading level={level as any}>
           {inputText || 'Please enter some text'}
         </Heading>
       );
@@ -48,9 +62,11 @@ export const TypographyPlayground: React.FC = () => {
   const getCodeSnippet = () => {
     if (!currentStyle) return '';
     if (currentStyle.type === 'heading') {
-      return `<Heading level="${currentStyle.value}">\n  ${inputText}\n</Heading>`;
+      const isNumeric = /^[1-6]$/.test(currentStyle.value);
+      const levelDisplay = isNumeric ? `{${currentStyle.value}}` : `"${currentStyle.value}"`;
+      return `<Heading level=${levelDisplay}>\n  ${inputText || 'Text content'}\n</Heading>`;
     }
-    return `<Text size="${currentStyle.value}">\n  ${inputText}\n</Text>`;
+    return `<Text size="${currentStyle.value}">\n  ${inputText || 'Text content'}\n</Text>`;
   };
 
   return (
@@ -88,7 +104,7 @@ export const TypographyPlayground: React.FC = () => {
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-          <div style={{ flex: '2 1 400px' }}>
+          <div style={{ flex: '2 1 400px', minWidth: 0 }}>
             <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: '#475467', fontWeight: '500' }}>Preview Text</label>
             <textarea
               value={inputText}
@@ -96,6 +112,7 @@ export const TypographyPlayground: React.FC = () => {
               placeholder="Type something..."
               style={{
                 width: '100%',
+                boxSizing: 'border-box',
                 padding: '12px 16px',
                 borderRadius: '8px',
                 border: '1px solid #D0D5DD',
@@ -107,13 +124,14 @@ export const TypographyPlayground: React.FC = () => {
               }}
             />
           </div>
-          <div style={{ flex: '1 1 200px' }}>
+          <div style={{ flex: '1 1 200px', minWidth: 0 }}>
             <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: '#475467', fontWeight: '500' }}>Select Style</label>
             <select
               value={selectedStyle}
-              onChange={(e) => setSelectedStyle(e.target.value)}
+              onChange={(e) => handleStyleChange(e.target.value)}
               style={{
                 width: '100%',
+                boxSizing: 'border-box',
                 padding: '12px 16px',
                 borderRadius: '8px',
                 border: '1px solid #D0D5DD',

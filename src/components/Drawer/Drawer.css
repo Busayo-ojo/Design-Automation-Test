@@ -1,4 +1,4 @@
-.qasah-drawer-overlay {
+.fmdqui-drawer-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -9,7 +9,7 @@
   backdrop-filter: blur(8px);
 }
 
-.qasah-drawer-panel {
+.fmdqui-drawer-panel {
   position: absolute;
   top: 0;
   height: 100%;
@@ -19,12 +19,12 @@
   flex-direction: column;
 }
 
-.qasah-drawer-panel--right {
+.fmdqui-drawer-panel--right {
   right: 0;
   animation: slideInRight 0.4s var(--transition-smooth) forwards;
 }
 
-.qasah-drawer-panel--left {
+.fmdqui-drawer-panel--left {
   left: 0;
   animation: slideInLeft 0.4s var(--transition-smooth) forwards;
 }
@@ -40,12 +40,12 @@
 }
 
 /* Sizes */
-.qasah-drawer-panel--sm { width: 300px; }
-.qasah-drawer-panel--md { width: 400px; }
-.qasah-drawer-panel--lg { width: 600px; }
-.qasah-drawer-panel--full { width: 100vw; }
+.fmdqui-drawer-panel--sm { width: 300px; }
+.fmdqui-drawer-panel--md { width: 400px; }
+.fmdqui-drawer-panel--lg { width: 600px; }
+.fmdqui-drawer-panel--full { width: 100vw; }
 
-.qasah-drawer-header {
+.fmdqui-drawer-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -53,13 +53,13 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.qasah-drawer-header-actions {
+.fmdqui-drawer-header-actions {
   display: flex;
   align-items: center;
   gap: var(--spacing-8);
 }
 
-.qasah-drawer-title {
+.fmdqui-drawer-title {
   margin: 0;
   font-family: var(--font-family-primary);
   font-size: 20px;
@@ -67,7 +67,7 @@
   color: var(--color-grey-focused, #101928);
 }
 
-.qasah-drawer-close-btn {
+.fmdqui-drawer-close-btn {
   background: none;
   border: none;
   cursor: pointer;
@@ -81,17 +81,17 @@
   transition: all var(--transition-fast);
 }
 
-.qasah-drawer-close-btn:hover {
+.fmdqui-drawer-close-btn:hover {
   background-color: var(--color-secondary-hover-bg, #f9fafb);
   color: var(--color-grey-focused, #101928);
 }
 
-.qasah-drawer-close-btn svg {
+.fmdqui-drawer-close-btn svg {
   width: 20px;
   height: 20px;
 }
 
-.qasah-drawer-body {
+.fmdqui-drawer-body {
   padding: var(--spacing-24);
   overflow-y: auto;
   flex-grow: 1;
@@ -101,7 +101,7 @@
   line-height: var(--font-line-height-standard);
 }
 
-.qasah-drawer-footer {
+.fmdqui-drawer-footer {
   padding: var(--spacing-24);
   border-top: 1px solid rgba(0, 0, 0, 0.04);
   display: flex;

@@ -52,9 +52,9 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
 
 
     const containerClasses = [
-      'qasah-chip',
-      `qasah-chip--${type.toLowerCase()}`,
-      `qasah-chip--${state}`,
+      'fmdqui-chip',
+      `fmdqui-chip--${type.toLowerCase()}`,
+      `fmdqui-chip--${state}`,
       className,
     ].filter(Boolean).join(' ');
 
@@ -70,12 +70,12 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
       if (!hasIcon && type !== 'Filter') return null;
       
       // If a custom leftIcon is provided, use it
-      if (leftIcon) return <span className="qasah-chip__icon qasah-chip__icon--left">{leftIcon}</span>;
+      if (leftIcon) return <span className="fmdqui-chip__icon fmdqui-chip__icon--left">{leftIcon}</span>;
 
       // Default Filter icon (simplified placeholder icon to match Figma intent)
       if (type === 'Filter') {
         return (
-          <span className="qasah-chip__icon qasah-chip__icon--left">
+          <span className="fmdqui-chip__icon fmdqui-chip__icon--left">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.6667 2H1.33333L6.66667 8.30667V12.6667L9.33333 14V8.30667L14.6667 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -85,7 +85,7 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
 
       // Default Input icon (if hasIcon=true but no leftIcon provided)
       return (
-        <span className="qasah-chip__icon qasah-chip__icon--left">
+        <span className="fmdqui-chip__icon fmdqui-chip__icon--left">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="8" cy="8" r="7.25" stroke="currentColor" strokeWidth="1.5"/>
           </svg>
@@ -105,11 +105,11 @@ export const Chip = forwardRef<HTMLDivElement, ChipProps>(
         {...props}
       >
         {renderLeftIcon()}
-        <span className="qasah-chip__label">{label}</span>
+        <span className="fmdqui-chip__label">{label}</span>
         {hasCloseButton && (
           <button
             type="button"
-            className="qasah-chip__close"
+            className="fmdqui-chip__close"
             onClick={handleClose}
             disabled={isDisabled}
             aria-label="Remove"

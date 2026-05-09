@@ -1,7 +1,7 @@
 @import '../../tokens.css';
 
 /* Container */
-.qasah-textarea-container {
+.fmdqui-textarea-container {
   display: inline-flex;
   flex-direction: column;
   gap: 4px;
@@ -9,13 +9,13 @@
   box-sizing: border-box;
 }
 
-.qasah-textarea-container--full-width {
+.fmdqui-textarea-container--full-width {
   display: flex;
   width: 100%;
 }
 
 /* Wrapper (holds border and handles focus rings) */
-.qasah-textarea-wrapper {
+.fmdqui-textarea-wrapper {
   display: flex;
   position: relative;
   background-color: #ffffff;
@@ -27,44 +27,44 @@
 }
 
 /* Default Variant States */
-.qasah-textarea-wrapper--default:hover:not(.qasah-textarea-wrapper--disabled) {
+.fmdqui-textarea-wrapper--default:hover:not(.fmdqui-textarea-wrapper--disabled) {
   border-color: var(--color-grey-hover);
 }
 
-.qasah-textarea-wrapper--default:focus-within:not(.qasah-textarea-wrapper--disabled) {
+.fmdqui-textarea-wrapper--default:focus-within:not(.fmdqui-textarea-wrapper--disabled) {
   border-color: var(--color-primary-default);
   outline: 2px solid var(--color-primary-default);
   outline-offset: -1px;
 }
 
 /* Error Variant States */
-.qasah-textarea-wrapper--error {
+.fmdqui-textarea-wrapper--error {
   border-color: var(--color-destructive-default);
 }
 
-.qasah-textarea-wrapper--error:hover:not(.qasah-textarea-wrapper--disabled) {
+.fmdqui-textarea-wrapper--error:hover:not(.fmdqui-textarea-wrapper--disabled) {
   border-color: var(--color-destructive-hover);
 }
 
-.qasah-textarea-wrapper--error:focus-within:not(.qasah-textarea-wrapper--disabled) {
+.fmdqui-textarea-wrapper--error:focus-within:not(.fmdqui-textarea-wrapper--disabled) {
   outline: 2px solid var(--color-destructive-default);
   outline-offset: -1px;
 }
 
 /* Disabled State */
-.qasah-textarea-wrapper--disabled {
+.fmdqui-textarea-wrapper--disabled {
   background-color: #f2f4f7;
   border-color: #eaecf0;
   cursor: not-allowed;
 }
 
-.qasah-textarea-container--disabled .qasah-textarea__message {
+.fmdqui-textarea-container--disabled .fmdqui-textarea__message {
   color: var(--color-grey-default);
   opacity: 0.7;
 }
 
 /* Actual textarea field */
-.qasah-textarea {
+.fmdqui-textarea {
   width: 100%;
   min-height: 80px; /* Sensible default height for textareas */
   border: none;
@@ -78,27 +78,27 @@
   resize: vertical; /* Allow users to resize vertically by default */
 }
 
-.qasah-textarea::placeholder {
+.fmdqui-textarea::placeholder {
   color: var(--color-grey-default);
   opacity: 0.8;
 }
 
-.qasah-textarea:disabled {
+.fmdqui-textarea:disabled {
   cursor: not-allowed;
   color: var(--color-grey-default);
 }
 
 /* Helper & Error Messages */
-.qasah-textarea__message {
+.fmdqui-textarea__message {
   font-size: 12px;
   line-height: var(--font-line-height-standard);
   margin-left: 2px;
 }
 
-.qasah-textarea__message--helper {
+.fmdqui-textarea__message--helper {
   color: var(--color-grey-default);
 }
 
-.qasah-textarea__message--error {
+.fmdqui-textarea__message--error {
   color: var(--color-destructive-default);
 }

@@ -38,7 +38,7 @@ const ToastContainer: React.FC<{ toasts: ToastMessage[]; removeToast: (id: strin
   if (typeof window === 'undefined') return null;
   
   return createPortal(
-    <div className="qasah-toast-container">
+    <div className="fmdqui-toast-container">
       {toasts.map((t) => (
         <ToastItem key={t.id} toast={t} removeToast={removeToast} />
       ))}
@@ -58,12 +58,12 @@ const ToastItem: React.FC<{ toast: ToastMessage; removeToast: (id: string) => vo
   }, [id, duration, removeToast]);
 
   return (
-    <div className={`qasah-toast qasah-toast--${variant}`} role="alert">
-      <div className="qasah-toast-content">
-        <h4 className="qasah-toast-title">{title}</h4>
-        {description && <p className="qasah-toast-desc">{description}</p>}
+    <div className={`fmdqui-toast fmdqui-toast--${variant}`} role="alert">
+      <div className="fmdqui-toast-content">
+        <h4 className="fmdqui-toast-title">{title}</h4>
+        {description && <p className="fmdqui-toast-desc">{description}</p>}
       </div>
-      <button className="qasah-toast-close" onClick={() => removeToast(id)} aria-label="Close Toast">
+      <button className="fmdqui-toast-close" onClick={() => removeToast(id)} aria-label="Close Toast">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>

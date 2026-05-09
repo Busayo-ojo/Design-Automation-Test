@@ -41,9 +41,9 @@ export const Modal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="qasah-modal-overlay" onClick={closeOnBackdropClick ? onClose : undefined}>
+    <div className="fmdqui-modal-overlay" onClick={closeOnBackdropClick ? onClose : undefined}>
       <div 
-        className={`qasah-modal-dialog qasah-modal-dialog--${size} ${className}`}
+        className={`fmdqui-modal-dialog fmdqui-modal-dialog--${size} ${className}`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -55,10 +55,10 @@ export const Modal: React.FC<ModalProps> = ({
 };
 
 export const ModalHeader: React.FC<{ title: string; onClose?: () => void; className?: string }> = ({ title, onClose, className = '' }) => (
-  <div className={`qasah-modal-header ${className}`}>
-    <h3 className="qasah-modal-title">{title}</h3>
+  <div className={`fmdqui-modal-header ${className}`}>
+    <h3 className="fmdqui-modal-title">{title}</h3>
     {onClose && (
-      <button className="qasah-modal-close-btn" onClick={onClose} aria-label="Close">
+      <button className="fmdqui-modal-close-btn" onClick={onClose} aria-label="Close">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -69,13 +69,13 @@ export const ModalHeader: React.FC<{ title: string; onClose?: () => void; classN
 );
 
 export const ModalBody: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
-  <div className={`qasah-modal-body ${className}`} {...props}>
+  <div className={`fmdqui-modal-body ${className}`} {...props}>
     {children}
   </div>
 );
 
 export const ModalFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
-  <div className={`qasah-modal-footer ${className}`} {...props}>
+  <div className={`fmdqui-modal-footer ${className}`} {...props}>
     {children}
   </div>
 );

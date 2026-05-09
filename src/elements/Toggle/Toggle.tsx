@@ -23,7 +23,7 @@ export interface ToggleProps
 // ─── SVG check icon (13×10, white) used by Checkbox & Checkcircle ─────────
 const CheckIcon = () => (
   <svg
-    className="qasah-toggle__check-icon"
+    className="fmdqui-toggle__check-icon"
     viewBox="0 0 13 10"
     fill="none"
     aria-hidden="true"
@@ -66,9 +66,9 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
       type === 'Radio' ? 'radio' : 'checkbox';
 
     const containerClass = [
-      'qasah-toggle',
-      `qasah-toggle--${type.toLowerCase()}`,
-      disabled ? 'qasah-toggle--disabled' : '',
+      'fmdqui-toggle',
+      `fmdqui-toggle--${type.toLowerCase()}`,
+      disabled ? 'fmdqui-toggle--disabled' : '',
       className,
     ]
       .filter(Boolean)
@@ -85,35 +85,35 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
           disabled={disabled}
           onChange={onChange}
           aria-label={ariaLabel}
-          className="qasah-toggle__input"
+          className="fmdqui-toggle__input"
           {...props}
         />
 
         {/* ─── Radio ─────────────────────────────────────────────── */}
         {type === 'Radio' && (
-          <span className="qasah-toggle__track qasah-toggle__track--radio" aria-hidden="true">
-            <span className="qasah-toggle__radio-inner" />
+          <span className="fmdqui-toggle__track fmdqui-toggle__track--radio" aria-hidden="true">
+            <span className="fmdqui-toggle__radio-inner" />
           </span>
         )}
 
         {/* ─── Checkbox ──────────────────────────────────────────── */}
         {type === 'Checkbox' && (
-          <span className="qasah-toggle__track qasah-toggle__track--checkbox" aria-hidden="true">
+          <span className="fmdqui-toggle__track fmdqui-toggle__track--checkbox" aria-hidden="true">
             <CheckIcon />
           </span>
         )}
 
         {/* ─── Checkcircle ───────────────────────────────────────── */}
         {type === 'Checkcircle' && (
-          <span className="qasah-toggle__track qasah-toggle__track--checkcircle" aria-hidden="true">
+          <span className="fmdqui-toggle__track fmdqui-toggle__track--checkcircle" aria-hidden="true">
             <CheckIcon />
           </span>
         )}
 
         {/* ─── Switch ────────────────────────────────────────────── */}
         {type === 'Switch' && (
-          <span className="qasah-toggle__track qasah-toggle__track--switch" aria-hidden="true">
-            <span className="qasah-toggle__knob" />
+          <span className="fmdqui-toggle__track fmdqui-toggle__track--switch" aria-hidden="true">
+            <span className="fmdqui-toggle__knob" />
           </span>
         )}
       </span>

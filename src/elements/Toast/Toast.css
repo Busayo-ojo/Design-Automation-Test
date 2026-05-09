@@ -1,4 +1,4 @@
-.qasah-toast-container {
+.fmdqui-toast-container {
   position: fixed;
   bottom: var(--spacing-24);
   right: var(--spacing-24);
@@ -9,7 +9,7 @@
   pointer-events: none;
 }
 
-.qasah-toast {
+.fmdqui-toast {
   pointer-events: auto;
   min-width: 300px;
   max-width: 400px;
@@ -30,32 +30,32 @@
   100% { transform: translateX(0); opacity: 1; }
 }
 
-.qasah-toast--success { border-left-color: #10b981; }
-.qasah-toast--error { border-left-color: var(--color-destructive-default, #cb1a14); }
-.qasah-toast--warning { border-left-color: #f59e0b; }
-.qasah-toast--info { border-left-color: var(--color-primary-default, #034591); }
+.fmdqui-toast--success { border-left-color: #10b981; }
+.fmdqui-toast--error { border-left-color: var(--color-destructive-default, #cb1a14); }
+.fmdqui-toast--warning { border-left-color: #f59e0b; }
+.fmdqui-toast--info { border-left-color: var(--color-primary-default, #034591); }
 
-.qasah-toast-content {
+.fmdqui-toast-content {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.qasah-toast-title {
+.fmdqui-toast-title {
   margin: 0;
   font-size: var(--font-size-sm);
   font-weight: 600;
   color: var(--color-grey-focused, #101928);
 }
 
-.qasah-toast-desc {
+.fmdqui-toast-desc {
   margin: 0;
   font-size: 13px;
   color: var(--color-grey-default, #667185);
   line-height: var(--font-line-height-standard);
 }
 
-.qasah-toast-close {
+.fmdqui-toast-close {
   background: none;
   border: none;
   cursor: pointer;
@@ -66,12 +66,12 @@
   transition: all var(--transition-fast);
 }
 
-.qasah-toast-close:hover {
+.fmdqui-toast-close:hover {
   background-color: var(--color-secondary-hover-bg, #f9fafb);
   color: var(--color-grey-focused, #101928);
 }
 
-.qasah-toast-close svg {
+.fmdqui-toast-close svg {
   width: 16px;
   height: 16px;
 }

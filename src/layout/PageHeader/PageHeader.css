@@ -1,4 +1,4 @@
-.qasah-page-header {
+.fmdqui-page-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -7,18 +7,18 @@
   font-family: var(--font-family-primary);
 }
 
-.qasah-page-header__left {
+.fmdqui-page-header__left {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-8);
   flex: 1;
 }
 
-.qasah-page-header__breadcrumbs {
+.fmdqui-page-header__breadcrumbs {
   margin-bottom: var(--spacing-8);
 }
 
-.qasah-page-header__breadcrumbs ol {
+.fmdqui-page-header__breadcrumbs ol {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -28,7 +28,7 @@
   gap: var(--spacing-8);
 }
 
-.qasah-page-header__breadcrumb-link {
+.fmdqui-page-header__breadcrumb-link {
   color: var(--color-primary-default);
   text-decoration: none;
   font-size: 13px;
@@ -36,37 +36,37 @@
   transition: all var(--transition-fast);
 }
 
-.qasah-page-header__breadcrumb-link:hover {
+.fmdqui-page-header__breadcrumb-link:hover {
   text-decoration: underline;
   color: var(--color-primary-hover);
 }
 
-.qasah-page-header__breadcrumb-current {
+.fmdqui-page-header__breadcrumb-current {
   color: var(--color-grey-default);
   font-size: 13px;
   font-weight: 500;
 }
 
-.qasah-page-header__breadcrumb-separator {
+.fmdqui-page-header__breadcrumb-separator {
   color: var(--color-grey-deactivated, #d0d5dd);
   font-size: 13px;
   margin: 0 2px;
 }
 
-.qasah-page-header__title {
+.fmdqui-page-header__title {
   margin: 0;
   font-size: 24px;
   font-weight: 600;
   color: var(--color-grey-focused, #101928);
 }
 
-.qasah-page-header__description {
+.fmdqui-page-header__description {
   margin: 0;
   font-size: var(--font-size-sm);
   color: var(--color-grey-default, #667185);
 }
 
-.qasah-page-header__actions {
+.fmdqui-page-header__actions {
   display: flex;
   align-items: center;
   gap: var(--spacing-12);

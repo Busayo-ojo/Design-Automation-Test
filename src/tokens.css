@@ -88,9 +88,9 @@
 
   /* Line Heights */
   --font-line-height-display: 100%;
-  --font-line-height-heading: 120%;
-  --font-line-height-paragraph: 145%;
-  --font-line-height-caption: 120%;
+  --font-line-height-heading: 100%;
+  --font-line-height-paragraph: 100%;
+  --font-line-height-caption: 100%;
 
   /* Letter Spacing */
   --font-letter-spacing-display: -0.04em;

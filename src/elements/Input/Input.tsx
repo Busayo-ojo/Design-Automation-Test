@@ -12,7 +12,7 @@ export type InputState =
   | 'read only'
   | 'input dropdown';
 
-export type InputSize = 'sm' | 'lg';
+export type InputSize = 'sm' | 'lg' | 'xl';
 
 export interface InputOption {
   value: string | number;
@@ -23,7 +23,7 @@ export interface InputOption {
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement | HTMLSelectElement>, 'size'> {
   /** Visual state of the input — maps 1:1 to Figma states */
   state?: InputState;
-  /** Size variant: sm (36px) or lg (56px) */
+  /** Size variant: sm (36px), lg (56px), or xl (80px+ expandable textarea) */
   size?: InputSize;
   /** Field label rendered above the input */
   label?: string;
@@ -87,7 +87,7 @@ const ErrorIcon = () => (
 
 // ─── Component ─────────────────────────────────────────────────────────────
 
-export const Input = forwardRef<HTMLInputElement | HTMLSelectElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, InputProps>(
   (
     {
       state = 'default',
@@ -112,6 +112,8 @@ export const Input = forwardRef<HTMLInputElement | HTMLSelectElement, InputProps
     },
     ref
   ) => {
+    const isXl = size === 'xl';
+
     // Derive actual disabled/readOnly from state prop too
     const isDisabled = disabled || state === 'read only';
     const isReadOnly = readOnly || state === 'read only';
@@ -140,29 +142,29 @@ export const Input = forwardRef<HTMLInputElement | HTMLSelectElement, InputProps
     })();
 
     const containerClasses = [
-      'qasah-input-container',
-      `qasah-input-container--${size}`,
+      'fmdqui-input-container',
+      `fmdqui-input-container--${size}`,
       className,
     ].filter(Boolean).join(' ');
 
     const wrapperClasses = [
-      'qasah-input-wrapper',
-      `qasah-input-wrapper--${size}`,
-      `qasah-input-wrapper--${state.replace(' ', '-')}`,
-      isDisabled ? 'qasah-input-wrapper--disabled' : '',
+      'fmdqui-input-wrapper',
+      `fmdqui-input-wrapper--${size}`,
+      `fmdqui-input-wrapper--${state.replace(' ', '-')}`,
+      isDisabled ? 'fmdqui-input-wrapper--disabled' : '',
     ].filter(Boolean).join(' ');
 
     const helperClasses = [
-      'qasah-input__helper',
-      state === 'success' ? 'qasah-input__helper--success' : '',
-      state === 'error' ? 'qasah-input__helper--error' : '',
+      'fmdqui-input__helper',
+      state === 'success' ? 'fmdqui-input__helper--success' : '',
+      state === 'error' ? 'fmdqui-input__helper--error' : '',
     ].filter(Boolean).join(' ');
 
     return (
       <div className={containerClasses}>
         {/* Label */}
         {hasLabel && (
-          <label htmlFor={inputId} className="qasah-input__label">
+          <label htmlFor={inputId} className="fmdqui-input__label">
             {label}
           </label>
         )}
@@ -171,7 +173,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLSelectElement, InputProps
         <div className={wrapperClasses}>
           {/* Left icon */}
           {hasLeftIcon && (
-            <span className="qasah-input__icon qasah-input__icon--leading">
+            <span className="fmdqui-input__icon fmdqui-input__icon--leading">
               {resolvedLeadingIcon}
             </span>
           )}
@@ -180,7 +182,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLSelectElement, InputProps
             <select
               ref={ref as React.Ref<HTMLSelectElement>}
               id={inputId}
-              className="qasah-input qasah-input--select"
+              className="fmdqui-input fmdqui-input--select"
               disabled={isDisabled}
               aria-invalid={false}
               aria-describedby={hasHelperText ? `${inputId}-helper` : undefined}
@@ -201,11 +203,23 @@ export const Input = forwardRef<HTMLInputElement | HTMLSelectElement, InputProps
                 </option>
               ))}
             </select>
+          ) : isXl ? (
+            <textarea
+              ref={ref as React.Ref<HTMLTextAreaElement>}
+              id={inputId}
+              className="fmdqui-input fmdqui-input--textarea"
+              disabled={isDisabled}
+              readOnly={isReadOnly}
+              placeholder={placeholder}
+              aria-invalid={state === 'error'}
+              aria-describedby={hasHelperText ? `${inputId}-helper` : undefined}
+              {...(props as unknown as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+            />
           ) : (
             <input
               ref={ref as React.Ref<HTMLInputElement>}
               id={inputId}
-              className="qasah-input"
+              className="fmdqui-input"
               disabled={isDisabled}
               readOnly={isReadOnly}
               placeholder={placeholder}
@@ -217,14 +231,14 @@ export const Input = forwardRef<HTMLInputElement | HTMLSelectElement, InputProps
 
           {/* Right add-on label */}
           {hasRightLabel && (
-            <span className="qasah-input__right-label">
+            <span className="fmdqui-input__right-label">
               {rightLabel ?? 'Add-on'}
             </span>
           )}
 
           {/* Right icon */}
           {hasRightIcon && (
-            <span className="qasah-input__icon qasah-input__icon--trailing">
+            <span className="fmdqui-input__icon fmdqui-input__icon--trailing">
               {resolvedTrailingIcon}
             </span>
           )}

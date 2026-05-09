@@ -1,4 +1,4 @@
-.qasah-card {
+.fmdqui-card {
   background-color: #ffffff;
   border-radius: var(--radius-16);
   border: 1px solid rgba(0, 0, 0, 0.04);
@@ -10,18 +10,18 @@
   transition: box-shadow var(--transition-smooth);
 }
 
-.qasah-card:hover {
+.fmdqui-card:hover {
   box-shadow: var(--shadow-lg);
 }
 
-.qasah-card-header {
+.fmdqui-card-header {
   padding: var(--spacing-24) var(--spacing-24) var(--spacing-16);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-8);
 }
 
-.qasah-card-title {
+.fmdqui-card-title {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
@@ -29,14 +29,14 @@
   line-height: var(--font-line-height-standard);
 }
 
-.qasah-card-body {
+.fmdqui-card-body {
   padding: 0 var(--spacing-24) var(--spacing-24);
   color: var(--color-grey-default);
   font-size: var(--font-size-sm);
   flex-grow: 1;
 }
 
-.qasah-card-footer {
+.fmdqui-card-footer {
   padding: var(--spacing-16) var(--spacing-24);
   background-color: rgba(249, 250, 251, 0.5);
   border-top: 1px solid rgba(0, 0, 0, 0.04);

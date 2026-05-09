@@ -1,6 +1,6 @@
 @import '../../tokens.css';
 
-.qasah-button {
+.fmdqui-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -9,7 +9,7 @@
     transition: all var(--transition-fast);
     font-family: var(--font-family-primary);
     font-weight: 600;
-    letter-spacing: var(--font-letter-spacing-paragraph);
+    letter-spacing: var(--font-letter-spacing-heading-large);
     gap: 10px;
     box-sizing: border-box;
     text-decoration: none;
@@ -17,66 +17,66 @@
     border-radius: var(--radius-12);
 }
 
-.qasah-button:active:not(:disabled) {
+.fmdqui-button:active:not(:disabled) {
     transform: scale(0.98);
 }
 
 /* --- Sizes --- */
-.qasah-button--sm {
+.fmdqui-button--sm {
     height: 36px;
     font-size: 14px;
 }
 
-.qasah-button--lg {
+.fmdqui-button--lg {
     height: 56px;
     font-size: 18px;
 }
 
 /* --- Padding & Width (per icon-style) --- */
 /* sm */
-.qasah-button--sm.qasah-button--icon-none {
+.fmdqui-button--sm.fmdqui-button--icon-none {
     padding: 8px 16px;
 }
-.qasah-button--sm.qasah-button--icon-leading-icon,
-.qasah-button--sm.qasah-button--icon-trailing-icon {
+.fmdqui-button--sm.fmdqui-button--icon-leading-icon,
+.fmdqui-button--sm.fmdqui-button--icon-trailing-icon {
     padding: 8px 12px;
 }
-.qasah-button--sm.qasah-button--icon-icon-only {
+.fmdqui-button--sm.fmdqui-button--icon-icon-only {
     padding: 8px;
     width: 36px;
 }
 
 /* lg */
-.qasah-button--lg.qasah-button--icon-none {
+.fmdqui-button--lg.fmdqui-button--icon-none {
     padding: 16px 24px;
 }
-.qasah-button--lg.qasah-button--icon-leading-icon,
-.qasah-button--lg.qasah-button--icon-trailing-icon,
-.qasah-button--lg.qasah-button--icon-icon-only {
+.fmdqui-button--lg.fmdqui-button--icon-leading-icon,
+.fmdqui-button--lg.fmdqui-button--icon-trailing-icon,
+.fmdqui-button--lg.fmdqui-button--icon-icon-only {
     padding: 16px;
 }
-.qasah-button--lg.qasah-button--icon-icon-only {
+.fmdqui-button--lg.fmdqui-button--icon-icon-only {
     width: 56px;
 }
 
 /* --- Base Variants --- */
 
 /* Primary */
-.qasah-button--primary {
+.fmdqui-button--primary {
     background-color: var(--color-fmdq-blue);
     color: #FFFFFF;
 }
-.qasah-button--primary:hover:not(:disabled),
-.qasah-button--primary.qasah-button--state-hover {
+.fmdqui-button--primary:hover:not(:disabled),
+.fmdqui-button--primary.fmdqui-button--state-hover {
     background-color: #012657;
 }
-.qasah-button--primary:focus-visible,
-.qasah-button--primary.qasah-button--state-focused {
+.fmdqui-button--primary:focus-visible,
+.fmdqui-button--primary.fmdqui-button--state-focused {
     background-color: #001633;
     box-shadow: var(--shadow-glow-primary);
 }
-.qasah-button--primary:disabled,
-.qasah-button--primary.qasah-button--state-de-activated {
+.fmdqui-button--primary:disabled,
+.fmdqui-button--primary.fmdqui-button--state-de-activated {
     background-color: #D0D5DD;
     color: #FFFFFF;
     cursor: not-allowed;
@@ -85,93 +85,93 @@
 }
 
 /* Secondary */
-.qasah-button--secondary {
+.fmdqui-button--secondary {
     background-color: #FFFFFF;
     color: #034592;
     border: 1.5px solid #034592;
 }
-.qasah-button--secondary:hover:not(:disabled),
-.qasah-button--secondary.qasah-button--state-hover {
+.fmdqui-button--secondary:hover:not(:disabled),
+.fmdqui-button--secondary.fmdqui-button--state-hover {
     background-color: #E6EEF6; /* Light blue from primary-50 approx */
 }
-.qasah-button--secondary:focus-visible,
-.qasah-button--secondary.qasah-button--state-focused {
+.fmdqui-button--secondary:focus-visible,
+.fmdqui-button--secondary.fmdqui-button--state-focused {
     background-color: #D0E0EF;
 }
-.qasah-button--secondary:disabled {
+.fmdqui-button--secondary:disabled {
     background-color: #F9FAFB;
     color: #D0D5DD;
     border-color: #F0F2F5;
 }
 
 /* Destructive */
-.qasah-button--destructive.qasah-button--type-solid {
+.fmdqui-button--destructive.fmdqui-button--type-solid {
     background-color: #CB1A14;
     color: #FFFFFF;
 }
-.qasah-button--destructive.qasah-button--type-solid:hover:not(:disabled) {
+.fmdqui-button--destructive.fmdqui-button--type-solid:hover:not(:disabled) {
     background-color: #A01511;
 }
-.qasah-button--destructive.qasah-button--type-solid:disabled {
+.fmdqui-button--destructive.fmdqui-button--type-solid:disabled {
     background-color: #D0D5DD;
     color: #FFFFFF;
 }
-.qasah-button--destructive.qasah-button--type-outlined {
+.fmdqui-button--destructive.fmdqui-button--type-outlined {
     background-color: transparent;
     color: #CB1A14;
     border: 1.5px solid #CB1A14;
 }
-.qasah-button--destructive.qasah-button--type-outlined:hover:not(:disabled) {
+.fmdqui-button--destructive.fmdqui-button--type-outlined:hover:not(:disabled) {
     background-color: #FFECE5;
 }
-.qasah-button--destructive.qasah-button--type-outlined:disabled {
+.fmdqui-button--destructive.fmdqui-button--type-outlined:disabled {
     border-color: #F0F2F5;
     color: #D0D5DD;
 }
 
 /* Grey */
-.qasah-button--grey.qasah-button--type-solid {
+.fmdqui-button--grey.fmdqui-button--type-solid {
     background-color: #667185;
     color: #FFFFFF;
 }
-.qasah-button--grey.qasah-button--type-outlined {
+.fmdqui-button--grey.fmdqui-button--type-outlined {
     background-color: transparent;
     color: #667185;
     border: 1.5px solid #667185;
 }
 
 /* Text Variants */
-.qasah-button--text {
+.fmdqui-button--text {
     background: transparent !important;
     padding: 0 !important;
     height: auto !important;
     border-radius: 0 !important;
     border: none !important;
 }
-.qasah-button--text.qasah-button--type-primary { color: #0D5EBA; }
-.qasah-button--text.qasah-button--type-secondary { color: #667185; }
-.qasah-button--text.qasah-button--type-destructive { color: #D42620; }
+.fmdqui-button--text.fmdqui-button--type-primary { color: #0D5EBA; }
+.fmdqui-button--text.fmdqui-button--type-secondary { color: #667185; }
+.fmdqui-button--text.fmdqui-button--type-destructive { color: #D42620; }
 
-.qasah-button--text:hover:not(:disabled) {
+.fmdqui-button--text:hover:not(:disabled) {
     text-decoration: underline;
 }
 
 /* Special Buttons */
-.qasah-button--success {
+.fmdqui-button--success {
     background-color: #04802E;
     color: #FFFFFF;
 }
-.qasah-button--warning {
+.fmdqui-button--warning {
     background-color: #F3A218;
     color: #000000;
 }
-.qasah-button--info {
+.fmdqui-button--info {
     background-color: #0D5EBA;
     color: #FFFFFF;
 }
 
 /* --- Icons --- */
-.qasah-button__icon {
+.fmdqui-button__icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -179,12 +179,12 @@
     height: 20px;
 }
 
-.qasah-button--lg .qasah-button__icon {
+.fmdqui-button--lg .fmdqui-button__icon {
     width: 24px;
     height: 24px;
 }
 
-.qasah-button__icon svg {
+.fmdqui-button__icon svg {
     width: 100%;
     height: 100%;
 }

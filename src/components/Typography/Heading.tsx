@@ -15,10 +15,19 @@ export const Heading: React.FC<HeadingProps> = ({
   children,
   ...props
 }) => {
-  const Tag = (typeof level === 'number' ? `h${level}` : 'h1') as React.ElementType;
+  // Normalize level to number if it's a string representation of 1-6
+  const isNumericLevel = (val: any): val is 1 | 2 | 3 | 4 | 5 | 6 => 
+    (typeof val === 'number' && val >= 1 && val <= 6) || 
+    (typeof val === 'string' && /^[1-6]$/.test(val));
+  
+  const normalizedLevel = (typeof level === 'string' && /^[1-6]$/.test(level)) 
+    ? parseInt(level, 10) 
+    : level;
+
+  const Tag = (typeof normalizedLevel === 'number' ? `h${normalizedLevel}` : 'h1') as React.ElementType;
   const classNames = [
     'fmdq-heading',
-    `fmdq-heading--${typeof level === 'number' ? `h${level}` : level}`,
+    `fmdq-heading--${typeof normalizedLevel === 'number' ? `h${normalizedLevel}` : normalizedLevel}`,
     `fmdq-typography--align-${align}`,
     `fmdq-typography--color-${color}`,
     className

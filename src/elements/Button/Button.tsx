@@ -30,17 +30,17 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const classNames = [
-    'qasah-button',
-    `qasah-button--${variant}`,
-    `qasah-button--${size}`,
-    `qasah-button--type-${buttonType}`,
-    state ? `qasah-button--state-${state}` : '',
-    `qasah-button--icon-${iconStyle.replace(' ', '-')}`,
+    'fmdqui-button',
+    `fmdqui-button--${variant}`,
+    `fmdqui-button--${size}`,
+    `fmdqui-button--type-${buttonType}`,
+    state ? `fmdqui-button--state-${state}` : '',
+    `fmdqui-button--icon-${iconStyle.replace(' ', '-')}`,
     className
   ].filter(Boolean).join(' ');
 
   const renderIcon = () => (
-    <span className="qasah-button__icon">
+    <span className="fmdqui-button__icon">
       {icon || <DefaultIcon />}
     </span>
   );

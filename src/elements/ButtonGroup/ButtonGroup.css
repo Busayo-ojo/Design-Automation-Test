@@ -1,13 +1,13 @@
 @import '../../tokens.css';
 
 /* ── Group Container ── */
-.qasah-btn-group {
+.fmdqui-btn-group {
   display: inline-flex;
   align-items: center;
 }
 
 /* ── Individual Segment ── */
-.qasah-btn-group__item {
+.fmdqui-btn-group__item {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -30,29 +30,29 @@
 }
 
 /* Collapse double borders between adjacent items */
-.qasah-btn-group__item + .qasah-btn-group__item {
+.fmdqui-btn-group__item + .fmdqui-btn-group__item {
   margin-left: -1px;
 }
 
 /* Ensure focused/hovered items render on top so their borders show correctly */
-.qasah-btn-group__item:hover,
-.qasah-btn-group__item--hover,
-.qasah-btn-group__item--focused {
+.fmdqui-btn-group__item:hover,
+.fmdqui-btn-group__item--hover,
+.fmdqui-btn-group__item--focused {
   position: relative;
   z-index: 1;
 }
 
 /* ── Position Variants ── */
-.qasah-btn-group__item--first {
+.fmdqui-btn-group__item--first {
   border-radius: 12px 0 0 12px;
 }
 
-.qasah-btn-group__item--last {
+.fmdqui-btn-group__item--last {
   border-radius: 0 12px 12px 0;
 }
 
-.qasah-btn-group__item--middle,
-.qasah-btn-group__item--more {
+.fmdqui-btn-group__item--middle,
+.fmdqui-btn-group__item--more {
   border-radius: 0;
 }
 
@@ -61,29 +61,29 @@
 /* Regular (default) — already set above */
 
 /* Hover */
-.qasah-btn-group__item--hover,
-.qasah-btn-group__item:not(:disabled):hover {
+.fmdqui-btn-group__item--hover,
+.fmdqui-btn-group__item:not(:disabled):hover {
   background-color: var(--color-neutral-100);
   border-color: var(--color-neutral-300);
   color: var(--color-neutral-600);
 }
 
 /* Focused / Selected */
-.qasah-btn-group__item--focused {
+.fmdqui-btn-group__item--focused {
   background-color: var(--color-fmdq-blue);
   border-color: var(--color-fmdq-blue);
   color: var(--color-neutral-white);
 }
 
-.qasah-btn-group__item--focused:hover {
+.fmdqui-btn-group__item--focused:hover {
   background-color: var(--color-fmdq-blue);
   border-color: var(--color-fmdq-blue);
   color: var(--color-neutral-white);
 }
 
 /* Disabled */
-.qasah-btn-group__item--disabled,
-.qasah-btn-group__item:disabled {
+.fmdqui-btn-group__item--disabled,
+.fmdqui-btn-group__item:disabled {
   background-color: var(--color-neutral-white);
   border-color: var(--color-neutral-300);
   color: var(--color-neutral-300);
@@ -91,7 +91,7 @@
 }
 
 /* ── Icon Slots ── */
-.qasah-btn-group__icon {
+.fmdqui-btn-group__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -100,13 +100,13 @@
   flex-shrink: 0;
 }
 
-.qasah-btn-group__icon svg {
+.fmdqui-btn-group__icon svg {
   width: 100%;
   height: 100%;
 }
 
 /* ── Label ── */
-.qasah-btn-group__label {
+.fmdqui-btn-group__label {
   display: inline-flex;
   align-items: center;
 }

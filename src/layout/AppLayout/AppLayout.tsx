@@ -16,20 +16,20 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
   ...props 
 }) => {
   return (
-    <div className={`qasah-app-layout ${className}`} {...props}>
+    <div className={`fmdqui-app-layout ${className}`} {...props}>
       {sidebar && (
-        <aside className="qasah-app-layout__sidebar">
+        <aside className="fmdqui-app-layout__sidebar">
           {sidebar}
         </aside>
       )}
-      <div className="qasah-app-layout__main-wrapper">
+      <div className="fmdqui-app-layout__main-wrapper">
         {topbar && (
-          <header className="qasah-app-layout__topbar">
+          <header className="fmdqui-app-layout__topbar">
             {topbar}
           </header>
         )}
-        <main className="qasah-app-layout__content">
-          <div className="qasah-app-layout__content-inner">
+        <main className="fmdqui-app-layout__content">
+          <div className="fmdqui-app-layout__content-inner">
             {children}
           </div>
         </main>
