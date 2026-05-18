@@ -1,7 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Heading } from './Heading';
-import { Text } from './Text';
-import { Label } from './Label';
 
 const meta: Meta<typeof Heading> = {
   title: 'Foundations/Typography',

@@ -53,7 +53,16 @@ export const TypefaceHero = () => (
   </div>
 );
 
-export const TypeBlock = ({ label, size, weight, lineHeight, letterSpacing, children }: any) => (
+interface TypeBlockProps {
+  label: string;
+  size: string;
+  weight: string;
+  lineHeight: string;
+  letterSpacing: string;
+  children: React.ReactNode;
+}
+
+export const TypeBlock = ({ label, size, weight, lineHeight, letterSpacing, children }: TypeBlockProps) => (
   <div style={{ 
     display: 'grid', 
     gridTemplateColumns: '280px 1fr', 

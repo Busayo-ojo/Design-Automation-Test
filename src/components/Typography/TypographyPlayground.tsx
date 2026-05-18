@@ -46,14 +46,14 @@ export const TypographyPlayground: React.FC = () => {
     if (currentStyle.type === 'heading') {
       const level = /^[1-6]$/.test(currentStyle.value) ? parseInt(currentStyle.value, 10) : currentStyle.value;
       return (
-        <Heading level={level as any}>
+        <Heading level={level as 'display-lg' | 'display-sm' | 1 | 2 | 3 | 4 | 5 | 6}>
           {inputText || 'Please enter some text'}
         </Heading>
       );
     }
 
     return (
-      <Text size={currentStyle.value as any}>
+      <Text size={currentStyle.value as 'lg' | 'md' | 'sm' | 'xs' | 'caption-lg' | 'caption-sm' | 'caption-xs'}>
         {inputText || 'Please enter some text'}
       </Text>
     );

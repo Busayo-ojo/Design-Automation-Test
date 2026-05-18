@@ -16,11 +16,11 @@ export const Heading: React.FC<HeadingProps> = ({
   ...props
 }) => {
   // Normalize level to number if it's a string representation of 1-6
-  const isNumericLevel = (val: any): val is 1 | 2 | 3 | 4 | 5 | 6 => 
+  const isNumericLevel = (val: unknown): val is 1 | 2 | 3 | 4 | 5 | 6 => 
     (typeof val === 'number' && val >= 1 && val <= 6) || 
     (typeof val === 'string' && /^[1-6]$/.test(val));
   
-  const normalizedLevel = (typeof level === 'string' && /^[1-6]$/.test(level)) 
+  const normalizedLevel = isNumericLevel(level) && typeof level === 'string'
     ? parseInt(level, 10) 
     : level;
 

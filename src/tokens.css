@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&display=swap');
 
 :root {
-  /* ── Primary ── */
-  --color-primary-50: #E6EEF6;
-  --color-primary-100: #D0E0EF;
-  --color-primary-200: #A2C3E0;
-  --color-primary-300: #74A6D1;
-  --color-primary-400: #4589C2;
-  --color-primary-500: #176CB3;
-  --color-primary-600: #104E82;
-  --color-primary-700: #0A3559;
-  --color-primary-800: #051A2C;
-  --color-primary-900: #020D15;
+  /* ── Primary (Updated to Gold Scale) ── */
+  --color-primary-50: #FDF9EE;
+  --color-primary-100: #FDF2DA;
+  --color-primary-200: #F8DEAB;
+  --color-primary-300: #F4CA7D;
+  --color-primary-400: #EDB44D;
+  --color-primary-500: #CC9933; /* Core Brand Gold */
+  --color-primary-600: #A9700B;
+  --color-primary-700: #754C04;
+  --color-primary-800: #402800;
+  --color-primary-900: #2C1B00;
 
   /* ── Brand Colors ── */
   --color-fmdq-blue: #1D326D;
@@ -128,7 +128,7 @@
   --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
   /* ── Focus Rings ── */
-  --shadow-glow-primary: 0 0 0 3px rgba(3, 69, 145, 0.15);
+  --shadow-glow-primary: 0 0 0 3px rgba(204, 153, 51, 0.15);
   --shadow-glow-destructive: 0 0 0 3px rgba(203, 26, 20, 0.15);
 }
 
