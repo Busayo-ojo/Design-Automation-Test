@@ -13,7 +13,7 @@ const MockAvatar = () => (
 );
 
 const meta: Meta<typeof Badge> = {
-  title: 'Elements/Badge',
+  title: 'Elements/📛 Badge',
   component: Badge,
   tags: ['autodocs'],
   argTypes: {

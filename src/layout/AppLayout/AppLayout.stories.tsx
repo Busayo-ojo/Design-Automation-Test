@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AppLayout } from './AppLayout';
 
 const meta: Meta<typeof AppLayout> = {
-  title: 'Layout/AppLayout',
+  title: 'Layout/✨ AppLayout',
   component: AppLayout,
   parameters: {
     layout: 'fullscreen', // crucial for full page layout stories

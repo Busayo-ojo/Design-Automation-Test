@@ -5,27 +5,45 @@ const preview: Preview = {
   parameters: {
     options: {
       storySort: (a, b) => {
-        const order = [
+        const rootOrder = [
           'Welcome',
           'Getting Started',
           'Catalog',
           'MCP',
           'Playground',
+          'Changelog',
+          'Migration Guide',
+          'Contributing',
           'Foundations',
           'Elements',
           'Components',
           'Layout',
-          'Changelog',
-          'Migration Guide',
-          'Contributing',
         ];
 
-        const aRoot = a.title.split('/')[0];
-        const bRoot = b.title.split('/')[0];
+        const itemOrder = [
+          'Colors',
+          'Shadows and Blurs',
+          'Spacing',
+          'Typography',
+          'Badge',
+          'Button',
+          'Chip',
+          'Input',
+          'Tabbed Buttons',
+          'Toast',
+          'Toggle',
+          'Avatars',
+          'Elements'
+        ];
+
+        const aRootRaw = a.title.split('/')[0];
+        const bRootRaw = b.title.split('/')[0];
+        const aRoot = aRootRaw.replace(/^[^a-zA-Z0-9]+/g, '').trim();
+        const bRoot = bRootRaw.replace(/^[^a-zA-Z0-9]+/g, '').trim();
 
         if (aRoot !== bRoot) {
-          const aIndex = order.indexOf(aRoot);
-          const bIndex = order.indexOf(bRoot);
+          const aIndex = rootOrder.indexOf(aRoot);
+          const bIndex = rootOrder.indexOf(bRoot);
 
           if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
           if (aIndex !== -1) return -1;
@@ -33,7 +51,19 @@ const preview: Preview = {
           return aRoot.localeCompare(bRoot);
         }
 
-        return a.title.localeCompare(b.title);
+        const aTitleRaw = a.title.split('/').pop() || '';
+        const bTitleRaw = b.title.split('/').pop() || '';
+        const aTitle = aTitleRaw.replace(/^[^a-zA-Z0-9]+/g, '').trim();
+        const bTitle = bTitleRaw.replace(/^[^a-zA-Z0-9]+/g, '').trim();
+        
+        const aItemIndex = itemOrder.indexOf(aTitle);
+        const bItemIndex = itemOrder.indexOf(bTitle);
+
+        if (aItemIndex !== -1 && bItemIndex !== -1) return aItemIndex - bItemIndex;
+        if (aItemIndex !== -1) return -1;
+        if (bItemIndex !== -1) return 1;
+
+        return aTitle.localeCompare(bTitle);
       },
     },
     docs: {

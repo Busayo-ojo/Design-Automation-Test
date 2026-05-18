@@ -45,7 +45,7 @@ const columns: ColumnDef<TradeData>[] = [
 ];
 
 const meta: Meta<TableProps<TradeData>> = {
-  title: 'Components/Table',
+  title: 'Components/✨ Table',
   component: Table as ConcreteTable,
   tags: ['autodocs'],
 };

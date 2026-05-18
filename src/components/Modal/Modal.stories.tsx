@@ -6,7 +6,7 @@ import { Input } from '../../elements/Input';
 import { Text } from '../Typography';
 
 const meta: Meta<typeof Modal> = {
-  title: 'Components/Modal',
+  title: 'Components/✨ Modal',
   component: Modal,
   tags: ['autodocs'],
 };

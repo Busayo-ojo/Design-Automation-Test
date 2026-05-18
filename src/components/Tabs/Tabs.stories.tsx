@@ -3,7 +3,7 @@ import { Tabs, TabList, Tab, TabPanel } from './Tabs';
 import type { TabsProps } from './Tabs';
 
 const meta: Meta<TabsProps & { hasIcon?: boolean, hasNumberTag?: boolean }> = {
-  title: 'Components/Tabs',
+  title: 'Components/✨ Tabs',
   component: Tabs,
   tags: ['autodocs'],
   argTypes: {

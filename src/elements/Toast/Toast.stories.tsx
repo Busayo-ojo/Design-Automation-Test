@@ -4,7 +4,7 @@ import { useToast } from './useToast';
 import { Button } from '../../elements/Button';
 
 const meta: Meta = {
-  title: 'Elements/Toast',
+  title: 'Elements/🍞 Toast',
   decorators: [
     (Story) => (
       <ToastProvider>

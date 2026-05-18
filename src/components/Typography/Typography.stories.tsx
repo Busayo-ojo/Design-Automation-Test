@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Heading } from './Heading';
 
 const meta: Meta<typeof Heading> = {
-  title: 'Foundations/Typography',
+  title: 'Foundations/✍🏽 Typography',
   component: Heading,
 };
 
@@ -12,7 +12,7 @@ type Story = StoryObj<typeof Heading>;
 
 export const Primary: Story = {
   args: {
-    level: '1',
+    level: 1,
     children: 'Typography Foundation',
   },
 };

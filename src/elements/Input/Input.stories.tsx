@@ -27,7 +27,7 @@ const gridStyle: React.CSSProperties = {
 
 // ─── Meta ──────────────────────────────────────────────────────────────────
 const meta: Meta<typeof Input> = {
-  title: 'Elements/Input',
+  title: 'Elements/🔠 Input',
   component: Input,
   tags: ['autodocs'],
   parameters: {

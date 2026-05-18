@@ -6,7 +6,7 @@ import { Text } from '../Typography';
 import { Input } from '../../elements/Input';
 
 const meta: Meta<typeof Drawer> = {
-  title: 'Components/Drawer',
+  title: 'Components/✨ Drawer',
   component: Drawer,
   tags: ['autodocs'],
 };

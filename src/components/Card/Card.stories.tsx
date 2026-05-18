@@ -4,7 +4,7 @@ import { Button } from '../../elements/Button';
 import { Text, Heading } from '../Typography';
 
 const meta: Meta<typeof Card> = {
-  title: 'Components/Card',
+  title: 'Components/✨ Card',
   component: Card,
   tags: ['autodocs'],
 };

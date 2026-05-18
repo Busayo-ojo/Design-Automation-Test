@@ -28,7 +28,7 @@ const col: React.CSSProperties = {
 
 // ─── Meta ──────────────────────────────────────────────────────────────────
 const meta: Meta<typeof Toggle> = {
-  title: 'Elements/Toggle',
+  title: 'Elements/🎛️‍ Toggle',
   component: Toggle,
   tags: ['autodocs'],
   parameters: {

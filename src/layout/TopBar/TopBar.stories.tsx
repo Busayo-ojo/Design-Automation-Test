@@ -6,7 +6,7 @@ import { Badge } from '../../elements/Badge';
 import { Dropdown } from '../../components/Dropdown';
 
 const meta: Meta<typeof TopBar> = {
-  title: 'Layout/TopBar',
+  title: 'Layout/✨ TopBar',
   component: TopBar,
   tags: ['autodocs'],
   parameters: {

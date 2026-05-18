@@ -3,7 +3,7 @@ import { PageHeader } from './PageHeader';
 import { Button } from '../../elements/Button';
 
 const meta: Meta<typeof PageHeader> = {
-  title: 'Layout/PageHeader',
+  title: 'Layout/✨ PageHeader',
   component: PageHeader,
   tags: ['autodocs'],
 };
