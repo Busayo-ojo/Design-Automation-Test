@@ -1,21 +1,27 @@
 #!/usr/bin/env node
 /**
  * ═══════════════════════════════════════════════════════════════
- * FMDQ Design Automation — Figma Token Extractor
+ * FMDQ Design Automation — Figma Deep-Scan Token Extractor
  * ═══════════════════════════════════════════════════════════════
  *
- * Connects to the Figma REST API, extracts published styles
- * (colors, typography, effects) from the Design System Kit file,
- * and writes:
+ * Connects to the Figma REST API and performs a DEEP NODE SCAN
+ * to extract design tokens directly from the file's visual tree.
+ * This approach works even when styles aren't formally published.
+ *
+ * Extraction targets:
+ *   - Colors page  → color palettes (Primary, Secondary, Neutral, Semantics)
+ *   - Typography   → font families, sizes, weights
+ *   - Spacing      → spacing scale values
+ *   - Shadows      → shadow/effect definitions
+ *
+ * Outputs:
  *   - src/tokens.json   (raw structured data)
- *   - src/tokens.css     (CSS custom properties, preserving format)
+ *   - src/tokens.css     (CSS custom properties)
  *
  * Usage:
  *   node scripts/figma-extractor.mjs                # full sync
- *   node scripts/figma-extractor.mjs --tokens-only  # tokens only, no component scan
+ *   node scripts/figma-extractor.mjs --tokens-only  # tokens only, skip component listing
  *   node scripts/figma-extractor.mjs --dry-run      # preview without writing files
- *
- * Requires env vars: FIGMA_ACCESS_TOKEN, FIGMA_FILE_KEY
  */
 
 import fs from 'node:fs';
@@ -27,7 +33,7 @@ const ROOT = path.resolve(__dirname, '..');
 const TOKENS_CSS_PATH = path.join(ROOT, 'src', 'tokens.css');
 const TOKENS_JSON_PATH = path.join(ROOT, 'src', 'tokens.json');
 
-// ─── Load .env manually (no external deps) ───────────────────
+// ─── Load .env manually ──────────────────────────────────────
 function loadEnv() {
   const envPath = path.join(ROOT, '.env');
   if (!fs.existsSync(envPath)) return;
@@ -53,286 +59,613 @@ const DRY_RUN = flags.has('--dry-run');
 const TOKENS_ONLY = flags.has('--tokens-only');
 
 // ─── Helpers ──────────────────────────────────────────────────
-function die(msg) {
-  console.error(`\n❌  ${msg}\n`);
-  process.exit(1);
-}
+function die(msg) { console.error(`\n❌  ${msg}\n`); process.exit(1); }
+function info(msg) { console.log(`  ℹ  ${msg}`); }
+function success(msg) { console.log(`  ✅  ${msg}`); }
 
-function info(msg) {
-  console.log(`  ℹ  ${msg}`);
-}
-
-function success(msg) {
-  console.log(`  ✅  ${msg}`);
-}
-
-async function figmaGet(endpoint) {
+async function figmaGet(endpoint, retries = 5, backoff = 5000) {
   const url = `${API_BASE}${endpoint}`;
-  const res = await fetch(url, {
-    headers: { 'X-Figma-Token': FIGMA_TOKEN }
-  });
-  if (!res.ok) {
-    const body = await res.text().catch(() => '');
-    die(`Figma API ${res.status} at ${endpoint}\n${body}`);
+  for (let i = 0; i < retries; i++) {
+    const res = await fetch(url, { headers: { 'X-Figma-Token': FIGMA_TOKEN } });
+    if (res.status === 429) {
+      const delay = parseInt(res.headers.get('Retry-After') || '0') * 1000 || backoff * (i + 1);
+      info(`Rate limited by Figma API. Retrying in ${Math.round(delay / 1000)}s...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      continue;
+    }
+    if (!res.ok) {
+      const body = await res.text().catch(() => '');
+      die(`Figma API ${res.status} at ${endpoint}\n${body.slice(0, 300)}`);
+    }
+    return res.json();
   }
-  return res.json();
+  die(`Figma API rate limit exceeded after ${retries} retries at ${endpoint}`);
 }
 
-// ─── Color extraction ─────────────────────────────────────────
-function rgbaToHex({ r, g, b, a }) {
-  const to255 = (v) => Math.round((v ?? 0) * 255);
-  const hex = [r, g, b].map(to255).map(v => v.toString(16).padStart(2, '0')).join('');
-  if (a !== undefined && a < 1) {
-    const alphaHex = to255(a).toString(16).padStart(2, '0');
-    return `#${hex}${alphaHex}`;
+function rgbaToHex({ r, g, b }) {
+  return '#' + [r, g, b].map(v => Math.round(v * 255).toString(16).padStart(2, '0')).join('');
+}
+
+// ─── Page discovery ───────────────────────────────────────────
+async function getFilePages() {
+  info('Fetching Figma file structure...');
+  const data = await figmaGet(`/files/${FIGMA_FILE_KEY}?depth=2`);
+  const pages = data.document.children.map(c => ({
+    id: c.id,
+    name: c.name.trim(),
+    childNames: (c.children || []).map(ch => ch.name)
+  }));
+  info(`Found ${pages.length} pages`);
+  return pages;
+}
+
+function findPage(pages, keyword) {
+  return pages.find(p => p.name.toLowerCase().includes(keyword.toLowerCase()));
+}
+
+// ─── Deep node fetcher ────────────────────────────────────────
+async function getPageNodes(pageId) {
+  const data = await figmaGet(`/files/${FIGMA_FILE_KEY}/nodes?ids=${pageId}&depth=12`);
+  return data.nodes[pageId]?.document;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// COLOR EXTRACTION
+// ═══════════════════════════════════════════════════════════════
+
+function extractColorPalettes(node) {
+  const palettes = {};
+
+  // Walk the tree looking for color swatch groups
+  // Pattern: Parent frame named like "Primary", "Neutral", etc.
+  //   → child groups named with shade numbers
+  //     → "Shade" text node (e.g. "50", "100", "400 (base)")
+  //     → "Hex code" text node (e.g. "#034591")
+  //     → "BG" rectangle with actual fill
+
+  function findColorGroups(n, category = '') {
+    const name = (n.name || '').trim();
+
+    // Detect category frames (Primary, Secondary, Neutral, Semantics sub-groups)
+    const categoryNames = [
+      'Primary', 'Secondary', 'Neutral',
+      'Success', 'Warning', 'Error', 'Information',
+      'Grey', 'Gray'
+    ];
+
+    let currentCategory = category;
+    if (categoryNames.some(c => name.toLowerCase() === c.toLowerCase())) {
+      currentCategory = name;
+    }
+    // Also match "Title" text nodes that declare a category
+    if (n.type === 'TEXT' && n.name === 'Text' && n.characters) {
+      const text = n.characters.trim();
+      if (categoryNames.some(c => text.toLowerCase() === c.toLowerCase())) {
+        currentCategory = text;
+      }
+    }
+
+    // Look for shade/hex pairs within grouped containers
+    if (n.children && n.children.length > 0) {
+      // Check if this node contains a "Shade" and "Hex code" sibling pair
+      const shadeNode = findDescendantByName(n, 'Shade');
+      const hexNode = findDescendantByName(n, 'Hex code');
+      const bgNode = findDescendantByNameAndType(n, 'BG', 'RECTANGLE');
+
+      if (shadeNode && hexNode && shadeNode.characters && hexNode.characters) {
+        const shade = shadeNode.characters.trim().replace(/\s*\(base\)/i, '');
+        let hex = hexNode.characters.trim().toUpperCase();
+
+        // Validate and normalize hex
+        if (hex.match(/^#[0-9A-F]{6,7}$/i)) {
+          hex = hex.slice(0, 7); // Trim extra F if present (e.g. #FFFFFFF → #FFFFFF)
+        }
+
+        // Determine the category from ancestor path
+        const cat = currentCategory || detectCategory(n);
+        if (cat) {
+          if (!palettes[cat]) palettes[cat] = {};
+          palettes[cat][shade] = hex;
+        }
+      }
+
+      // Recurse into children
+      for (const child of n.children) {
+        const childPalettes = extractColorPalettes_inner(child, currentCategory);
+        for (const [cat, shades] of Object.entries(childPalettes)) {
+          if (!palettes[cat]) palettes[cat] = {};
+          Object.assign(palettes[cat], shades);
+        }
+      }
+    }
+
+    return palettes;
   }
-  return `#${hex}`;
+
+  function extractColorPalettes_inner(n, category = '') {
+    const result = {};
+    const name = (n.name || '').trim();
+
+    // Category detection
+    const categoryNames = [
+      'Primary', 'Secondary', 'Neutral',
+      'Success', 'Warning', 'Error', 'Information',
+      'Grey', 'Gray', 'Shades'
+    ];
+
+    let currentCategory = category;
+
+    // Check frame name for category
+    for (const cat of categoryNames) {
+      if (name.toLowerCase() === cat.toLowerCase() ||
+          name.toLowerCase().startsWith(cat.toLowerCase() + ' ')) {
+        currentCategory = cat === 'Shades' ? 'Neutral' : cat;
+        break;
+      }
+    }
+
+    // Check if a child TEXT node's text declares a category
+    if (n.children) {
+      for (const child of n.children) {
+        if (child.type === 'TEXT' && child.name === 'Text' && child.characters) {
+          const t = child.characters.trim();
+          for (const cat of categoryNames) {
+            if (t.toLowerCase() === cat.toLowerCase()) {
+              currentCategory = cat === 'Shades' ? 'Neutral' : cat;
+            }
+          }
+        }
+      }
+    }
+
+    if (n.children) {
+      // Try to find shade/hex pairs at this level
+      const shadeNode = findDirectChild(n, 'Shade', 'TEXT');
+      const hexNode = findDirectChild(n, 'Hex code', 'TEXT');
+
+      if (shadeNode && hexNode && shadeNode.characters && hexNode.characters) {
+        const shade = shadeNode.characters.trim().replace(/\s*\(base\)/i, '');
+        let hex = hexNode.characters.trim();
+        if (hex.match(/^#[0-9A-Fa-f]{6,8}$/)) {
+          hex = hex.slice(0, 7).toUpperCase();
+          if (currentCategory) {
+            if (!result[currentCategory]) result[currentCategory] = {};
+            result[currentCategory][shade] = hex;
+          }
+        }
+      }
+
+      // Recurse
+      for (const child of n.children) {
+        const childResult = extractColorPalettes_inner(child, currentCategory);
+        for (const [cat, shades] of Object.entries(childResult)) {
+          if (!result[cat]) result[cat] = {};
+          Object.assign(result[cat], shades);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  return extractColorPalettes_inner(node);
 }
 
-function figmaColorToCSS(paint) {
-  if (!paint || paint.type !== 'SOLID') return null;
-  return rgbaToHex(paint.color);
-}
-
-// ─── Typography extraction ────────────────────────────────────
-function extractTypography(style) {
-  const result = {};
-  if (style.fontFamily) result.fontFamily = style.fontFamily;
-  if (style.fontSize) result.fontSize = `${style.fontSize}px`;
-  if (style.fontWeight) result.fontWeight = style.fontWeight;
-  if (style.lineHeightPx) result.lineHeight = `${style.lineHeightPx}px`;
-  if (style.lineHeightPercent) result.lineHeightPercent = `${style.lineHeightPercent}%`;
-  if (style.letterSpacing) result.letterSpacing = `${style.letterSpacing}px`;
-  return result;
-}
-
-// ─── Effect extraction ────────────────────────────────────────
-function effectToCSS(effect) {
-  if (!effect || !effect.visible) return null;
-  const { type, color, offset, radius, spread } = effect;
-  if (type === 'DROP_SHADOW' || type === 'INNER_SHADOW') {
-    const rgba = color
-      ? `rgba(${Math.round(color.r * 255)}, ${Math.round(color.g * 255)}, ${Math.round(color.b * 255)}, ${(color.a ?? 1).toFixed(2)})`
-      : 'rgba(0,0,0,0.1)';
-    const x = offset?.x ?? 0;
-    const y = offset?.y ?? 0;
-    const r = radius ?? 0;
-    const s = spread ?? 0;
-    const inset = type === 'INNER_SHADOW' ? 'inset ' : '';
-    return `${inset}${x}px ${y}px ${r}px ${s}px ${rgba}`;
+function findDescendantByName(node, targetName) {
+  if (node.name === targetName && node.type === 'TEXT') return node;
+  if (node.children) {
+    for (const child of node.children) {
+      const found = findDescendantByName(child, targetName);
+      if (found) return found;
+    }
   }
   return null;
 }
 
-// ─── Token name sanitiser ─────────────────────────────────────
-function styleName2VarName(name) {
-  return '--' + name
-    .replace(/\//g, '-')
-    .replace(/\s+/g, '-')
-    .replace(/[^a-zA-Z0-9-]/g, '')
-    .replace(/-+/g, '-')
-    .toLowerCase();
-}
-
-// ─── Main extraction flow ─────────────────────────────────────
-async function extractTokens() {
-  console.log('\n🎨 FMDQ Figma Token Extractor');
-  console.log('═'.repeat(50));
-
-  if (!FIGMA_TOKEN) die('FIGMA_ACCESS_TOKEN is not set. See .env.example');
-  if (!FIGMA_FILE_KEY) die('FIGMA_FILE_KEY is not set. See .env.example');
-
-  // 1. Fetch file styles
-  info('Fetching published styles from Figma...');
-  const { meta } = await figmaGet(`/files/${FIGMA_FILE_KEY}/styles`);
-  const styles = meta?.styles ?? [];
-  info(`Found ${styles.length} published styles`);
-
-  if (styles.length === 0) {
-    console.warn('  ⚠  No published styles found in this file. Make sure styles are published in Figma.');
-  }
-
-  // 2. Collect node IDs we need to inspect
-  const nodeIds = styles.map(s => s.node_id);
-
-  // 3. Fetch all style nodes in a single request
-  info('Fetching node details...');
-  const nodesData = await figmaGet(`/files/${FIGMA_FILE_KEY}/nodes?ids=${nodeIds.join(',')}`);
-  const nodes = nodesData.nodes ?? {};
-
-  // 4. Parse into structured tokens
-  const tokens = {
-    colors: {},
-    typography: {},
-    effects: {},
-    _meta: {
-      source: `figma://file/${FIGMA_FILE_KEY}`,
-      extractedAt: new Date().toISOString(),
-      styleCount: styles.length
-    }
-  };
-
-  for (const styleDef of styles) {
-    const nodeWrapper = nodes[styleDef.node_id];
-    if (!nodeWrapper || !nodeWrapper.document) continue;
-    const node = nodeWrapper.document;
-    const varName = styleName2VarName(styleDef.name);
-
-    switch (styleDef.style_type) {
-      case 'FILL': {
-        const fills = node.fills ?? [];
-        const solidFill = fills.find(f => f.type === 'SOLID' && f.visible !== false);
-        if (solidFill) {
-          const hex = figmaColorToCSS(solidFill);
-          if (hex) tokens.colors[varName] = hex;
-        }
-        break;
-      }
-      case 'TEXT': {
-        const typo = extractTypography(node.style ?? {});
-        if (Object.keys(typo).length > 0) {
-          tokens.typography[varName] = typo;
-        }
-        break;
-      }
-      case 'EFFECT': {
-        const effects = (node.effects ?? []).filter(e => e.visible !== false);
-        const cssEffects = effects.map(effectToCSS).filter(Boolean);
-        if (cssEffects.length > 0) {
-          tokens.effects[varName] = cssEffects.join(', ');
-        }
-        break;
-      }
-      default:
-        break;
+function findDescendantByNameAndType(node, targetName, targetType) {
+  if (node.name === targetName && node.type === targetType) return node;
+  if (node.children) {
+    for (const child of node.children) {
+      const found = findDescendantByNameAndType(child, targetName, targetType);
+      if (found) return found;
     }
   }
-
-  success(`Extracted ${Object.keys(tokens.colors).length} colors, ${Object.keys(tokens.typography).length} typography styles, ${Object.keys(tokens.effects).length} effects`);
-
-  return tokens;
+  return null;
 }
 
-// ─── CSS Generation ───────────────────────────────────────────
+function findDirectChild(node, name, type) {
+  if (!node.children) return null;
+  for (const child of node.children) {
+    if (child.name === name && (!type || child.type === type)) return child;
+    // Also search one level deeper (common pattern: Base/Shade, Base/Hex code)
+    if (child.children) {
+      for (const grandchild of child.children) {
+        if (grandchild.name === name && (!type || grandchild.type === type)) return grandchild;
+        // And one more level for Code/Hex code pattern
+        if (grandchild.children) {
+          for (const gg of grandchild.children) {
+            if (gg.name === name && (!type || gg.type === type)) return gg;
+          }
+        }
+      }
+    }
+  }
+  return null;
+}
+
+function detectCategory(node) {
+  // Walk up to detect category from ancestor names
+  return null; // Used in fallback only
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TYPOGRAPHY EXTRACTION
+// ═══════════════════════════════════════════════════════════════
+
+function extractTypography(node) {
+  const typography = [];
+
+  function walk(n) {
+    if (n.type === 'TEXT' && n.style) {
+      const s = n.style;
+      const existing = typography.find(t =>
+        t.fontFamily === s.fontFamily &&
+        t.fontSize === s.fontSize &&
+        t.fontWeight === s.fontWeight
+      );
+      if (!existing && s.fontFamily && s.fontSize) {
+        typography.push({
+          fontFamily: s.fontFamily,
+          fontSize: s.fontSize,
+          fontWeight: s.fontWeight || 400,
+          lineHeight: s.lineHeightPx || null,
+          lineHeightPercent: s.lineHeightPercent || null,
+          letterSpacing: s.letterSpacing || 0,
+          textCase: s.textCase || 'ORIGINAL',
+          sample: (n.characters || '').slice(0, 40)
+        });
+      }
+    }
+    if (n.children) n.children.forEach(walk);
+  }
+
+  walk(node);
+  // Sort by fontSize descending
+  typography.sort((a, b) => b.fontSize - a.fontSize);
+  return typography;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SPACING EXTRACTION
+// ═══════════════════════════════════════════════════════════════
+
+function extractSpacing(node) {
+  const spacingValues = new Set();
+
+  function walk(n) {
+    // Look for frames/rectangles that represent spacing tokens
+    if (n.type === 'TEXT' && n.characters) {
+      // Match patterns like "4", "8", "12", "16", "24", "32", "40", "48", "64" etc.
+      const match = n.characters.match(/^(\d+)(?:px)?$/);
+      if (match) {
+        const val = parseInt(match[1]);
+        if (val > 0 && val <= 200) spacingValues.add(val);
+      }
+    }
+    // Also look at size of spacing swatch rectangles
+    if (n.name && n.name.toLowerCase().includes('spacing') && n.absoluteBoundingBox) {
+      const w = Math.round(n.absoluteBoundingBox.width);
+      const h = Math.round(n.absoluteBoundingBox.height);
+      if (w === h && w > 0 && w <= 200) spacingValues.add(w);
+    }
+    if (n.children) n.children.forEach(walk);
+  }
+
+  walk(node);
+  return [...spacingValues].sort((a, b) => a - b);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SHADOW EXTRACTION
+// ═══════════════════════════════════════════════════════════════
+
+function extractShadows(node) {
+  const shadows = [];
+
+  function walk(n) {
+    if (n.effects && n.effects.length > 0) {
+      const dropShadows = n.effects.filter(e =>
+        (e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') && e.visible !== false
+      );
+      if (dropShadows.length > 0) {
+        const cssValues = dropShadows.map(e => {
+          const c = e.color || { r: 0, g: 0, b: 0, a: 0.1 };
+          const rgba = `rgba(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)}, ${(c.a ?? 0.1).toFixed(2)})`;
+          const x = e.offset?.x ?? 0;
+          const y = e.offset?.y ?? 0;
+          const r = e.radius ?? 0;
+          const s = e.spread ?? 0;
+          const inset = e.type === 'INNER_SHADOW' ? 'inset ' : '';
+          return `${inset}${x}px ${y}px ${r}px ${s}px ${rgba}`;
+        });
+
+        const existing = shadows.find(s => s.css === cssValues.join(', '));
+        if (!existing) {
+          shadows.push({
+            name: n.name,
+            css: cssValues.join(', '),
+            effects: dropShadows.map(e => ({
+              type: e.type,
+              x: e.offset?.x ?? 0,
+              y: e.offset?.y ?? 0,
+              blur: e.radius ?? 0,
+              spread: e.spread ?? 0,
+              color: e.color ? rgbaToHex(e.color) : '#000000',
+              opacity: e.color?.a ?? 0.1
+            }))
+          });
+        }
+      }
+    }
+    if (n.children) n.children.forEach(walk);
+  }
+
+  walk(node);
+  return shadows;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BUTTON SPECS EXTRACTION
+// ═══════════════════════════════════════════════════════════════
+
+function extractButtonSpecs(node) {
+  const buttons = [];
+
+  function walk(n) {
+    const name = (n.name || '').toLowerCase();
+    if (
+      (name.includes('button') || n.type === 'COMPONENT' || n.type === 'COMPONENT_SET') &&
+      n.absoluteBoundingBox
+    ) {
+      const spec = {
+        name: n.name,
+        type: n.type,
+        width: Math.round(n.absoluteBoundingBox.width),
+        height: Math.round(n.absoluteBoundingBox.height),
+      };
+
+      if (n.cornerRadius) spec.borderRadius = n.cornerRadius;
+      if (n.paddingLeft !== undefined) {
+        spec.padding = {
+          top: n.paddingTop, right: n.paddingRight,
+          bottom: n.paddingBottom, left: n.paddingLeft
+        };
+      }
+      if (n.itemSpacing !== undefined) spec.gap = n.itemSpacing;
+      if (n.fills && n.fills.length > 0 && n.fills[0].type === 'SOLID') {
+        spec.fill = rgbaToHex(n.fills[0].color);
+      }
+      if (n.strokes && n.strokes.length > 0 && n.strokes[0].type === 'SOLID') {
+        spec.stroke = rgbaToHex(n.strokes[0].color);
+        spec.strokeWeight = n.strokeWeight;
+      }
+
+      buttons.push(spec);
+    }
+    if (n.children) n.children.forEach(walk);
+  }
+
+  walk(node);
+  return buttons;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CSS GENERATION
+// ═══════════════════════════════════════════════════════════════
+
 function generateCSS(tokens) {
   const lines = [':root {'];
 
-  // Read existing tokens.css to preserve manually-added tokens
-  let existingVars = {};
-  if (fs.existsSync(TOKENS_CSS_PATH)) {
-    const existing = fs.readFileSync(TOKENS_CSS_PATH, 'utf-8');
-    const varRegex = /--([\w-]+)\s*:\s*(.+?)\s*;/g;
-    let match;
-    while ((match = varRegex.exec(existing)) !== null) {
-      existingVars[`--${match[1]}`] = match[2];
-    }
-  }
-
   // Colors
-  if (Object.keys(tokens.colors).length > 0) {
-    lines.push('  /* ── Colors (synced from Figma) ── */');
-    for (const [name, value] of Object.entries(tokens.colors)) {
-      lines.push(`  ${name}: ${value};`);
-      delete existingVars[name]; // Remove from existing so we don't duplicate
+  for (const [category, shades] of Object.entries(tokens.colors)) {
+    const catSlug = category.toLowerCase().replace(/\s+/g, '-');
+    lines.push(`  /* ── ${category} ── */`);
+
+    // Sort shades numerically, with special names at end
+    const sortedShades = Object.entries(shades).sort((a, b) => {
+      const numA = parseInt(a[0]);
+      const numB = parseInt(b[0]);
+      if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+      if (!isNaN(numA)) return -1;
+      if (!isNaN(numB)) return 1;
+      return a[0].localeCompare(b[0]);
+    });
+
+    for (const [shade, hex] of sortedShades) {
+      const shadeSlug = shade.toLowerCase().replace(/\s+/g, '-');
+      lines.push(`  --color-${catSlug}-${shadeSlug}: ${hex};`);
     }
     lines.push('');
   }
 
   // Typography
-  if (Object.keys(tokens.typography).length > 0) {
-    lines.push('  /* ── Typography (synced from Figma) ── */');
-    for (const [name, style] of Object.entries(tokens.typography)) {
-      if (style.fontFamily) {
-        lines.push(`  ${name}-family: '${style.fontFamily}', sans-serif;`);
-        delete existingVars[`${name}-family`];
-      }
-      if (style.fontSize) {
-        lines.push(`  ${name}-size: ${style.fontSize};`);
-        delete existingVars[`${name}-size`];
-      }
-      if (style.fontWeight) {
-        lines.push(`  ${name}-weight: ${style.fontWeight};`);
-        delete existingVars[`${name}-weight`];
-      }
-      if (style.lineHeight) {
-        lines.push(`  ${name}-line-height: ${style.lineHeight};`);
-        delete existingVars[`${name}-line-height`];
-      }
-      if (style.letterSpacing) {
-        lines.push(`  ${name}-letter-spacing: ${style.letterSpacing};`);
-        delete existingVars[`${name}-letter-spacing`];
-      }
+  if (tokens.typography.length > 0) {
+    lines.push('  /* ── Typography ── */');
+    const families = [...new Set(tokens.typography.map(t => t.fontFamily))];
+    families.forEach((family, i) => {
+      lines.push(`  --font-family-${i === 0 ? 'primary' : 'secondary'}: '${family}', sans-serif;`);
+    });
+    lines.push('');
+
+    // Font size scale
+    const sizes = [...new Set(tokens.typography.map(t => t.fontSize))].sort((a, b) => a - b);
+    const sizeLabels = ['xs', 'sm', 'md', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl'];
+    sizes.forEach((size, i) => {
+      const label = sizeLabels[i] || `${size}`;
+      lines.push(`  --font-size-${label}: ${size}px;`);
+    });
+    lines.push('');
+
+    // Line heights
+    const lineHeights = [...new Set(tokens.typography.filter(t => t.lineHeightPercent).map(t => Math.round(t.lineHeightPercent)))].sort((a, b) => a - b);
+    lineHeights.forEach(lh => {
+      lines.push(`  --font-line-height-${lh}: ${lh}%;`);
+    });
+    if (lineHeights.length > 0) lines.push('');
+  }
+
+  // Spacing
+  if (tokens.spacing.length > 0) {
+    lines.push('  /* ── Spacing ── */');
+    for (const val of tokens.spacing) {
+      lines.push(`  --spacing-${val}: ${val}px;`);
     }
     lines.push('');
   }
 
-  // Effects
-  if (Object.keys(tokens.effects).length > 0) {
-    lines.push('  /* ── Effects (synced from Figma) ── */');
-    for (const [name, value] of Object.entries(tokens.effects)) {
-      lines.push(`  ${name}: ${value};`);
-      delete existingVars[name];
-    }
+  // Shadows
+  if (tokens.shadows.length > 0) {
+    lines.push('  /* ── Shadows ── */');
+    tokens.shadows.forEach((shadow, i) => {
+      const label = ['sm', 'md', 'lg', 'xl', '2xl'][i] || `${i + 1}`;
+      lines.push(`  --shadow-${label}: ${shadow.css};`);
+    });
     lines.push('');
   }
 
-  // Preserve any manually-defined tokens not from Figma
-  const remaining = Object.entries(existingVars);
-  if (remaining.length > 0) {
-    lines.push('  /* ── Manual Overrides (preserved) ── */');
-    for (const [name, value] of remaining) {
-      lines.push(`  ${name}: ${value};`);
-    }
-    lines.push('');
-  }
+  // Border radii (standard scale)
+  lines.push('  /* ── Radii ── */');
+  lines.push('  --radius-4: 4px;');
+  lines.push('  --radius-8: 8px;');
+  lines.push('  --radius-12: 12px;');
+  lines.push('  --radius-16: 16px;');
+  lines.push('  --radius-24: 24px;');
+  lines.push('  --radius-full: 9999px;');
+  lines.push('');
+
+  // Transitions
+  lines.push('  /* ── Transitions ── */');
+  lines.push("  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);");
+  lines.push("  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);");
+  lines.push('');
+
+  // Focus rings
+  lines.push('  /* ── Focus Rings ── */');
+  lines.push('  --shadow-glow-primary: 0 0 0 3px rgba(3, 69, 145, 0.15);');
+  lines.push('  --shadow-glow-destructive: 0 0 0 3px rgba(203, 26, 20, 0.15);');
 
   lines.push('}');
   return lines.join('\n') + '\n';
 }
 
-// ─── Component listing (non-tokens-only mode) ─────────────────
-async function listComponents() {
-  info('Fetching component inventory...');
-  const { meta } = await figmaGet(`/files/${FIGMA_FILE_KEY}/components`);
-  const components = meta?.components ?? [];
-  info(`Found ${components.length} components in Figma file`);
+// ═══════════════════════════════════════════════════════════════
+// MAIN
+// ═══════════════════════════════════════════════════════════════
 
-  const summary = components.map(c => ({
-    name: c.name,
-    description: c.description || '(no description)',
-    containingFrame: c.containing_frame?.name || 'root',
-    nodeId: c.node_id
-  }));
-
-  return summary;
-}
-
-// ─── Entrypoint ───────────────────────────────────────────────
 async function main() {
-  const tokens = await extractTokens();
+  console.log('\n🎨 FMDQ Figma Deep-Scan Token Extractor');
+  console.log('═'.repeat(50));
 
-  let components = [];
-  if (!TOKENS_ONLY) {
-    components = await listComponents();
-    info(`Component inventory: ${components.length} components catalogued`);
+  if (!FIGMA_TOKEN) die('FIGMA_ACCESS_TOKEN is not set. See .env.example');
+  if (!FIGMA_FILE_KEY) die('FIGMA_FILE_KEY is not set. See .env.example');
+
+  // 1. Get file structure
+  const pages = await getFilePages();
+
+  const tokens = {
+    colors: {},
+    typography: [],
+    spacing: [],
+    shadows: [],
+    components: {},
+    _meta: {
+      source: `figma://file/${FIGMA_FILE_KEY}`,
+      extractedAt: new Date().toISOString(),
+      pages: pages.map(p => p.name)
+    }
+  };
+
+  // 2. Extract COLORS
+  const colorsPage = findPage(pages, 'Colors');
+  if (colorsPage) {
+    info(`Scanning Colors page: "${colorsPage.name}" (${colorsPage.id})...`);
+    const colorNodes = await getPageNodes(colorsPage.id);
+    if (colorNodes) {
+      tokens.colors = extractColorPalettes(colorNodes);
+      const totalColors = Object.values(tokens.colors).reduce((sum, cat) => sum + Object.keys(cat).length, 0);
+      success(`Extracted ${totalColors} colors across ${Object.keys(tokens.colors).length} palettes`);
+      for (const [cat, shades] of Object.entries(tokens.colors)) {
+        info(`  ${cat}: ${Object.keys(shades).length} shades`);
+      }
+    }
+  } else {
+    info('No Colors page found');
   }
 
+  // 3. Extract TYPOGRAPHY
+  const typoPage = findPage(pages, 'Typography');
+  if (typoPage) {
+    info(`Scanning Typography page: "${typoPage.name}" (${typoPage.id})...`);
+    const typoNodes = await getPageNodes(typoPage.id);
+    if (typoNodes) {
+      tokens.typography = extractTypography(typoNodes);
+      success(`Extracted ${tokens.typography.length} unique typography styles`);
+    }
+  } else {
+    info('No Typography page found');
+  }
+
+  // 4. Extract SPACING
+  const spacingPage = findPage(pages, 'Spacing');
+  if (spacingPage) {
+    info(`Scanning Spacing page: "${spacingPage.name}" (${spacingPage.id})...`);
+    const spacingNodes = await getPageNodes(spacingPage.id);
+    if (spacingNodes) {
+      tokens.spacing = extractSpacing(spacingNodes);
+      success(`Extracted ${tokens.spacing.length} spacing values`);
+    }
+  } else {
+    info('No Spacing page found');
+  }
+
+  // 5. Extract SHADOWS
+  const shadowPage = findPage(pages, 'Shadow');
+  if (shadowPage) {
+    info(`Scanning Shadows page: "${shadowPage.name}" (${shadowPage.id})...`);
+    const shadowNodes = await getPageNodes(shadowPage.id);
+    if (shadowNodes) {
+      tokens.shadows = extractShadows(shadowNodes);
+      success(`Extracted ${tokens.shadows.length} shadow definitions`);
+    }
+  } else {
+    info('No Shadows page found');
+  }
+
+  // 6. Extract COMPONENT SPECS (unless --tokens-only)
+  if (!TOKENS_ONLY) {
+    const buttonsPage = findPage(pages, 'Buttons');
+    if (buttonsPage) {
+      info(`Scanning Buttons page: "${buttonsPage.name}" (${buttonsPage.id})...`);
+      const buttonNodes = await getPageNodes(buttonsPage.id);
+      if (buttonNodes) {
+        tokens.components.buttons = extractButtonSpecs(buttonNodes);
+        success(`Extracted ${tokens.components.buttons.length} button specs`);
+      }
+    }
+  }
+
+  // ─── Output ─────────────────────────────────────────────────
   if (DRY_RUN) {
     console.log('\n📋 DRY RUN — No files written\n');
-    console.log('Tokens:', JSON.stringify(tokens, null, 2));
-    if (components.length > 0) {
-      console.log('\nComponents:', JSON.stringify(components.slice(0, 10), null, 2));
-      if (components.length > 10) console.log(`  ... and ${components.length - 10} more`);
-    }
+    console.log(JSON.stringify(tokens, null, 2));
     return;
   }
 
   // Write tokens.json
-  const jsonPayload = { ...tokens, components: components.slice(0, 100) };
-  fs.writeFileSync(TOKENS_JSON_PATH, JSON.stringify(jsonPayload, null, 2) + '\n', 'utf-8');
+  fs.writeFileSync(TOKENS_JSON_PATH, JSON.stringify(tokens, null, 2) + '\n', 'utf-8');
   success(`Written ${TOKENS_JSON_PATH}`);
 
-  // Write tokens.css (merges with existing manual tokens)
+  // Write tokens.css
   const css = generateCSS(tokens);
   fs.writeFileSync(TOKENS_CSS_PATH, css, 'utf-8');
   success(`Written ${TOKENS_CSS_PATH}`);
@@ -342,5 +675,6 @@ async function main() {
 
 main().catch(err => {
   console.error('\n💥 Extraction failed:', err.message);
+  if (err.stack) console.error(err.stack);
   process.exit(1);
 });

@@ -1,0 +1,715 @@
+{
+  "name": "      ✤  Colors ",
+  "type": "CANVAS",
+  "children": [
+    {
+      "name": "Neutral",
+      "type": "FRAME",
+      "fill": "#ffffff",
+      "children": [
+        {
+          "name": "_Document heading",
+          "type": "INSTANCE",
+          "fill": "#fef6e7",
+          "children": [
+            {
+              "name": "Content + Logo",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Content",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Container",
+          "type": "FRAME",
+          "children": [
+            {
+              "name": "Neutral/Grey",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Title + Description",
+                  "type": "FRAME"
+                },
+                {
+                  "name": "Color",
+                  "type": "FRAME"
+                }
+              ]
+            },
+            {
+              "name": "Brown",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Title + Description",
+                  "type": "FRAME"
+                },
+                {
+                  "name": "Color",
+                  "type": "FRAME"
+                }
+              ]
+            },
+            {
+              "name": "Shades",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Title + Description",
+                  "type": "FRAME"
+                },
+                {
+                  "name": "Color",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Page Footer",
+          "type": "INSTANCE",
+          "fill": "#f0f2f5",
+          "children": [
+            {
+              "name": "Container",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Description",
+                  "type": "TEXT",
+                  "fill": "#344054",
+                  "fontSize": 24,
+                  "fontFamily": "DM Sans",
+                  "text": "FMDQ UI component library"
+                },
+                {
+                  "name": "fmdq-logo",
+                  "type": "INSTANCE",
+                  "fill": "#ffffff"
+                }
+              ]
+            },
+            {
+              "name": "Socials",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Content",
+                  "type": "FRAME"
+                }
+              ]
+            },
+            {
+              "name": "Spacings",
+              "type": "INSTANCE",
+              "fill": "#ffffff",
+              "children": [
+                {
+                  "name": "Spacing swatch",
+                  "type": "RECTANGLE",
+                  "fill": "#eb9b98"
+                }
+              ]
+            },
+            {
+              "name": "Spacings",
+              "type": "INSTANCE",
+              "fill": "#ffffff",
+              "children": [
+                {
+                  "name": "Spacing swatch",
+                  "type": "RECTANGLE",
+                  "fill": "#eb9b98"
+                }
+              ]
+            },
+            {
+              "name": "Copy rights",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Copyrights",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Semantics",
+      "type": "FRAME",
+      "fill": "#ffffff",
+      "children": [
+        {
+          "name": "_Document heading",
+          "type": "INSTANCE",
+          "fill": "#fef6e7",
+          "children": [
+            {
+              "name": "Content + Logo",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Content",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Container",
+          "type": "FRAME",
+          "children": [
+            {
+              "name": "Success",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Title + Description",
+                  "type": "FRAME"
+                },
+                {
+                  "name": "Color",
+                  "type": "FRAME"
+                }
+              ]
+            },
+            {
+              "name": "Warning",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Title & Description",
+                  "type": "FRAME"
+                },
+                {
+                  "name": "Color",
+                  "type": "FRAME"
+                }
+              ]
+            },
+            {
+              "name": "Error",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Title + Description",
+                  "type": "FRAME"
+                },
+                {
+                  "name": "Color",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Page Footer",
+          "type": "INSTANCE",
+          "fill": "#f0f2f5",
+          "children": [
+            {
+              "name": "Container",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Description",
+                  "type": "TEXT",
+                  "fill": "#344054",
+                  "fontSize": 24,
+                  "fontFamily": "DM Sans",
+                  "text": "FMDQ UI component library"
+                },
+                {
+                  "name": "fmdq-logo",
+                  "type": "INSTANCE",
+                  "fill": "#ffffff"
+                }
+              ]
+            },
+            {
+              "name": "Socials",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Content",
+                  "type": "FRAME"
+                }
+              ]
+            },
+            {
+              "name": "Spacings",
+              "type": "INSTANCE",
+              "fill": "#ffffff",
+              "children": [
+                {
+                  "name": "Spacing swatch",
+                  "type": "RECTANGLE",
+                  "fill": "#eb9b98"
+                }
+              ]
+            },
+            {
+              "name": "Spacings",
+              "type": "INSTANCE",
+              "fill": "#ffffff",
+              "children": [
+                {
+                  "name": "Spacing swatch",
+                  "type": "RECTANGLE",
+                  "fill": "#eb9b98"
+                }
+              ]
+            },
+            {
+              "name": "Copy rights",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Copyrights",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Secondary",
+      "type": "FRAME",
+      "fill": "#ffffff",
+      "children": [
+        {
+          "name": "_Document heading",
+          "type": "INSTANCE",
+          "fill": "#fef6e7",
+          "children": [
+            {
+              "name": "Content + Logo",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Content",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Container",
+          "type": "FRAME",
+          "children": [
+            {
+              "name": "Secondary",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Title + Description",
+                  "type": "FRAME"
+                },
+                {
+                  "name": "Colors",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Page Footer",
+          "type": "INSTANCE",
+          "fill": "#f0f2f5",
+          "children": [
+            {
+              "name": "Container",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Description",
+                  "type": "TEXT",
+                  "fill": "#344054",
+                  "fontSize": 24,
+                  "fontFamily": "DM Sans",
+                  "text": "FMDQ UI component library"
+                },
+                {
+                  "name": "fmdq-logo",
+                  "type": "INSTANCE",
+                  "fill": "#ffffff"
+                }
+              ]
+            },
+            {
+              "name": "Socials",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Content",
+                  "type": "FRAME"
+                }
+              ]
+            },
+            {
+              "name": "Spacings",
+              "type": "INSTANCE",
+              "fill": "#ffffff",
+              "children": [
+                {
+                  "name": "Spacing swatch",
+                  "type": "RECTANGLE",
+                  "fill": "#eb9b98"
+                }
+              ]
+            },
+            {
+              "name": "Spacings",
+              "type": "INSTANCE",
+              "fill": "#ffffff",
+              "children": [
+                {
+                  "name": "Spacing swatch",
+                  "type": "RECTANGLE",
+                  "fill": "#eb9b98"
+                }
+              ]
+            },
+            {
+              "name": "Copy rights",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Copyrights",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Primary",
+      "type": "FRAME",
+      "fill": "#ffffff",
+      "children": [
+        {
+          "name": "_Document heading",
+          "type": "INSTANCE",
+          "fill": "#fef6e7",
+          "children": [
+            {
+              "name": "Content + Logo",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Content",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Container",
+          "type": "FRAME",
+          "children": [
+            {
+              "name": "Primary",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Title + Description",
+                  "type": "FRAME"
+                },
+                {
+                  "name": "Colors",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Page Footer",
+          "type": "INSTANCE",
+          "fill": "#f0f2f5",
+          "children": [
+            {
+              "name": "Container",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Description",
+                  "type": "TEXT",
+                  "fill": "#344054",
+                  "fontSize": 24,
+                  "fontFamily": "DM Sans",
+                  "text": "FMDQ UI component library"
+                },
+                {
+                  "name": "fmdq-logo",
+                  "type": "INSTANCE",
+                  "fill": "#ffffff"
+                }
+              ]
+            },
+            {
+              "name": "Socials",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Content",
+                  "type": "FRAME"
+                }
+              ]
+            },
+            {
+              "name": "Spacings",
+              "type": "INSTANCE",
+              "fill": "#ffffff",
+              "children": [
+                {
+                  "name": "Spacing swatch",
+                  "type": "RECTANGLE",
+                  "fill": "#eb9b98"
+                }
+              ]
+            },
+            {
+              "name": "Spacings",
+              "type": "INSTANCE",
+              "fill": "#ffffff",
+              "children": [
+                {
+                  "name": "Spacing swatch",
+                  "type": "RECTANGLE",
+                  "fill": "#eb9b98"
+                }
+              ]
+            },
+            {
+              "name": "Copy rights",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Copyrights",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Accessibility Guides",
+      "type": "FRAME",
+      "fill": "#ffffff",
+      "children": [
+        {
+          "name": "Container",
+          "type": "FRAME",
+          "children": [
+            {
+              "name": "Title + Subtext",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Text",
+                  "type": "TEXT",
+                  "fill": "#000000",
+                  "fontSize": 18,
+                  "fontFamily": "DM Sans",
+                  "text": "Accessibility guides"
+                },
+                {
+                  "name": "Supporting text",
+                  "type": "TEXT",
+                  "fill": "#667185",
+                  "fontSize": 16,
+                  "fontFamily": "DM Sans",
+                  "text": "This short guide will help you achieve the accessibility standards outlined in t"
+                }
+              ]
+            },
+            {
+              "name": "Preview",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "showcase",
+                  "type": "FRAME"
+                },
+                {
+                  "name": "Text",
+                  "type": "TEXT",
+                  "fill": "#667185",
+                  "fontSize": 12,
+                  "fontFamily": "DM Sans",
+                  "text": "Accessibility for\ncolor swatches"
+                }
+              ]
+            },
+            {
+              "name": "Content",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Foreground/BG Color",
+                  "type": "TEXT",
+                  "fill": "#667185",
+                  "fontSize": 14,
+                  "fontFamily": "DM Sans",
+                  "text": "Foreground / Background color: Black and white provide the highest contrast for "
+                },
+                {
+                  "name": "Contrast Ratio",
+                  "type": "TEXT",
+                  "fill": "#667185",
+                  "fontSize": 14,
+                  "fontFamily": "DM Sans",
+                  "text": "The Contrast ratio: The measure of the difference in brightness between two colo"
+                },
+                {
+                  "name": "Large Text Score",
+                  "type": "TEXT",
+                  "fill": "#667185",
+                  "fontSize": 14,
+                  "fontFamily": "DM Sans",
+                  "text": "The Large Text Score: The large text score refers to the minimum contrast ratio "
+                },
+                {
+                  "name": "Text Score",
+                  "type": "TEXT",
+                  "fill": "#667185",
+                  "fontSize": 14,
+                  "fontFamily": "DM Sans",
+                  "text": "The Text Score: The  text score refers to the minimum contrast ratio required fo"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Plugins",
+      "type": "FRAME",
+      "fill": "#ffffff",
+      "children": [
+        {
+          "name": "Container",
+          "type": "FRAME",
+          "children": [
+            {
+              "name": "Title + Subtext",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Text",
+                  "type": "TEXT",
+                  "fill": "#000000",
+                  "fontSize": 18,
+                  "fontFamily": "DM Sans",
+                  "text": "Plugins"
+                },
+                {
+                  "name": "Supporting text",
+                  "type": "TEXT",
+                  "fill": "#667185",
+                  "fontSize": 16,
+                  "fontFamily": "DM Sans",
+                  "text": "These are plugins you can use to create your own color schemes for your product."
+                }
+              ]
+            },
+            {
+              "name": "Foundational Color Scheme",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Supporting text",
+                  "type": "TEXT",
+                  "fill": "#667185",
+                  "fontSize": 14,
+                  "fontFamily": "DM Sans",
+                  "text": "Foundational Color Scheme: Create Color Palettes based on great Design Systems l"
+                },
+                {
+                  "name": "Preview",
+                  "type": "FRAME"
+                }
+              ]
+            },
+            {
+              "name": "Tint & Shades",
+              "type": "FRAME",
+              "children": [
+                {
+                  "name": "Supporting text",
+                  "type": "TEXT",
+                  "fill": "#667185",
+                  "fontSize": 14,
+                  "fontFamily": "DM Sans",
+                  "text": "Tint and Shades: Generate lighter and darker variations of any color. Perfect fo"
+                },
+                {
+                  "name": "Preview",
+                  "type": "FRAME"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rectangle 2",
+      "type": "RECTANGLE",
+      "fill": "#1d326d"
+    },
+    {
+      "name": "BG",
+      "type": "RECTANGLE",
+      "fill": "#034592"
+    },
+    {
+      "name": "BG",
+      "type": "RECTANGLE",
+      "fill": "#1d326d"
+    },
+    {
+      "name": "BG",
+      "type": "RECTANGLE",
+      "fill": "#98a2b3"
+    },
+    {
+      "name": "BG",
+      "type": "RECTANGLE",
+      "fill": "#969898"
+    },
+    {
+      "name": "BG",
+      "type": "RECTANGLE",
+      "fill": "#667185"
+    },
+    {
+      "name": "Rectangle 1",
+      "type": "RECTANGLE",
+      "fill": "#969898"
+    }
+  ]
+}

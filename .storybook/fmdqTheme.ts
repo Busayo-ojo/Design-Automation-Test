@@ -5,7 +5,7 @@ export default create({
 
   brandTitle: 'FMDQ Design System',
   brandUrl: '/',
-  brandImage: '/fmdq-logo.svg',
+  brandImage: '/public/fmdq-logo.svg',
   brandTarget: '_self',
 
   // UI
