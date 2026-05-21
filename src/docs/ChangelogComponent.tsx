@@ -37,11 +37,34 @@ export const ChangelogComponent: React.FC = () => {
 
   // Filter commits
   const filteredCommits = (changelogData as Commit[]).filter((commit) => {
+    const q = searchTerm.toLowerCase();
+
+    // Build searchable date strings from the ISO date (e.g. "2026-05-21")
+    const dateVariants = (() => {
+      try {
+        const [year, month, day] = commit.date.split('-');
+        const dateObj = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+        return [
+          commit.date,                                              // "2026-05-21"
+          dateObj.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),  // "May 2026"
+          dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }),   // "May 21"
+          dateObj.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }), // "May 2026"
+          dateObj.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }), // "May 21, 2026"
+          year, month, day,
+        ].map(s => s.toLowerCase());
+      } catch {
+        return [commit.date.toLowerCase()];
+      }
+    })();
+
     const matchesSearch =
-      commit.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      commit.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      commit.hash.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      commit.scope.toLowerCase().includes(searchTerm.toLowerCase());
+      !q ||
+      commit.subject.toLowerCase().includes(q) ||
+      commit.author.toLowerCase().includes(q) ||
+      commit.email.toLowerCase().includes(q) ||
+      commit.hash.toLowerCase().includes(q) ||
+      commit.scope.toLowerCase().includes(q) ||
+      dateVariants.some(d => d.includes(q));
 
     const matchesCategory =
       selectedCategory === 'all' ||
@@ -99,32 +122,55 @@ export const ChangelogComponent: React.FC = () => {
           margin-bottom: 32px;
           flex-wrap: wrap;
         }
+        .changelog-filter-group .fmdqui-btn-group__item,
+        .changelog-filter-group .fmdqui-btn-group__label {
+          font-size: 14px !important;
+        }
         .changelog-timeline {
           position: relative;
           padding-left: 32px;
           margin-left: 12px;
-          border-left: 2px solid #eaecf0;
+        }
+        .changelog-timeline::before {
+          content: '';
+          position: absolute;
+          left: 1px;
+          top: 0;
+          bottom: 0;
+          width: 2px;
+          background: #eaecf0;
         }
         .changelog-date-section {
           position: relative;
           margin-bottom: 40px;
         }
+        .changelog-date-header {
+          display: flex;
+          align-items: center;
+          gap: 0;
+          margin-bottom: 16px;
+          position: relative;
+        }
         .changelog-date-bullet {
           position: absolute;
-          left: -44px;
-          top: 4px;
+          /* center on the 2px timeline line: line is at left:-32px (padding-left),
+             bullet is 18px wide so offset = -(32 + 9 - 1) = -40px to center it */
+          left: -41px;
+          top: 50%;
+          transform: translateY(-50%);
           width: 18px;
           height: 18px;
           border-radius: 50%;
           background: #ffffff;
-          border: 4px solid #183972;
+          border: 4px solid var(--color-fmdq-gold);
           box-shadow: 0 0 0 4px #f2f4f7;
+          flex-shrink: 0;
         }
         .changelog-date-title {
           font-size: 16px;
           font-weight: 700;
           color: #183972;
-          margin: 0 0 16px 0;
+          margin: 0;
         }
         .changelog-commits-list {
           display: flex;
@@ -224,7 +270,7 @@ export const ChangelogComponent: React.FC = () => {
           hasHelperText={false}
           hasLeftIcon={true}
           hasRightIcon={false}
-          placeholder="Search commits, authors, scopes..."
+          placeholder="Search commits, authors, dates..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -235,8 +281,8 @@ export const ChangelogComponent: React.FC = () => {
         {categories.map((cat, idx) => {
           const position =
             idx === 0 ? 'first'
-            : idx === categories.length - 1 ? 'last'
-            : 'middle';
+              : idx === categories.length - 1 ? 'last'
+                : 'middle';
           return (
             <ButtonGroupItem
               key={cat.value}
@@ -254,8 +300,10 @@ export const ChangelogComponent: React.FC = () => {
         <div className="changelog-timeline">
           {Object.entries(groupedCommits).map(([date, commits]) => (
             <div key={date} className="changelog-date-section">
-              <div className="changelog-date-bullet" />
-              <h3 className="changelog-date-title">{formatDate(date)}</h3>
+              <div className="changelog-date-header">
+                <div className="changelog-date-bullet" />
+                <h3 className="changelog-date-title">{formatDate(date)}</h3>
+              </div>
               <div className="changelog-commits-list">
                 {commits.map((commit) => {
                   const catBadge = CATEGORY_BADGES[commit.category] || CATEGORY_BADGES.other;
@@ -265,9 +313,9 @@ export const ChangelogComponent: React.FC = () => {
                     <div key={commit.hash} className="changelog-commit-card">
                       <div className="changelog-commit-header">
                         <div className="changelog-badge-container">
-                          <Badge 
-                            color={catBadge.color} 
-                            type={catBadge.type} 
+                          <Badge
+                            color={catBadge.color}
+                            type={catBadge.type}
                             size="sm"
                           >
                             {catBadge.label}

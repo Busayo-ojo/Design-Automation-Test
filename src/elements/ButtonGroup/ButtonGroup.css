@@ -30,7 +30,7 @@
 }
 
 /* Collapse double borders between adjacent items */
-.fmdqui-btn-group__item + .fmdqui-btn-group__item {
+.fmdqui-btn-group__item+.fmdqui-btn-group__item {
   margin-left: -1px;
 }
 
