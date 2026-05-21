@@ -23,6 +23,15 @@
     height: 0 !important;
   }
 
+  /* Collapse the wrapper span around hidden icons so it takes no space */
+  a[id]>span:has(svg),
+  button[id]>span:has(svg) {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
   /* But keep the expander/action icons and sidebar controls */
   .sidebar-subheading-action svg,
   [class*="expander"] svg,
@@ -50,6 +59,21 @@
     text-decoration: none !important;
     overflow: hidden !important;
     border: 1px solid transparent !important;
+    padding-left: 16px !important;
+  }
+
+  /* Normalize indentation — collapse hidden icon wrapper spans */
+  a[id]>span:first-child:has(svg),
+  button[id]>span:first-child:has(svg),
+  a[id]>div:first-child:has(svg),
+  button[id]>div:first-child:has(svg) {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   /* Selected Item Styling */
@@ -75,33 +99,62 @@
     color: #1D326D !important;
   }
 
-  /* Search Field Styling */
-  #storybook-explorer-searchfield {
-    border: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  #storybook-explorer-searchfield:focus {
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
-  }
-
-  /* Search wrapper border-radius */
+  /* Search Field — matches .fmdqui-input-wrapper (sm) */
+  div.search-field,
   .search-field,
   [class*="search-field"] {
+    background-color: #ffffff !important;
+    border: 1px solid #D0D5DD !important;
     border-radius: 12px !important;
+    height: 36px !important;
+    padding: 8px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+    box-sizing: border-box !important;
   }
 
-  /* Button beside the search field */
+  /* Focus state — matches .fmdqui-input-wrapper:focus-within */
+  div.search-field:focus-within,
+  .search-field:focus-within,
+  [class*="search-field"]:focus-within {
+    border-color: #034591 !important;
+    box-shadow: 0 0 0 4px #E7E8F1, 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10) !important;
+  }
+
+  /* Inner input — matches .fmdqui-input */
+  #storybook-explorer-searchfield {
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    color: #101828 !important;
+  }
+
+  #storybook-explorer-searchfield::placeholder {
+    color: #667085 !important;
+  }
+
+  /* Button beside the search field — 36×36, same border as input */
   .search-field+div button,
   .search-field~div button,
   [class*="search-field"]+div button,
   [class*="search-field"]~div button,
   [class*="search-field"]+button,
   [class*="search-field"]~button {
-    border-radius: 16px !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    border-radius: 12px !important;
+    border: 1px solid #D0D5DD !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
   }
 
   /* Section Headers */
@@ -115,3 +168,60 @@
     margin-bottom: 8px !important;
   }
 </style>
+<script>
+  (function () {
+    var overrideStyle = null;
+    var css = [
+      'div.search-field,[class*="search-field"]{',
+      '  background-color:#ffffff!important;',
+      '  border:1px solid #D0D5DD!important;',
+      '  border-radius:12px!important;',
+      '  height:36px!important;',
+      '  padding:8px 12px!important;',
+      '  display:flex!important;',
+      '  align-items:center!important;',
+      '  transition:border-color 0.15s ease,box-shadow 0.15s ease!important;',
+      '  box-sizing:border-box!important;',
+      '}',
+      'div.search-field:focus-within,[class*="search-field"]:focus-within{',
+      '  border-color:#034591!important;',
+      '  box-shadow:0 0 0 4px #E7E8F1,0 1px 2px rgba(16,24,40,0.06),0 1px 3px rgba(16,24,40,0.10)!important;',
+      '}',
+      '#storybook-explorer-searchfield{',
+      '  border:none!important;outline:none!important;background:transparent!important;',
+      '  box-shadow:none!important;font-size:14px!important;line-height:20px!important;color:#101828!important;',
+      '}',
+      '#storybook-explorer-searchfield::placeholder{color:#667085!important;}',
+      '[class*="search-field"]+div button,[class*="search-field"]~div button,[class*="search-field"]+button,[class*="search-field"]~button{',
+      '  width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;',
+      '  border-radius:12px!important;border:1px solid #D0D5DD!important;',
+      '  box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;',
+      '}',
+    ].join('');
+
+    function injectOverride() {
+      if (!document.head) return;
+      if (!overrideStyle) {
+        overrideStyle = document.createElement('style');
+        overrideStyle.id = '__search-field-override__';
+        overrideStyle.textContent = css;
+      }
+      document.head.appendChild(overrideStyle);
+    }
+
+    new MutationObserver(function (mutations) {
+      for (var i = 0; i < mutations.length; i++) {
+        var nodes = mutations[i].addedNodes;
+        for (var j = 0; j < nodes.length; j++) {
+          if (nodes[j].nodeName === 'STYLE' && nodes[j] !== overrideStyle) {
+            injectOverride();
+            break;
+          }
+        }
+      }
+    }).observe(document.documentElement, { childList: true, subtree: true });
+
+    document.addEventListener('DOMContentLoaded', injectOverride);
+    window.addEventListener('load', injectOverride);
+  })();
+</script>

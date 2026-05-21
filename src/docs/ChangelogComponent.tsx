@@ -5,6 +5,9 @@ import type { BadgeColor, BadgeType } from '../elements/Badge';
 import { ButtonGroup, ButtonGroupItem } from '../elements/ButtonGroup';
 import { Input } from '../elements/Input';
 import { Avatar } from '../elements/Avatar/Avatar';
+import { Heading } from '../components/Typography/Heading';
+import { Text } from '../components/Typography/Text';
+import { Button } from '../elements/Button';
 
 interface Commit {
   hash: string;
@@ -87,7 +90,7 @@ export const ChangelogComponent: React.FC = () => {
   ];
 
   return (
-    <div style={{ fontFamily: 'inherit', color: '#101828', maxWidth: '1000px', margin: '0 auto' }}>
+    <div style={{ fontFamily: 'var(--font-family-primary)', color: '#101828', maxWidth: '1000px', margin: '0 auto' }}>
       <style>{`
         .changelog-search-container {
           margin-bottom: 24px;
@@ -296,7 +299,7 @@ export const ChangelogComponent: React.FC = () => {
                           <Avatar type="Initials" size="xs" initials={initials} />
                           <span>{commit.author}</span>
                         </div>
-                        <span style={{ fontSize: '11px' }}>{commit.email}</span>
+                        <Text as="span" size="sm" color="grey">{commit.email}</Text>
                       </div>
                     </div>
                   );
@@ -307,18 +310,20 @@ export const ChangelogComponent: React.FC = () => {
         </div>
       ) : (
         <div className="changelog-empty">
-          <p style={{ margin: '0 0 12px 0', fontSize: '16px', fontWeight: 600 }}>No changes found</p>
-          <p style={{ margin: 0, fontSize: '14px' }}>Try clearing your search query or choosing another filter.</p>
-          <button
-            className="changelog-filter-chip"
-            style={{ marginTop: '16px', background: '#183972', color: '#ffffff' }}
-            onClick={() => {
-              setSearchTerm('');
-              setSelectedCategory('all');
-            }}
-          >
-            Clear Filters
-          </button>
+          <Heading level={6} style={{ margin: '0 0 12px 0' }}>No changes found</Heading>
+          <Text size="md" style={{ margin: 0 }}>Try clearing your search query or choosing another filter.</Text>
+          <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '16px' }}>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => {
+                setSearchTerm('');
+                setSelectedCategory('all');
+              }}
+            >
+              Clear Filters
+            </Button>
+          </div>
         </div>
       )}
     </div>

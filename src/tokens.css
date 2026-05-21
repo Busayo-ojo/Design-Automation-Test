@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&display=swap');
 
 :root {
-  /* ── Primary (Updated to Gold Scale) ── */
-  --color-primary-50: #FDF9EE;
-  --color-primary-100: #FDF2DA;
-  --color-primary-200: #F8DEAB;
-  --color-primary-300: #F4CA7D;
-  --color-primary-400: #EDB44D;
-  --color-primary-500: #CC9933; /* Core Brand Gold */
-  --color-primary-600: #A9700B;
-  --color-primary-700: #754C04;
-  --color-primary-800: #402800;
-  --color-primary-900: #2C1B00;
+  /* ── Primary ── */
+  --color-primary-50: #E3EFFC;
+  --color-primary-75: #C6DDF7;
+  --color-primary-100: #B6D8FF;
+  --color-primary-200: #80BBFF;
+  --color-primary-300: #3D89DF;
+  --color-primary-400: #1671D9;
+  --color-primary-500: #0D5EBA;
+  --color-primary-600: #034592;
+  --color-primary-700: #1D326D;
+  --color-primary-800: #012657;
+  --color-primary-900: #001633;
 
   /* ── Brand Colors ── */
   --color-fmdq-blue: #1D326D;
@@ -19,16 +20,17 @@
   --color-fmdq-grey: #969898;
 
   /* ── Secondary ── */
-  --color-secondary-50: #FDF9EE;
-  --color-secondary-100: #FDF2DA;
-  --color-secondary-200: #F8DEAB;
-  --color-secondary-300: #F4CA7D;
-  --color-secondary-400: #EDB44D;
-  --color-secondary-500: #DF9916;
-  --color-secondary-600: #A9700B;
-  --color-secondary-700: #754C04;
-  --color-secondary-800: #402800;
-  --color-secondary-900: #2C1B00;
+  --color-secondary-50: #FEF6E7;
+  --color-secondary-75: #FBE2B7;
+  --color-secondary-100: #F7D394;
+  --color-secondary-200: #F7C164;
+  --color-secondary-300: #F5B546;
+  --color-secondary-400: #F3A218;
+  --color-secondary-500: #CC9933;
+  --color-secondary-600: #A17827;
+  --color-secondary-700: #8A6722;
+  --color-secondary-800: #5C4416;
+  --color-secondary-900: #33260C;
 
   /* ── Neutral ── */
   --color-neutral-white: #FFFFFF;

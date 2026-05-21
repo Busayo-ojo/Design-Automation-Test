@@ -1,5 +1,38 @@
 [
   {
+    "hash": "1bf6f71",
+    "date": "2026-05-21",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "style: simplify search field appearance and remove redundant DOM-mutation script in Storybook manager",
+    "category": "style",
+    "scope": "",
+    "message": "simplify search field appearance and remove redundant DOM-mutation script in Storybook manager",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/1bf6f71"
+  },
+  {
+    "hash": "b5bd859",
+    "date": "2026-05-21",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "feat: Implemented StartHere landing pages for documentation categories and add automated changelog generation. Doings!!!",
+    "category": "feat",
+    "scope": "",
+    "message": "Implemented StartHere landing pages for documentation categories and add automated changelog generation. Doings!!!",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/b5bd859"
+  },
+  {
+    "hash": "1b9649d",
+    "date": "2026-05-19",
+    "author": "damilare",
+    "email": "imisioluwa.bonnie@fmdqgroup.com",
+    "subject": "feat: enhance figma deep-scan token extractor, update brand logo, and configure Storybook router and story sorting",
+    "category": "feat",
+    "scope": "",
+    "message": "enhance figma deep-scan token extractor, update brand logo, and configure Storybook router and story sorting",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/1b9649d"
+  },
+  {
     "hash": "66b1cf1",
     "date": "2026-05-18",
     "author": "dudesoamazing",
