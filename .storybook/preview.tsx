@@ -1,7 +1,8 @@
-import React from 'react';
+/// <reference types="vite/client" />
 import { BrowserRouter } from 'react-router-dom';
-import type { Preview } from '@storybook/react-vite'
+import type { Preview } from '@storybook/react'
 import '../src/tokens.css'
+
 
 const preview: Preview = {
   decorators: [
@@ -17,7 +18,7 @@ const preview: Preview = {
         const rootOrder = [
           'Welcome',
           'Getting Started',
-          'Catalog',
+          'Branding Todo',
           'MCP',
           'Playground',
           'Changelog',
@@ -64,7 +65,7 @@ const preview: Preview = {
         const bTitleRaw = b.title.split('/').pop() || '';
         const aTitle = aTitleRaw.replace(/^[^a-zA-Z0-9]+/g, '').trim();
         const bTitle = bTitleRaw.replace(/^[^a-zA-Z0-9]+/g, '').trim();
-        
+
         const aItemIndex = itemOrder.indexOf(aTitle);
         const bItemIndex = itemOrder.indexOf(bTitle);
 
@@ -83,8 +84,8 @@ const preview: Preview = {
     },
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
 

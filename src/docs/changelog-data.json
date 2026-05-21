@@ -1,5 +1,27 @@
 [
   {
+    "hash": "78d906d",
+    "date": "2026-05-21",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "feat: Enhance ChangelogComponent with date-based search, style refinements, and improved timeline layout.",
+    "category": "feat",
+    "scope": "",
+    "message": "Enhance ChangelogComponent with date-based search, style refinements, and improved timeline layout.",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/78d906d"
+  },
+  {
+    "hash": "1dd93e1",
+    "date": "2026-05-21",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "style: Update design tokens, refine Storybook UI search styling, and standardize typography font-family. God i hate frontend...ugh",
+    "category": "style",
+    "scope": "",
+    "message": "Update design tokens, refine Storybook UI search styling, and standardize typography font-family. God i hate frontend...ugh",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/1dd93e1"
+  },
+  {
     "hash": "1bf6f71",
     "date": "2026-05-21",
     "author": "dudesoamazing",

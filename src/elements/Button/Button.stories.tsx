@@ -99,6 +99,14 @@ export const TextSecondary: Story = {
     },
 };
 
+export const TextDestructive: Story = {
+    args: {
+        variant: 'text',
+        buttonType: 'destructive',
+        label: 'Text Destructive',
+    },
+};
+
 export const Success: Story = {
     args: {
         variant: 'success',

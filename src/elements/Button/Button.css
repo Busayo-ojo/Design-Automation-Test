@@ -147,10 +147,67 @@
     height: auto !important;
     border-radius: 0 !important;
     border: none !important;
+    gap: 8px !important;
 }
-.fmdqui-button--text.fmdqui-button--type-primary { color: #0D5EBA; }
-.fmdqui-button--text.fmdqui-button--type-secondary { color: #667185; }
-.fmdqui-button--text.fmdqui-button--type-destructive { color: #D42620; }
+
+.fmdqui-button--text.fmdqui-button--sm {
+    font-size: 14px !important;
+}
+
+.fmdqui-button--text.fmdqui-button--lg {
+    font-size: 16px !important;
+}
+
+.fmdqui-button--text .fmdqui-button__icon {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+/* Primary Text Button */
+.fmdqui-button--text.fmdqui-button--type-primary {
+    color: var(--color-primary-700);
+}
+.fmdqui-button--text.fmdqui-button--type-primary:hover:not(:disabled),
+.fmdqui-button--text.fmdqui-button--type-primary.fmdqui-button--state-hover {
+    color: var(--color-primary-600);
+}
+.fmdqui-button--text.fmdqui-button--type-primary:focus-visible,
+.fmdqui-button--text.fmdqui-button--type-primary.fmdqui-button--state-focused {
+    color: var(--color-primary-700);
+}
+
+/* Secondary Text Button */
+.fmdqui-button--text.fmdqui-button--type-secondary {
+    color: var(--color-neutral-500);
+}
+.fmdqui-button--text.fmdqui-button--type-secondary:hover:not(:disabled),
+.fmdqui-button--text.fmdqui-button--type-secondary.fmdqui-button--state-hover {
+    color: var(--color-neutral-400);
+}
+.fmdqui-button--text.fmdqui-button--type-secondary:focus-visible,
+.fmdqui-button--text.fmdqui-button--type-secondary.fmdqui-button--state-focused {
+    color: var(--color-neutral-700);
+}
+
+/* Destructive Text Button */
+.fmdqui-button--text.fmdqui-button--type-destructive {
+    color: #D42620;
+}
+.fmdqui-button--text.fmdqui-button--type-destructive:hover:not(:disabled),
+.fmdqui-button--text.fmdqui-button--type-destructive.fmdqui-button--state-hover {
+    color: #E26E6A;
+}
+.fmdqui-button--text.fmdqui-button--type-destructive:focus-visible,
+.fmdqui-button--text.fmdqui-button--type-destructive.fmdqui-button--state-focused {
+    color: #9E0A05;
+}
+
+/* Disabled State for all Text Buttons */
+.fmdqui-button--text:disabled,
+.fmdqui-button--text.fmdqui-button--state-de-activated {
+    color: var(--color-neutral-300) !important;
+    cursor: not-allowed !important;
+}
 
 .fmdqui-button--text:hover:not(:disabled) {
     text-decoration: underline;
