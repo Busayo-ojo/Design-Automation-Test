@@ -1,0 +1,117 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Foundations/🚀 Start Here" />
+
+<style>
+{`
+  .foundation-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+    margin-bottom: 48px;
+  }
+  .foundation-card {
+    border: 1px solid #e4e7ec;
+    border-radius: 16px;
+    padding: 32px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .foundation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(29, 50, 109, 0.08);
+    border-color: #1d326d;
+  }
+  .foundation-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #1d326d;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .foundation-card p {
+    margin: 0;
+    color: #475367;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .intro-box {
+    background: #183972;
+    color: white;
+    padding: 40px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 32px rgba(24, 57, 114, 0.15);
+  }
+  .intro-box h1 {
+    color: white !important;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 32px;
+    font-weight: 800;
+  }
+  .intro-box p {
+    color: #e3effc;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.8;
+    margin: 0;
+  }
+`}
+</style>
+
+<div className="intro-box">
+  <h1>Design Foundations</h1>
+  <p>
+    Foundations represent the visual core of the FMDQ Design System. They define our tokens, rules, and fundamental design decisions that ensure a cohesive user experience across all digital platforms.
+  </p>
+</div>
+
+## Core Foundations
+
+These core building blocks dictate our overall brand aesthetic, spacing density, and typographic hierarchy. Explore each section to view detailed token values and usage guidelines:
+
+<div className="foundation-card-grid">
+  <div className="foundation-card">
+    <h3>🌈 Colors</h3>
+    <p>
+      Explore the standardized color palette tailored to distinct brand functions including FMDQ Brand Colors, Primary, Secondary, Status (Success, Warning, Error), and Neutrals.
+    </p>
+  </div>
+  <div className="foundation-card">
+    <h3>🌫️ Shadows and Blurs</h3>
+    <p>
+      View depth and elevation specifications, including background filters, drop shadows, overlay blur configurations, and card styling rules.
+    </p>
+  </div>
+  <div className="foundation-card">
+    <h3>📐 Spacing</h3>
+    <p>
+      Learn about the 8pt spacing system used to establish visual grid rhythm, alignment, padding, and margins across all layouts.
+    </p>
+  </div>
+  <div className="foundation-card">
+    <h3>🔤 Typography</h3>
+    <p>
+      Discover the typographic scale driven by the modern and clean <strong>DM Sans</strong> typeface, defining line-heights, weights, and sizes for headings, body text, and labels.
+    </p>
+  </div>
+</div>
+
+## Implementing Design Tokens
+
+All foundations are exported as CSS custom properties (variables) defined in `tokens.css`. You can reference these variables directly in your CSS files:
+
+```css
+.card {
+  background-color: var(--color-shade-white);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+```

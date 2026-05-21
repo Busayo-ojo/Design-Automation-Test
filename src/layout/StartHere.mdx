@@ -1,0 +1,102 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Layout/🚀 Start Here" />
+
+<style>
+{`
+  .layout-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+    margin-bottom: 48px;
+  }
+  .layout-card {
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+    padding: 24px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .layout-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(29, 50, 109, 0.06);
+    border-color: #1d326d;
+  }
+  .layout-card h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #1d326d;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .layout-card p {
+    margin: 0;
+    color: #475367;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .intro-box {
+    background: #183972;
+    color: white;
+    padding: 40px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 32px rgba(24, 57, 114, 0.15);
+  }
+  .intro-box h1 {
+    color: white !important;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 32px;
+    font-weight: 800;
+  }
+  .intro-box p {
+    color: #e3effc;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.8;
+    margin: 0;
+  }
+`}
+</style>
+
+<div className="intro-box">
+  <h1>App & Page Layouts</h1>
+  <p>
+    Layout components define the high-level structural shells (templates) of our applications. They manage the placement of headers, sidebars, page bodies, and navigation shells.
+  </p>
+</div>
+
+## Available Layouts
+
+Explore our structural layout containers:
+
+<div className="layout-card-grid">
+  <div className="layout-card">
+    <h3>✨ AppLayout</h3>
+    <p>
+      The core application container combining the TopBar, navigation sidebar, and primary workspace layout grid.
+    </p>
+  </div>
+  <div className="layout-card">
+    <h3>✨ PageHeader</h3>
+    <p>
+      The standard header for distinct page views, holding titles, breadcrumbs, descriptions, and action panels.
+    </p>
+  </div>
+  <div className="layout-card">
+    <h3>✨ TopBar</h3>
+    <p>
+      The header panel holding brand logos, global search tools, notifications, and user account actions.
+    </p>
+  </div>
+</div>
+
+## Alignment Guidelines
+
+Layout containers adhere strictly to our 8px layout grid and responsive breakpoints to guarantee fluid rendering from standard laptop screens to large trading monitors.

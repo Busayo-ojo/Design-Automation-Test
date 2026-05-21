@@ -82,8 +82,26 @@
   }
 
   #storybook-explorer-searchfield:focus {
-    border-color: #cc9933 !important;
-    box-shadow: 0 0 0 3px rgba(204, 153, 51, 0.1) !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  /* Search wrapper border-radius */
+  div.search-field,
+  .search-field,
+  [class*="search-field"] {
+    border-radius: 12px !important;
+  }
+
+  /* Button beside the search field */
+  .search-field+div button,
+  .search-field~div button,
+  [class*="search-field"]+div button,
+  [class*="search-field"]~div button,
+  [class*="search-field"]+button,
+  [class*="search-field"]~button {
+    border-radius: 16px !important;
   }
 
   /* Section Headers */
@@ -96,5 +114,38 @@
     margin-top: 20px !important;
     margin-bottom: 8px !important;
   }
-
 </style>
+<script>
+  // Emotion re-injects styles on every render, so static CSS and inline styles lose.
+  // Fix: keep our <style> appended AFTER all Emotion <style> tags so it's always last.
+  (function () {
+    let overrideStyle = null;
+
+    function injectOverride() {
+      if (!document.head) return;
+      if (!overrideStyle) {
+        overrideStyle = document.createElement('style');
+        overrideStyle.id = '__search-field-override__';
+        overrideStyle.textContent = 'div.search-field,[class*="search-field"]{border-radius:12px!important}';
+      }
+      // Always re-append to end of <head> so it beats Emotion's last-injected rule
+      document.head.appendChild(overrideStyle);
+    }
+
+    // Re-run whenever Emotion adds a new <style> tag
+    new MutationObserver(function (mutations) {
+      for (var i = 0; i < mutations.length; i++) {
+        var nodes = mutations[i].addedNodes;
+        for (var j = 0; j < nodes.length; j++) {
+          if (nodes[j].nodeName === 'STYLE' && nodes[j] !== overrideStyle) {
+            injectOverride();
+            break;
+          }
+        }
+      }
+    }).observe(document.documentElement, { childList: true, subtree: true });
+
+    document.addEventListener('DOMContentLoaded', injectOverride);
+    window.addEventListener('load', injectOverride);
+  })();
+</script>

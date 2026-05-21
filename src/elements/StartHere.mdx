@@ -1,0 +1,114 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Elements/🚀 Start Here" />
+
+<style>
+{`
+  .element-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+    margin-bottom: 48px;
+  }
+  .element-card {
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+    padding: 24px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .element-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(29, 50, 109, 0.06);
+    border-color: #1d326d;
+  }
+  .element-card h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #1d326d;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .element-card p {
+    margin: 0;
+    color: #475367;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .intro-box {
+    background: #183972;
+    color: white;
+    padding: 40px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 32px rgba(24, 57, 114, 0.15);
+  }
+  .intro-box h1 {
+    color: white !important;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 32px;
+    font-weight: 800;
+  }
+  .intro-box p {
+    color: #e3effc;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.8;
+    margin: 0;
+  }
+`}
+</style>
+
+<div className="intro-box">
+  <h1>Atomic Elements</h1>
+  <p>
+    Elements are the standard building blocks (atoms) of the FMDQ Design System. They are low-level, highly reusable components that consume design tokens and are combined to build larger interface patterns.
+  </p>
+</div>
+
+## Available Elements
+
+Explore the atomic elements configured to match our exact brand guidelines:
+
+<div className="element-card-grid">
+  <div className="element-card">
+    <h3>🌚 Avatars</h3>
+    <p>
+      Visual representations of users or entities, supporting initials, images, fallbacks, and size variants.
+    </p>
+  </div>
+  <div className="element-card">
+    <h3>📛 Badge & Chip</h3>
+    <p>
+      Small visual indicators for status reporting, filtering tags, categories, or quantitative counts.
+    </p>
+  </div>
+  <div className="element-card">
+    <h3>➡️ Button & Tabbed Buttons</h3>
+    <p>
+      Used to trigger actions, submissions, or state changes. Available in primary, secondary, tertiary, and link variants.
+    </p>
+  </div>
+  <div className="element-card">
+    <h3>🔠 Input & Toggle</h3>
+    <p>
+      Core form controls for user input. Includes support for labels, helper texts, validation states, and toggling preferences.
+    </p>
+  </div>
+  <div className="element-card">
+    <h3>🍞 Toast</h3>
+    <p>
+      Temporary toast notifications to alert users about system events, successful actions, or background errors.
+    </p>
+  </div>
+</div>
+
+## Usage Philosophy
+
+Elements are designed to be **stateless** and **controlled** from parent components. They avoid managing complex business logic and focus entirely on visual presentation, usability, and accessibility rules.
