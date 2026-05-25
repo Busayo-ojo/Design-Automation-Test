@@ -30,22 +30,6 @@ const preview: Preview = {
           'Layout',
         ];
 
-        const itemOrder = [
-          'Colors',
-          'Shadows and Blurs',
-          'Spacing',
-          'Typography',
-          'Badge',
-          'Button',
-          'Chip',
-          'Input',
-          'Tabbed Buttons',
-          'Toast',
-          'Toggle',
-          'Avatars',
-          'Elements'
-        ];
-
         const aRootRaw = a.title.split('/')[0];
         const bRootRaw = b.title.split('/')[0];
         const aRoot = aRootRaw.replace(/^[^a-zA-Z0-9]+/g, '').trim();
@@ -66,12 +50,8 @@ const preview: Preview = {
         const aTitle = aTitleRaw.replace(/^[^a-zA-Z0-9]+/g, '').trim();
         const bTitle = bTitleRaw.replace(/^[^a-zA-Z0-9]+/g, '').trim();
 
-        const aItemIndex = itemOrder.indexOf(aTitle);
-        const bItemIndex = itemOrder.indexOf(bTitle);
-
-        if (aItemIndex !== -1 && bItemIndex !== -1) return aItemIndex - bItemIndex;
-        if (aItemIndex !== -1) return -1;
-        if (bItemIndex !== -1) return 1;
+        if (aTitle === 'Start Here') return -1;
+        if (bTitle === 'Start Here') return 1;
 
         return aTitle.localeCompare(bTitle);
       },

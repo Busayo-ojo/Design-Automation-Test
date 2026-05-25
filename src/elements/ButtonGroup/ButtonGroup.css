@@ -63,7 +63,7 @@
 /* Hover */
 .fmdqui-btn-group__item--hover,
 .fmdqui-btn-group__item:not(:disabled):hover {
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-secondary-50);
   border-color: var(--color-neutral-300);
   color: var(--color-neutral-600);
 }
