@@ -1,5 +1,38 @@
 [
   {
+    "hash": "47e30a2",
+    "date": "2026-05-25",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "Merge branch 'main' of github.com:WebMaster0-1/Design-Automation-Test",
+    "category": "other",
+    "scope": "",
+    "message": "Merge branch 'main' of github.com:WebMaster0-1/Design-Automation-Test",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/47e30a2"
+  },
+  {
+    "hash": "80c44c2",
+    "date": "2026-05-25",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "Simplified Storybook navigation sorting, update changelog data, and adjust ButtonGroup hover background color",
+    "category": "other",
+    "scope": "",
+    "message": "Simplified Storybook navigation sorting, update changelog data, and adjust ButtonGroup hover background color",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/80c44c2"
+  },
+  {
+    "hash": "3fa2b1b",
+    "date": "2026-05-22",
+    "author": "ellerton",
+    "email": "immanuel_bonnie@yahoo.com",
+    "subject": "docs: update changelog data post-publish",
+    "category": "docs",
+    "scope": "",
+    "message": "update changelog data post-publish",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/3fa2b1b"
+  },
+  {
     "hash": "e04508a",
     "date": "2026-05-21",
     "author": "dudesoamazing",
