@@ -4,7 +4,7 @@
 .fmdqui-input-container {
   display: inline-flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-4);
   font-family: var(--font-family-primary);
   box-sizing: border-box;
   width: 320px;
@@ -13,7 +13,7 @@
 /* ─── Label ──────────────────────────────────────────────────────────── */
 .fmdqui-input__label {
   font-family: var(--font-family-primary);
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 500;
   line-height: 20px;
   color: var(--color-neutral-900);
@@ -25,80 +25,76 @@
   display: flex;
   align-items: center;
   position: relative;
-  background-color: #ffffff;
-  border: 1px solid #D0D5DD;
-  border-radius: 12px;
+  background-color: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-12);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
   box-sizing: border-box;
   width: 100%;
-  gap: 12px;
+  gap: var(--spacing-12);
 }
 
 /* ── Sizes ── */
 .fmdqui-input-wrapper--sm {
   height: 36px;
-  padding: 8px 12px;
+  padding: var(--spacing-8) var(--spacing-12);
 }
 
 .fmdqui-input-wrapper--lg {
   height: 56px;
-  padding: 16px;
+  padding: var(--spacing-16);
 }
 
 .fmdqui-input-wrapper--xl {
   min-height: 80px;
   height: auto;
-  padding: 12px;
+  padding: var(--spacing-12);
   align-items: flex-start;
 }
 
 /* ── States ── */
-/* default — no extra rule needed (base above is correct) */
-
 .fmdqui-input-wrapper--hover {
-  border-color: #034591;
+  border-color: var(--color-primary-default);
 }
 
 .fmdqui-input-wrapper--active,
 .fmdqui-input-wrapper--typing,
 .fmdqui-input-wrapper--input-dropdown:focus-within {
-  border-color: #034591;
-  box-shadow: 0 0 0 4px #E7E8F1, 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10);
+  border-color: var(--color-primary-default);
+  box-shadow: 0 0 0 4px var(--color-focus-ring), 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10);
 }
 
-/* JS focus state to support "typing" in real-time */
 .fmdqui-input-wrapper:focus-within:not(.fmdqui-input-wrapper--disabled):not(.fmdqui-input-wrapper--read-only):not(.fmdqui-input-wrapper--success):not(.fmdqui-input-wrapper--error) {
-  border-color: #034591;
-  box-shadow: 0 0 0 4px #E7E8F1, 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10);
+  border-color: var(--color-primary-default);
+  box-shadow: 0 0 0 4px var(--color-focus-ring), 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10);
 }
-
 
 .fmdqui-input-wrapper--filled {
-  border-color: #D0D5DD;
+  border-color: var(--color-neutral-300);
 }
 
 .fmdqui-input-wrapper--success {
-  border-color: #5FC381;
+  border-color: var(--color-success-200);
 }
 
 .fmdqui-input-wrapper--success:focus-within {
-  border-color: #5FC381;
+  border-color: var(--color-success-200);
   box-shadow: 0 0 0 3px rgba(95, 195, 129, 0.15);
 }
 
 .fmdqui-input-wrapper--error {
-  border-color: #E26E6A;
+  border-color: var(--color-destructive-light);
 }
 
 .fmdqui-input-wrapper--error:focus-within {
-  border-color: #E26E6A;
+  border-color: var(--color-destructive-light);
   box-shadow: 0 0 0 3px rgba(226, 110, 106, 0.15);
 }
 
 .fmdqui-input-wrapper--read-only,
 .fmdqui-input-wrapper--disabled {
-  background-color: #F0F2F5;
-  border-color: #D0D5DD;
+  background-color: var(--color-neutral-100);
+  border-color: var(--color-neutral-300);
   cursor: not-allowed;
 }
 
@@ -110,7 +106,7 @@
   outline: none;
   background: transparent;
   font-family: var(--font-family-primary);
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   line-height: 20px;
   color: var(--color-neutral-900);
   box-sizing: border-box;
@@ -177,7 +173,7 @@
 /* ─── Right add-on label ──────────────────────────────────────────────── */
 .fmdqui-input__right-label {
   font-family: var(--font-family-primary);
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 400;
   line-height: 20px;
   color: var(--color-neutral-500);
@@ -188,7 +184,7 @@
 /* ─── Helper / Status text ───────────────────────────────────────────── */
 .fmdqui-input__helper {
   font-family: var(--font-family-primary);
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 400;
   line-height: 20px;
   color: var(--color-neutral-500);
@@ -196,9 +192,9 @@
 }
 
 .fmdqui-input__helper--success {
-  color: #04802E;
+  color: var(--color-success-600);
 }
 
 .fmdqui-input__helper--error {
-  color: #CB1A14;
+  color: var(--color-destructive-default);
 }

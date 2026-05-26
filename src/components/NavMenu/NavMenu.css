@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 260px;
-  background-color: #ffffff;
+  background-color: var(--color-neutral-white);
   border-right: 1px solid rgba(0, 0, 0, 0.04);
   height: 100%;
   padding: var(--spacing-16) 0;
@@ -55,7 +55,7 @@
   margin: 0 var(--spacing-8) 2px var(--spacing-8);
   border-radius: var(--radius-8);
   text-decoration: none;
-  color: var(--color-secondary-text, var(--color-grey-focused));
+  color: var(--color-secondary-text);
   font-family: var(--font-family-primary);
   font-size: var(--font-size-sm);
   font-weight: 500;
@@ -67,10 +67,11 @@
   background-color: rgba(3, 69, 145, 0.04);
   color: var(--color-primary-hover);
   transform: translateX(4px);
+  box-shadow: var(--shadow-soft-lg);
 }
 
 .fmdqui-nav-item--active {
-  background-color: rgba(3, 69, 145, 0.08); /* soft primary tint */
+  background-color: rgba(3, 69, 145, 0.08);
   color: var(--color-primary-default);
   font-weight: 600;
   box-shadow: inset 3px 0 0 var(--color-primary-default);

@@ -1,10 +1,5 @@
 @import '../../tokens.css';
 
-/* ─── Brand colours (from Figma spec) ──────────────────────────────── */
-/* Active fill:   rgb(29, 50, 109)  → #1D326D  */
-/* Inactive border: rgb(208, 213, 221) → #D0D5DD */
-/* Switch off bg: rgb(228, 231, 236) → #E4E7EC  */
-
 /* ─── Base container ────────────────────────────────────────────────── */
 .fmdqui-toggle {
   display: inline-flex;
@@ -44,19 +39,17 @@
   justify-content: center;
   box-sizing: border-box;
   transition: background-color 0.18s ease, border-color 0.18s ease;
-  pointer-events: none; /* clicks go through to the hidden input */
+  pointer-events: none;
 }
 
 /* ─── Focus ring on keyboard navigation ─────────────────────────────── */
 .fmdqui-toggle__input:focus-visible ~ .fmdqui-toggle__track {
-  outline: 2px solid #1D326D;
+  outline: 2px solid var(--color-fmdq-blue);
   outline-offset: 2px;
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    RADIO  —  24×24 circle
-   Figma: outer circle 24px, stroke 1.5px
-          inner circle 12px filled brand colour (active only)
    ══════════════════════════════════════════════════════════════════════ */
 .fmdqui-toggle--radio {
   width: 24px;
@@ -67,16 +60,14 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: #ffffff;
-  border: 1.5px solid #D0D5DD;
+  background-color: var(--color-neutral-white);
+  border: 1.5px solid var(--color-neutral-300);
 }
 
-/* Active state: border goes brand blue */
 .fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--radio {
-  border-color: #1D326D;
+  border-color: var(--color-fmdq-blue);
 }
 
-/* Inner dot */
 .fmdqui-toggle__radio-inner {
   width: 12px;
   height: 12px;
@@ -86,13 +77,11 @@
 }
 
 .fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--radio .fmdqui-toggle__radio-inner {
-  background-color: #1D326D;
+  background-color: var(--color-fmdq-blue);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
    CHECKBOX  —  24×24 rounded-square (r=4)
-   Figma: inactive = white bg, 1.5px #D0D5DD border
-          active   = #1D326D bg, no border, white check
    ══════════════════════════════════════════════════════════════════════ */
 .fmdqui-toggle--checkbox {
   width: 24px;
@@ -102,19 +91,18 @@
 .fmdqui-toggle__track--checkbox {
   width: 24px;
   height: 24px;
-  border-radius: 4px;
-  background-color: #ffffff;
-  border: 1.5px solid #D0D5DD;
+  border-radius: var(--radius-4);
+  background-color: var(--color-neutral-white);
+  border: 1.5px solid var(--color-neutral-300);
 }
 
 .fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkbox {
-  background-color: #1D326D;
-  border-color: #1D326D;
+  background-color: var(--color-fmdq-blue);
+  border-color: var(--color-fmdq-blue);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   CHECKCIRCLE  —  24×24 full-circle (r=100 → 50%)
-   Same visual logic as Checkbox but fully rounded
+   CHECKCIRCLE  —  24×24 full-circle
    ══════════════════════════════════════════════════════════════════════ */
 .fmdqui-toggle--checkcircle {
   width: 24px;
@@ -125,13 +113,13 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: #ffffff;
-  border: 1.5px solid #D0D5DD;
+  background-color: var(--color-neutral-white);
+  border: 1.5px solid var(--color-neutral-300);
 }
 
 .fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkcircle {
-  background-color: #1D326D;
-  border-color: #1D326D;
+  background-color: var(--color-fmdq-blue);
+  border-color: var(--color-fmdq-blue);
 }
 
 /* ── Shared check icon (used by Checkbox & Checkcircle) ──────────────── */
@@ -151,8 +139,6 @@
 
 /* ══════════════════════════════════════════════════════════════════════
    SWITCH  —  39×24 pill
-   Figma: inactive bg = #E4E7EC (228,231,236), knob 21×21 white, offset left
-          active  bg = #1D326D,                knob 21×21 white, offset right
    ══════════════════════════════════════════════════════════════════════ */
 .fmdqui-toggle--switch {
   width: 39px;
@@ -162,14 +148,14 @@
 .fmdqui-toggle__track--switch {
   width: 39px;
   height: 24px;
-  border-radius: 27px; /* Figma cornerRadius 27.375 → ~27px */
-  background-color: #E4E7EC;
+  border-radius: 27px;
+  background-color: var(--color-neutral-200);
   position: relative;
   padding: 0;
 }
 
 .fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--switch {
-  background-color: #1D326D;
+  background-color: var(--color-fmdq-blue);
 }
 
 /* Knob */
@@ -181,20 +167,20 @@
   width: 21px;
   height: 21px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: var(--color-neutral-white);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--switch .fmdqui-toggle__knob {
-  left: calc(39px - 21px - 1.5px); /* = 16.5px */
+  left: calc(39px - 21px - 1.5px);
 }
 
 /* ── Hover feedback ─────────────────────────────────────────────────── */
 .fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--radio,
 .fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--checkbox,
 .fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--checkcircle {
-  border-color: #1D326D;
+  border-color: var(--color-fmdq-blue);
 }
 
 .fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--switch {

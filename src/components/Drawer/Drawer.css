@@ -13,7 +13,7 @@
   position: absolute;
   top: 0;
   height: 100%;
-  background-color: #ffffff;
+  background-color: var(--color-neutral-white);
   box-shadow: var(--shadow-xl);
   display: flex;
   flex-direction: column;
@@ -62,16 +62,16 @@
 .fmdqui-drawer-title {
   margin: 0;
   font-family: var(--font-family-primary);
-  font-size: 20px;
+  font-size: var(--font-size-h6);
   font-weight: 600;
-  color: var(--color-grey-focused, #101928);
+  color: var(--color-grey-focused);
 }
 
 .fmdqui-drawer-close-btn {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--color-grey-default, #667185);
+  color: var(--color-grey-default);
   padding: var(--spacing-8);
   margin: calc(-1 * var(--spacing-8));
   border-radius: var(--radius-8);
@@ -82,8 +82,8 @@
 }
 
 .fmdqui-drawer-close-btn:hover {
-  background-color: var(--color-secondary-hover-bg, #f9fafb);
-  color: var(--color-grey-focused, #101928);
+  background-color: var(--color-secondary-hover-bg);
+  color: var(--color-grey-focused);
 }
 
 .fmdqui-drawer-close-btn svg {
@@ -97,7 +97,7 @@
   flex-grow: 1;
   font-family: var(--font-family-primary);
   font-size: var(--font-size-sm);
-  color: var(--color-grey-focused, #101928);
+  color: var(--color-grey-focused);
   line-height: var(--font-line-height-standard);
 }
 
@@ -108,5 +108,5 @@
   align-items: center;
   justify-content: flex-end;
   gap: var(--spacing-12);
-  background-color: #f9fafb;
+  background-color: var(--color-neutral-50);
 }
