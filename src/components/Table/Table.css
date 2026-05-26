@@ -4,7 +4,7 @@
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.04);
   border-radius: var(--radius-8);
-  background-color: #ffffff;
+  background-color: var(--color-neutral-white);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
@@ -24,7 +24,7 @@
 }
 
 .fmdqui-table-head {
-  background-color: #f9fafb;
+  background-color: var(--color-neutral-50);
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 
@@ -59,9 +59,9 @@
 }
 
 .fmdqui-table-body .fmdqui-table-row:hover {
-  background-color: var(--color-secondary-hover-bg, #f9fafb);
+  background-color: var(--color-secondary-hover-bg);
   transform: translateY(-1px);
-  box-shadow: 0 4px 6px -4px rgba(0,0,0,0.05);
+  box-shadow: var(--shadow-soft-xxsm);
   position: relative;
   z-index: 10;
 }
@@ -84,7 +84,7 @@
   justify-content: space-between;
   padding: var(--spacing-12) var(--spacing-16);
   border-top: 1px solid rgba(0, 0, 0, 0.04);
-  background-color: #ffffff;
+  background-color: var(--color-neutral-white);
   font-family: var(--font-family-primary);
   font-size: var(--font-size-sm);
   color: var(--color-grey-default);

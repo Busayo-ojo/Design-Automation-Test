@@ -3,16 +3,16 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: #f9fafb; /* Light neutral grey for app background */
+  background-color: var(--color-neutral-50);
   font-family: var(--font-family-primary);
 }
 
 .fmdqui-app-layout__sidebar {
   flex-shrink: 0;
-  width: 260px; /* Aligned with NavMenu width */
+  width: 260px;
   height: 100%;
   z-index: 40;
-  background-color: #ffffff;
+  background-color: var(--color-neutral-white);
   border-right: 1px solid rgba(0, 0, 0, 0.04);
   box-shadow: var(--shadow-sm);
 }
@@ -21,14 +21,14 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  min-width: 0; /* Important for preventing flexbox blowout */
+  min-width: 0;
   height: 100%;
 }
 
 .fmdqui-app-layout__topbar {
   flex-shrink: 0;
   height: 64px;
-  background-color: #ffffff;
+  background-color: var(--color-neutral-white);
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
   z-index: 30;
   display: flex;
@@ -40,13 +40,12 @@
   flex-grow: 1;
   overflow-y: auto;
   position: relative;
-  /* Smooth scrolling for main content */
   scroll-behavior: smooth;
 }
 
 .fmdqui-app-layout__content-inner {
   padding: var(--spacing-24);
-  max-width: 1440px; /* Standard wide constraint */
+  max-width: 1440px;
   margin: 0 auto;
   min-height: 100%;
   display: flex;

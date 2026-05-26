@@ -4,7 +4,7 @@
 .fmdqui-textarea-container {
   display: inline-flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-4);
   font-family: var(--font-family-primary);
   box-sizing: border-box;
 }
@@ -18,9 +18,9 @@
 .fmdqui-textarea-wrapper {
   display: flex;
   position: relative;
-  background-color: #ffffff;
-  border: 1px solid var(--color-grey-deactivated, #d0d5dd);
-  border-radius: var(--radius-8); /* Match Input sm border radius */
+  background-color: var(--color-neutral-white);
+  border: 1px solid var(--color-grey-deactivated);
+  border-radius: var(--radius-8);
   transition: all 0.2s ease;
   box-sizing: border-box;
   overflow: hidden;
@@ -53,8 +53,8 @@
 
 /* Disabled State */
 .fmdqui-textarea-wrapper--disabled {
-  background-color: #f2f4f7;
-  border-color: #eaecf0;
+  background-color: var(--color-neutral-100);
+  border-color: var(--color-neutral-200);
   cursor: not-allowed;
 }
 
@@ -66,16 +66,16 @@
 /* Actual textarea field */
 .fmdqui-textarea {
   width: 100%;
-  min-height: 80px; /* Sensible default height for textareas */
+  min-height: 80px;
   border: none;
   outline: none;
   background: transparent;
-  padding: 10px var(--spacing-16); /* Padding that matches input horizontal, standard vertical */
+  padding: var(--spacing-10) var(--spacing-16);
   font-family: inherit;
-  font-size: var(--font-size-sm); /* Default to sm text size */
+  font-size: var(--font-size-sm);
   color: var(--color-grey-focused);
   box-sizing: border-box;
-  resize: vertical; /* Allow users to resize vertically by default */
+  resize: vertical;
 }
 
 .fmdqui-textarea::placeholder {
@@ -90,9 +90,9 @@
 
 /* Helper & Error Messages */
 .fmdqui-textarea__message {
-  font-size: 12px;
+  font-size: var(--font-size-caption-sm);
   line-height: var(--font-line-height-standard);
-  margin-left: 2px;
+  margin-left: var(--spacing-2);
 }
 
 .fmdqui-textarea__message--helper {

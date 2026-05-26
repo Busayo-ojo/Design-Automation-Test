@@ -1,5 +1,5 @@
 .fmdqui-card {
-  background-color: #ffffff;
+  background-color: var(--color-neutral-white);
   border-radius: var(--radius-16);
   border: 1px solid rgba(0, 0, 0, 0.04);
   box-shadow: var(--shadow-md);
@@ -23,7 +23,7 @@
 
 .fmdqui-card-title {
   margin: 0;
-  font-size: 18px;
+  font-size: var(--font-size-p-lg);
   font-weight: 600;
   color: var(--color-grey-focused);
   line-height: var(--font-line-height-standard);
