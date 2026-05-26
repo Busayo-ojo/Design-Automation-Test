@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { IconShowcase } from '../docs/IconShowcase';
+
+<Meta title="Foundations/💠 Icons" />
+
+# Icons
+
+The FMDQ Design System employs a consistent, standardized set of vector icons. Icons are tokenized in `tokens.css` as base64-encoded SVG data URIs, allowing them to be loaded efficiently and styled dynamically using standard CSS properties.
+
+## Features
+
+- **Dynamic Styling**: Toggle between **Linear** (default outline) and **Bold** (solid fill) variants.
+- **Colorable**: Icons utilize CSS masking, meaning you can color them dynamically using the `color` property or the `--icon-color` variable.
+- **Sizable**: Control the size using the `--icon-size` variable (defaults to `24px`).
+- **Semantic Mapping**: Easily integration-tested and mapped to brand semantic palettes (`primary-700`, `fmdq-gold`, etc.).
+
+---
+
+## Interactive Icon Showcase
+
+Use the explorer below to search for icons, preview them in different sizes, colors, and variants, and copy code snippets for HTML/CSS or React.
+
+<IconShowcase />
+
+## Developer Usage
+
+### 1. HTML / CSS
+To use icons in plain HTML, add the `.fmdq-icon` utility class and the specific icon class name. Color and size can be customized via CSS variables:
+
+```html
+/* Default Linear Icon with primary color */
+<span class="fmdq-icon fmdq-icon-ai-stars"></span>
+
+/* Bold Variant with Gold Color */
+<span class="fmdq-icon fmdq-icon-ai-stars style-bold" style="--icon-color: var(--color-fmdq-gold);"></span>
+```
+
+### 2. React Component
+Import the `<Icon />` component from the elements package:
+
+```tsx
+import { Icon } from '@fmdq/design-system';
+
+/* Linear icon at default size (24px) */
+<Icon name="ai-stars" />
+
+/* Bold icon, customized color and size */
+<Icon name="ai-stars" variant="bold" color="fmdq-gold" size="32px" />
+```

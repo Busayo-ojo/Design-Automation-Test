@@ -8,6 +8,7 @@ export * from './elements/Badge';
 export * from './elements/Chip';
 
 export * from './elements/Toggle';
+export * from './elements/Icon/Icon';
 
 
 // Components

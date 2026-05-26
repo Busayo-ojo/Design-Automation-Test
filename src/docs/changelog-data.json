@@ -1,5 +1,16 @@
 [
   {
+    "hash": "5e19163",
+    "date": "2026-05-26",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "refactor: Updated Storybook imports, add sidebar navigation tokens, and append recent commits to changelog data",
+    "category": "refactor",
+    "scope": "",
+    "message": "Updated Storybook imports, add sidebar navigation tokens, and append recent commits to changelog data",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/5e19163"
+  },
+  {
     "hash": "8be865a",
     "date": "2026-05-26",
     "author": "ellerton",
