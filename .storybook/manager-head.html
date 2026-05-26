@@ -44,62 +44,146 @@
     width: auto !important;
     height: auto !important;
     color: #cc9933 !important;
-    /* Make expanders gold */
   }
 
-  /* Sidebar item layout - High specificity */
-  a[id],
-  button[id],
+  /* Exempt settings/shortcuts button from hiding and fix its alignment */
+  button[title*="Settings"] svg,
+  button[aria-label*="Settings"] svg,
+  button[id^="react-aria"]:not([aria-label*="ontext"]):not([title*="ontext"]) svg {
+    display: block !important;
+    opacity: 1 !important;
+    width: 14px !important;
+    height: 14px !important;
+    color: inherit !important;
+  }
+
+  button[title*="Settings"],
+  button[aria-label*="Settings"],
+  button[id^="react-aria"]:not([aria-label*="ontext"]):not([title*="ontext"]) {
+    padding: 0 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /*
+   * ── Sidebar items ──────────────────────────────────────────────────────────
+   *
+   * Storybook 10 DOM structure:
+   *   <div class="css-HASH sidebar-item" data-selected="true|false">   ← wrapper div
+   *     <a   class="css-HASH2" id="elements-button--default" ...>      ← inner link (has id, NO sidebar-item class)
+   *
+   * Selectors MUST target the wrapper div via [class*="sidebar-item"].
+   * Never combine a[id] or button[id] with [class*="sidebar-item"] — those
+   * attributes live on DIFFERENT elements.
+   */
+
+  /* Base — wrapper div */
   [class*="sidebar-item"] {
     display: flex !important;
     align-items: center !important;
     border-radius: 12px !important;
-    position: relative !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    min-height: 32px !important;
+    margin-bottom: 4px !important;
+    transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow: hidden !important;
+    background-color: transparent !important;
+    color: #1D326D !important;
+    font-weight: 400 !important;
+    box-shadow: none !important;
+  }
+
+  /* Inner link/button inherits color and font from wrapper */
+  [class*="sidebar-item"] a,
+  [class*="sidebar-item"]>button:not([data-action]) {
+    color: inherit !important;
+    font-size: 14px !important;
+    font-weight: inherit !important;
     text-decoration: none !important;
-    overflow: hidden !important;
-    border: 1px solid transparent !important;
-    padding-left: 16px !important;
+    gap: 4px !important;
   }
 
-  /* Normalize indentation — collapse hidden icon wrapper spans */
-  a[id]>span:first-child:has(svg),
-  button[id]>span:first-child:has(svg),
-  a[id]>div:first-child:has(svg),
-  button[id]>div:first-child:has(svg) {
-    display: none !important;
-    width: 0 !important;
-    min-width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  /* Selected Item Styling */
-  a[id][data-selected="true"],
-  button[id][data-selected="true"],
+  /* Selected */
   [class*="sidebar-item"][data-selected="true"] {
     background-color: #1D326D !important;
     color: #ffffff !important;
-    box-shadow: 0 4px 12px rgba(16, 17, 102, 0.25) !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 0 rgba(9, 19, 48, 1) !important;
   }
 
-  /* Hover State Styling */
-  a[id]:hover,
-  button[id]:hover,
-  [class*="sidebar-item"]:hover {
-    background-color: rgba(204, 153, 51, 0.1) !important;
-  }
-
-  /* Ensure text color remains readable on hover if not selected */
-  a[id]:not([data-selected="true"]):hover,
-  button[id]:not([data-selected="true"]):hover,
+  /* Hover non-selected */
   [class*="sidebar-item"]:not([data-selected="true"]):hover {
+    background-color: #FEF6E7 !important;
     color: #1D326D !important;
+    box-shadow: 0 4px 0 rgba(237, 227, 207, 1) !important;
   }
 
-  /* Search Field — matches .fmdqui-input-wrapper (sm) */
+  /* Active/pressed non-selected */
+  [class*="sidebar-item"]:not([data-selected="true"]):active {
+    background-color: #FEF6E7 !important;
+    color: #1D326D !important;
+    box-shadow: none !important;
+  }
+
+  /* Hover on selected */
+  [class*="sidebar-item"][data-selected="true"]:hover {
+    background-color: #162754 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 0 rgba(9, 19, 48, 1) !important;
+  }
+
+  /* Focus ring */
+  [class*="sidebar-item"]:focus-visible,
+  [class*="sidebar-item"] a:focus-visible,
+  [class*="sidebar-item"]>button:focus-visible {
+    outline: none !important;
+    box-shadow: 0px 0px 0px 4px rgba(29, 50, 109, 1), 0px 0px 0px 2px rgba(255, 255, 255, 1) !important;
+  }
+
+  /* Context menu button ('...' action inside sidebar item) */
+  [class*="sidebar-item"] button[aria-label*="ontext"],
+  [class*="sidebar-item"] button[title*="ontext"] {
+    width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    margin: 0 4px 0 auto !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    transition: all 0.15s ease-in-out !important;
+    box-shadow: none !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+  }
+
+  /* Context menu icon — default row */
+  [class*="sidebar-item"]:not([data-selected="true"]) button[aria-label*="ontext"] svg,
+  [class*="sidebar-item"]:not([data-selected="true"]) button[title*="ontext"] svg {
+    color: #667085 !important;
+  }
+
+  /* Context menu icon — selected row */
+  [class*="sidebar-item"][data-selected="true"] button[aria-label*="ontext"] svg,
+  [class*="sidebar-item"][data-selected="true"] button[title*="ontext"] svg {
+    color: #ffffff !important;
+  }
+
+  /* Context menu button hover — default row */
+  [class*="sidebar-item"]:not([data-selected="true"]):hover button[aria-label*="ontext"]:hover,
+  [class*="sidebar-item"]:not([data-selected="true"]):hover button[title*="ontext"]:hover {
+    background-color: rgba(29, 50, 109, 0.1) !important;
+  }
+
+  /* Context menu button hover — selected row */
+  [class*="sidebar-item"][data-selected="true"]:hover button[aria-label*="ontext"]:hover,
+  [class*="sidebar-item"][data-selected="true"]:hover button[title*="ontext"]:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* ── Search Field ──────────────────────────────────────────────────────── */
   div.search-field,
   .search-field,
   [class*="search-field"] {
@@ -114,15 +198,14 @@
     box-sizing: border-box !important;
   }
 
-  /* Focus state — matches .fmdqui-input-wrapper:focus-within */
   div.search-field:focus-within,
   .search-field:focus-within,
   [class*="search-field"]:focus-within {
     border-color: #034591 !important;
     box-shadow: 0 0 0 4px #E7E8F1, 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10) !important;
+    outline: none !important;
   }
 
-  /* Inner input — matches .fmdqui-input */
   #storybook-explorer-searchfield {
     border: none !important;
     outline: none !important;
@@ -137,7 +220,22 @@
     color: #667085 !important;
   }
 
-  /* Button beside the search field — 36×36, same border as input */
+  #storybook-explorer-searchfield:focus,
+  #storybook-explorer-searchfield:focus-visible,
+  #storybook-explorer-searchfield:active,
+  [class*="search-field"] input:focus,
+  [class*="search-field"] input:focus-visible,
+  div.search-field:focus,
+  div.search-field:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  div.search-field:focus-within,
+  [class*="search-field"]:focus-within {
+    box-shadow: 0 0 0 4px #E7E8F1, 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10) !important;
+  }
+
   .search-field+div button,
   .search-field~div button,
   [class*="search-field"]+div button,
@@ -148,13 +246,23 @@
     height: 36px !important;
     min-width: 36px !important;
     min-height: 36px !important;
-    border-radius: 12px !important;
+    border-radius: 10px !important;
     border: 1px solid #D0D5DD !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     padding: 0 !important;
+  }
+
+  button.css-1toig9g,
+  .css-1toig9g {
+    border-radius: 10px !important;
+  }
+
+  /* Hide onboarding checklist widget */
+  #storybook-checklist-widget {
+    display: none !important;
   }
 
   /* Section Headers */
@@ -186,6 +294,7 @@
       'div.search-field:focus-within,[class*="search-field"]:focus-within{',
       '  border-color:#034591!important;',
       '  box-shadow:0 0 0 4px #E7E8F1,0 1px 2px rgba(16,24,40,0.06),0 1px 3px rgba(16,24,40,0.10)!important;',
+      '  outline:none!important;',
       '}',
       '#storybook-explorer-searchfield{',
       '  border:none!important;outline:none!important;background:transparent!important;',
@@ -194,16 +303,45 @@
       '#storybook-explorer-searchfield::placeholder{color:#667085!important;}',
       '[class*="search-field"]+div button,[class*="search-field"]~div button,[class*="search-field"]+button,[class*="search-field"]~button{',
       '  width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;',
-      '  border-radius:12px!important;border:1px solid #D0D5DD!important;',
+      '  border-radius:10px!important;border:1px solid #D0D5DD!important;',
       '  box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;',
       '}',
+      'button.css-1toig9g,.css-1toig9g{border-radius:10px!important;}',
+      /* Sidebar — wrapper div is [class*="sidebar-item"], NOT a[id] or button[id] */
+      '[class*="sidebar-item"]{',
+      '  display:flex!important;align-items:center!important;border-radius:12px!important;min-height:32px!important;',
+      '  margin-bottom:4px!important;',
+      '  transition:background-color 0.15s cubic-bezier(0.4,0,0.2,1),box-shadow 0.15s cubic-bezier(0.4,0,0.2,1)!important;',
+      '  overflow:hidden!important;background-color:transparent!important;color:#1D326D!important;',
+      '  font-weight:400!important;box-shadow:none!important;',
+      '}',
+      '[class*="sidebar-item"] a,[class*="sidebar-item"] > button:not([data-action]){',
+      '  color:inherit!important;font-size:14px!important;font-weight:inherit!important;text-decoration:none!important;',
+      '  gap:4px!important;',
+      '}',
+      '[class*="sidebar-item"][data-selected="true"]{',
+      '  background-color:#1D326D!important;color:#ffffff!important;font-weight:600!important;',
+      '  box-shadow:0 4px 0 rgba(9,19,48,1)!important;',
+      '}',
+      '[class*="sidebar-item"]:not([data-selected="true"]):hover{',
+      '  background-color:#FEF6E7!important;color:#1D326D!important;',
+      '  box-shadow:0 4px 0 rgba(237,227,207,1)!important;',
+      '}',
+      '[class*="sidebar-item"]:not([data-selected="true"]):active{',
+      '  background-color:#FEF6E7!important;color:#1D326D!important;box-shadow:none!important;',
+      '}',
+      '[class*="sidebar-item"][data-selected="true"]:hover{',
+      '  background-color:#162754!important;color:#ffffff!important;',
+      '  box-shadow:0 4px 0 rgba(9,19,48,1)!important;',
+      '}',
+      '#storybook-checklist-widget{display:none!important;}',
     ].join('');
 
     function injectOverride() {
       if (!document.head) return;
       if (!overrideStyle) {
         overrideStyle = document.createElement('style');
-        overrideStyle.id = '__search-field-override__';
+        overrideStyle.id = '__fmdq-override__';
         overrideStyle.textContent = css;
       }
       document.head.appendChild(overrideStyle);
@@ -223,5 +361,61 @@
 
     document.addEventListener('DOMContentLoaded', injectOverride);
     window.addEventListener('load', injectOverride);
+  })();
+</script>
+<script>
+  (function () {
+    var rafId;
+
+    function hideChecklist() {
+      var el = document.getElementById('storybook-checklist-widget');
+      if (el) {
+        el.style.setProperty('display', 'none', 'important');
+        var parent = el.parentElement && el.parentElement.parentElement;
+        if (parent) parent.style.setProperty('display', 'none', 'important');
+      }
+    }
+
+    // Normalize sidebar padding via inline style (wins over all CSS).
+    // The wrapper div is [class*="sidebar-item"]. Find the inner a/button[id]
+    // to read the Storybook ID, which tells us the depth:
+    //   'elements-button'          → no '--' → top-level component
+    //   'elements-button--default' → has '--' → leaf story (indented)
+    function normalizeSidebarPadding() {
+      var wrappers = document.querySelectorAll('[class*="sidebar-item"]');
+      for (var i = 0; i < wrappers.length; i++) {
+        var wrapper = wrappers[i];
+        var inner = wrapper.querySelector('a[id], button[id]');
+        var id = inner ? (inner.id || '') : '';
+        var isSubItem = id.indexOf('--') !== -1;
+        wrapper.style.setProperty('padding-top', '0', 'important');
+        wrapper.style.setProperty('padding-bottom', '0', 'important');
+        wrapper.style.setProperty('padding-right', '0', 'important');
+        wrapper.style.setProperty('padding-left', '0', 'important');
+        if (inner) {
+          inner.style.setProperty('padding-top', '5px', 'important');
+          inner.style.setProperty('padding-bottom', '5px', 'important');
+          inner.style.setProperty('padding-right', '12px', 'important');
+          inner.style.setProperty('gap', '4px', 'important');
+          if (!isSubItem) {
+            inner.style.setProperty('padding-left', '12px', 'important');
+          }
+        }
+      }
+    }
+
+    function run() {
+      hideChecklist();
+      normalizeSidebarPadding();
+    }
+
+    function runDebounced() {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(run);
+    }
+
+    new MutationObserver(runDebounced)
+      .observe(document.documentElement, { childList: true, subtree: true });
+    document.addEventListener('DOMContentLoaded', run);
   })();
 </script>
