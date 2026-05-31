@@ -1,7 +1,7 @@
 import React from 'react';
 import './Button.css';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'grey' | 'text' | 'success' | 'warning' | 'info';
+export type ButtonVariant = 'primary' | 'secondary' | 'destructive' | 'grey' | 'text' | 'success' | 'warning' | 'info' | 'error';
 export type ButtonSize = 'sm' | 'lg';
 export type ButtonType = 'solid' | 'outlined' | 'primary' | 'secondary' | 'destructive';
 export type ButtonIconStyle = 'none' | 'leading icon' | 'trailing icon' | 'icon-only';

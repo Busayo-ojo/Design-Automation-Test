@@ -5,16 +5,14 @@ import { IconShowcase } from '../docs/IconShowcase';
 
 # Icons
 
-The FMDQ Design System employs a consistent, standardized set of vector icons. Icons are tokenized in `tokens.css` as base64-encoded SVG data URIs, allowing them to be loaded efficiently and styled dynamically using standard CSS properties.
+The FMDQ Design System includes a custom icon library of 400+ icons, each available in **Linear** (outline) and **Bold** (solid) variants. Icons are stored as individual SVG files under `src/foundations/icons/svg/{icon-name}/{variant}.svg` and loaded as React components via SVGR, no CSS class juggling required.
 
 ## Features
 
-- **Dynamic Styling**: Toggle between **Linear** (default outline) and **Bold** (solid fill) variants.
-- **Colorable**: Icons utilize CSS masking, meaning you can color them dynamically using the `color` property or the `--icon-color` variable.
-- **Sizable**: Control the size using the `--icon-size` variable (defaults to `24px`).
-- **Semantic Mapping**: Easily integration-tested and mapped to brand semantic palettes (`primary-700`, `fmdq-gold`, etc.).
-
----
+- **Two Variants**: Every icon ships in **Linear** (default outline) and **Bold** (solid fill) variants.
+- **Prop-based Sizing**: Pass any number or CSS string to the `size` prop (e.g. `size={32}` or `size="2rem"`). Defaults to `24`.
+- **Prop-based Color**: Pass any CSS color or token variable to the `color` prop. Defaults to `currentColor` so icons inherit text color automatically.
+- **Zero Config Updates**: New icons added to the `svg/` folder are picked up automatically, no import changes needed.
 
 ## Interactive Icon Showcase
 
@@ -24,26 +22,91 @@ Use the explorer below to search for icons, preview them in different sizes, col
 
 ## Developer Usage
 
-### 1. HTML / CSS
-To use icons in plain HTML, add the `.fmdq-icon` utility class and the specific icon class name. Color and size can be customized via CSS variables:
-
-```html
-/* Default Linear Icon with primary color */
-<span class="fmdq-icon fmdq-icon-ai-stars"></span>
-
-/* Bold Variant with Gold Color */
-<span class="fmdq-icon fmdq-icon-ai-stars style-bold" style="--icon-color: var(--color-fmdq-gold);"></span>
-```
-
-### 2. React Component
-Import the `<Icon />` component from the elements package:
+Import the `<Icon />` component from the design system package:
 
 ```tsx
 import { Icon } from '@fmdq/design-system';
 
-/* Linear icon at default size (24px) */
+// Linear icon at default size (24)
 <Icon name="ai-stars" />
 
-/* Bold icon, customized color and size */
-<Icon name="ai-stars" variant="bold" color="fmdq-gold" size="32px" />
+// Bold variant at 32px in FMDQ gold
+<Icon name="ai-stars" variant="bold" size={32} color="var(--color-fmdq-gold)" />
+
+// Inherits text color from parent
+<span style={{ color: 'var(--color-primary-700)' }}>
+  <Icon name="send-2" size="1.5rem" />
+</span>
 ```
+
+## Adding New Icons
+
+Every icon lives in its own folder with two variant files:
+
+```
+src/foundations/icons/svg/
+  my-icon/
+    linear.svg   ← outline variant
+    bold.svg     ← filled variant
+```
+
+Once the files are in place, `<Icon name="my-icon" />` works immediately, no imports, no config changes.
+
+The final step in both paths below is registering the icon in `src/docs/IconShowcase.tsx` so it appears in the showcase above:
+
+```ts
+// Inside the ALL_ICONS array, add your entry to the right category
+{ name: 'my-icon', category: 'Interface', tags: ['keyword', 'description'] },
+```
+
+---
+
+### Path A; From Figma
+
+Use this when the icon already exists as a component set in Figma.
+
+**1. Get the node ID**, select the component set in Figma and copy its ID from the URL or via the MCP.
+
+**2. Export both variants** via `figma_execute`:
+
+```js
+const node = await figma.getNodeByIdAsync('3253:XXXXXX');
+const linear = await node.children
+  .find(c => c.name.includes('linear'))
+  .exportAsync({ format: 'SVG_STRING' });
+const bold = await node.children
+  .find(c => c.name.includes('bold'))
+  .exportAsync({ format: 'SVG_STRING' });
+```
+
+**3. Prepare the SVG** before saving:
+- Ensure the file is wrapped in `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">`
+- Replace any hardcoded `fill="#1D326D"` or `fill="black"` with `fill="currentColor"` so the `color` prop works
+
+**4. Save** to `src/foundations/icons/svg/{icon-name}/linear.svg` and `bold.svg`.
+
+**5. Register** in `ALL_ICONS` (see above).
+
+---
+
+### Path B; Custom SVG
+
+Use this when you have your own SVG artwork outside of Figma.
+
+**1. Prepare the SVG:**
+- Size the artboard to `24×24` with `viewBox="0 0 24 24"`
+- Replace any hardcoded fill colors with `fill="currentColor"`
+
+**2. Drop the files** into the folder structure shown above.
+
+**3. Register** in `ALL_ICONS` (see above).
+
+---
+
+### What's automatic
+
+| What | How |
+|------|-----|
+| `<Icon name="…" />` becomes available | `import.meta.glob` in `Icon.tsx` scans the folder on every build/HMR |
+| No import statements needed | The glob picks up new files without touching any code |
+| Storybook hot-reloads | New SVG files are picked up without restarting the dev server |

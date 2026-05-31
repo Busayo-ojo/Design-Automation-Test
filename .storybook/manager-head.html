@@ -32,10 +32,11 @@
     overflow: hidden !important;
   }
 
-  /* But keep the expander/action icons and sidebar controls */
+  /* But keep the expander/action icons and sidebar controls
+     Exclude context-menu buttons — they are styled separately below */
   .sidebar-subheading-action svg,
   [class*="expander"] svg,
-  [class*="Action"] svg,
+  [class*="Action"]:not(button[aria-label*="ontext"]):not(button[title*="ontext"]) svg,
   [class*="icon-expander"] svg,
   button[class*="expander"] svg,
   #storybook-explorer-searchicon svg {
@@ -86,7 +87,7 @@
     min-height: 32px !important;
     margin-bottom: 4px !important;
     transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     background-color: transparent !important;
     color: #1D326D !important;
     font-weight: 400 !important;
@@ -113,14 +114,14 @@
     box-shadow: 0 4px 0 rgba(9, 19, 48, 1) !important;
   }
 
-  /* Hover non-selected */
+  /* Hover non-selected — amber fill + solid amber drop shadow (Figma "Hover" variant) */
   [class*="sidebar-item"]:not([data-selected="true"]):hover {
     background-color: #FEF6E7 !important;
     color: #1D326D !important;
-    box-shadow: 0 4px 0 rgba(237, 227, 207, 1) !important;
+    box-shadow: 0 4px 0 #EDE3CF !important;
   }
 
-  /* Active/pressed non-selected */
+  /* Active/pressed non-selected — amber fill, NO shadow (Figma "Hover + Clicked" variant) */
   [class*="sidebar-item"]:not([data-selected="true"]):active {
     background-color: #FEF6E7 !important;
     color: #1D326D !important;
@@ -142,65 +143,51 @@
     box-shadow: 0px 0px 0px 4px rgba(29, 50, 109, 1), 0px 0px 0px 2px rgba(255, 255, 255, 1) !important;
   }
 
-  /* Context menu button ('...' action inside sidebar item) */
+  /* ── Context menu button (⋯ "Open context menu") — REMOVED ───────────────
+   * Hidden entirely in all states. Storybook's Emotion styling kept winning
+   * the hover state and rendering a visible circle; the menu isn't needed in
+   * this design system, so we remove the control (and any non-id action
+   * button) completely rather than fight the injected styles.
+   */
+  [class*="sidebar-item"] button[data-testid="context-menu"],
   [class*="sidebar-item"] button[aria-label*="ontext"],
-  [class*="sidebar-item"] button[title*="ontext"] {
-    width: 28px !important;
-    height: 28px !important;
+  [class*="sidebar-item"] button[title*="ontext"],
+  [class*="sidebar-item"] button:not([class*="expander"]):not([id]) {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
     padding: 0 !important;
-    margin: 0 4px 0 auto !important;
-    align-self: center !important;
-    border-radius: 8px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* ── Non-anchor, non-button children (star badge / indicators) ──────────
+   * Hide anything that has no SVG (e.g. grey circle modified indicator).
+   * Show only elements that contain an SVG icon (new-story star badge),
+   * strip Storybook's pill background and recolour the icon to FMDQ gold.
+   */
+  [class*="sidebar-item"] > *:not(a):not(button) {
+    display: none !important;
+  }
+  [class*="sidebar-item"] > *:not(a):not(button):has(svg) {
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
     background: transparent !important;
-    border: none !important;
-    transition: all 0.15s ease-in-out !important;
+    background-color: transparent !important;
+    background-image: none !important;
     box-shadow: none !important;
-    min-width: 28px !important;
-    min-height: 28px !important;
+    border: none !important;
+    padding: 0 4px !important;
   }
-
-  /* Unhide span wrapper around context menu SVG (overrides blanket button[id]>span:has(svg) rule) */
-  [class*="sidebar-item"] button[aria-label*="ontext"] > span:has(svg),
-  [class*="sidebar-item"] button[title*="ontext"] > span:has(svg) {
-    display: flex !important;
-    width: auto !important;
-    height: auto !important;
-    overflow: visible !important;
-  }
-
-  /* Context menu icon — default row */
-  [class*="sidebar-item"]:not([data-selected="true"]) button[aria-label*="ontext"] svg,
-  [class*="sidebar-item"]:not([data-selected="true"]) button[title*="ontext"] svg {
+  [class*="sidebar-item"] > *:not(a):not(button):has(svg) svg {
     display: flex !important;
     opacity: 1 !important;
-    width: 16px !important;
-    height: 16px !important;
-    color: #667085 !important;
-  }
-
-  /* Context menu icon — selected row */
-  [class*="sidebar-item"][data-selected="true"] button[aria-label*="ontext"] svg,
-  [class*="sidebar-item"][data-selected="true"] button[title*="ontext"] svg {
-    display: flex !important;
-    opacity: 1 !important;
-    width: 16px !important;
-    height: 16px !important;
-    color: #ffffff !important;
-  }
-
-  /* Context menu button hover — default row */
-  [class*="sidebar-item"]:not([data-selected="true"]):hover button[aria-label*="ontext"]:hover,
-  [class*="sidebar-item"]:not([data-selected="true"]):hover button[title*="ontext"]:hover {
-    background-color: rgba(29, 50, 109, 0.1) !important;
-  }
-
-  /* Context menu button hover — selected row */
-  [class*="sidebar-item"][data-selected="true"]:hover button[aria-label*="ontext"]:hover,
-  [class*="sidebar-item"][data-selected="true"]:hover button[title*="ontext"]:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
+    width: 14px !important;
+    height: 14px !important;
+    color: #CC9933 !important;
   }
 
   /* ── Search Field ──────────────────────────────────────────────────────── */
@@ -280,6 +267,14 @@
     border-radius: 10px !important;
   }
 
+  /* "Reviewing modified stories" toggle button */
+  button[role="switch"] {
+    border-radius: 12px !important;
+  }
+  button[role="switch"] svg {
+    color: #CC9933 !important;
+  }
+
   /* Hide onboarding checklist widget */
   #storybook-checklist-widget {
     display: none !important;
@@ -332,7 +327,7 @@
       '  display:flex!important;align-items:center!important;border-radius:12px!important;min-height:32px!important;',
       '  margin-bottom:4px!important;',
       '  transition:background-color 0.15s cubic-bezier(0.4,0,0.2,1),box-shadow 0.15s cubic-bezier(0.4,0,0.2,1)!important;',
-      '  overflow:hidden!important;background-color:transparent!important;color:#1D326D!important;',
+      '  overflow:visible!important;background-color:transparent!important;color:#1D326D!important;',
       '  font-weight:400!important;box-shadow:none!important;',
       '}',
       '[class*="sidebar-item"] a,[class*="sidebar-item"] > button:not([data-action]){',
@@ -346,7 +341,7 @@
       '}',
       '[class*="sidebar-item"]:not([data-selected="true"]):hover{',
       '  background-color:#FEF6E7!important;color:#1D326D!important;',
-      '  box-shadow:0 4px 0 rgba(237,227,207,1)!important;',
+      '  box-shadow:0 4px 0 #EDE3CF!important;',
       '}',
       '[class*="sidebar-item"]:not([data-selected="true"]):active{',
       '  background-color:#FEF6E7!important;color:#1D326D!important;box-shadow:none!important;',
@@ -356,24 +351,17 @@
       '  box-shadow:0 4px 0 rgba(9,19,48,1)!important;',
       '}',
       '#storybook-checklist-widget{display:none!important;}',
-      /* Context menu button */
-      '[class*="sidebar-item"] button[aria-label*="ontext"],[class*="sidebar-item"] button[title*="ontext"]{',
-      '  border-radius:8px!important;background:transparent!important;border:none!important;',
-      '  width:28px!important;height:28px!important;min-width:28px!important;min-height:28px!important;',
-      '  display:flex!important;align-items:center!important;justify-content:center!important;align-self:center!important;',
+      'button[role="switch"]{border-radius:12px!important;}',
+      'button[role="switch"] svg{color:#CC9933!important;}',
+      /* Context menu button (⋯) — REMOVED entirely in all states */
+      '[class*="sidebar-item"] button[data-testid="context-menu"],[class*="sidebar-item"] button[aria-label*="ontext"],[class*="sidebar-item"] button[title*="ontext"],[class*="sidebar-item"] button:not([class*="expander"]):not([id]){',
+      '  display:none!important;width:0!important;height:0!important;min-width:0!important;min-height:0!important;',
+      '  margin:0!important;padding:0!important;opacity:0!important;pointer-events:none!important;',
       '}',
-      /* Unhide span wrapper around context menu SVG */
-      '[class*="sidebar-item"] button[aria-label*="ontext"]>span:has(svg),[class*="sidebar-item"] button[title*="ontext"]>span:has(svg){',
-      '  display:flex!important;width:auto!important;height:auto!important;overflow:visible!important;',
-      '}',
-      /* Context menu SVG — default */
-      '[class*="sidebar-item"]:not([data-selected="true"]) button[aria-label*="ontext"] svg,[class*="sidebar-item"]:not([data-selected="true"]) button[title*="ontext"] svg{',
-      '  display:flex!important;opacity:1!important;width:16px!important;height:16px!important;color:#667085!important;',
-      '}',
-      /* Context menu SVG — selected */
-      '[class*="sidebar-item"][data-selected="true"] button[aria-label*="ontext"] svg,[class*="sidebar-item"][data-selected="true"] button[title*="ontext"] svg{',
-      '  display:flex!important;opacity:1!important;width:16px!important;height:16px!important;color:#ffffff!important;',
-      '}',
+      /* Non-a, non-button children: hide unless they contain an SVG (grey circle fix) */
+      '[class*="sidebar-item"]>*:not(a):not(button){display:none!important;}',
+      '[class*="sidebar-item"]>*:not(a):not(button):has(svg){display:flex!important;align-items:center!important;background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important;border:none!important;padding:0 4px!important;}',
+      '[class*="sidebar-item"]>*:not(a):not(button):has(svg) svg{display:flex!important;opacity:1!important;width:14px!important;height:14px!important;color:#CC9933!important;}',
     ].join('');
 
     function injectOverride() {
@@ -443,9 +431,130 @@
       }
     }
 
+    // Remove the context-menu button (⋯) entirely via inline important styles.
+    // Emotion re-injects its own hover styling and wins over our stylesheet,
+    // rendering a visible circle; inline styles are the only reliable override.
+    // The menu isn't used in this design system, so we hide it in every state.
+    function hideContextMenuButtons() {
+      var btns = document.querySelectorAll(
+        '[class*="sidebar-item"] button[data-testid="context-menu"],' +
+        '[class*="sidebar-item"] button[aria-label*="ontext"],' +
+        '[class*="sidebar-item"] button[title*="ontext"]'
+      );
+      for (var i = 0; i < btns.length; i++) {
+        var btn = btns[i];
+        btn.style.setProperty('display', 'none', 'important');
+        btn.style.setProperty('width', '0', 'important');
+        btn.style.setProperty('height', '0', 'important');
+        btn.style.setProperty('min-width', '0', 'important');
+        btn.style.setProperty('min-height', '0', 'important');
+        btn.style.setProperty('margin', '0', 'important');
+        btn.style.setProperty('padding', '0', 'important');
+        btn.style.setProperty('opacity', '0', 'important');
+        btn.style.setProperty('pointer-events', 'none', 'important');
+      }
+    }
+
+    // Handle non-a, non-button direct children of sidebar items:
+    // - Hide elements with no SVG (grey circle "modified" indicator)
+    // - Keep elements that contain SVG (new-story star badge) but strip pill styling
+    function styleSidebarBadges() {
+      var items = document.querySelectorAll('[class*="sidebar-item"]');
+      for (var i = 0; i < items.length; i++) {
+        var children = Array.prototype.slice.call(items[i].children);
+        for (var j = 0; j < children.length; j++) {
+          var child = children[j];
+          var tag = child.tagName.toLowerCase();
+          if (tag === 'a' || tag === 'button') continue;
+          var hasSvg = child.querySelector('svg') !== null;
+          if (!hasSvg) {
+            // No SVG — hide the grey circle indicator entirely
+            child.style.setProperty('display', 'none', 'important');
+            continue;
+          }
+          // Has SVG — strip pill background, keep icon visible in FMDQ gold
+          child.style.setProperty('display', 'flex', 'important');
+          child.style.setProperty('align-items', 'center', 'important');
+          child.style.setProperty('background', 'transparent', 'important');
+          child.style.setProperty('background-color', 'transparent', 'important');
+          child.style.setProperty('background-image', 'none', 'important');
+          child.style.setProperty('box-shadow', 'none', 'important');
+          child.style.setProperty('border', 'none', 'important');
+          child.style.setProperty('padding', '0 4px', 'important');
+          var svgs = child.querySelectorAll('svg');
+          for (var k = 0; k < svgs.length; k++) {
+            svgs[k].style.setProperty('color', '#CC9933', 'important');
+            svgs[k].style.setProperty('display', 'flex', 'important');
+            svgs[k].style.setProperty('opacity', '1', 'important');
+            svgs[k].style.setProperty('width', '14px', 'important');
+            svgs[k].style.setProperty('height', '14px', 'important');
+          }
+        }
+      }
+    }
+
+    // Figma "Hover + Clicked" variant: when a submenu item (story) is selected,
+    // its parent menu item (component) stays highlighted amber, no shadow.
+    //
+    // The sidebar is a FLAT list; the parent relationship lives in the id:
+    //   selected story  →  elements-button--default
+    //   parent component →  elements-button   (everything before the '--')
+    // We strip the story suffix, look up the parent row by id, and tint it.
+    function highlightSelectedParent() {
+      // Clear any stale parent highlight from a previous selection
+      var prev = document.querySelectorAll('[data-fmdq-parent-active="true"]');
+      for (var p = 0; p < prev.length; p++) {
+        prev[p].removeAttribute('data-fmdq-parent-active');
+        prev[p].style.removeProperty('background-color');
+        prev[p].style.removeProperty('color');
+        prev[p].style.removeProperty('box-shadow');
+      }
+
+      var selected = document.querySelector('[class*="sidebar-item"][data-selected="true"]');
+      if (!selected) return;
+      var selInner = selected.querySelector('a[id], button[id]');
+      if (!selInner || !selInner.id) return;
+
+      var sep = selInner.id.indexOf('--');
+      if (sep === -1) return; // top-level page, no parent component
+      var parentId = selInner.id.substring(0, sep);
+
+      var parentInner = document.getElementById(parentId);
+      if (!parentInner) return;
+      var parentRow = parentInner.closest('[class*="sidebar-item"]');
+      if (!parentRow || parentRow === selected) return;
+      // Don't override a genuinely-selected row (selected styling wins)
+      if (parentRow.getAttribute('data-selected') === 'true') return;
+
+      parentRow.setAttribute('data-fmdq-parent-active', 'true');
+      parentRow.style.setProperty('background-color', '#FEF6E7', 'important');
+      parentRow.style.setProperty('color', '#1D326D', 'important');
+      parentRow.style.setProperty('box-shadow', 'none', 'important');
+    }
+
+    // Style the "Reviewing modified stories" toggle button.
+    // Identified by role="switch" which Storybook uses for this specific control.
+    function styleReviewBanner() {
+      var banners = document.querySelectorAll('button[role="switch"]');
+      for (var i = 0; i < banners.length; i++) {
+        banners[i].style.setProperty('border-radius', '12px', 'important');
+        var svgs = banners[i].querySelectorAll('svg');
+        for (var k = 0; k < svgs.length; k++) {
+          svgs[k].style.setProperty('color', '#CC9933', 'important');
+        }
+        if (banners[i].parentElement) {
+          banners[i].parentElement.style.setProperty('border-radius', '12px', 'important');
+        }
+      }
+    }
+
     function run() {
       hideChecklist();
       normalizeSidebarPadding();
+      hideContextMenuButtons();
+      styleSidebarBadges();
+      highlightSelectedParent();
+      styleReviewBanner();
     }
 
     function runDebounced() {

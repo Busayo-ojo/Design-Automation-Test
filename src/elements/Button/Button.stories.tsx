@@ -10,7 +10,7 @@ const meta: Meta<typeof Button> = {
     argTypes: {
         variant: {
             control: 'select',
-            options: ['primary', 'secondary', 'destructive', 'grey', 'text', 'success', 'warning', 'info'],
+            options: ['primary', 'secondary', 'destructive', 'grey', 'text', 'success', 'warning', 'info', 'error'],
         },
         size: {
             control: 'radio',
@@ -108,23 +108,33 @@ export const TextDestructive: Story = {
 };
 
 export const Success: Story = {
+    name: 'Special Success',
     args: {
         variant: 'success',
-        label: 'Success Button',
+        label: 'Special Success',
     },
 };
 
 export const Warning: Story = {
+    name: 'Special Warning',
     args: {
         variant: 'warning',
-        label: 'Warning Button',
+        label: 'Special Warning',
     },
 };
 
 export const Information: Story = {
+    name: 'Special Information',
     args: {
         variant: 'info',
-        label: 'Info Button',
+        label: 'Special Information',
+    },
+};
+
+export const SpecialDestructive: Story = {
+    args: {
+        variant: 'error',
+        label: 'Destructive Button',
     },
 };
 
