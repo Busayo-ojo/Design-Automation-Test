@@ -1,5 +1,49 @@
 [
   {
+    "hash": "51b7b7a",
+    "date": "2026-06-02",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "Merge branch 'main' of github.com:WebMaster0-1/Design-Automation-Test",
+    "category": "other",
+    "scope": "",
+    "message": "Merge branch 'main' of github.com:WebMaster0-1/Design-Automation-Test",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/51b7b7a"
+  },
+  {
+    "hash": "c89c33d",
+    "date": "2026-06-02",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "chore: ignore auto-generated markdown file in public directory",
+    "category": "chore",
+    "scope": "",
+    "message": "ignore auto-generated markdown file in public directory",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/c89c33d"
+  },
+  {
+    "hash": "99808fd",
+    "date": "2026-06-02",
+    "author": "ellerton",
+    "email": "immanuel_bonnie@yahoo.com",
+    "subject": "fix: update Storybook brand logo path",
+    "category": "fix",
+    "scope": "",
+    "message": "update Storybook brand logo path",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/99808fd"
+  },
+  {
+    "hash": "84071d2",
+    "date": "2026-06-01",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "refactor: Updated all SVG icon strokes to use currentColor for improved theme compatibility",
+    "category": "refactor",
+    "scope": "",
+    "message": "Updated all SVG icon strokes to use currentColor for improved theme compatibility",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/84071d2"
+  },
+  {
     "hash": "05633d7",
     "date": "2026-05-31",
     "author": "dudesoamazing",
