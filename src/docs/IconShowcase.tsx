@@ -551,6 +551,10 @@ export const IconShowcase: React.FC = () => {
         .icon-controls-grid .fmdqui-input-container {
           width: 100% !important;
         }
+        .fmdqui-badge,
+        .fmdqui-badge__label {
+          font-size: 14px !important;
+        }
       `}</style>
 
       {/* ── Controls Toolbar ── */}

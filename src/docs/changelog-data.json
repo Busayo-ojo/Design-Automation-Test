@@ -1,5 +1,16 @@
 [
   {
+    "hash": "9b5d7a1",
+    "date": "2026-06-02",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "docs: add recent commit history to changelog data",
+    "category": "docs",
+    "scope": "",
+    "message": "add recent commit history to changelog data",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/9b5d7a1"
+  },
+  {
     "hash": "51b7b7a",
     "date": "2026-06-02",
     "author": "dudesoamazing",
