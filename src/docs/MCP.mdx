@@ -42,7 +42,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Model Context Protocol
 
-The FMDQ Design System ships with two local **MCP (Model Context Protocol) servers**. They expose the codebase and its upstream Figma file to AI assistants (Claude Code, Cursor, and any MCP-aware client) through a small set of read-only tools — so an assistant can inspect Storybook, list published Figma styles, and diff design tokens without guessing or scraping.
+The FMDQ Design System ships with two local **MCP (Model Context Protocol) servers**. They expose the codebase and its upstream Figma file to AI assistants (Claude Code, Cursor, and any MCP-aware client) through a small set of read-only tools, so an assistant can inspect Storybook, list published Figma styles, and diff design tokens without guessing or scraping.
 
 MCP servers run locally on your machine, talk to services you have already authenticated (your local Storybook, the Figma API via your `.env`), and return structured data the assistant can act on.
 
@@ -52,14 +52,14 @@ MCP servers run locally on your machine, talk to services you have already authe
 
 | Server | Command | Purpose |
 |---|---|---|
-| **`storybook-local`** | `npm run mcp:storybook` | Inspect the running Storybook instance — list stories/docs and fetch individual entries. |
-| **`figma-design-sync`** | `node mcp/figma.mjs` | Read the FMDQ Figma file — list styles and components, inspect nodes, and diff against local tokens. |
+| **`storybook-local`** | `npm run mcp:storybook` | Inspect the running Storybook instance, list stories/docs and fetch individual entries. |
+| **`figma-design-sync`** | `node mcp/figma.mjs` | Read the FMDQ Figma file, list styles and components, inspect nodes, and diff against local tokens. |
 
 The server source lives in [`mcp/storybook.mjs`](mcp/storybook.mjs) and [`mcp/figma.mjs`](mcp/figma.mjs).
 
 ---
 
-## Storybook server — `storybook-local`
+## Storybook server; `storybook-local`
 
 Lets an assistant introspect what is actually published in Storybook so it can verify a component exists, has stories, and renders before relying on it.
 
@@ -78,7 +78,7 @@ Lets an assistant introspect what is actually published in Storybook so it can v
 
 ---
 
-## Figma server — `figma-design-sync`
+## Figma server; `figma-design-sync`
 
 Backs the Figma → code pipeline. It reads directly from the FMDQ Figma file so the design system never drifts from the source of truth. This is the same data layer used by `npm run figma:sync` and `npm run figma:tokens`.
 
@@ -116,7 +116,7 @@ Point any MCP-aware client at the server commands above. For example, in a Claud
 }
 ```
 
-Once connected, the assistant can call the tools above directly during a conversation — for example "list the published Figma components" or "does a Drawer story exist in Storybook?".
+Once connected, the assistant can call the tools above directly during a conversation, for example "list the published Figma components" or "does a Drawer story exist in Storybook?".
 
 ---
 
