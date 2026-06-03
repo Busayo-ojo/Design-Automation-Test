@@ -4,7 +4,61 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Migration Guide
 
-This guide is designed to assist developers upgrading `@fmdq/ui` across breaking changes.
+This guide helps developers upgrade `@fmdq/ui` safely across releases — what changed, what breaks, and how to move forward without surprises.
 
-## Upgrading to v0.1.0 (Initial Beta)
-There are no existing components to migrate from. For consumers switching from inline tailwind logic to the FMDQ Component system, please follow the [Getting Started](/docs/getting-started--docs) guidelines and replace existing HTML elements with `@fmdq/ui` components systematically.
+---
+
+## Versioning policy
+
+`@fmdq/ui` follows **Semantic Versioning** (`MAJOR.MINOR.PATCH`):
+
+◼ **MAJOR** — breaking changes. Removed or renamed props, components, or tokens; changed default behaviour. Always documented here with a dedicated migration section.
+
+◼ **MINOR** — new components, props, or tokens added in a backward-compatible way. Safe to adopt without code changes.
+
+◼ **PATCH** — bug fixes and internal changes with no public API impact.
+
+During the **beta (`0.x`) phase**, minor versions may still introduce breaking changes as the API stabilises. Pin an exact version in production and upgrade deliberately.
+
+---
+
+## How breaking changes are communicated
+
+1. **Changelog** — every release is recorded automatically from the git history. Browse it on the <a href="../?path=/docs/🪵-changelog--docs" target="_top">Changelog</a> page.
+2. **This guide** — each breaking release gets a section below with before/after examples.
+3. **Deprecation first** — wherever possible, a prop or component is marked deprecated for one minor release before removal, so you have a window to migrate.
+
+---
+
+## Before you upgrade
+
+◼ Read the changelog entries between your current version and the target version.
+
+◼ Run `npm run build` and `npm run typecheck` after bumping — TypeScript surfaces most renamed or removed props at compile time.
+
+◼ Upgrade one major version at a time rather than skipping across several.
+
+◼ Verify visually in Storybook (`npm run storybook`) — token changes can shift spacing, colour, or typography without any type error.
+
+---
+
+## Releases
+
+### Upgrading to v0.1.0 (Initial Beta)
+
+There are no prior published versions to migrate from. For teams switching from inline Tailwind or bespoke HTML to the FMDQ component system:
+
+1. Install the package and import the global stylesheet once — see <a href="../?path=/docs/🏁-getting-started--docs" target="_top">Getting Started</a>.
+2. Replace raw HTML elements with `@fmdq/ui` components systematically, screen by screen.
+3. Swap hardcoded colour, spacing, and typography values for the design tokens in `src/tokens.css`. See <a href="../?path=/docs/foundations" target="_top">Foundations</a>.
+4. Run the <a href="../?path=/docs/✅-branding-todo--docs" target="_top">Brand & UI Quality Checklist</a> before handing off for review.
+
+---
+
+## Deprecations
+
+No APIs are currently deprecated. As the library evolves, deprecated props and components will be listed here with their replacement and the version in which they will be removed.
+
+---
+
+*Hit a migration issue not covered here? Raise it with the Application Delivery Group (iQx) — see <a href="../?path=/docs/🧑🏽%E2%80%8D🍳-contributing--docs" target="_top">Contributing</a>.*

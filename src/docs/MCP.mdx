@@ -2,8 +2,126 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="🖇️ MCP" />
 
+<style>
+{`
+  .mcp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+  .mcp-table th,
+  .mcp-table td {
+    border: 1px solid #e4e7ec;
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .mcp-table th {
+    background: #f9fafb;
+    font-weight: 700;
+    color: #101828;
+  }
+  .mcp-table code {
+    background: #f4f5f7;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  .mcp-note {
+    background: #f9fafb;
+    border-left: 3px solid #1d326d;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #344054;
+  }
+`}
+</style>
+
 # Model Context Protocol
 
-This project utilizes advanced model context bindings (MCP). This documentation section will outline the internal tooling APIs exposed to AI assistants that interact with the `@fmdq/ui` codebase.
+The FMDQ Design System ships with two local **MCP (Model Context Protocol) servers**. They expose the codebase and its upstream Figma file to AI assistants (Claude Code, Cursor, and any MCP-aware client) through a small set of read-only tools — so an assistant can inspect Storybook, list published Figma styles, and diff design tokens without guessing or scraping.
 
-*(Further documentation regarding MCP endpoints and tool descriptors will be populated here.)*
+MCP servers run locally on your machine, talk to services you have already authenticated (your local Storybook, the Figma API via your `.env`), and return structured data the assistant can act on.
+
+---
+
+## Available servers
+
+| Server | Command | Purpose |
+|---|---|---|
+| **`storybook-local`** | `npm run mcp:storybook` | Inspect the running Storybook instance — list stories/docs and fetch individual entries. |
+| **`figma-design-sync`** | `node mcp/figma.mjs` | Read the FMDQ Figma file — list styles and components, inspect nodes, and diff against local tokens. |
+
+The server source lives in [`mcp/storybook.mjs`](mcp/storybook.mjs) and [`mcp/figma.mjs`](mcp/figma.mjs).
+
+---
+
+## Storybook server — `storybook-local`
+
+Lets an assistant introspect what is actually published in Storybook so it can verify a component exists, has stories, and renders before relying on it.
+
+<table className="mcp-table">
+  <thead>
+    <tr><th>Tool</th><th>What it does</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>storybook_health</code></td><td>Checks whether the configured Storybook dev server is reachable.</td></tr>
+    <tr><td><code>storybook_list_entries</code></td><td>Lists every story and docs entry from the local Storybook at <code>STORYBOOK_URL</code>.</td></tr>
+    <tr><td><code>storybook_get_entry</code></td><td>Fetches a single Storybook entry by its id.</td></tr>
+  </tbody>
+</table>
+
+**Setup:** start Storybook first (`npm run storybook`, default `http://localhost:6006`), then run the server with `npm run mcp:storybook`. The server reads `STORYBOOK_URL` to know where to look.
+
+---
+
+## Figma server — `figma-design-sync`
+
+Backs the Figma → code pipeline. It reads directly from the FMDQ Figma file so the design system never drifts from the source of truth. This is the same data layer used by `npm run figma:sync` and `npm run figma:tokens`.
+
+<table className="mcp-table">
+  <thead>
+    <tr><th>Tool</th><th>What it does</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>figma_health</code></td><td>Checks whether the Figma API is reachable with the configured token and file key.</td></tr>
+    <tr><td><code>figma_get_styles</code></td><td>Lists all published styles (colours, typography, effects) from the Figma file.</td></tr>
+    <tr><td><code>figma_get_components</code></td><td>Lists all published components from the Figma Design System Kit.</td></tr>
+    <tr><td><code>figma_get_node</code></td><td>Fetches detailed properties of a specific Figma node by id — dimensions, fills, strokes, typography, and effects.</td></tr>
+    <tr><td><code>figma_diff_tokens</code></td><td>Compares the published colour styles in Figma against local <code>src/tokens.css</code> to surface additions, changes, and removals.</td></tr>
+  </tbody>
+</table>
+
+**Setup:** add `FIGMA_ACCESS_TOKEN` and `FIGMA_FILE_KEY` to your `.env`, then run `node mcp/figma.mjs`. Use `figma_health` first to confirm credentials are valid.
+
+<div className="mcp-note">
+  <strong>Tokens stay in sync, not in your head.</strong> Before changing a colour, run <code>figma_diff_tokens</code> to see exactly how <code>src/tokens.css</code> differs from Figma. Add new tokens rather than hardcoding values — see the <a href="../?path=/docs/foundations" target="_top">Foundations</a> for the token structure.
+</div>
+
+---
+
+## Connecting a client
+
+Point any MCP-aware client at the server commands above. For example, in a Claude Code / Cursor MCP config:
+
+```json
+{
+  "mcpServers": {
+    "storybook-local": { "command": "node", "args": ["mcp/storybook.mjs"] },
+    "figma-design-sync": { "command": "node", "args": ["mcp/figma.mjs"] }
+  }
+}
+```
+
+Once connected, the assistant can call the tools above directly during a conversation — for example "list the published Figma components" or "does a Drawer story exist in Storybook?".
+
+---
+
+## Related
+
+- **Figma → Storybook workflow:** the mandatory steps for building a component from Figma live in [`rules/FIGMA_STORYBOOK_RULES.md`](rules/FIGMA_STORYBOOK_RULES.md).
+- **Component tracking & parity:** [`rules/FIGMA_STORYBOOK_MAPPING.md`](rules/FIGMA_STORYBOOK_MAPPING.md).
+- **Contributing:** see the <a href="../?path=/docs/🧑🏽%E2%80%8D🍳-contributing--docs" target="_top">Contributing</a> guide for how these tools fit into the build process.
