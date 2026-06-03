@@ -8,6 +8,30 @@ We welcome internal contributions from the FMDQ engineering team to extend and r
 
 ---
 
+## Local setup
+
+Working on the design system itself means running this repository locally. (If you only want to *use* the system in an app, see <a href="../?path=/docs/🏁-getting-started--docs" target="_top">Getting Started</a> instead — you don't need to clone anything.)
+
+**Prerequisites:** Node.js v18+, npm or yarn, Git, and access to the FMDQ internal design system repository.
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/fmdq/design-system.git
+cd design-system
+npm install
+```
+
+Then start the design system locally:
+
+```bash
+npm run storybook
+```
+
+Storybook will be available at `http://localhost:6006`.
+
+---
+
 ## Workflow
 
 1. **Raise an issue.** Before building a new component, raise an issue describing the missing functionality and its potential layout impact. **Confirm the Figma design exists first** and that the component is tracked in [`rules/FIGMA_STORYBOOK_MAPPING.md`](rules/FIGMA_STORYBOOK_MAPPING.md).
