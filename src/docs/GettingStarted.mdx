@@ -35,43 +35,74 @@ import { Meta } from '@storybook/addon-docs/blocks';
 `}
 </style>
 
+
 # Getting Started
 
-The `@fmdq/ui` component library is designed to get you building FMDQ interfaces as fast as possible.
+This page covers everything you need to integrate the FMDQ Design System into your project — from local setup to using your first component.
 
-## 1. Installation
+### Prerequisites
 
-Install the library using npm. Note that peer dependencies like `react` and `react-dom` are required.
+Ensure the following are available in your environment before proceeding:
 
-<div className="code-block">
-  npm install @fmdq/ui
-</div>
+◼ **Node.js** v18 or higher <br></br>
+◼ **npm** or **yarn** <br></br>
+◼ **Git** <br></br>
+◼ Access to the FMDQ internal design system repository
 
-## 2. Usage
+---
 
-Import the foundational CSS into your application's entry point (such as `main.tsx` or `_app.tsx`):
+### Local Setup
 
-<div className="code-block">
-  import "@fmdq/ui/style.css";
-</div>
+Clone the repository and install dependencies:
 
-Now, you can import and use any component:
+```bash
+git clone https://github.com/fmdq/design-system.git
+cd design-system
+npm install
+```
 
-<div className="code-block">
-{`import { Button } from "@fmdq/ui";
+To run the design system locally:
 
-export default function MyFeature() {
-  return <Button variant="primary">Execute Trade</Button>;
-}`}
-</div>
+```bash
+npm run dev
+```
+The interface will be available at `http://localhost:6006`
 
-<div className="card-grid">
-  <div className="onboarding-card" onClick={() => window.open('https://www.figma.com/design/lppxKU2sj2O4ZFAltL5iOW/FMDQ-Design-System-2026', '_blank')}>
-    <h3>🎨 Figma Design System</h3>
-    <p>View the unified design language, tokens, and component specifications in our central Figma workspace.</p>
-  </div>
-  <div className="onboarding-card" onClick={() => window.open('#', '_blank')}>
-    <h3>👨‍💻 GitHub Repository</h3>
-    <p>Access the source code, open issues, and contribute to the @fmdq/ui component library.</p>
-  </div>
-</div>
+---
+
+### Installing in Your Project
+
+Add the design system package to your project:
+
+```bash
+npm install @fmdq/design-system
+```
+
+Import the global stylesheet once at your application's entry point (e.g. `main.ts` or `index.js`):
+
+```js
+import '@fmdq/design-system/styles/global.css';
+```
+This loads all design tokens — colours, spacing, typography, shadows — as CSS variables.
+
+---
+
+### Using a Component
+
+Import and use components directly:
+
+```jsx
+import { Button } from '@fmdq/design-system';
+
+<Button variant="primary" label="Submit" />
+```
+
+Each component page includes a **Controls** panel where you can adjust props and preview variants live. 
+Use the **"Show code"** option at the bottom of any preview to copy the exact JSX for your selected configuration.
+
+### Where to Go Next
+
+- **New to the system?** Start with <a href="../?path=/docs/foundations" target="_top">Foundations</a>. to understand the token structure before building.
+- **Ready to build?** Go to <a href="../?path=/docs/elements" target="_top">Elements</a> for a recommended component order.
+- **Need a component that doesn't exist?** See <a href="../?path=/docs/🧑🏽%E2%80%8D🍳-contributing--docs" target="_top">Contributing</a>.
+
