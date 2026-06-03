@@ -1,5 +1,27 @@
 [
   {
+    "hash": "e3b09b9",
+    "date": "2026-06-03",
+    "author": "Busayo Ojo",
+    "email": "ojobusayo99@gmail.com",
+    "subject": "Migration Guide Docuemntation  (#3)",
+    "category": "other",
+    "scope": "",
+    "message": "Migration Guide Docuemntation  (#3)",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/e3b09b9"
+  },
+  {
+    "hash": "d49b7db",
+    "date": "2026-06-02",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "docs: update IconShowcase badge styles, append changelog data, and remove Icon export from index",
+    "category": "docs",
+    "scope": "",
+    "message": "update IconShowcase badge styles, append changelog data, and remove Icon export from index",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/d49b7db"
+  },
+  {
     "hash": "9b5d7a1",
     "date": "2026-06-02",
     "author": "dudesoamazing",
