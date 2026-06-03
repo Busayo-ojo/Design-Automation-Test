@@ -56,7 +56,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Component Playground
 
-The playground is a sandbox for trying components interactively — change props, swap variants, and copy the exact code for the configuration you land on, all without touching your project.
+The playground is a sandbox for trying components interactively; change props, swap variants, and copy the exact code for the configuration you land on, all without touching your project.
 
 There is no separate playground page to load: **every component story in Storybook _is_ the playground.** This page explains how to use it.
 
@@ -67,29 +67,29 @@ There is no separate playground page to load: **every component story in Storybo
 <ol className="pg-steps">
   <li>Open any component under the <strong>Elements</strong>, <strong>Components</strong>, or <strong>Layout</strong> sidebar groups.</li>
   <li>Select the <strong>Controls</strong> tab in the bottom (addons) panel.</li>
-  <li>Adjust props — <code>variant</code>, <code>size</code>, <code>disabled</code>, label text, and so on. The canvas updates live as you change them.</li>
+  <li>Adjust props like <code>variant</code>, <code>size</code>, <code>disabled</code>, label text, and so on. The canvas updates live as you change them.</li>
   <li>Open <strong>Show code</strong> at the bottom of the preview to see and copy the exact JSX for your current selection.</li>
 </ol>
 
 <div className="pg-tip">
-  <strong>Tip:</strong> the code shown under <em>Show code</em> reflects your live control values — set the component up the way you want it, then copy straight into your project.
+  <strong>Tip:</strong> the code shown under <em>Show code</em> reflects your live control values, set the component up the way you want it, then copy straight into your project.
 </div>
 
 ---
 
 ## Previewing states
 
-◼ **Variants** — every Figma variant has its own story; switch between them in the sidebar to compare side by side.
+◼ **Variants**; every Figma variant has its own story; switch between them in the sidebar to compare side by side.
 
-◼ **Interactive states** — use the Controls (e.g. `disabled`, `hover`-style props) to exercise each state rather than guessing how it behaves.
+◼ **Interactive states**; use the Controls (e.g. `disabled`, `hover`-style props) to exercise each state rather than guessing how it behaves.
 
-◼ **Theming & tokens** — colours, spacing, and typography come from `src/tokens.css`. To see how a component responds to the design tokens, review the <a href="../?path=/docs/foundations" target="_top">Foundations</a> alongside it.
+◼ **Theming & tokens**; colours, spacing, and typography come from `src/tokens.css`. To see how a component responds to the design tokens, review the <a href="../?path=/docs/foundations" target="_top">Foundations</a> alongside it.
 
 ---
 
 ## Building a real prototype
 
-The Controls panel is great for a single component. To assemble a full screen — a layout with a `TopBar`, `PageHeader`, a `Table`, and `Button`s working together — run the library locally and compose the components in your own file:
+The Controls panel is great for a single component. To assemble a full screen layout with a `TopBar`, `PageHeader`, a `Table`, and `Button`s working together, run the library locally and compose the components in your own file:
 
 ```bash
 npm install @fmdq/design-system

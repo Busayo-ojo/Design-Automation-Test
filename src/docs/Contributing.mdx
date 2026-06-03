@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Contributing Guidelines
 
-We welcome internal contributions from the FMDQ engineering team to extend and refine the Design System. This page covers how we build components here — the conventions are not optional, they are what keeps the library consistent and on-brand.
+We welcome internal contributions from the FMDQ engineering team to extend and refine the Design System. This page covers how we build components here, the conventions are not optional, they are what keeps the library consistent and on-brand.
 
 ---
 
@@ -12,7 +12,7 @@ We welcome internal contributions from the FMDQ engineering team to extend and r
 
 1. **Raise an issue.** Before building a new component, raise an issue describing the missing functionality and its potential layout impact. **Confirm the Figma design exists first** and that the component is tracked in [`rules/FIGMA_STORYBOOK_MAPPING.md`](rules/FIGMA_STORYBOOK_MAPPING.md).
 2. **Branch.** Branch off `main` using `feature/<component-name>` or `fix/<component-name>`.
-3. **Extract the spec from Figma.** Never guess or invent values. Pull the full spec from Figma via the MCP tools (`figma_get_components`, `figma_get_node`) — see the <a href="../?path=/docs/🖇️-mcp--docs" target="_top">MCP</a> page. The mandatory step-by-step is in [`rules/FIGMA_STORYBOOK_RULES.md`](rules/FIGMA_STORYBOOK_RULES.md).
+3. **Extract the spec from Figma.** Never guess or invent values. Pull the full spec from Figma via the MCP tools (`figma_get_components`, `figma_get_node`), see the <a href="../?path=/docs/🖇️-mcp--docs" target="_top">MCP</a> page. The mandatory step-by-step is in [`rules/FIGMA_STORYBOOK_RULES.md`](rules/FIGMA_STORYBOOK_RULES.md).
 4. **Build to convention** (see below).
 5. **Check parity.** Run `figma_diff_tokens` / the design-parity check before marking a component complete, and update the mapping file with the status and date.
 6. **Open a PR.** Request review from at least one core maintainer. Ensure your Storybook additions render correctly.
@@ -33,11 +33,11 @@ ComponentName/
 
 Place it under the correct tier:
 
-◼ **`elements/`** — atomic primitives (Button, Input, Badge, Chip, Toggle…)
+◼ **`elements/`**; atomic primitives (Button, Input, Badge, Chip, Toggle…)
 
-◼ **`components/`** — composites (Table, Tabs, Modal, Dropdown, Card…)
+◼ **`components/`**; composites (Table, Tabs, Modal, Dropdown, Card…)
 
-◼ **`layout/`** — full-page structure (AppLayout, TopBar, PageHeader)
+◼ **`layout/`**; full-page structure (AppLayout, TopBar, PageHeader)
 
 Export every public component from [`src/index.ts`](src/index.ts).
 
@@ -45,7 +45,7 @@ Export every public component from [`src/index.ts`](src/index.ts).
 
 ## Coding standards
 
-◼ **Design values come from tokens — always.** Use the CSS variables in `src/tokens.css` (`var(--color-primary-default)`, `var(--spacing-md)`, etc.). Never hardcode a colour, spacing, typography, or shadow value that is already tokenised. If a token is missing, add it rather than hardcoding.
+◼ **Design values come from tokens, always.** Use the CSS variables in `src/tokens.css` (`var(--color-primary-default)`, `var(--spacing-md)`, etc.). Never hardcode a colour, spacing, typography, or shadow value that is already tokenised. If a token is missing, add it rather than hardcoding.
 
 ◼ **CSS naming uses the `fmdqui-` prefix with BEM-like modifiers:** `fmdqui-button`, `fmdqui-button--primary`, `fmdqui-button--sm`.
 

@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Migration Guide
 
-This guide helps developers upgrade `@fmdq/ui` safely across releases — what changed, what breaks, and how to move forward without surprises.
+This guide helps developers upgrade `@fmdq/ui` safely across releases; what changed, what breaks, and how to move forward without surprises.
 
 ---
 
@@ -12,11 +12,11 @@ This guide helps developers upgrade `@fmdq/ui` safely across releases — what c
 
 `@fmdq/ui` follows **Semantic Versioning** (`MAJOR.MINOR.PATCH`):
 
-◼ **MAJOR** — breaking changes. Removed or renamed props, components, or tokens; changed default behaviour. Always documented here with a dedicated migration section.
+◼ **MAJOR**; breaking changes. Removed or renamed props, components, or tokens; changed default behaviour. Always documented here with a dedicated migration section.
 
-◼ **MINOR** — new components, props, or tokens added in a backward-compatible way. Safe to adopt without code changes.
+◼ **MINOR**; new components, props, or tokens added in a backward-compatible way. Safe to adopt without code changes.
 
-◼ **PATCH** — bug fixes and internal changes with no public API impact.
+◼ **PATCH**; bug fixes and internal changes with no public API impact.
 
 During the **beta (`0.x`) phase**, minor versions may still introduce breaking changes as the API stabilises. Pin an exact version in production and upgrade deliberately.
 
@@ -24,9 +24,9 @@ During the **beta (`0.x`) phase**, minor versions may still introduce breaking c
 
 ## How breaking changes are communicated
 
-1. **Changelog** — every release is recorded automatically from the git history. Browse it on the <a href="../?path=/docs/🪵-changelog--docs" target="_top">Changelog</a> page.
-2. **This guide** — each breaking release gets a section below with before/after examples.
-3. **Deprecation first** — wherever possible, a prop or component is marked deprecated for one minor release before removal, so you have a window to migrate.
+1. **Changelog**; every release is recorded automatically from the git history. Browse it on the <a href="../?path=/docs/🪵-changelog--docs" target="_top">Changelog</a> page.
+2. **This guide**; each breaking release gets a section below with before/after examples.
+3. **Deprecation first**; wherever possible, a prop or component is marked deprecated for one minor release before removal, so you have a window to migrate.
 
 ---
 
@@ -34,11 +34,11 @@ During the **beta (`0.x`) phase**, minor versions may still introduce breaking c
 
 ◼ Read the changelog entries between your current version and the target version.
 
-◼ Run `npm run build` and `npm run typecheck` after bumping — TypeScript surfaces most renamed or removed props at compile time.
+◼ Run `npm run build` and `npm run typecheck` after bumping, TypeScript surfaces most renamed or removed props at compile time.
 
 ◼ Upgrade one major version at a time rather than skipping across several.
 
-◼ Verify visually in Storybook (`npm run storybook`) — token changes can shift spacing, colour, or typography without any type error.
+◼ Verify visually in Storybook (`npm run storybook`), token changes can shift spacing, colour, or typography without any type error.
 
 ---
 
