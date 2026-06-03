@@ -13,17 +13,101 @@ import { Meta } from '@storybook/addon-docs/blocks';
     color: #667185;
     margin-top: 24px;
   }
+  .pg-steps {
+    counter-reset: pg;
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 24px;
+  }
+  .pg-steps li {
+    position: relative;
+    padding: 4px 0 16px 40px;
+    color: #344054;
+    line-height: 1.6;
+  }
+  .pg-steps li::before {
+    counter-increment: pg;
+    content: counter(pg);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: #1d326d;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pg-tip {
+    background: #f9fafb;
+    border-left: 3px solid #1d326d;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #344054;
+  }
 `}
 </style>
 
 # Component Playground
 
-The playground is a sandbox environment where developers can interactively test and combine components. 
+The playground is a sandbox for trying components interactively — change props, swap variants, and copy the exact code for the configuration you land on, all without touching your project.
 
-## How to use the controls
+There is no separate playground page to load: **every component story in Storybook _is_ the playground.** This page explains how to use it.
 
-1. Navigate to any component under the **Components** or **Layout** sidebar navigation.
-2. Select the **Controls** tab at the bottom panel of the Storybook viewport.
-3. Adjust attributes like `variant`, `disabled`, `size`, or typing custom strings. The component will instantly reflect these changes in live time.
+---
 
-> Want a fully integrated experience? Try assembling a prototype in your local machine by importing multiple layout components together.
+## Using the Controls
+
+<ol className="pg-steps">
+  <li>Open any component under the <strong>Elements</strong>, <strong>Components</strong>, or <strong>Layout</strong> sidebar groups.</li>
+  <li>Select the <strong>Controls</strong> tab in the bottom (addons) panel.</li>
+  <li>Adjust props — <code>variant</code>, <code>size</code>, <code>disabled</code>, label text, and so on. The canvas updates live as you change them.</li>
+  <li>Open <strong>Show code</strong> at the bottom of the preview to see and copy the exact JSX for your current selection.</li>
+</ol>
+
+<div className="pg-tip">
+  <strong>Tip:</strong> the code shown under <em>Show code</em> reflects your live control values — set the component up the way you want it, then copy straight into your project.
+</div>
+
+---
+
+## Previewing states
+
+◼ **Variants** — every Figma variant has its own story; switch between them in the sidebar to compare side by side.
+
+◼ **Interactive states** — use the Controls (e.g. `disabled`, `hover`-style props) to exercise each state rather than guessing how it behaves.
+
+◼ **Theming & tokens** — colours, spacing, and typography come from `src/tokens.css`. To see how a component responds to the design tokens, review the <a href="../?path=/docs/foundations" target="_top">Foundations</a> alongside it.
+
+---
+
+## Building a real prototype
+
+The Controls panel is great for a single component. To assemble a full screen — a layout with a `TopBar`, `PageHeader`, a `Table`, and `Button`s working together — run the library locally and compose the components in your own file:
+
+```bash
+npm install @fmdq/design-system
+npm run dev
+```
+
+```jsx
+import { AppLayout, PageHeader, Button } from '@fmdq/design-system';
+import '@fmdq/design-system/styles/global.css';
+
+export default function Demo() {
+  return (
+    <AppLayout>
+      <PageHeader title="Orders" actions={<Button variant="primary" label="New Order" />} />
+      {/* compose Table, Tabs, Modal… here */}
+    </AppLayout>
+  );
+}
+```
+
+See <a href="../?path=/docs/🏁-getting-started--docs" target="_top">Getting Started</a> for full setup, and <a href="../?path=/docs/elements" target="_top">Elements</a> for a recommended build order.
