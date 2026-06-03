@@ -10,7 +10,7 @@
     font-family: var(--font-family-primary);
     font-weight: 600;
     letter-spacing: var(--font-letter-spacing-heading-large);
-    gap: 10px;
+    gap: var(--spacing-10);
     box-sizing: border-box;
     text-decoration: none;
     outline: none;
@@ -24,36 +24,36 @@
 /* --- Sizes --- */
 .fmdqui-button--sm {
     height: 36px;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
 }
 
 .fmdqui-button--lg {
     height: 56px;
-    font-size: 18px;
+    font-size: var(--font-size-p-lg);
 }
 
 /* --- Padding & Width (per icon-style) --- */
 /* sm */
 .fmdqui-button--sm.fmdqui-button--icon-none {
-    padding: 8px 16px;
+    padding: var(--spacing-8) var(--spacing-16);
 }
 .fmdqui-button--sm.fmdqui-button--icon-leading-icon,
 .fmdqui-button--sm.fmdqui-button--icon-trailing-icon {
-    padding: 8px 12px;
+    padding: var(--spacing-8) var(--spacing-12);
 }
 .fmdqui-button--sm.fmdqui-button--icon-icon-only {
-    padding: 8px;
+    padding: var(--spacing-8);
     width: 36px;
 }
 
 /* lg */
 .fmdqui-button--lg.fmdqui-button--icon-none {
-    padding: 16px 24px;
+    padding: var(--spacing-16) var(--spacing-24);
 }
 .fmdqui-button--lg.fmdqui-button--icon-leading-icon,
 .fmdqui-button--lg.fmdqui-button--icon-trailing-icon,
 .fmdqui-button--lg.fmdqui-button--icon-icon-only {
-    padding: 16px;
+    padding: var(--spacing-16);
 }
 .fmdqui-button--lg.fmdqui-button--icon-icon-only {
     width: 56px;
@@ -64,21 +64,21 @@
 /* Primary */
 .fmdqui-button--primary {
     background-color: var(--color-fmdq-blue);
-    color: #FFFFFF;
+    color: var(--color-neutral-white);
 }
 .fmdqui-button--primary:hover:not(:disabled),
 .fmdqui-button--primary.fmdqui-button--state-hover {
-    background-color: #012657;
+    background-color: var(--color-primary-hover);
 }
 .fmdqui-button--primary:focus-visible,
 .fmdqui-button--primary.fmdqui-button--state-focused {
-    background-color: #001633;
+    background-color: var(--color-primary-900);
     box-shadow: var(--shadow-glow-primary);
 }
 .fmdqui-button--primary:disabled,
 .fmdqui-button--primary.fmdqui-button--state-de-activated {
-    background-color: #D0D5DD;
-    color: #FFFFFF;
+    background-color: var(--color-neutral-300);
+    color: var(--color-neutral-white);
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
@@ -86,58 +86,58 @@
 
 /* Secondary */
 .fmdqui-button--secondary {
-    background-color: #FFFFFF;
-    color: #034592;
-    border: 1.5px solid #034592;
+    background-color: var(--color-neutral-white);
+    color: var(--color-primary-default);
+    border: 1.5px solid var(--color-primary-default);
 }
 .fmdqui-button--secondary:hover:not(:disabled),
 .fmdqui-button--secondary.fmdqui-button--state-hover {
-    background-color: #E6EEF6; /* Light blue from primary-50 approx */
+    background-color: var(--color-primary-50);
 }
 .fmdqui-button--secondary:focus-visible,
 .fmdqui-button--secondary.fmdqui-button--state-focused {
-    background-color: #D0E0EF;
+    background-color: var(--color-primary-75);
 }
 .fmdqui-button--secondary:disabled {
-    background-color: #F9FAFB;
-    color: #D0D5DD;
-    border-color: #F0F2F5;
+    background-color: var(--color-neutral-50);
+    color: var(--color-neutral-300);
+    border-color: var(--color-neutral-100);
 }
 
 /* Destructive */
 .fmdqui-button--destructive.fmdqui-button--type-solid {
-    background-color: #CB1A14;
-    color: #FFFFFF;
+    background-color: var(--color-destructive-default);
+    color: var(--color-neutral-white);
 }
 .fmdqui-button--destructive.fmdqui-button--type-solid:hover:not(:disabled) {
-    background-color: #A01511;
+    background-color: var(--color-destructive-hover);
 }
 .fmdqui-button--destructive.fmdqui-button--type-solid:disabled {
-    background-color: #D0D5DD;
-    color: #FFFFFF;
+    background-color: var(--color-neutral-300);
+    color: var(--color-neutral-white);
 }
 .fmdqui-button--destructive.fmdqui-button--type-outlined {
     background-color: transparent;
-    color: #CB1A14;
-    border: 1.5px solid #CB1A14;
+    color: var(--color-destructive-default);
+    border: 1.5px solid var(--color-destructive-default);
 }
 .fmdqui-button--destructive.fmdqui-button--type-outlined:hover:not(:disabled) {
-    background-color: #FFECE5;
+    background-color: var(--color-warning-50);
 }
 .fmdqui-button--destructive.fmdqui-button--type-outlined:disabled {
-    border-color: #F0F2F5;
-    color: #D0D5DD;
+    border-color: var(--color-neutral-100);
+    color: var(--color-neutral-300);
 }
 
 /* Grey */
 .fmdqui-button--grey.fmdqui-button--type-solid {
-    background-color: #667185;
-    color: #FFFFFF;
+    background-color: var(--color-neutral-500);
+    color: var(--color-neutral-white);
 }
 .fmdqui-button--grey.fmdqui-button--type-outlined {
     background-color: transparent;
-    color: #667185;
-    border: 1.5px solid #667185;
+    color: var(--color-neutral-500);
+    border: 1.5px solid var(--color-neutral-500);
 }
 
 /* Text Variants */
@@ -147,15 +147,15 @@
     height: auto !important;
     border-radius: 0 !important;
     border: none !important;
-    gap: 8px !important;
+    gap: var(--spacing-8) !important;
 }
 
 .fmdqui-button--text.fmdqui-button--sm {
-    font-size: 14px !important;
+    font-size: var(--font-size-sm) !important;
 }
 
 .fmdqui-button--text.fmdqui-button--lg {
-    font-size: 16px !important;
+    font-size: var(--font-size-p-md) !important;
 }
 
 .fmdqui-button--text .fmdqui-button__icon {
@@ -191,15 +191,15 @@
 
 /* Destructive Text Button */
 .fmdqui-button--text.fmdqui-button--type-destructive {
-    color: #D42620;
+    color: var(--color-error-500);
 }
 .fmdqui-button--text.fmdqui-button--type-destructive:hover:not(:disabled),
 .fmdqui-button--text.fmdqui-button--type-destructive.fmdqui-button--state-hover {
-    color: #E26E6A;
+    color: var(--color-destructive-light);
 }
 .fmdqui-button--text.fmdqui-button--type-destructive:focus-visible,
 .fmdqui-button--text.fmdqui-button--type-destructive.fmdqui-button--state-focused {
-    color: #9E0A05;
+    color: var(--color-destructive-dark);
 }
 
 /* Disabled State for all Text Buttons */
@@ -215,16 +215,60 @@
 
 /* Special Buttons */
 .fmdqui-button--success {
-    background-color: #04802E;
-    color: #FFFFFF;
+    background-color: var(--color-success-600);
+    color: var(--color-neutral-white);
 }
+.fmdqui-button--success:hover:not(:disabled),
+.fmdqui-button--success.fmdqui-button--state-hover {
+    background-color: var(--color-success-400);
+}
+.fmdqui-button--success:focus-visible,
+.fmdqui-button--success.fmdqui-button--state-focused {
+    background-color: var(--color-success-700);
+    box-shadow: var(--shadow-glow-success);
+}
+
 .fmdqui-button--warning {
-    background-color: #F3A218;
-    color: #000000;
+    background-color: var(--color-secondary-400);
+    color: var(--color-neutral-black);
 }
+.fmdqui-button--warning:hover:not(:disabled),
+.fmdqui-button--warning.fmdqui-button--state-hover {
+    background-color: var(--color-secondary-200);
+}
+.fmdqui-button--warning:focus-visible,
+.fmdqui-button--warning.fmdqui-button--state-focused {
+    background-color: var(--color-secondary-450);
+    box-shadow: var(--shadow-glow-warning);
+}
+
 .fmdqui-button--info {
-    background-color: #0D5EBA;
-    color: #FFFFFF;
+    background-color: var(--color-primary-500);
+    color: var(--color-neutral-white);
+}
+.fmdqui-button--info:hover:not(:disabled),
+.fmdqui-button--info.fmdqui-button--state-hover {
+    background-color: var(--color-primary-300);
+}
+.fmdqui-button--info:focus-visible,
+.fmdqui-button--info.fmdqui-button--state-focused {
+    background-color: var(--color-primary-600);
+    box-shadow: var(--shadow-glow-info);
+}
+
+/* Special Destructive — Figma "Special Primary Buttons / style=destructive" */
+.fmdqui-button--error {
+    background-color: var(--color-error-500);
+    color: var(--color-neutral-white);
+}
+.fmdqui-button--error:hover:not(:disabled),
+.fmdqui-button--error.fmdqui-button--state-hover {
+    background-color: var(--color-error-300);
+}
+.fmdqui-button--error:focus-visible,
+.fmdqui-button--error.fmdqui-button--state-focused {
+    background-color: var(--color-error-700);
+    box-shadow: var(--shadow-glow-error);
 }
 
 /* --- Icons --- */

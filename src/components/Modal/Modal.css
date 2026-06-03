@@ -19,7 +19,7 @@
 }
 
 .fmdqui-modal-dialog {
-  background-color: #ffffff;
+  background-color: var(--color-neutral-white);
   border-radius: var(--radius-16);
   box-shadow: var(--shadow-xl);
   display: flex;
@@ -44,7 +44,7 @@
 .fmdqui-modal-title {
   margin: 0;
   font-family: var(--font-family-primary);
-  font-size: 18px;
+  font-size: var(--font-size-p-lg);
   font-weight: 600;
   color: var(--color-grey-focused);
 }
@@ -64,7 +64,7 @@
 }
 
 .fmdqui-modal-close-btn:hover {
-  background-color: var(--color-secondary-hover-bg, #f9fafb);
+  background-color: var(--color-secondary-hover-bg);
   color: var(--color-grey-focused);
 }
 
@@ -89,5 +89,5 @@
   align-items: center;
   justify-content: flex-end;
   gap: var(--spacing-12);
-  background-color: #f9fafb;
+  background-color: var(--color-neutral-50);
 }

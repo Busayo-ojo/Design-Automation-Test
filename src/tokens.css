@@ -26,6 +26,7 @@
   --color-secondary-200: #F7C164;
   --color-secondary-300: #F5B546;
   --color-secondary-400: #F3A218;
+  --color-secondary-450: #DD900D;
   --color-secondary-500: #CC9933;
   --color-secondary-600: #A17827;
   --color-secondary-700: #8A6722;
@@ -61,7 +62,15 @@
 
   /* ── Warning ── */
   --color-warning-50: #FFECE5;
-  --color-warning-75: #FCD2c2;
+  --color-warning-75: #FCD2C2;
+  --color-warning-500: #F56630;
+  --color-warning-700: #AD3307;
+
+  /* ── Error ── */
+  --color-error-50: #FBEAE9;
+  --color-error-300: #DD524D;
+  --color-error-500: #D42620;
+  --color-error-700: #9E0A05;
 
   /* Gradients */
   --gradient-primary-lg: linear-gradient(180deg, #ffd859 0%, #ff8a00 100%);
@@ -103,8 +112,10 @@
   --font-letter-spacing-caption-xs: 0.16em;
 
   /* ── Spacing ── */
+  --spacing-2: 2px;
   --spacing-4: 4px;
   --spacing-8: 8px;
+  --spacing-10: 10px;
   --spacing-12: 12px;
   --spacing-16: 16px;
   --spacing-24: 24px;
@@ -113,9 +124,50 @@
   --spacing-48: 48px;
   --spacing-64: 64px;
 
-  /* ── Shadows ── */
+  /* ── Shadows – Soft ── */
+  --shadow-soft-xxsm: 0px 1.5px 4px -1px rgba(16, 25, 40, 0.07);
+  --shadow-soft-xsm: 0px 2px 4px -1px rgba(16, 25, 40, 0.02), 0px 5px 13px -5px rgba(16, 25, 40, 0.05);
+  --shadow-soft-sm: 0px 10px 18px -2px rgba(16, 25, 40, 0.07);
+  --shadow-soft-md: 0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 14px 22px -9px rgba(16, 25, 40, 0.14);
+  --shadow-soft-lg: 0px 4px 6px -2px rgba(16, 25, 40, 0.03), 0px 16px 24px -4px rgba(16, 25, 40, 0.08);
+  --shadow-soft-xl: 0px 8px 8px -4px rgba(16, 25, 40, 0.03), 0px 24px 32px -4px rgba(16, 25, 40, 0.08);
+  --shadow-soft-xxl: 0px 32px 54px -12px rgba(16, 25, 40, 0.18);
+  --shadow-soft-xxxl: 0px 40px 72px -12px rgba(16, 25, 40, 0.14);
+
+  /* ── Shadows – Normal ── */
+  --shadow-normal-xsm: 0px 5px 3px -2px rgba(0, 0, 0, 0.02), 0px 3px 2px -2px rgba(0, 0, 0, 0.06);
+  --shadow-normal-sm: 0px 2px 4px -2px rgba(0, 0, 0, 0.04), 0px 4px 8px -2px rgba(0, 0, 0, 0.08);
+  --shadow-normal-md: 0px 4px 6px -2px rgba(0, 0, 0, 0.06), 0px 12px 16px -4px rgba(0, 0, 0, 0.10);
+  --shadow-normal-lg: 0px 8px 8px -4px rgba(0, 0, 0, 0.04), 0px 20px 24px -4px rgba(0, 0, 0, 0.10);
+  --shadow-normal-xl: 0px 8px 10px -6px rgba(16, 24, 40, 0.10), 0px 20px 25px -5px rgba(16, 24, 40, 0.10);
+  --shadow-normal-xxl: 0px 25px 50px -12px rgba(16, 24, 40, 0.25);
+
+  /* ── Shadows – Hard ── */
+  --shadow-hard-xxsm: 0px 0px 0px 1px rgba(16, 25, 40, 0.05), 0px 2px 7px 0px rgba(16, 25, 40, 0.05), 0px 2px 5px -2px rgba(16, 25, 40, 0.06);
+  --shadow-hard-xsm: 0px 0px 0px 1px rgba(16, 25, 40, 0.05), 0px 2px 2px -1px rgba(16, 25, 40, 0.04), 0px 2px 12px -1px rgba(16, 25, 40, 0.10);
+  --shadow-hard-sm: 0px 0px 0px 1px rgba(16, 25, 40, 0.05), 0px 6px 16px 0px rgba(16, 25, 40, 0.08);
+  --shadow-hard-md: 0px 0px 0px 1px rgba(16, 25, 40, 0.05), 0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 16px 24px -6px rgba(16, 25, 40, 0.08);
+  --shadow-hard-lg: 0px 0px 0px 1px rgba(16, 25, 40, 0.05), 0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 27px 30px -15px rgba(16, 25, 40, 0.13);
+  --shadow-hard-xl: 0px 0px 0px 1px rgba(16, 25, 40, 0.05), 0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 30px 36px -15px rgba(16, 25, 40, 0.18);
+  --shadow-hard-xxl: 0px 0px 0px 1px rgba(16, 25, 40, 0.05), 0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 38px 44px -15px rgba(16, 25, 40, 0.24);
+  --shadow-hard-xxxl: 0px 0px 0px 1px rgba(16, 25, 40, 0.05), 0px 0px 3px -1px rgba(16, 25, 40, 0.04), 0px 48px 52px -15px rgba(16, 25, 40, 0.30);
+
+  /* ── Shadows – Sidebar Navigation ── */
+  --shadow-sidebar-hover: 0px 4px 0px 0px rgba(237, 227, 207, 1);
+  --shadow-sidebar-selected: 0px 4px 0px 0px rgba(9, 19, 48, 1);
+
+  /* ── Shadows – Focus & Interaction ── */
+  --shadow-focus: 0px 0px 0px 4px rgba(29, 50, 109, 1.00), 0px 0px 0px 2px rgba(255, 255, 255, 1.00);
+  --shadow-hover: 0px 0px 0px 4px rgba(209, 207, 207, 1.00), 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.10);
+  --shadow-line: 0px 0px 0px 4px rgba(251, 241, 241, 1.00);
+  --shadow-date-picker: inset 0px -2px 0px 0px rgba(29, 50, 109, 1.00), 0px 3px 4px -1px rgba(0, 0, 0, 0.12);
+  --shadow-white-2px: 0px 0px 0px 2px rgba(255, 255, 255, 1.00);
+
+  /* ── Shadows – Legacy / Aliases ── */
   --shadow-sm: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   --shadow-md: 0px 4px 8px -2px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.06);
+  --shadow-lg: var(--shadow-normal-lg);
+  --shadow-xl: var(--shadow-normal-xl);
 
   /* ── Radii ── */
   --radius-4: 4px;
@@ -132,7 +184,67 @@
   /* ── Focus Rings ── */
   --shadow-glow-primary: 0 0 0 3px rgba(204, 153, 51, 0.15);
   --shadow-glow-destructive: 0 0 0 3px rgba(203, 26, 20, 0.15);
+  --shadow-glow-success: 0 0 0 3px rgba(4, 128, 46, 0.15);
+  --shadow-glow-warning: 0 0 0 3px rgba(243, 162, 24, 0.15);
+  --shadow-glow-info: 0 0 0 3px rgba(13, 94, 186, 0.15);
+  --shadow-glow-error: 0 0 0 3px rgba(212, 38, 32, 0.15);
+  --color-focus-ring: #E7E8F1;
+
+  /* ── Semantic Color Aliases ── */
+  --color-primary-default: var(--color-primary-600);
+  --color-primary-hover: var(--color-primary-800);
+
+  --color-destructive-default: #CB1A14;
+  --color-destructive-hover: #A01511;
+  --color-destructive-light: #E26E6A;
+  --color-destructive-dark: var(--color-error-700);
+
+  --color-grey-focused: var(--color-neutral-900);
+  --color-grey-default: var(--color-neutral-500);
+  --color-grey-deactivated: var(--color-neutral-300);
+  --color-grey-hover: var(--color-primary-default);
+
+  --color-secondary-text: var(--color-neutral-600);
+  --color-secondary-hover-bg: var(--color-neutral-50);
+
+  /* ── Typography Aliases ── */
+  --font-size-sm: var(--font-size-p-sm);
+  --font-line-height-standard: 1.5;
+
+  /* ── Spacing Alias ── */
+  --spacing-gap-10: var(--spacing-10);
+
+  /* ── Icons ── */
+  --icon-ai-stars-linear: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04LjAyMzczIDIuNDU4NjJDNy4zNzU0NiAwLjUxMzc5MSA0LjYyNDU0IDAuNTEzNzkzIDMuOTc2MjcgMi40NTg2MkMzLjczNzQyIDMuMTc1MTYgMy4xNzUxNiAzLjczNzQyIDIuNDU4NjIgMy45NzYyN0MwLjUxMzc5MiA0LjYyNDU0IDAuNTEzNzkyIDcuMzc1NDYgMi40NTg2MiA4LjAyMzczQzMuMTc1MTYgOC4yNjI1OCAzLjczNzQyIDguODI0ODQgMy45NzYyNyA5LjU0MTM4QzQuNjI0NTQgMTEuNDg2MiA3LjM3NTQ2IDExLjQ4NjIgOC4wMjM3MyA5LjU0MTM4QzguMjYyNTggOC44MjQ4NCA4LjgyNDg0IDguMjYyNTggOS41NDEzOCA4LjAyMzczQzExLjQ4NjIgNy4zNzU0NiAxMS40ODYyIDQuNjI0NTQgOS41NDEzOCAzLjk3NjI3QzguODI0ODQgMy43Mzc0MiA4LjI2MjU4IDMuMTc1MTYgOC4wMjM3MyAyLjQ1ODYyWk01Ljg3MzYzIDMuMDkxMDhDNS44ODk3NCAzLjA0Mjc2IDUuOTA4NTIgMy4wMjg0NiA1LjkxODI2IDMuMDIxODdDNS45MzQxOSAzLjAxMTA5IDUuOTYyNDEgMyA2IDNDNi4wMzc1OSAzIDYuMDY1ODEgMy4wMTEwOSA2LjA4MTc0IDMuMDIxODdDNi4wOTE0OCAzLjAyODQ2IDYuMTEwMjYgMy4wNDI3NiA2LjEyNjM3IDMuMDkxMDhDNi41NjQyOCA0LjQwNDgyIDcuNTk1MTggNS40MzU3MiA4LjkwODkyIDUuODczNjNDOC45NTcyNCA1Ljg4OTc0IDguOTcxNTQgNS45MDg1MiA4Ljk3ODEzIDUuOTE4MjZDOC45ODg5MSA1LjkzNDE5IDkgNS45NjI0MSA5IDZDOSA2LjAzNzU5IDguOTg4OTEgNi4wNjU4MSA4Ljk3ODEzIDYuMDgxNzRDOC45NzE1NCA2LjA5MTQ4IDguOTU3MjQgNi4xMTAyNiA4LjkwODkyIDYuMTI2MzdDNy41OTUxOCA2LjU2NDI4IDYuNTY0MjggNy41OTUxOCA2LjEyNjM3IDguOTA4OTJDNi4xMTAyNiA4Ljk1NzI0IDYuMDkxNDggOC45NzE1NCA2LjA4MTc0IDguOTc4MTNDNi4wNjU4MSA4Ljk4ODkxIDYuMDM3NTkgOSA2IDlDNS45NjI0MSA5IDUuOTM0MTkgOC45ODg5MSA1LjkxODI2IDguOTc4MTNDNS45MDg1MiA4Ljk3MTU0IDUuODg5NzQgOC45NTcyNCA1Ljg3MzYzIDguOTA4OTJDNS40MzU3MiA3LjU5NTE4IDQuNDA0ODIgNi41NjQyOCAzLjA5MTA4IDYuMTI2MzdDMy4wNDI3NiA2LjExMDI2IDMuMDI4NDYgNi4wOTE0OCAzLjAyMTg3IDYuMDgxNzRDMy4wMTEwOSA2LjA2NTgxIDMgNi4wMzc1OSAzIDZDMyA1Ljk2MjQxIDMuMDExMDkgNS45MzQxOSAzLjAyMTg3IDUuOTE4MjZDMy4wMjg0NiA1LjkwODUyIDMuMDQyNzYgNS44ODk3NCAzLjA5MTA4IDUuODczNjNDNC40MDQ4MiA1LjQzNTcyIDUuNDM1NzIgNC40MDQ4MiA1Ljg3MzYzIDMuMDkxMDhaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE3LjgzIDkuMDM5NzZDMTYuOTIzNSA2LjMyMDA4IDEzLjA3NjUgNi4zMjAwOCAxMi4xNyA5LjAzOTc2QzExLjY3NzQgMTAuNTE3NyAxMC41MTc3IDExLjY3NzQgOS4wMzk3NiAxMi4xN0M2LjMyMDA4IDEzLjA3NjUgNi4zMjAwOCAxNi45MjM1IDkuMDM5NzYgMTcuODNDMTAuNTE3NyAxOC4zMjI3IDExLjY3NzQgMTkuNDgyMyAxMi4xNyAyMC45NjAyQzEzLjA3NjUgMjMuNjc5OSAxNi45MjM1IDIzLjY3OTkgMTcuODMgMjAuOTYwMkMxOC4zMjI2IDE5LjQ4MjMgMTkuNDgyMyAxOC4zMjI3IDIwLjk2MDIgMTcuODNDMjMuNjc5OSAxNi45MjM1IDIzLjY3OTkgMTMuMDc2NSAyMC45NjAyIDEyLjE3QzE5LjQ4MjMgMTEuNjc3NCAxOC4zMjI3IDEwLjUxNzcgMTcuODMgOS4wMzk3NlpNMTQuMDY3MyA5LjY3MjIyQzE0LjM2NjEgOC43NzU5MyAxNS42MzM5IDguNzc1OTMgMTUuOTMyNyA5LjY3MjIyQzE2LjYyNDQgMTEuNzQ3MyAxOC4yNTI3IDEzLjM3NTYgMjAuMzI3OCAxNC4wNjczQzIxLjIyNDEgMTQuMzY2MSAyMS4yMjQxIDE1LjYzMzkgMjAuMzI3OCAxNS45MzI3QzE4LjI1MjcgMTYuNjI0NCAxNi42MjQ0IDE4LjI1MjcgMTUuOTMyNyAyMC4zMjc4QzE1LjYzMzkgMjEuMjI0MSAxNC4zNjYxIDIxLjIyNDEgMTQuMDY3MyAyMC4zMjc4QzEzLjM3NTYgMTguMjUyNyAxMS43NDczIDE2LjYyNDQgOS42NzIyMiAxNS45MzI3QzguNzc1OTMgMTUuNjMzOSA4Ljc3NTkzIDE0LjM2NjEgOS42NzIyMiAxNC4wNjczQzExLjc0NzMgMTMuMzc1NiAxMy4zNzU2IDExLjc0NzMgMTQuMDY3MyA5LjY3MjIyWiIgZmlsbD0iYmxhY2siLz4KPC9zdmc+");
+  --icon-ai-stars-bold: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTI0OTUgOS4yMjUxNUM0LjU4NjU3IDguMjEwMDEgMy43ODk5OSA3LjQxMzQzIDIuNzc0ODUgNy4wNzUwNUMxLjc0MTcyIDYuNzMwNjcgMS43NDE3MiA1LjI2OTMzIDIuNzc0ODUgNC45MjQ5NUMzLjc4OTk5IDQuNTg2NTcgNC41ODY1NyAzLjc4OTk5IDQuOTI0OTUgMi43NzQ4NUM1LjI2OTMzIDEuNzQxNzIgNi43MzA2NyAxLjc0MTcyIDcuMDc1MDUgMi43NzQ4NUM3LjQxMzQzIDMuNzg5OTkgOC4yMTAwMSA0LjU4NjU3IDkuMjI1MTUgNC45MjQ5NUMxMC4yNTgzIDUuMjY5MzMgMTAuMjU4MyA2LjczMDY3IDkuMjI1MTUgNy4wNzUwNUM4LjIxMDAxIDcuNDEzNDMgNy40MTM0MyA4LjIxMDAxIDcuMDc1MDUgOS4yMjUxNUM2LjczMDY3IDEwLjI1ODMgNS4yNjkzMyAxMC4yNTgzIDQuOTI0OTUgOS4yMjUxNVoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGQ9Ik0xMy4xMTg3IDIwLjY0NEMxMi41MjY1IDE4Ljg2NzUgMTEuMTMyNSAxNy40NzM1IDkuMzU1OTkgMTYuODgxM0M3LjU0OCAxNi4yNzg3IDcuNTQ4IDEzLjcyMTMgOS4zNTU5OSAxMy4xMTg3QzExLjEzMjUgMTIuNTI2NSAxMi41MjY1IDExLjEzMjUgMTMuMTE4NyA5LjM1NTk5QzEzLjcyMTMgNy41NDggMTYuMjc4NyA3LjU0OCAxNi44ODEzIDkuMzU1OTlDMTcuNDczNSAxMS4xMzI1IDE4Ljg2NzUgMTIuNTI2NSAyMC42NDQgMTMuMTE4N0MyMi40NTIgMTMuNzIxMyAyMi40NTIgMTYuMjc4NyAyMC42NDQgMTYuODgxM0MxOC44Njc1IDE3LjQ3MzUgMTcuNDczNSAxOC44Njc1IDE2Ljg4MTMgMjAuNjQ0QzE2LjI3ODcgMjIuNDUyIDEzLjcyMTMgMjIuNDUyIDEzLjExODcgMjAuNjQ0WiIgZmlsbD0iYmxhY2siLz4KPC9zdmc+");
 }
+
+/* ── Base Icon Utility CSS ── */
+.fmdq-icon {
+  display: inline-block;
+  width: var(--icon-size, 24px);
+  height: var(--icon-size, 24px);
+  background-color: var(--icon-color, currentColor);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  flex-shrink: 0;
+}
+
+/* Icon Variants mapping */
+.fmdq-icon-ai-stars {
+  mask-image: var(--icon-ai-stars-linear);
+  -webkit-mask-image: var(--icon-ai-stars-linear);
+}
+
+.fmdq-icon-ai-stars.style-bold {
+  mask-image: var(--icon-ai-stars-bold);
+  -webkit-mask-image: var(--icon-ai-stars-bold);
+}
+
 
 /* ── Global Base ── */
 body {

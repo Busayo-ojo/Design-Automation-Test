@@ -1,11 +1,11 @@
-import { create } from '@storybook/theming/create';
+import { create } from 'storybook/theming/create';
 
 export default create({
   base: 'light',
 
   brandTitle: 'FMDQ Design System',
   brandUrl: '/',
-  brandImage: '/public/fmdq-logo.svg',
+  brandImage: './fmdq-logo.svg',
   brandTarget: '_self',
 
   // UI
