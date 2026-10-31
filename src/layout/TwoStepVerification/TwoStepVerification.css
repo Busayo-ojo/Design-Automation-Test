@@ -153,7 +153,7 @@
 .fmdqui-twostep__digit-input {
   width: 52px;
   height: 60px;
-  border-radius: 10px;
+  border-radius: var(--radius-12, 12px);
   border: 1px solid var(--color-neutral-300, #D0D5DD);
   background-color: var(--color-neutral-white, #FFFFFF);
   font-family: var(--font-family-primary, 'DM Sans', sans-serif);
@@ -170,22 +170,24 @@
 }
 
 .fmdqui-twostep__digit-input:hover {
-  border-color: var(--color-primary-600, #1D326D);
+  border-color: var(--color-primary-default, var(--color-primary-600, #1D326D));
 }
 
+.fmdqui-twostep__digit-input:focus,
 .fmdqui-twostep__digit-input:focus-visible {
-  border-color: var(--color-primary-600, #1D326D);
-  box-shadow: 0 0 0 4px var(--color-primary-100, #D1D9EB);
+  border-color: var(--color-primary-default, var(--color-primary-600, #1D326D));
+  box-shadow: 0 0 0 4px var(--color-focus-ring, #E7E8F1);
 }
 
 /* Error state on digits */
 .fmdqui-twostep__digits--error .fmdqui-twostep__digit-input {
-  border-color: var(--color-error-600, #CB1A14);
+  border-color: var(--color-destructive-light, var(--color-error-600, #CB1A14));
 }
 
+.fmdqui-twostep__digits--error .fmdqui-twostep__digit-input:focus,
 .fmdqui-twostep__digits--error .fmdqui-twostep__digit-input:focus-visible {
-  border-color: var(--color-error-600, #CB1A14);
-  box-shadow: 0 0 0 4px var(--color-error-100, #FEE4E2);
+  border-color: var(--color-destructive-light, var(--color-error-600, #CB1A14));
+  box-shadow: 0 0 0 4px rgba(226, 110, 106, 0.15);
 }
 
 .fmdqui-twostep__error-message {
@@ -205,7 +207,8 @@
   max-width: 400px;
 }
 
-.fmdqui-twostep__action .fmdqui-btn {
+.fmdqui-twostep__submit-btn,
+.fmdqui-twostep__action .fmdqui-button {
   width: 100% !important;
   font-weight: 600;
   letter-spacing: -0.64px;

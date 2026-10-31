@@ -24,6 +24,7 @@
 | 1.1 Sign in | Complete | Layout/🔐 SignIn | 2026-10-31 | Figma 10303:161102 (DRP Flow 1); composes AuthBackground, Logo, Input (lg), Button (lg primary & sm text), and foundations icons; added --shadow-auth-card token |
 | 1.2 Sign in · incorrect details | Complete | Layout/🔐 SignIn (story: IncorrectDetails) | 2026-10-31 | Figma 10303:161172 (DRP Flow 1); composes SignIn with Toast banner (type="banners", state="error"), User ID / Password in state="error"; Paragraph/Small/Regular (14px) support note |
 | Tabbed Buttons | Complete | Elements/🚥 Tabbed Buttons | 2026-10-27 | Figma 1543:6760; middle and more variants given full borders to match the code (borders checked by hand, not with figma_check_design_parity) |
+| Breadcrumbs | Complete | Components/🍞 Breadcrumbs | 2026-10-31 | Figma 2031:39144 & 2031:39096; 4 variant states (default, hover, active, disabled) + demo trail, custom separator, icon swap; borders in Grey/200 (#E4E7EC) |
 | Pagination | Complete | Components/📄 Pagination | 2026-10-27 | Figma 347:10062; rebuild from lowest base elements: PageNumber (2608:66376, 12 variants), TruncatedPages (2775:76546), PageIndicator (2609:67848), NavigationControls (2607:66246, 15 variants), PaginationList (2767:76342, 15 variants), full Pagination bar (2767:76362, 15 variants with 5 variations and 4 alignments) |
 
 ## Reuse mapping — Pagination (2026-10-27)
@@ -151,6 +152,22 @@ Curvature refinement (2026-10-31): reduced spatial frequency, domain-warp streng
 | Email support button (`10303:161442`) | existing component as-is | `<Button variant="primary" size="lg" fullWidth>Email support@fmdqgroup.com</Button>` |
 | Back to sign in (`10303:161445`) | existing component as-is | `<Button variant="text" size="sm" iconStyle="leading icon" icon={<Icon name="arrow-left" size={16} />}>Back to sign in</Button>` |
 | Regulatory copyright (`10303:161416`) | semantic markup | 12px neutral-400 SEC caption below card |
+
+## Reuse mapping — Breadcrumbs (2026-10-31)
+
+| Figma element (Nodes 2031:39144, 2031:39096) | Decision | Implementation |
+| :--- | :--- | :--- |
+| `Breadcrumb` item | genuinely new component | `src/components/Breadcrumbs/BreadcrumbItem.tsx` |
+| `Breadcrumbs` trail composite | genuinely new composite | `src/components/Breadcrumbs/Breadcrumbs.tsx` |
+| Leading Icon (`Icon#3892:0`) | existing component as-is | `<Icon name={icon} size={20} />` from `src/foundations/icons` |
+| Separator (`/`) | semantic text / node | 20×20px container centered in 14px medium |
+| Top/Bottom Dividers (`has borders`) | CSS borders | 1px border-top and border-bottom in `--color-neutral-200` (`#E4E7EC`) |
+| Typography | existing tokens | DM Sans Medium (500), 14px (`--font-size-p-sm`), 20.3px line-height, -0.56px letter-spacing |
+| Default State | existing tokens | `--color-neutral-500` (`#667185`) label/icon, `--color-neutral-300` (`#D0D5DD`) separator |
+| Hover State | existing tokens | `--color-primary-300` (`#3D89DF`) label/icon, `--color-neutral-400` (`#98A2B3`) separator |
+| Active State | existing tokens | `--color-secondary-500` / gold (`#CC9933`) label, `--color-primary-500` (`#0D5EBA`) icon, `--color-neutral-400` (`#98A2B3`) separator |
+| Disabled State | existing tokens | `--color-neutral-400` (`#98A2B3`) label/icon/separator |
+
 
 
 

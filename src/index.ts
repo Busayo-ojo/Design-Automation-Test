@@ -26,11 +26,13 @@ export * from './components/ProgressBar';
 export * from './components/Metrics';
 export * from './components/Pagination';
 export * from './components/Sidebar';
+export * from './components/Breadcrumbs';
 
 // Layout
 export * from './layout/AppLayout';
 export * from './layout/TopBar';
-export * from './layout/PageHeader';
+export { PageHeader } from './layout/PageHeader';
+export type { PageHeaderProps, BreadcrumbItem as PageHeaderBreadcrumbItem } from './layout/PageHeader';
 export * from './layout/EmptyState';
 export * from './layout/AuthBackground';
 export * from './layout/SignIn';

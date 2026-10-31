@@ -27,7 +27,9 @@ const config: StorybookConfig = {
           if (req.url && (req.url.includes('changelog-data.json') || req.url.includes('Changelog.mdx'))) {
             try {
               execSync('node scripts/generate-changelog.mjs', { stdio: 'ignore' });
-            } catch {}
+            } catch (_err) {
+              // Ignore changelog generation error during hot requests
+            }
           }
           next();
         });
