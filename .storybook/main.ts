@@ -1,4 +1,5 @@
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
@@ -17,6 +18,19 @@ const config: StorybookConfig = {
         if (id.startsWith('file://')) {
           return fileURLToPath(id);
         }
+      },
+    });
+    config.plugins.push({
+      name: 'auto-generate-changelog',
+      configureServer(server) {
+        server.middlewares.use((req, _res, next) => {
+          if (req.url && (req.url.includes('changelog-data.json') || req.url.includes('Changelog.mdx'))) {
+            try {
+              execSync('node scripts/generate-changelog.mjs', { stdio: 'ignore' });
+            } catch {}
+          }
+          next();
+        });
       },
     });
     return config;

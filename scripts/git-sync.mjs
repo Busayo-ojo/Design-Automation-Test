@@ -120,6 +120,7 @@ function stageAndCommit(files, message) {
     'src/docs/',
     'src/index.ts',
     'rules/',
+    '.storybook/',
     'scripts/',
     'mcp/',
     '.env.example',
@@ -223,6 +224,13 @@ function main() {
   }
 
   // Check changes
+  info('Synchronizing changelog from Git history...');
+  try {
+    run('node scripts/generate-changelog.mjs');
+  } catch (err) {
+    warn('Could not run generate-changelog: ' + err.message);
+  }
+
   const changes = getChangedFiles();
   if (changes.length === 0) {
     success('No changes detected. Everything is up to date.');
@@ -235,6 +243,18 @@ function main() {
   // Commit
   const message = generateCommitMessage(changes);
   const committed = stageAndCommit(changes, message);
+
+  // If committed, update changelog with the newly created commit and amend
+  if (committed && !DRY_RUN) {
+    try {
+      run('node scripts/generate-changelog.mjs');
+      run('git add src/docs/changelog-data.json');
+      run('git commit --amend --no-edit');
+      success('Dynamic changelog synchronized with new commit');
+    } catch (err) {
+      warn('Could not auto-amend changelog: ' + err.message);
+    }
+  }
 
   // Push
   if (committed) {
