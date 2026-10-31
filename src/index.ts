@@ -33,4 +33,10 @@ export * from './layout/TopBar';
 export * from './layout/PageHeader';
 export * from './layout/EmptyState';
 export * from './layout/AuthBackground';
+export * from './layout/SignIn';
+export * from './layout/TwoStepVerification';
+export * from './layout/ForgotPassword';
+export * from './layout/SetPassword';
+export * from './layout/AccountLocked';
+
 

@@ -124,6 +124,7 @@
   /* ── Spacing ── */
   --spacing-2: 2px;
   --spacing-4: 4px;
+  --spacing-6: 6px;
   --spacing-8: 8px;
   --spacing-10: 10px;
   --spacing-12: 12px;
@@ -209,6 +210,9 @@
     0px 10px 15px -3px rgba(0, 0, 0, 0.10),
     0px 0px 0px 1px rgba(0, 0, 0, 0.05);
 
+  /* ── Auth card glow elevation (Figma: Auth card node 10303:161103) ── */
+  --shadow-auth-card: 0px 0px 220px -35px rgba(223, 174, 77, 1);
+
   /* ── Semantic Color Aliases ── */
   --color-primary-default: var(--color-primary-600);
   --color-primary-hover: var(--color-primary-800);
@@ -228,6 +232,7 @@
 
   /* ── Typography Aliases ── */
   --font-size-sm: var(--font-size-p-sm);
+  --font-size-xs: var(--font-size-p-xs);
   --font-line-height-standard: 1.5;
 
   /* ── Spacing Alias ── */

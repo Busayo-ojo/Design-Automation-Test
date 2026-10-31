@@ -33,17 +33,27 @@
   top: 0;
   left: 0;
   height: 100%;
+  width: 58px;
   pointer-events: none;
   z-index: 1;
   overflow: hidden;
   user-select: none;
 }
 
+.fmdqui-alert--toasts .fmdqui-alert__texture-streak {
+  width: 58px;
+}
+
+.fmdqui-alert--banners .fmdqui-alert__texture-streak {
+  width: 58px;
+}
+
 .fmdqui-alert__texture-img {
   height: 100%;
-  width: auto;
+  width: 58px;
   max-width: none;
-  object-fit: fill;
+  object-fit: cover;
+  object-position: left center;
   display: block;
   pointer-events: none;
 }
@@ -64,14 +74,13 @@
 }
 
 .fmdqui-alert--toasts .fmdqui-alert__container {
-  padding: var(--spacing-12, 12px) var(--spacing-16, 16px);
-  padding-left: var(--spacing-16, 16px);
+  padding: var(--spacing-12, 12px) var(--spacing-16, 16px) var(--spacing-12, 12px) 22px;
   gap: var(--spacing-12, 12px);
   align-items: center;
 }
 
 .fmdqui-alert--banners .fmdqui-alert__container {
-  padding: var(--spacing-20, 20px);
+  padding: var(--spacing-20, 20px) var(--spacing-20, 20px) var(--spacing-20, 20px) 26px;
   gap: var(--spacing-16, 16px);
 }
 

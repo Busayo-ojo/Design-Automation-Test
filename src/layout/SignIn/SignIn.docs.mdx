@@ -1,0 +1,85 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as SignInStories from './SignIn.stories';
+
+<Meta of={SignInStories} />
+
+# Sign In Page
+
+## Overview
+
+The `SignIn` component is the first authentication entry point for the FMDQ Data Reporting Portal (DRP), matching Figma frame **1.1 Sign in** (node `10303:161102`).
+
+It composes the official design system building blocks:
+- **`AuthBackground`**: Primary/900 dotted gold GLSL shader backdrop with vignette focus
+- **`Logo`**: Official FMDQ Group brand asset
+- **`Input`**: Standard design system inputs with user & lock iconography, password reveal toggle, and integrated field errors
+- **`Button`**: Full-width primary button with loading feedback, and text button for password recovery
+- **Support & Legal**: Integrated support enquiry mailto and SEC regulatory copyright notice
+
+## Figma Reference
+
+<iframe
+  title="Sign In Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=10303-161102&embed-host=share"
+  allowFullScreen
+/>
+
+## Default State
+
+<Canvas of={SignInStories.Default} sourceState="shown" />
+
+## Incorrect Details (Figma Frame 1.2 · Node 10303:161172)
+
+<Canvas of={SignInStories.IncorrectDetails} sourceState="shown" />
+
+## Filled State
+
+<Canvas of={SignInStories.Filled} sourceState="shown" />
+
+## Loading State
+
+<Canvas of={SignInStories.Loading} sourceState="shown" />
+
+## Global Error State
+
+<Canvas of={SignInStories.WithGlobalError} sourceState="shown" />
+
+## Field Validation Errors
+
+<Canvas of={SignInStories.WithValidationErrors} sourceState="shown" />
+
+## Paused Background (Reduced Motion)
+
+<Canvas of={SignInStories.PausedBackground} sourceState="shown" />
+
+## Interactive Playground
+
+<Canvas of={SignInStories.Interactive} sourceState="shown" />
+
+## Props Table
+
+<Controls of={SignInStories.Default} />
+
+## Anatomy & Tokens
+
+| Anatomy Part | Token / Dimension | Value |
+| :--- | :--- | :--- |
+| Card Max Width | fixed/hug | `480px` |
+| Card Padding | `--spacing-40` | `40px` |
+| Card Corner Radius | `--radius-16` | `16px` |
+| Card Elevation | `--shadow-auth-card` | `0px 0px 220px -35px rgba(223, 174, 77, 1)` |
+| Card Background | `--color-neutral-white` | `#FFFFFF` |
+| Title Typography | DM Sans SemiBold (600) | `20px` / line-height `24px` |
+| Subtitle Typography | DM Sans Regular (400) | `14px` / line-height `20.3px` |
+| Submit Button | `--color-primary-700` | Height `56px`, radius `12px` |
+| Support Note | Paragraph/Small/Regular (400) | `14px` / line-height `20.3px` |
+| Copyright Caption | `--color-neutral-400` | `12px` / line-height `17.4px` |
+
+## Usage Guidelines
+
+- Wrap sign in logic with client or server authentication callbacks (`onSubmit`).
+- Set `loading={true}` while awaiting authentication responses; this automatically disables all form controls and toggles the action button to its de-activated loading state.
+- Return user-friendly error banners via `error` for bad credentials, or field-level validation errors via `userIdError` / `passwordError`.
+

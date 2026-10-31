@@ -1,0 +1,280 @@
+@import '../../tokens.css';
+
+/* ── Container Layout ──────────────────────────────────────────────────────── */
+
+.fmdqui-twostep-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.fmdqui-twostep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: var(--spacing-24, 24px) var(--spacing-16, 16px);
+  box-sizing: border-box;
+  gap: var(--spacing-24, 24px);
+  overflow-y: auto;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+}
+
+/* ── Auth Card (Figma: Auth card 10303:161633) ─────────────────────────────── */
+
+.fmdqui-twostep__card {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border-radius: var(--radius-16, 16px);
+  padding: var(--spacing-40, 40px);
+  box-shadow: var(--shadow-auth-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-24, 24px);
+  box-sizing: border-box;
+}
+
+/* ── Brand Logo ───────────────────────────────────────────────────────────── */
+
+.fmdqui-twostep__logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.fmdqui-twostep__logo-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.fmdqui-twostep__logo-button:focus-visible {
+  outline: 2px solid var(--color-primary-600, #1D326D);
+  outline-offset: 4px;
+  border-radius: var(--radius-4, 4px);
+}
+
+.fmdqui-twostep__logo {
+  width: 166px;
+  height: 40px;
+}
+
+.fmdqui-twostep__logo .fmdqui-logo__svg {
+  width: 166px !important;
+  height: 40px !important;
+}
+
+/* ── Featured Icon Badge ── */
+.fmdqui-twostep__icon-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  background-color: var(--color-primary-50, #E8ECF5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Heading Group ── */
+.fmdqui-twostep__heading-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.fmdqui-twostep__step-badge {
+  margin-bottom: var(--spacing-4, 4px);
+}
+
+.fmdqui-twostep__title {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -1.2px;
+  color: var(--color-neutral-900, #101928);
+}
+
+.fmdqui-twostep__subtitle {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 400;
+  line-height: 20.3px;
+  letter-spacing: -0.56px;
+  color: var(--color-neutral-600, #475467);
+}
+
+/* ── Alert Banner ── */
+.fmdqui-twostep__alert-wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+.fmdqui-twostep__alert-wrapper .fmdqui-alert--banners {
+  width: 100%;
+  min-height: auto;
+}
+
+.fmdqui-twostep__alert-wrapper .fmdqui-alert__container {
+  padding: var(--spacing-20, 20px);
+  min-width: unset;
+}
+
+/* ── 6-Digit Code Input ── */
+.fmdqui-twostep__code-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8, 8px);
+  width: 100%;
+  max-width: 400px;
+}
+
+.fmdqui-twostep__digits {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.fmdqui-twostep__digit-input {
+  width: 52px;
+  height: 60px;
+  border-radius: 10px;
+  border: 1px solid var(--color-neutral-300, #D0D5DD);
+  background-color: var(--color-neutral-white, #FFFFFF);
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28.8px;
+  letter-spacing: -1.44px;
+  text-align: center;
+  color: var(--color-neutral-900, #101928);
+  box-sizing: border-box;
+  padding: 0;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.fmdqui-twostep__digit-input:hover {
+  border-color: var(--color-primary-600, #1D326D);
+}
+
+.fmdqui-twostep__digit-input:focus-visible {
+  border-color: var(--color-primary-600, #1D326D);
+  box-shadow: 0 0 0 4px var(--color-primary-100, #D1D9EB);
+}
+
+/* Error state on digits */
+.fmdqui-twostep__digits--error .fmdqui-twostep__digit-input {
+  border-color: var(--color-error-600, #CB1A14);
+}
+
+.fmdqui-twostep__digits--error .fmdqui-twostep__digit-input:focus-visible {
+  border-color: var(--color-error-600, #CB1A14);
+  box-shadow: 0 0 0 4px var(--color-error-100, #FEE4E2);
+}
+
+.fmdqui-twostep__error-message {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 400;
+  line-height: 20.3px;
+  letter-spacing: -0.56px;
+  color: var(--color-error-700, #BA110B);
+  text-align: center;
+}
+
+/* ── Primary Action ── */
+.fmdqui-twostep__action {
+  width: 100%;
+  max-width: 400px;
+}
+
+.fmdqui-twostep__action .fmdqui-btn {
+  width: 100% !important;
+  font-weight: 600;
+  letter-spacing: -0.64px;
+}
+
+/* ── Resend Code ── */
+.fmdqui-twostep__resend {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.fmdqui-twostep__resend-text {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 400;
+  line-height: 17.4px;
+  letter-spacing: -0.48px;
+  color: var(--color-neutral-600, #667085);
+}
+
+.fmdqui-twostep__resend-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--color-primary-700, #1D326D);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.fmdqui-twostep__resend-button:hover {
+  color: var(--color-primary-800, #0E1B4D);
+}
+
+.fmdqui-twostep__resend-button:focus-visible {
+  outline: 2px solid var(--color-primary-600, #1D326D);
+  outline-offset: 2px;
+  border-radius: var(--radius-2, 2px);
+}
+
+.fmdqui-twostep__resend-button:disabled {
+  color: var(--color-neutral-400, #98A2B3);
+  text-decoration: none;
+  cursor: not-allowed;
+}
+
+/* ── Back to Sign In ── */
+.fmdqui-twostep__back {
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Footer Legal ── */
+.fmdqui-twostep__footer {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.fmdqui-twostep__copyright {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 400;
+  line-height: 17.4px;
+  letter-spacing: -0.48px;
+  color: var(--color-neutral-400, #98A2B3);
+}

@@ -1,0 +1,35 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as AccountLockedStories from './AccountLocked.stories';
+
+<Meta of={AccountLockedStories} />
+
+# Account Locked
+
+The `AccountLocked` layout handles enterprise security lockouts for the FMDQ Data Reporting Portal (DRP Flow 1, nodes `10303:161403` and `10308:210995`).
+
+## Overview
+
+Key features:
+- **Security Lock Badge**: 56px circular container in Error/50 (`#FEE4E2`) with bold `lock` icon in Error/600 (`#CB1A14`).
+- **Clear Security Messaging**: Explains why the lockout occurred (repeated sign-in attempts vs 5 failed OTP verification codes).
+- **One-Click Support Contact**: Primary button directly connects the user to the Market Service Group via `mailto:support@fmdqgroup.com`.
+- **Back Navigation**: Small text button returning the user safely to the sign-in screen.
+
+<Canvas of={AccountLockedStories.PasswordAttempts} />
+
+## Properties
+
+<Controls of={AccountLockedStories.PasswordAttempts} />
+
+## States
+
+### Failed Password Attempts (1.3)
+Triggered when credential threshold is exceeded during sign in.
+
+<Canvas of={AccountLockedStories.PasswordAttempts} />
+
+### Failed Verification Attempts (1.4d)
+Triggered after 5 wrong OTP codes are submitted during two-step verification.
+
+<Canvas of={AccountLockedStories.VerificationAttempts} />
+

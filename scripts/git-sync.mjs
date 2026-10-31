@@ -59,8 +59,8 @@ function validateTypeScript() {
 
 // ─── Step 2: Check for changes ────────────────────────────────
 function getChangedFiles() {
-  const status = run('git status --porcelain');
-  if (!status) return [];
+  const status = execSync('git status --porcelain', { cwd: ROOT, encoding: 'utf-8', stdio: 'pipe' });
+  if (!status.trim()) return [];
   return status.split('\n').filter(Boolean).map(line => ({
     status: line.slice(0, 2).trim(),
     file: line.slice(3).trim()
@@ -119,6 +119,7 @@ function stageAndCommit(files, message) {
     'src/layout/',
     'src/docs/',
     'src/index.ts',
+    'rules/',
     'scripts/',
     'mcp/',
     '.env.example',

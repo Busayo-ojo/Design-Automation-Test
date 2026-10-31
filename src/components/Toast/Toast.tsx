@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
+import { Icon } from '../../foundations/icons';
 import './Toast.css';
 
 import toastInfoTexture from './assets/toast_information.png';
@@ -81,14 +82,6 @@ const CheckCircleIcon = ({ color }: { color: string }) => (
   </svg>
 );
 
-const InfoTriangleIcon = ({ color }: { color: string }) => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7 2L12.5 11.5H1.5L7 2Z" stroke={color} strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M7 5.5V8" stroke={color} strokeWidth="1.25" strokeLinecap="round" />
-    <circle cx="7" cy="9.75" r="0.75" fill={color} />
-  </svg>
-);
-
 const MultiplyIcon = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M2.5 2.5L9.5 9.5M9.5 2.5L2.5 9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -129,9 +122,9 @@ export const Toast: React.FC<ToastProps> = ({
       case 'success':
         return <CheckCircleIcon color="#04802E" />;
       case 'warning':
-        return <InfoTriangleIcon color="#DD900D" />;
+        return <Icon name="info-triangle" variant="bold" size={16} color="#DD900D" />;
       case 'error':
-        return <CheckCircleIcon color="#CB1A14" />;
+        return <Icon name="info-triangle" variant="bold" size={16} color="#CB1A14" />;
       case 'information':
       default:
         return <CheckCircleIcon color="#1671D9" />;
