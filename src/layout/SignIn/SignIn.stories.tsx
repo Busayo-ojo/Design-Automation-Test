@@ -102,6 +102,13 @@ export const LoggedOut: Story = {
   },
 };
 
+/** Global top-level alert error banner. */
+export const WithGlobalError: Story = {
+  args: {
+    error: 'Your account has been deactivated. Please contact support@fmdqgroup.com.',
+  },
+};
+
 /** Field-level validation errors (e.g. required field enforcement). */
 export const WithValidationErrors: Story = {
   args: {
