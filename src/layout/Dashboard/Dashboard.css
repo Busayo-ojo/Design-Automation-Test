@@ -499,7 +499,9 @@
   margin: 0 !important;
 }
 
-.fmdqui-dashboard-table .fmdqui-table-cell--text {
+.fmdqui-dashboard-table .fmdqui-table-cell__text,
+.fmdqui-dashboard-table .fmdqui-table-cell--text,
+.fmdqui-dashboard-table td.fmdqui-table-cell {
   font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
   font-size: 12px !important;
   font-weight: 500 !important;

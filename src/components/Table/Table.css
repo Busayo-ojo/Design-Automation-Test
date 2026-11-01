@@ -69,10 +69,11 @@
 .fmdqui-table-header-cell {
   height: 44px;
   padding: 12px 24px;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
   font-size: var(--font-size-p-xs, 12px);
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-grey-default, #667185);
   white-space: nowrap;
   vertical-align: middle;
@@ -230,8 +231,10 @@
 
 /* Plain text cell */
 .fmdqui-table-cell__text {
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
   font-size: var(--font-size-p-sm, 14px);
   line-height: var(--font-line-height-paragraph, 20px);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-grey-focused, #101928);
 }
 .fmdqui-table-cell__text--medium {
@@ -252,16 +255,20 @@
 }
 
 .fmdqui-table-cell__primary-text {
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
   font-size: var(--font-size-p-sm, 14px);
   font-weight: 500;
   line-height: var(--font-line-height-paragraph, 20px);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-grey-focused, #101928);
 }
 
 .fmdqui-table-cell__secondary-text {
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
   font-size: var(--font-size-p-xs, 12px);
   font-weight: 400;
   line-height: var(--font-line-height-paragraph, 18px);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-grey-default, #667185);
 }
 

@@ -513,6 +513,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         <TableCell
                           variant="text"
                           text={item.member}
+                          textWeight="medium"
                         />
                         <TableCell
                           variant="text-stack"
