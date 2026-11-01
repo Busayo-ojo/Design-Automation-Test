@@ -8,7 +8,7 @@
 | Special Primary Buttons / information | Complete | Elements/➡️ Button → Information | 2026-05-29 | hover + focused states added |
 | Special Primary Buttons / destructive | Complete | Elements/➡️ Button → SpecialDestructive | 2026-05-29 | New variant (error), all 3 states |
 | Sidebars | Complete | Components/🍺 Sidebar | 2026-10-26 | Replaced NavMenu; cell primitives, sections, variants 1 & 2, 4 themes |
-| Dropdown / Menu | Complete | Components/🔽 Dropdown | 2026-10-27 | Figma 2190:52619 & 2159:51455; standalone trigger & popover menu |
+| Dropdown / Menu | Superseded | Components/🔽 Dropdowns | 2026-10-27 | Earlier singular Dropdown stories removed; use Dropdowns |
 | Dropdown / Selectors | Complete | Elements/🔤 Input → Input Dropdown | 2026-10-27 | Figma 2198:54679; merged into Input with 4 types and 5 states |
 | fmdq-logo | Complete | Elements/🏛️ Logo | 2026-10-26 | Node 6769:1811; Default & DarkBG Card variants |
 | Command shortcut | Complete | Components/🔽 Dropdowns → Elements / ⌘ Command Shortcut | 2026-10-27 | Figma 2327:77216; 2 variants (Type) |
@@ -50,7 +50,7 @@
 | `icon / hashtag`, `icon / heart`, chevron, dots | existing as-is | `Icon` (foundations, 418 icons) |
 | menu item / header / shortcut / sections / popovers | genuinely new | `src/components/Dropdowns/` |
 
-> **Note.** `Components/🔽 Dropdown` (singular) and `Elements/🔤 Input → Input Dropdown` were earlier builds from these same Figma nodes (`2190:52619`, `2198:54679`, `2159:51455`). `Components/🔽 Dropdowns` (plural) is the rebuild from the elements up and is the current reference. The two older entries are left in place and untouched.
+> **Note.** `Components/🔽 Dropdown` (singular) stories have been removed. `Components/🔽 Dropdowns` (plural) is the rebuild from the elements up and is the current reference.
 
 ## Reuse mapping — AuthBackground native shader (2026-10-27)
 

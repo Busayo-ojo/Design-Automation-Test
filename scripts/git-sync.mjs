@@ -153,7 +153,11 @@ function stageAndCommit(files, message) {
     if (DRY_RUN) {
       info(`  [dry-run] git add "${file}"`);
     } else {
-      run(`git add "${file}"`);
+      if (fs.existsSync(path.resolve(ROOT, file))) {
+        run(`git add "${file}"`);
+      } else {
+        run(`git rm -r --cached --ignore-unmatch "${file}" 2>/dev/null || true`);
+      }
     }
   }
 
