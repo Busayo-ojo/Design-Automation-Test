@@ -206,7 +206,7 @@ export const SetPassword: React.FC<SetPasswordProps> = ({
                   hasHelperText={Boolean(passwordError)}
                   onChange={handlePasswordChange}
                   hasLeftIcon={true}
-                  leadingIcon={<Icon name="lock" size={20} color="var(--color-neutral-500)" />}
+                  leadingIcon={<Icon name="lock" variant="bold" size={20} color="var(--color-neutral-500)" />}
                   hasRightIcon={true}
                   trailingIcon={
                     <button
@@ -218,6 +218,7 @@ export const SetPassword: React.FC<SetPasswordProps> = ({
                     >
                       <Icon
                         name={showPassword ? 'eye-slash' : 'eye'}
+                        variant="bold"
                         size={20}
                         color="var(--color-neutral-500)"
                       />
@@ -237,7 +238,7 @@ export const SetPassword: React.FC<SetPasswordProps> = ({
                   hasHelperText={Boolean(confirmPasswordError)}
                   onChange={handleConfirmPasswordChange}
                   hasLeftIcon={true}
-                  leadingIcon={<Icon name="lock" size={20} color="var(--color-neutral-500)" />}
+                  leadingIcon={<Icon name="lock" variant="bold" size={20} color="var(--color-neutral-500)" />}
                   hasRightIcon={true}
                   trailingIcon={
                     <button
@@ -249,6 +250,7 @@ export const SetPassword: React.FC<SetPasswordProps> = ({
                     >
                       <Icon
                         name={showConfirmPassword ? 'eye-slash' : 'eye'}
+                        variant="bold"
                         size={20}
                         color="var(--color-neutral-500)"
                       />

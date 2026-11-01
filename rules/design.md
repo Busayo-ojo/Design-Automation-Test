@@ -92,6 +92,11 @@
    - **Semantic Icons**: Toast icon must match the state 1:1 (`shield-tick` or `check-circle` for success; `alert-circle` or `close-circle` for errors). Never substitute mismatched icons.
    - **Gradient & Feathering**: Banners and toasts must retain their full radial grain/feathered backdrop spread without clipping.
 
+5. **Icon Variant Style Rules (Bold vs. Linear)**:
+   - **Form Fields & Content Icons (`variant="bold"`)**: All leading and trailing icons inside form fields, cards, and status badges (e.g. `user`, `lock`, `eye`, `eye-slash`, `mail-check`, `shield-tick`, `clock`, `check-circle`) must use **`variant="bold"`**.
+   - **Navigation & Directional Exceptions (`variant="linear"`)**: Only directional indicators and dismissal actions stay **`variant="linear"`** (specifically `arrow-left`, `arrow-right`, `chevron-left`, `chevron-right`, `chevron-down`, and `close`).
+   - **React Implementation Guard**: Because the `<Icon />` primitive component in code defaults to `'linear'` when the prop is omitted, **you must always explicitly pass `variant="bold"`** to avoid regression back to thin stroke icons.
+
 ---
 
 ## 5. Prototyping & Interaction Rules

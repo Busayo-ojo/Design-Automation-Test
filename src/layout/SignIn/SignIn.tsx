@@ -178,7 +178,7 @@ export const SignIn: React.FC<SignInProps> = ({
               helperText={userIdError}
               hasHelperText={Boolean(userIdError)}
               hasLeftIcon={true}
-              leadingIcon={<Icon name="user" size={20} color="var(--color-neutral-500)" />}
+              leadingIcon={<Icon name="user" variant="bold" size={20} color="var(--color-neutral-500)" />}
               hasRightIcon={false}
               autoComplete="username"
               required
@@ -198,7 +198,7 @@ export const SignIn: React.FC<SignInProps> = ({
               helperText={passwordError}
               hasHelperText={Boolean(passwordError)}
               hasLeftIcon={true}
-              leadingIcon={<Icon name="lock" size={20} color="var(--color-neutral-500)" />}
+              leadingIcon={<Icon name="lock" variant="bold" size={20} color="var(--color-neutral-500)" />}
               hasRightIcon={true}
               trailingIcon={
                 <button
@@ -210,6 +210,7 @@ export const SignIn: React.FC<SignInProps> = ({
                 >
                   <Icon
                     name={showPassword ? 'eye-slash' : 'eye'}
+                    variant="bold"
                     size={20}
                     color="var(--color-neutral-500)"
                   />

@@ -130,7 +130,7 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
                 helperText={userIdError}
                 hasHelperText={Boolean(userIdError)}
                 onChange={handleUserIdChange}
-                leadingIcon={<Icon name="user" size={20} color="var(--color-neutral-500)" />}
+                leadingIcon={<Icon name="user" variant="bold" size={20} color="var(--color-neutral-500)" />}
                 hasRightIcon={false}
                 autoFocus
               />
