@@ -127,6 +127,7 @@ function stageAndCommit(files, message) {
     '.gitignore',
     'package.json',
     'README.md',
+    'design.md',
     '.cursor/mcp.json'
   ];
 
