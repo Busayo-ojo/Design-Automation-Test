@@ -26,6 +26,7 @@
 | Tabbed Buttons | Complete | Elements/🚥 Tabbed Buttons | 2026-10-27 | Figma 1543:6760; middle and more variants given full borders to match the code (borders checked by hand, not with figma_check_design_parity) |
 | Breadcrumbs | Complete | Components/🍞 Breadcrumbs | 2026-10-31 | Figma 2031:39144 & 2031:39096; 4 variant states (default, hover, active, disabled) + demo trail, custom separator, icon swap; borders in Grey/200 (#E4E7EC) |
 | Pagination | Complete | Components/📄 Pagination | 2026-10-27 | Figma 347:10062; rebuild from lowest base elements: PageNumber (2608:66376, 12 variants), TruncatedPages (2775:76546), PageIndicator (2609:67848), NavigationControls (2607:66246, 15 variants), PaginationList (2767:76342, 15 variants), full Pagination bar (2767:76362, 15 variants with 5 variations and 4 alignments) |
+| DRP / Dashboard | Complete | Layout/📊 Dashboard | 2026-11-01 | Figma 10301:78467; full responsive desktop layout assembling Sidebar (v2, dark-blue), MetricsCard (×4), Approvals Table Card, Contributions ProgressBar Card, Recent Activity, and Quick Actions grid |
 
 ## Reuse mapping — Pagination (2026-10-27)
 
@@ -167,6 +168,19 @@ Curvature refinement (2026-10-31): reduced spatial frequency, domain-warp streng
 | Hover State | existing tokens | `--color-primary-300` (`#3D89DF`) label/icon, `--color-neutral-400` (`#98A2B3`) separator |
 | Active State | existing tokens | `--color-secondary-500` / gold (`#CC9933`) label, `--color-primary-500` (`#0D5EBA`) icon, `--color-neutral-400` (`#98A2B3`) separator |
 | Disabled State | existing tokens | `--color-neutral-400` (`#98A2B3`) label/icon/separator |
+
+## Reuse mapping — DRP / Dashboard (2026-11-01)
+
+| Figma element (Node 10301:78467) | Decision | Implementation |
+| :--- | :--- | :--- |
+| Sidebar (`10301:78468`) | existing component as-is | `<Sidebar variant="2" theme="dark-blue">` (`src/components/Sidebar`) |
+| Page header (`10301:79039`) | composite from existing | Title (24px DM Sans Bold), Subtitle (14px Regular), `<Button variant="secondary" size="sm">` + `<Button variant="primary" size="sm">` |
+| Metrics Cards (`10301:79056`) | existing component as-is | 4 × `<MetricsCard orientation="left">` (`src/components/Metrics`) with gold (`#CC9933`) bold icons |
+| Approvals Card & Table (`10301:79208`) | existing components as-is | `<Card>`, `<Table>`, `<TableRow>`, `<TableCell>` (`badge`, `text-stack`, `text`, `actions`), `<Badge color="blue">`, `<Button>` |
+| Contributions Card (`10301:79209`) | existing components as-is | `<Card>`, 4 × `<ProgressBar size="lg" hasPercentages percentagePosition="bottom">`, `<Button>` |
+| Recent Activity Card (`10301:81893`) | existing components as-is | `<Card>`, `<Badge color="success" \| "error" type="filled">`, typography |
+| Quick Actions Card (`10301:81894`) | existing components as-is | `<Card>`, 2×2 grid with 4 × `<Button variant="secondary" size="sm">` using bold icons (`user-tick`, `coin-swap`, `calendar-tick`, `upload`) |
+| Desktop Page Layout (`10301:78467`) | genuinely new composite | `src/layout/Dashboard/` (`Dashboard.tsx`, `Dashboard.css`, `Dashboard.stories.tsx`, `Dashboard.docs.mdx`) |
 
 ## Icon Variant Implementation Rule (`variant="bold"` vs `variant="linear"`)
 

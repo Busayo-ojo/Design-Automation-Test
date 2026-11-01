@@ -1,0 +1,41 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as DashboardStories from './Dashboard.stories';
+
+<Meta of={DashboardStories} />
+
+# DRP Dashboard
+
+## Overview
+
+The `Dashboard` component represents the primary command center for Market Service Group (MSG Admin) users on the FMDQ Data Reporting Portal (DRP), matching Figma frame **DRP / Dashboard** (node `10301:78467`).
+
+It assembles the core design system components into a responsive desktop layout:
+- **`Sidebar`**: Left navigation column (`variant="2"`, `theme="dark-blue"`) with user profile header, global search, badge counts, and categorized module items
+- **`PageHeader`**: Screen title, date subtitle, summary export button, and quick navigation CTA
+- **`MetricsCard`**: 4 top KPI tiles tracking pending approvals, daily contributions, weekly returns, and rejections
+- **`Approvals Card & Table`**: Interactive data table displaying queued contributions with module badges and review triggers
+- **`Contributions Card`**: Visual progress bars showing daily completion ratios across major market segments (NIBOR, NITTY, NAFEX, Money market)
+- **`Recent Activity Card`**: Audit log of recent authorization and rejection decisions with timestamps
+- **`Quick Actions Card`**: 2×2 button grid for common operational workflows
+
+## Figma Reference
+
+<iframe
+  title="DRP Dashboard Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=10301-78467&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={DashboardStories.Default} sourceState="shown" />
+
+## Queue Clear State
+
+<Canvas of={DashboardStories.QueueClear} sourceState="shown" />
+
+## Props
+
+<Controls />

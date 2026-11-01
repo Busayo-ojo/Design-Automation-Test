@@ -1,0 +1,365 @@
+/* ─── Dashboard Full Page Layout ─────────────────────────────────────────────── */
+
+.fmdqui-dashboard-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--color-neutral-50, #F9FAFB);
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  color: var(--color-neutral-900, #101828);
+  box-sizing: border-box;
+}
+
+/* ─── Sidebar Column ───────────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-layout__sidebar {
+  flex-shrink: 0;
+  width: 272px;
+  height: 100vh;
+  z-index: 30;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-layout__sidebar .fmdqui-sidebar {
+  height: 100vh;
+}
+
+/* ─── Main Content Canvas ──────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-layout__main {
+  flex: 1 1 0%;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-layout__main-inner {
+  max-width: 1168px;
+  margin: 0 auto;
+  padding: var(--spacing-32, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24, 24px);
+  box-sizing: border-box;
+}
+
+/* ─── 1. Page Header ───────────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-layout__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16, 16px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-layout__title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fmdqui-dashboard-layout__title {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-h3, 24px);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-neutral-900, #101828);
+}
+
+.fmdqui-dashboard-layout__subtitle {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-neutral-500, #667185);
+}
+
+.fmdqui-dashboard-layout__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12, 12px);
+}
+
+/* ─── 2. Top Metrics Grid ──────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-layout__metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-16, 16px);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─── 3. Content Grid (Approvals & Contributions) ─────────────────────────── */
+
+.fmdqui-dashboard-layout__content-grid {
+  display: flex;
+  gap: var(--spacing-16, 16px);
+  width: 100%;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+/* ─── 4. Activity Grid (Recent Activity & Quick Actions) ──────────────────── */
+
+.fmdqui-dashboard-layout__activity-grid {
+  display: flex;
+  gap: var(--spacing-16, 16px);
+  width: 100%;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+/* ─── Shared Card Containers ───────────────────────────────────────────────── */
+
+.fmdqui-dashboard-card {
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  border-radius: var(--radius-12, 12px);
+  box-shadow: none;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.fmdqui-dashboard-card--approvals {
+  flex: 1 1 728px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fmdqui-dashboard-card--contributions {
+  flex: 0 0 360px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.fmdqui-dashboard-card--activity {
+  flex: 1 1 728px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fmdqui-dashboard-card--quick-actions {
+  flex: 0 0 360px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Card Headers ─────────────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 20px 16px 20px;
+  gap: 12px;
+  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC);
+}
+
+.fmdqui-dashboard-card__header-flush {
+  padding: 20px 20px 0 20px;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.fmdqui-dashboard-card__title {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-lg, 16px);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-neutral-900, #101828);
+}
+
+.fmdqui-dashboard-card__subtitle {
+  margin: 4px 0 0 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-neutral-500, #667185);
+}
+
+/* ─── Approvals Table ──────────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-table-container {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.fmdqui-dashboard-table {
+  width: 100%;
+}
+
+.fmdqui-dashboard-table thead th,
+.fmdqui-dashboard-table .fmdqui-table-header-cell {
+  background-color: var(--color-neutral-50, #F9FAFB);
+  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC);
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 500;
+  color: var(--color-neutral-500, #667185);
+  padding: 10px 16px;
+  height: 44px;
+}
+
+.fmdqui-dashboard-table tbody tr {
+  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC);
+}
+
+.fmdqui-dashboard-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.fmdqui-dashboard-table tbody td,
+.fmdqui-dashboard-table .fmdqui-table-cell {
+  padding: 6px 16px;
+  height: 52px;
+}
+
+/* ─── Contributions Body ───────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-card__contributions-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.fmdqui-dashboard-card__progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fmdqui-dashboard-card__footer-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 4px;
+}
+
+/* ─── Recent Activity Body ─────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-card__activity-body {
+  padding: 16px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fmdqui-dashboard-activity-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.fmdqui-dashboard-activity-row__description {
+  flex: 1 1 0%;
+  min-width: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 400;
+  color: var(--color-neutral-900, #101828);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fmdqui-dashboard-activity-row__timestamp {
+  flex-shrink: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 400;
+  color: var(--color-neutral-500, #667185);
+}
+
+/* ─── Quick Actions Body ───────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-card__quick-actions-body {
+  padding: 16px 20px 20px 20px;
+}
+
+.fmdqui-dashboard-quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.fmdqui-dashboard-quick-actions-btn {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 8px 12px;
+}
+
+/* ─── Responsive Desktop Breakpoints ───────────────────────────────────────── */
+
+@media (max-width: 1240px) {
+  .fmdqui-dashboard-layout__metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  .fmdqui-dashboard-layout__content-grid,
+  .fmdqui-dashboard-layout__activity-grid {
+    flex-direction: column;
+  }
+
+  .fmdqui-dashboard-card--approvals,
+  .fmdqui-dashboard-card--contributions,
+  .fmdqui-dashboard-card--activity,
+  .fmdqui-dashboard-card--quick-actions {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 860px) {
+  .fmdqui-dashboard-layout {
+    flex-direction: column;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .fmdqui-dashboard-layout__sidebar {
+    width: 100%;
+    height: auto;
+  }
+
+  .fmdqui-dashboard-layout__main {
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .fmdqui-dashboard-layout__main-inner {
+    padding: var(--spacing-16, 16px);
+  }
+
+  .fmdqui-dashboard-layout__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fmdqui-dashboard-layout__metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
