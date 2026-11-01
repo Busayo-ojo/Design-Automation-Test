@@ -1,6 +1,6 @@
 # FMDQ Design System & Flow Screen Rules (design.md)
 
-> **Purpose**: This document defines the engineering and design rules for creating, composing, and prototyping screens and UI flows on Figma for the **FMDQ Data Reporting Portal (DRP)**. It captures the foundational design language, canvas architectural constraints, and all critical feedback, corrections, and learnings accumulated across implementations.
+> **Purpose**: This document defines the engineering and design rules for creating, composing, and prototyping screens and UI flows on Figma for the **FMDQ Design System**. It captures the foundational design language, canvas architectural constraints, and all critical feedback, corrections, and learnings accumulated across implementations.
 
 ---
 
@@ -65,8 +65,11 @@
 
 ## 4. UI Components & Composition Rules
 
-1. **Breadcrumbs**:
-   - Standard 3-tier hierarchy: `Dashboard / <Parent Section> / <Active Page>` (e.g., `Dashboard / To authorise / NIBOR`).
+1. **Breadcrumbs & Back Navigation**:
+   - **Sidebar Landing Pages Rule**: Landing pages reached directly by clicking a sidebar menu item (e.g., `Users` table, `Approvals` inbox, Role dashboards) **do NOT have breadcrumbs or back buttons** (`visible = false`). They display only the page title and subtitle.
+   - **Breadcrumb Hierarchy**: Breadcrumb logic begins when a user navigates deeper into a sub-page or sub-flow within that module (e.g., `Users > Create user` or `Contributions > NIBOR > Enter rates`).
+   - **Back Button Placement & Targeting**: Flow sub-screens feature a leading 36px back button inside `Frame 1` of the breadcrumb trail. The back button must always be prototyped to return to the specific screen the user originated from.
+   - **Clickable Breadcrumb Items**: Every non-active ancestor item in the breadcrumb trail must have a prototype click reaction to its destination screen. If an ancestor module screen does not yet exist on canvas (e.g., an overarching "Contributions" hub), log it in the prototype audit backlog.
    - **Automated Text Targeting**: When modifying breadcrumbs programmatically via scripts or plugins, **always target the `Label` text layer**. Never overwrite the `Separator` text layer, which is fixed to a 20px width and will cause severe text overlapping and collapse.
    - Top and bottom borders: 1px solid `--color-neutral-200` (`#E4E7EC`) with a bounded height of `38px`.
 
@@ -118,3 +121,4 @@ Before completing any Figma UI flow task, execute the following checks:
    - Correct full-width button stretching.
 3. **Prototype Reaction Count**: Run a reaction audit across the target section to verify that all primary CTAs are interactive.
 4. **Audit Table Sync**: Confirm `Prototype audit · dead ends` reflects the latest screen count and remaining unwired CTAs.
+
