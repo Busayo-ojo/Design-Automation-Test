@@ -85,8 +85,8 @@ Curvature refinement (2026-10-31): reduced spatial frequency, domain-warp streng
 | Background (`10310:262845`) | existing component as-is | `<AuthBackground>` (Three.js GPU GLSL shader) |
 | Logo (`10303:161104`) | existing component as-is | `<Logo variant="default" size="md" />` |
 | Heading & Subtitle (`10303:161122`) | semantic markup | Card header (20px SemiBold title, 14px Regular subtitle) |
-| User ID Input (`10303:161126`) | existing component as-is | `<Input size="lg" label="User ID" placeholder="e.g. USR-90412" leadingIcon={<Icon name="user" size={20} />} hasRightIcon={false} />` |
-| Password Input (`10303:161144`) | existing component as-is | `<Input size="lg" label="Password" placeholder="Enter your password" leadingIcon={<Icon name="lock" size={20} />} trailingIcon={<button ...><Icon name="eye" / "eye-slash" size={20} /></button>} />` |
+| User ID Input (`10303:161126`) | existing component as-is | `<Input size="lg" label="User ID" placeholder="e.g. USR-90412" leadingIcon={<Icon name="user" variant="bold" size={20} />} hasRightIcon={false} />` |
+| Password Input (`10303:161144`) | existing component as-is | `<Input size="lg" label="Password" placeholder="Enter your password" leadingIcon={<Icon name="lock" variant="bold" size={20} />} trailingIcon={<button ...><Icon name="eye" / "eye-slash" variant="bold" size={20} /></button>} />` |
 | Forgot password button (`10303:161164`) | existing component as-is | `<Button variant="text" size="sm" buttonType="primary">Forgot password?</Button>` |
 | Sign in button (`10303:161167`) | existing component as-is | `<Button variant="primary" size="lg" className="fmdqui-signin__submit-btn">Sign in</Button>` |
 | Support caption (`10303:161170`) | semantic markup | Caption with `mailto:support@fmdqgroup.com` |
@@ -168,8 +168,10 @@ Curvature refinement (2026-10-31): reduced spatial frequency, domain-warp streng
 | Active State | existing tokens | `--color-secondary-500` / gold (`#CC9933`) label, `--color-primary-500` (`#0D5EBA`) icon, `--color-neutral-400` (`#98A2B3`) separator |
 | Disabled State | existing tokens | `--color-neutral-400` (`#98A2B3`) label/icon/separator |
 
+## Icon Variant Implementation Rule (`variant="bold"` vs `variant="linear"`)
 
-
-
+- **Figma Design Pattern**: In Figma, all content icons and form field icons (e.g., `user`, `lock`, `eye`, `eye-slash`, `mail-check`, `shield-tick`, `clock`, `check-circle`) use the **bold** variant. Directional controls (`arrow-left`, `arrow-right`, `chevron-left`, `chevron-right`, `chevron-down`) and dismissal (`close`) use the **linear** variant.
+- **Code Default Pitfall**: The `<Icon />` component in `src/foundations/icons/` defaults to `variant="linear"` when the `variant` prop is omitted.
+- **Mandatory Practice**: Always check the Figma icon variant style. When implementing form inputs, cards, or status indicators where Figma uses bold icons, explicitly pass `variant="bold"` (e.g. `<Icon name="user" variant="bold" size={20} />`) to maintain 1:1 visual parity and prevent regression back to thin stroke icons.
 
 
