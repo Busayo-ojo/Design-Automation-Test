@@ -658,7 +658,6 @@
   padding: 8px 12px;
   background-color: var(--color-primary-50, #EBF3FC) !important;
   border: 1px solid var(--color-primary-200, #C6DDF7) !important;
-  border-radius: var(--radius-6, 6px) !important;
   color: var(--color-primary-700, #1D326D) !important;
   font-family: var(--font-family-primary, 'DM Sans', sans-serif);
   font-size: 12px !important;
@@ -669,6 +668,23 @@
   transition: all 0.15s ease;
   box-shadow: none !important;
   box-sizing: border-box;
+}
+
+/* Figma 2×2 button grid: inner facing center corner of each button has 0px radius */
+.fmdqui-dashboard-quick-actions-grid .fmdqui-dashboard-quick-actions-btn:nth-child(1) {
+  border-radius: 6px 6px 0 6px !important;
+}
+
+.fmdqui-dashboard-quick-actions-grid .fmdqui-dashboard-quick-actions-btn:nth-child(2) {
+  border-radius: 6px 6px 6px 0 !important;
+}
+
+.fmdqui-dashboard-quick-actions-grid .fmdqui-dashboard-quick-actions-btn:nth-child(3) {
+  border-radius: 6px 0 6px 6px !important;
+}
+
+.fmdqui-dashboard-quick-actions-grid .fmdqui-dashboard-quick-actions-btn:nth-child(4) {
+  border-radius: 0 6px 6px 6px !important;
 }
 
 .fmdqui-dashboard-quick-actions-btn:hover {
