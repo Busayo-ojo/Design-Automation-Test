@@ -9,6 +9,8 @@
   font-family: var(--font-family-primary, 'DM Sans', sans-serif);
   color: var(--color-neutral-900, #101828);
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ─── Sidebar Column ───────────────────────────────────────────────────────── */
@@ -41,10 +43,10 @@
 .fmdqui-dashboard-layout__main-inner {
   max-width: 1168px;
   margin: 0 auto;
-  padding: var(--spacing-32, 32px);
+  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-24, 24px);
+  gap: 24px;
   box-sizing: border-box;
 }
 
@@ -54,8 +56,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--spacing-16, 16px);
+  gap: 16px;
   width: 100%;
+  height: 53px;
   box-sizing: border-box;
 }
 
@@ -68,44 +71,173 @@
 .fmdqui-dashboard-layout__title {
   margin: 0;
   font-family: var(--font-family-primary, 'DM Sans', sans-serif);
-  font-size: var(--font-size-h3, 24px);
-  font-weight: 700;
-  line-height: 1.25;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: var(--font-letter-spacing-heading-large, -0.06em);
   color: var(--color-neutral-900, #101828);
 }
 
 .fmdqui-dashboard-layout__subtitle {
   margin: 0;
   font-family: var(--font-family-primary, 'DM Sans', sans-serif);
-  font-size: var(--font-size-p-sm, 14px);
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-neutral-500, #667185);
 }
 
 .fmdqui-dashboard-layout__actions {
   display: flex;
   align-items: center;
-  gap: var(--spacing-12, 12px);
+  gap: 12px;
+}
+
+/* Download summary secondary action */
+.fmdqui-dashboard-btn--download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 8px 12px;
+  background-color: #FFFFFF !important;
+  border: 1.5px solid var(--color-primary-600, #034592) !important;
+  border-radius: var(--radius-12, 12px) !important;
+  color: var(--color-primary-600, #034592) !important;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-btn--download:hover {
+  background-color: var(--color-primary-50, #EBF3FC) !important;
+}
+
+/* Review approvals primary action */
+.fmdqui-dashboard-btn--review-approvals {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 8px 12px;
+  background-color: var(--color-primary-700, #1D326D) !important;
+  border: none !important;
+  border-radius: var(--radius-12, 12px) !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-btn--review-approvals:hover {
+  background-color: var(--color-primary-800, #14234C) !important;
 }
 
 /* ─── 2. Top Metrics Grid ──────────────────────────────────────────────────── */
 
 .fmdqui-dashboard-layout__metrics-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--spacing-16, 16px);
+  grid-template-columns: repeat(4, 264px);
+  gap: 16px;
   width: 100%;
   box-sizing: border-box;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card {
+  border-radius: 16px;
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  background-color: #FFFFFF;
+  width: 264px;
+  height: 160px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  flex-shrink: 0;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__title {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+  margin: 0;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__value {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-900, #101828);
+  margin: 0;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__subtext-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__subtext {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+  white-space: nowrap;
 }
 
 /* ─── 3. Content Grid (Approvals & Contributions) ─────────────────────────── */
 
 .fmdqui-dashboard-layout__content-grid {
   display: flex;
-  gap: var(--spacing-16, 16px);
+  gap: 16px;
   width: 100%;
-  align-items: stretch;
+  height: 452px;
+  align-items: flex-start;
   box-sizing: border-box;
 }
 
@@ -113,9 +245,10 @@
 
 .fmdqui-dashboard-layout__activity-grid {
   display: flex;
-  gap: var(--spacing-16, 16px);
+  gap: 16px;
   width: 100%;
-  align-items: stretch;
+  height: 161px;
+  align-items: flex-start;
   box-sizing: border-box;
 }
 
@@ -131,137 +264,340 @@
 }
 
 .fmdqui-dashboard-card--approvals {
-  flex: 1 1 728px;
-  min-width: 0;
+  width: 728px;
+  height: 452px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .fmdqui-dashboard-card--contributions {
-  flex: 0 0 360px;
   width: 360px;
+  height: 435px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.fmdqui-dashboard-card--contributions .fmdqui-card-header,
+.fmdqui-dashboard-card--contributions .fmdqui-dashboard-card__header-flush {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 45px !important;
+  flex-shrink: 0 !important;
+}
+
+.fmdqui-dashboard-card--contributions .fmdqui-card-body,
+.fmdqui-dashboard-card--contributions .fmdqui-dashboard-card__contributions-body {
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: calc(100% - 45px) !important;
+  box-sizing: border-box !important;
 }
 
 .fmdqui-dashboard-card--activity {
-  flex: 1 1 728px;
-  min-width: 0;
+  width: 728px;
+  height: 161px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 12px;
 }
 
 .fmdqui-dashboard-card--quick-actions {
-  flex: 0 0 360px;
   width: 360px;
+  height: 153px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 12px;
 }
 
-/* ─── Card Headers ─────────────────────────────────────────────────────────── */
+/* ─── Card Headers & Titles ────────────────────────────────────────────────── */
 
 .fmdqui-dashboard-card__header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   padding: 20px 20px 16px 20px;
-  gap: 12px;
-  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC);
-}
-
-.fmdqui-dashboard-card__header-flush {
-  padding: 20px 20px 0 20px;
-  margin-bottom: 0;
-  border-bottom: none;
+  height: 81px;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .fmdqui-dashboard-card__title {
   margin: 0;
   font-family: var(--font-family-primary, 'DM Sans', sans-serif);
-  font-size: var(--font-size-p-lg, 16px);
+  font-size: 16px;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-heading-small, -0.04em);
   color: var(--color-neutral-900, #101828);
 }
 
 .fmdqui-dashboard-card__subtitle {
   margin: 4px 0 0 0;
   font-family: var(--font-family-primary, 'DM Sans', sans-serif);
-  font-size: var(--font-size-p-xs, 12px);
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-neutral-500, #667185);
 }
 
-/* ─── Approvals Table ──────────────────────────────────────────────────────── */
+/* Link-style action buttons ("View all", "View contributions") */
+.fmdqui-dashboard-card__link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-primary-700, #1D326D);
+  transition: color 0.15s ease;
+}
+
+.fmdqui-dashboard-card__link-btn:hover {
+  color: var(--color-primary-900, #001633);
+}
+
+.fmdqui-dashboard-card__link-btn svg {
+  color: var(--color-primary-600, #034592);
+}
+
+/* ─── Approvals Table Exact Specifications ──────────────────────────────────── */
 
 .fmdqui-dashboard-table-container {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  flex: 1 1 auto;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .fmdqui-dashboard-table {
-  width: 100%;
+  width: 100% !important;
+  border-collapse: collapse !important;
+  table-layout: fixed !important;
+}
+
+.fmdqui-dashboard-table thead {
+  background-color: var(--color-neutral-50, #F9FAFB) !important;
+}
+
+.fmdqui-dashboard-table thead tr {
+  height: 44px !important;
 }
 
 .fmdqui-dashboard-table thead th,
 .fmdqui-dashboard-table .fmdqui-table-header-cell {
-  background-color: var(--color-neutral-50, #F9FAFB);
-  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC);
-  font-size: var(--font-size-p-xs, 12px);
-  font-weight: 500;
-  color: var(--color-neutral-500, #667185);
-  padding: 10px 16px;
-  height: 44px;
+  background-color: var(--color-neutral-50, #F9FAFB) !important;
+  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC) !important;
+  border-top: 1px solid var(--color-neutral-200, #E4E7EC) !important;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-neutral-500, #667185) !important;
+  box-sizing: border-box !important;
+  height: 44px !important;
+  vertical-align: middle !important;
 }
 
+.fmdqui-dashboard-table thead th:nth-child(1) { width: 136px; padding: 0 12px 0 24px !important; }
+.fmdqui-dashboard-table thead th:nth-child(2) { width: 196px; padding: 0 12px !important; }
+.fmdqui-dashboard-table thead th:nth-child(3) { width: 208px; padding: 0 12px !important; }
+.fmdqui-dashboard-table thead th:nth-child(4) { width: 112px; padding: 0 12px !important; }
+.fmdqui-dashboard-table thead th:nth-child(5) { width: 74px; padding: 0 20px 0 12px !important; }
+
 .fmdqui-dashboard-table tbody tr {
-  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC);
+  height: 54px !important;
+  max-height: 54px !important;
+  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC) !important;
+  box-sizing: border-box !important;
 }
 
 .fmdqui-dashboard-table tbody tr:last-child {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 
-.fmdqui-dashboard-table tbody td,
-.fmdqui-dashboard-table .fmdqui-table-cell {
-  padding: 6px 16px;
-  height: 52px;
+.fmdqui-dashboard-table tbody td.fmdqui-table-cell {
+  height: 54px !important;
+  max-height: 54px !important;
+  box-sizing: border-box !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC) !important;
+  padding: 0 12px !important;
+}
+
+.fmdqui-dashboard-table tbody tr:last-child td.fmdqui-table-cell {
+  border-bottom: none !important;
+}
+
+.fmdqui-dashboard-table tbody td:nth-child(1) { padding-left: 24px !important; padding-right: 12px !important; }
+.fmdqui-dashboard-table tbody td:nth-child(2) { padding-left: 12px !important; padding-right: 12px !important; }
+.fmdqui-dashboard-table tbody td:nth-child(3) { padding-left: 12px !important; padding-right: 12px !important; }
+.fmdqui-dashboard-table tbody td:nth-child(4) { padding-left: 12px !important; padding-right: 12px !important; }
+.fmdqui-dashboard-table tbody td:nth-child(5) { padding-left: 12px !important; padding-right: 20px !important; text-align: right !important; }
+
+/* Table Text typography exactly from Figma */
+.fmdqui-dashboard-table .fmdqui-table-cell__content {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.fmdqui-dashboard-table .fmdqui-table-cell__text-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  line-height: 1 !important;
+}
+
+.fmdqui-dashboard-table .fmdqui-table-cell__primary-text {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-neutral-900, #101828) !important;
+  margin: 0 !important;
+}
+
+.fmdqui-dashboard-table .fmdqui-table-cell__secondary-text {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-neutral-500, #667185) !important;
+  margin: 0 !important;
+}
+
+.fmdqui-dashboard-table .fmdqui-table-cell--text {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-neutral-900, #101828) !important;
+}
+
+/* Review text button inside table */
+.fmdqui-dashboard-table__review-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-primary-500, #0D5EBA) !important;
+  transition: color 0.15s ease;
+}
+
+.fmdqui-dashboard-table__review-btn:hover {
+  color: var(--color-primary-700, #1D326D) !important;
+  text-decoration: underline;
+}
+
+/* ─── Badge Global Letter Spacing & Sizing in Dashboard ────────────────────── */
+
+.fmdqui-dashboard-layout .fmdqui-badge {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  height: 20px !important;
+  padding: 0 8px !important;
+  border-radius: var(--radius-12, 12px) !important;
+  box-sizing: border-box;
 }
 
 /* ─── Contributions Body ───────────────────────────────────────────────────── */
 
 .fmdqui-dashboard-card__contributions-body {
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  height: 100%;
   justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .fmdqui-dashboard-card__progress-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+}
+
+.fmdqui-dashboard-card__progress-list .fmdqui-progress-bar__label {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-900, #101828);
+}
+
+.fmdqui-dashboard-card__progress-list .fmdqui-progress-bar__meta {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+}
+
+.fmdqui-dashboard-card__progress-list .fmdqui-progress-bar__percentage {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
 }
 
 .fmdqui-dashboard-card__footer-action {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 4px;
 }
 
 /* ─── Recent Activity Body ─────────────────────────────────────────────────── */
 
 .fmdqui-dashboard-card__activity-body {
-  padding: 16px 20px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  box-sizing: border-box;
 }
 
 .fmdqui-dashboard-activity-row {
@@ -269,14 +605,18 @@
   align-items: center;
   gap: 12px;
   width: 100%;
+  height: 20px;
+  box-sizing: border-box;
 }
 
 .fmdqui-dashboard-activity-row__description {
   flex: 1 1 0%;
   min-width: 0;
   font-family: var(--font-family-primary, 'DM Sans', sans-serif);
-  font-size: var(--font-size-p-sm, 14px);
+  font-size: 14px;
   font-weight: 400;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-neutral-900, #101828);
   white-space: nowrap;
   overflow: hidden;
@@ -286,28 +626,63 @@
 .fmdqui-dashboard-activity-row__timestamp {
   flex-shrink: 0;
   font-family: var(--font-family-primary, 'DM Sans', sans-serif);
-  font-size: var(--font-size-p-xs, 12px);
+  font-size: 12px;
   font-weight: 400;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-neutral-500, #667185);
 }
 
 /* ─── Quick Actions Body ───────────────────────────────────────────────────── */
 
 .fmdqui-dashboard-card__quick-actions-body {
-  padding: 16px 20px 20px 20px;
+  box-sizing: border-box;
 }
 
 .fmdqui-dashboard-quick-actions-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  width: 100%;
+  grid-template-columns: repeat(2, 157px);
+  gap: 4px;
+  width: 318px;
+  height: 76px;
+  box-sizing: border-box;
 }
 
 .fmdqui-dashboard-quick-actions-btn {
-  width: 100%;
+  display: inline-flex;
+  align-items: center;
   justify-content: flex-start;
+  gap: 8px;
+  width: 157px;
+  height: 36px;
   padding: 8px 12px;
+  background-color: var(--color-primary-50, #EBF3FC) !important;
+  border: 1px solid var(--color-primary-200, #C6DDF7) !important;
+  border-radius: var(--radius-6, 6px) !important;
+  color: var(--color-primary-700, #1D326D) !important;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-quick-actions-btn:hover {
+  background-color: var(--color-primary-100, #D5E7FA) !important;
+  border-color: var(--color-primary-300, #ADCFF3) !important;
+  color: var(--color-primary-800, #14234C) !important;
+}
+
+.fmdqui-dashboard-quick-actions-btn:active {
+  background-color: var(--color-primary-200, #C6DDF7) !important;
+}
+
+.fmdqui-dashboard-quick-actions-btn svg {
+  color: var(--color-primary-700, #1D326D);
 }
 
 /* ─── Responsive Desktop Breakpoints ───────────────────────────────────────── */
@@ -322,13 +697,23 @@
   .fmdqui-dashboard-layout__content-grid,
   .fmdqui-dashboard-layout__activity-grid {
     flex-direction: column;
+    height: auto;
   }
 
   .fmdqui-dashboard-card--approvals,
   .fmdqui-dashboard-card--contributions,
   .fmdqui-dashboard-card--activity,
   .fmdqui-dashboard-card--quick-actions {
-    flex: 1 1 100%;
+    width: 100%;
+    height: auto;
+  }
+
+  .fmdqui-dashboard-quick-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+
+  .fmdqui-dashboard-quick-actions-btn {
     width: 100%;
   }
 }
@@ -351,12 +736,13 @@
   }
 
   .fmdqui-dashboard-layout__main-inner {
-    padding: var(--spacing-16, 16px);
+    padding: 16px;
   }
 
   .fmdqui-dashboard-layout__header {
     flex-direction: column;
     align-items: flex-start;
+    height: auto;
   }
 
   .fmdqui-dashboard-layout__metrics-grid {

@@ -22,7 +22,6 @@ import {
   TableCell,
 } from '../../components/Table';
 import { ProgressBar } from '../../components/ProgressBar';
-import { Button } from '../../elements/Button';
 import { Badge } from '../../elements/Badge';
 import { Icon } from '../../foundations/icons';
 import defaultAvatar from '../../assets/avatar-marvin.png';
@@ -360,24 +359,22 @@ export const Dashboard: React.FC<DashboardProps> = ({
               <p className="fmdqui-dashboard-layout__subtitle">{dateText}</p>
             </div>
             <div className="fmdqui-dashboard-layout__actions">
-              <Button
-                variant="secondary"
-                size="sm"
-                iconStyle="leading icon"
-                icon={<Icon name="download" variant="bold" size={16} />}
+              <button
+                type="button"
+                className="fmdqui-dashboard-btn--download"
                 onClick={onDownloadSummary}
               >
-                Download summary
-              </Button>
-              <Button
-                variant="primary"
-                size="sm"
-                iconStyle="trailing icon"
-                icon={<Icon name="arrow-right" variant="linear" size={16} />}
+                <Icon name="download" variant="bold" size={16} />
+                <span>Download summary</span>
+              </button>
+              <button
+                type="button"
+                className="fmdqui-dashboard-btn--review-approvals"
                 onClick={onReviewApprovals}
               >
-                Review approvals
-              </Button>
+                <span>Review approvals</span>
+                <Icon name="arrow-right" variant="linear" size={16} />
+              </button>
             </div>
           </header>
 
@@ -481,16 +478,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     Oldest first · 42 items across 6 modules
                   </p>
                 </div>
-                <Button
-                  variant="text"
-                  size="sm"
-                  buttonType="primary"
-                  iconStyle="trailing icon"
-                  icon={<Icon name="arrow-right" variant="linear" size={14} />}
+                <button
+                  type="button"
+                  className="fmdqui-dashboard-card__link-btn"
                   onClick={onViewAllApprovals}
                 >
-                  View all
-                </Button>
+                  <span>View all</span>
+                  <Icon name="arrow-right" variant="linear" size={14} />
+                </button>
               </div>
 
               <TableContainer className="fmdqui-dashboard-table-container">
@@ -520,7 +515,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         <TableCell
                           variant="text"
                           text={item.member}
-                          textWeight="medium"
                         />
                         <TableCell
                           variant="text-stack"
@@ -528,14 +522,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
                           secondaryText={item.submittedDay}
                         />
                         <TableCell variant="actions" align="right">
-                          <Button
-                            variant="text"
-                            size="sm"
-                            buttonType="primary"
+                          <button
+                            type="button"
+                            className="fmdqui-dashboard-table__review-btn"
                             onClick={() => onReviewItem?.(item.id)}
                           >
                             Review
-                          </Button>
+                          </button>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -571,16 +564,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   ))}
                 </div>
                 <div className="fmdqui-dashboard-card__footer-action">
-                  <Button
-                    variant="text"
-                    size="sm"
-                    buttonType="primary"
-                    iconStyle="trailing icon"
-                    icon={<Icon name="arrow-right" variant="linear" size={14} />}
+                  <button
+                    type="button"
+                    className="fmdqui-dashboard-card__link-btn"
                     onClick={onViewContributions}
                   >
-                    View contributions
-                  </Button>
+                    <span>View contributions</span>
+                    <Icon name="arrow-right" variant="linear" size={14} />
+                  </button>
                 </div>
               </CardBody>
             </Card>
@@ -590,12 +581,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <section className="fmdqui-dashboard-layout__activity-grid">
             {/* Left: Your recent activity */}
             <Card className="fmdqui-dashboard-card fmdqui-dashboard-card--activity">
-              <CardHeader className="fmdqui-dashboard-card__header-flush">
-                <CardTitle className="fmdqui-dashboard-card__title">
-                  Your recent activity
-                </CardTitle>
-              </CardHeader>
-              <CardBody className="fmdqui-dashboard-card__activity-body">
+              <CardTitle className="fmdqui-dashboard-card__title">
+                Your recent activity
+              </CardTitle>
+              <div className="fmdqui-dashboard-card__activity-body">
                 {recentActivity.map(act => (
                   <div key={act.id} className="fmdqui-dashboard-activity-row">
                     <Badge
@@ -613,60 +602,50 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     </span>
                   </div>
                 ))}
-              </CardBody>
+              </div>
             </Card>
 
             {/* Right: Quick actions */}
             <Card className="fmdqui-dashboard-card fmdqui-dashboard-card--quick-actions">
-              <CardHeader className="fmdqui-dashboard-card__header-flush">
-                <CardTitle className="fmdqui-dashboard-card__title">
-                  Quick actions
-                </CardTitle>
-              </CardHeader>
-              <CardBody className="fmdqui-dashboard-card__quick-actions-body">
+              <CardTitle className="fmdqui-dashboard-card__title">
+                Quick actions
+              </CardTitle>
+              <div className="fmdqui-dashboard-card__quick-actions-body">
                 <div className="fmdqui-dashboard-quick-actions-grid">
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    iconStyle="leading icon"
-                    icon={<Icon name="user-tick" variant="bold" size={16} />}
+                  <button
+                    type="button"
+                    className="fmdqui-dashboard-quick-actions-btn"
                     onClick={() => onQuickAction?.('create-user')}
-                    className="fmdqui-dashboard-quick-actions-btn"
                   >
-                    Create user
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    iconStyle="leading icon"
-                    icon={<Icon name="coin-swap" variant="bold" size={16} />}
+                    <Icon name="user-tick" variant="bold" size={16} />
+                    <span>Create user</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="fmdqui-dashboard-quick-actions-btn"
                     onClick={() => onQuickAction?.('weekly-fx-rate')}
-                    className="fmdqui-dashboard-quick-actions-btn"
                   >
-                    Weekly FX rate
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    iconStyle="leading icon"
-                    icon={<Icon name="calendar-tick" variant="bold" size={16} />}
+                    <Icon name="coin-swap" variant="bold" size={16} />
+                    <span>Weekly FX rate</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="fmdqui-dashboard-quick-actions-btn"
                     onClick={() => onQuickAction?.('add-holiday')}
-                    className="fmdqui-dashboard-quick-actions-btn"
                   >
-                    Add holiday
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    iconStyle="leading icon"
-                    icon={<Icon name="upload" variant="bold" size={16} />}
+                    <Icon name="calendar-tick" variant="bold" size={16} />
+                    <span>Add holiday</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="fmdqui-dashboard-quick-actions-btn"
                     onClick={() => onQuickAction?.('upload-data')}
-                    className="fmdqui-dashboard-quick-actions-btn"
                   >
-                    Upload data
-                  </Button>
+                    <Icon name="upload" variant="bold" size={16} />
+                    <span>Upload data</span>
+                  </button>
                 </div>
-              </CardBody>
+              </div>
             </Card>
           </section>
         </div>
