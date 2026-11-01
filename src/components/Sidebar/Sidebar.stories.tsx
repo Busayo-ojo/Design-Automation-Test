@@ -554,6 +554,120 @@ export const Variant2ProfileTop: Story = {
   },
 };
 
+export const Variant2DarkBlue: Story = {
+  name: 'Variant 2 / Dark Blue Theme (DRP)',
+  render: () => {
+    const [active, setActive] = useState('dashboard');
+
+    return (
+      <div style={{ display: 'flex', height: '100vh', backgroundColor: '#F9FAFB', padding: '16px', boxSizing: 'border-box' }}>
+        <Sidebar
+          variant="2"
+          theme="dark-blue"
+          activeId={active}
+          onActiveChange={setActive}
+          user={{
+            name: 'Marvin Marvin Ogah',
+            email: 'MSG Admin',
+            avatarSrc: defaultAvatar,
+          }}
+          footerSection={
+            <SidebarSection title="Administration" theme="dark-blue">
+              <SidebarMenuItem
+                id="users-members"
+                theme="dark-blue"
+                label="Users & Members"
+                icon={<Icon name="users" variant="bold" size={20} />}
+                counter={2}
+              />
+              <SidebarMenuItem
+                id="reference-data"
+                theme="dark-blue"
+                label="Reference Data"
+                icon={<Icon name="calendar" variant="bold" size={20} />}
+              />
+            </SidebarSection>
+          }
+        >
+          <SidebarSection hasTitle={false} hasDivider theme="dark-blue">
+            <SidebarMenuItem
+              id="dashboard"
+              theme="dark-blue"
+              label="Dashboard"
+              icon={<Icon name="home" variant="bold" size={20} />}
+            />
+            <SidebarMenuItem
+              id="approvals"
+              theme="dark-blue"
+              label="Approvals"
+              icon={<Icon name="check-circle" variant="bold" size={20} />}
+              counter={42}
+            />
+          </SidebarSection>
+
+          <SidebarSection title="Modules" theme="dark-blue">
+            <SidebarMenuItem
+              id="benchmark-contributions"
+              theme="dark-blue"
+              label="Benchmark Contributions"
+              icon={<Icon name="chart-up" variant="bold" size={20} />}
+              counter={12}
+            />
+            <SidebarMenuItem
+              id="trade-data-reporting"
+              theme="dark-blue"
+              label="Trade Data Reporting"
+              icon={<Icon name="data" variant="bold" size={20} />}
+              counter={14}
+            />
+            <SidebarMenuItem
+              id="securities-settlement"
+              theme="dark-blue"
+              label="Securities & Settlement"
+              icon={<Icon name="bank" variant="bold" size={20} />}
+              counter={3}
+            />
+            <SidebarMenuItem
+              id="fx-market-data"
+              theme="dark-blue"
+              label="FX Market Data"
+              icon={<Icon name="coin-swap" variant="bold" size={20} />}
+              counter={11}
+            />
+            <SidebarMenuItem
+              id="prices"
+              theme="dark-blue"
+              label="Prices"
+              icon={<Icon name="bar-chart-v" variant="bold" size={20} />}
+            />
+            <SidebarMenuItem
+              id="fees-billing"
+              theme="dark-blue"
+              label="Fees & Billing"
+              icon={<Icon name="receipt" variant="bold" size={20} />}
+            />
+            <SidebarMenuItem
+              id="reports"
+              theme="dark-blue"
+              label="Reports"
+              icon={<Icon name="pie-chart" variant="bold" size={20} />}
+            />
+          </SidebarSection>
+        </Sidebar>
+
+        <main style={{ flex: 1, padding: '32px', fontFamily: 'var(--font-family-primary)' }}>
+          <h2 style={{ margin: '0 0 8px 0', fontSize: 'var(--font-size-h5)', color: '#101828' }}>
+            Variant 2 Dark Blue (DRP Admin Master)
+          </h2>
+          <p style={{ color: 'var(--color-neutral-500)', fontSize: 'var(--font-size-p-sm)' }}>
+            Matches Figma node 10301:78468: 12px border-radius, #1D326D badge pills, gold bold icons, active item highlight, thin divider, and pinned Administration footer.
+          </p>
+        </main>
+      </div>
+    );
+  },
+};
+
 // ─── 7. Collapsed Sidebar (82px) ─────────────────────────────────────────────
 
 export const CollapsedState: Story = {

@@ -15,6 +15,8 @@
   width: 272px;
   min-height: 100vh;
   height: 100%;
+  border-radius: var(--radius-12, 12px);
+  overflow: hidden;
   box-sizing: border-box;
   font-family: var(--font-family-primary, "DM Sans", sans-serif);
   transition: width var(--transition-smooth, 0.3s cubic-bezier(0.16, 1, 0.3, 1)),
@@ -46,7 +48,7 @@
 /* 3. Dark Blue Theme (Figma: #001633) */
 .fmdqui-sidebar--theme-dark-blue {
   background-color: var(--color-primary-900, #001633);
-  border-right-color: rgba(255, 255, 255, 0.08);
+  border-right: none;
 }
 
 /* 4. Dark Grey Theme (Figma: #101928) */
@@ -69,7 +71,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 0 16px 0;
+  padding: 0 0 24px 0;
   margin-top: auto;
   flex-shrink: 0;
 }
@@ -266,7 +268,7 @@
 .fmdqui-sidebar-section {
   display: flex;
   flex-direction: column;
-  padding: 0 16px;
+  padding: 0 8px;
   box-sizing: border-box;
   width: 100%;
 }
@@ -277,7 +279,7 @@
 }
 
 .fmdqui-sidebar-section__title-row {
-  padding: 8px 8px 6px 8px;
+  padding: 8px 12px 6px 12px;
 }
 
 /* Figma: 14px DM Sans Medium (NOT uppercase) */
@@ -334,9 +336,12 @@
 }
 
 .fmdqui-sidebar-section--theme-blue .fmdqui-sidebar-section__divider,
-.fmdqui-sidebar-section--theme-dark-blue .fmdqui-sidebar-section__divider,
 .fmdqui-sidebar-section--theme-dark-grey .fmdqui-sidebar-section__divider {
   background-color: rgba(255, 255, 255, 0.08);
+}
+
+.fmdqui-sidebar-section--theme-dark-blue .fmdqui-sidebar-section__divider {
+  background-color: var(--color-primary-700, #1D326D);
 }
 
 /* ==========================================================================
@@ -355,7 +360,7 @@
   justify-content: space-between;
   width: 100%;
   height: 44px;
-  padding: 12px 12px;
+  padding: 12px 16px;
   border-radius: var(--radius-8, 8px);
   box-sizing: border-box;
   background: transparent;
@@ -408,9 +413,9 @@
 .fmdqui-sidebar-menu-item__right {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   flex-shrink: 0;
-  margin-left: 8px;
+  margin-left: 4px;
 }
 
 .fmdqui-sidebar-menu-item__counter {
@@ -503,6 +508,7 @@
 /* 3. Dark Blue Theme Items (Figma: #001633 bg - Gold icons!) */
 .fmdqui-sidebar-menu-item--theme-dark-blue {
   color: var(--color-primary-75, #C6DDF7);
+  border-radius: var(--radius-4, 4px);
 }
 .fmdqui-sidebar-menu-item--theme-dark-blue .fmdqui-sidebar-menu-item__icon {
   color: var(--color-fmdq-gold, #CC9933);
@@ -513,18 +519,44 @@
   color: var(--color-neutral-white, #FFFFFF);
 }
 .fmdqui-sidebar-menu-item--theme-dark-blue:hover .fmdqui-sidebar-menu-item__icon {
-  color: var(--color-neutral-white, #FFFFFF);
+  color: var(--color-fmdq-gold, #CC9933);
 }
 .fmdqui-sidebar-menu-item--theme-dark-blue.fmdqui-sidebar-menu-item--selected,
 .fmdqui-sidebar-menu-item--theme-dark-blue.fmdqui-sidebar-menu-item--state-selected {
-  background-color: var(--color-primary-800, #012657);
-  color: var(--color-neutral-white, #FFFFFF);
+  background-color: var(--color-primary-800, #012657) !important;
+  border-radius: var(--radius-12, 12px) !important;
+  color: var(--color-neutral-white, #FFFFFF) !important;
 }
 .fmdqui-sidebar-menu-item--theme-dark-blue.fmdqui-sidebar-menu-item--selected .fmdqui-sidebar-menu-item__label {
   font-weight: 600;
+  color: var(--color-neutral-white, #FFFFFF) !important;
 }
 .fmdqui-sidebar-menu-item--theme-dark-blue.fmdqui-sidebar-menu-item--selected .fmdqui-sidebar-menu-item__icon {
-  color: var(--color-fmdq-gold, #CC9933);
+  color: var(--color-fmdq-gold, #CC9933) !important;
+}
+
+/* Dark Blue Theme Badges & Counters (Figma #1D326D background, #FFFFFF text, height: 18px, radius: 12px) */
+.fmdqui-sidebar--theme-dark-blue .fmdqui-sidebar-menu-item__counter .fmdqui-badge,
+.fmdqui-sidebar-menu-item--theme-dark-blue .fmdqui-sidebar-menu-item__counter .fmdqui-badge,
+.fmdqui-sidebar--theme-dark-blue .fmdqui-sidebar-menu-item .fmdqui-badge,
+.fmdqui-sidebar-menu-item--theme-dark-blue .fmdqui-badge {
+  background-color: var(--color-primary-700, #1D326D) !important;
+  color: var(--color-neutral-white, #FFFFFF) !important;
+  border-radius: var(--radius-12, 12px) !important;
+  height: 18px !important;
+  line-height: 18px !important;
+  padding: 0 8px !important;
+  min-width: 24px !important;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif) !important;
+  font-size: var(--font-size-p-xs, 12px) !important;
+  font-weight: 500 !important;
+  border: none !important;
+  box-shadow: none !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 /* 4. Dark Grey Theme Items (Figma: #101928 bg) */

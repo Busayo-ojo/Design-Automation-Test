@@ -260,25 +260,40 @@ export const Dashboard: React.FC<DashboardProps> = ({
           user={user}
           hasSearch
           searchPlaceholder="Search"
+          footerSection={
+            <SidebarSection title="Administration" theme="dark-blue">
+              <SidebarMenuItem
+                id="users-members"
+                theme="dark-blue"
+                label="Users & Members"
+                icon={<Icon name="users" variant="bold" size={20} />}
+                counter={2}
+              />
+              <SidebarMenuItem
+                id="reference-data"
+                theme="dark-blue"
+                label="Reference Data"
+                icon={<Icon name="calendar" variant="bold" size={20} />}
+              />
+            </SidebarSection>
+          }
         >
-          {/* Top section: Overview items */}
-          <SidebarMenuItem
-            id="dashboard"
-            theme="dark-blue"
-            label="Dashboard"
-            icon={<Icon name="home" variant="bold" size={20} />}
-          />
-          <SidebarMenuItem
-            id="approvals"
-            theme="dark-blue"
-            label="Approvals"
-            icon={<Icon name="check-circle" variant="bold" size={20} />}
-            badge={
-              <Badge color="blue" type="filled" size="sm">
-                42
-              </Badge>
-            }
-          />
+          {/* Top section: Overview items with divider below Approvals */}
+          <SidebarSection hasTitle={false} hasDivider theme="dark-blue">
+            <SidebarMenuItem
+              id="dashboard"
+              theme="dark-blue"
+              label="Dashboard"
+              icon={<Icon name="home" variant="bold" size={20} />}
+            />
+            <SidebarMenuItem
+              id="approvals"
+              theme="dark-blue"
+              label="Approvals"
+              icon={<Icon name="check-circle" variant="bold" size={20} />}
+              counter={42}
+            />
+          </SidebarSection>
 
           {/* Modules Section */}
           <SidebarSection title="Modules" theme="dark-blue">
@@ -327,23 +342,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
               theme="dark-blue"
               label="Reports"
               icon={<Icon name="pie-chart" variant="bold" size={20} />}
-            />
-          </SidebarSection>
-
-          {/* Administration Section */}
-          <SidebarSection title="Administration" theme="dark-blue">
-            <SidebarMenuItem
-              id="users-members"
-              theme="dark-blue"
-              label="Users & Members"
-              icon={<Icon name="users" variant="bold" size={20} />}
-              counter={2}
-            />
-            <SidebarMenuItem
-              id="reference-data"
-              theme="dark-blue"
-              label="Reference Data"
-              icon={<Icon name="calendar" variant="bold" size={20} />}
             />
           </SidebarSection>
         </Sidebar>
