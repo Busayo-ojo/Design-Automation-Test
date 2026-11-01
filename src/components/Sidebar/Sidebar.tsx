@@ -448,6 +448,15 @@ export const SidebarProfile: React.FC<SidebarProfileProps> = ({
 };
 SidebarProfile.displayName = 'SidebarProfile';
 
+export interface SidebarAccountMenuItem {
+  key: string;
+  label?: string;
+  icon?: string;
+  iconVariant?: 'linear' | 'bold';
+  type?: 'item' | 'divider';
+  destructive?: boolean;
+}
+
 export interface SidebarAccountMenuProps {
   isOpen: boolean;
   onClose: () => void;
@@ -457,62 +466,73 @@ export interface SidebarAccountMenuProps {
     avatarSrc?: string;
     status?: AvatarStatus;
   };
+  items?: SidebarAccountMenuItem[];
+  showHeader?: boolean;
+  lastSignedInText?: string;
   onItemClick?: (key: string) => void;
   className?: string;
 }
+
+const DEFAULT_ACCOUNT_MENU_ITEMS: SidebarAccountMenuItem[] = [
+  { key: 'settings', label: 'Account settings', icon: 'user-circle', iconVariant: 'bold' },
+  { key: 'security', label: 'Security', icon: 'shield-tick', iconVariant: 'bold' },
+  { key: 'notifications', label: 'Notification preferences', icon: 'bell', iconVariant: 'bold' },
+  { key: 'divider-1', type: 'divider' },
+  { key: 'guide', label: 'Submission guide', icon: 'book', iconVariant: 'bold' },
+  { key: 'support', label: 'Contact support', icon: 'mail', iconVariant: 'bold' },
+  { key: 'divider-2', type: 'divider' },
+  { key: 'logout', label: 'Log out', icon: 'sign-out', iconVariant: 'bold', destructive: true },
+];
 
 export const SidebarAccountMenu: React.FC<SidebarAccountMenuProps> = ({
   isOpen,
   onClose,
   user = {
-    name: 'David Eno',
-    email: 'david.e@fmdq.ui',
+    name: 'Marvin Marvin Ogah',
+    email: 'MSG Admin',
     status: 'online',
   },
+  items = DEFAULT_ACCOUNT_MENU_ITEMS,
+  showHeader = false,
+  lastSignedInText = 'Last signed in 26 Oct 2026, 08:12 · Lagos',
   onItemClick,
   className = '',
 }) => {
   if (!isOpen) return null;
 
-  const menuItems = [
-    { key: 'profile', label: 'View profile', icon: 'user', shortcut: '⌘K->P' },
-    { key: 'settings', label: 'Account settings', icon: 'settings', shortcut: '⌘S' },
-    { key: 'notifications', label: 'Notifications', icon: 'bell', shortcut: '' },
-    { key: 'theme', label: 'Display preferences', icon: 'brush', shortcut: '' },
-    { key: 'divider', type: 'divider' },
-    { key: 'logout', label: 'Log out', icon: 'sign-out', shortcut: '⌘Q', destructive: true },
-  ];
-
   return (
     <>
       <div className="fmdqui-sidebar-account-menu__backdrop" onClick={onClose} />
       <div
-        className={`fmdqui-sidebar-account-menu ${className}`}
+        className={`fmdqui-sidebar-account-menu ${className}`.trim()}
         role="dialog"
         aria-modal="true"
       >
-        <div className="fmdqui-sidebar-account-menu__header">
-          <Avatar
-            size="sm"
-            type={user.avatarSrc ? 'Image' : 'Initials'}
-            imageUrl={user.avatarSrc}
-            initials={user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
-            statusIcon={user.status}
-          />
-          <div className="fmdqui-sidebar-account-menu__user-info">
-            <span className="fmdqui-sidebar-account-menu__name fmdq-text fmdq-text--size-sm fmdq-text--weight-semibold">
-              {user.name}
-            </span>
-            <span className="fmdqui-sidebar-account-menu__email fmdq-text fmdq-text--size-xs">
-              {user.email}
-            </span>
-          </div>
-        </div>
-
-        <div className="fmdqui-sidebar-account-menu__divider" />
+        {showHeader && (
+          <>
+            <div className="fmdqui-sidebar-account-menu__header">
+              <Avatar
+                size="sm"
+                type={user.avatarSrc ? 'Image' : 'Initials'}
+                imageUrl={user.avatarSrc}
+                initials={user.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
+                statusIcon={user.status}
+              />
+              <div className="fmdqui-sidebar-account-menu__user-info">
+                <span className="fmdqui-sidebar-account-menu__name fmdq-text fmdq-text--size-sm fmdq-text--weight-semibold">
+                  {user.name}
+                </span>
+                <span className="fmdqui-sidebar-account-menu__email fmdq-text fmdq-text--size-xs">
+                  {user.email}
+                </span>
+              </div>
+            </div>
+            <div className="fmdqui-sidebar-account-menu__divider" />
+          </>
+        )}
 
         <div className="fmdqui-sidebar-account-menu__items" role="menu">
-          {menuItems.map(item => {
+          {items.map(item => {
             if (item.type === 'divider') {
               return (
                 <div
@@ -529,7 +549,7 @@ export const SidebarAccountMenu: React.FC<SidebarAccountMenuProps> = ({
                 type="button"
                 className={`fmdqui-sidebar-account-menu__item ${
                   item.destructive ? 'fmdqui-sidebar-account-menu__item--destructive' : ''
-                }`}
+                }`.trim()}
                 onClick={() => {
                   onItemClick?.(item.key);
                   onClose();
@@ -537,20 +557,29 @@ export const SidebarAccountMenu: React.FC<SidebarAccountMenuProps> = ({
                 role="menuitem"
               >
                 <span className="fmdqui-sidebar-account-menu__item-left">
-                  {item.icon && <Icon name={item.icon} variant="linear" size={18} />}
-                  <span className="fmdqui-sidebar-account-menu__item-label fmdq-text fmdq-text--size-sm">
+                  {item.icon && (
+                    <Icon
+                      name={item.icon}
+                      variant={item.iconVariant ?? 'bold'}
+                      size={20}
+                    />
+                  )}
+                  <span className="fmdqui-sidebar-account-menu__item-label">
                     {item.label}
                   </span>
                 </span>
-                {item.shortcut && (
-                  <span className="fmdqui-sidebar-account-menu__item-shortcut">
-                    {item.shortcut}
-                  </span>
-                )}
               </button>
             );
           })}
         </div>
+
+        {lastSignedInText && (
+          <div className="fmdqui-sidebar-account-menu__footer">
+            <span className="fmdqui-sidebar-account-menu__footer-text">
+              {lastSignedInText}
+            </span>
+          </div>
+        )}
       </div>
     </>
   );
@@ -573,6 +602,9 @@ export interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   onSearchChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   logo?: ReactNode;
   profile?: ReactNode;
+  isAccountMenuOpen?: boolean;
+  defaultAccountMenuOpen?: boolean;
+  onAccountMenuToggle?: (open: boolean) => void;
   user?: {
     name: string;
     email: string;
@@ -597,6 +629,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSearchChange,
   logo,
   profile,
+  isAccountMenuOpen: propIsAccountMenuOpen,
+  defaultAccountMenuOpen = false,
+  onAccountMenuToggle,
   user = {
     name: 'David Eno',
     email: 'david.e@fmdq.ui',
@@ -609,7 +644,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const isCollapsed = propCollapsed !== undefined ? propCollapsed : state === 'collapsed';
   const [internalActiveId, setInternalActiveId] = useState<string | undefined>(propActiveId);
   const activeId = propActiveId !== undefined ? propActiveId : internalActiveId;
-  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const [internalAccountMenuOpen, setInternalAccountMenuOpen] = useState(defaultAccountMenuOpen);
+  const isAccountMenuOpen = propIsAccountMenuOpen !== undefined ? propIsAccountMenuOpen : internalAccountMenuOpen;
+
+  const toggleAccountMenu = (open?: boolean) => {
+    const next = open !== undefined ? open : !isAccountMenuOpen;
+    setInternalAccountMenuOpen(next);
+    onAccountMenuToggle?.(next);
+  };
 
   const handleSetActiveId = (id: string) => {
     setInternalActiveId(id);
@@ -636,7 +678,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       collapsed={isCollapsed}
       variant={variant}
       onSignOut={user.onSignOut}
-      onProfileClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
+      onProfileClick={() => toggleAccountMenu()}
     />
   );
 
@@ -693,7 +735,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               {resolvedProfile}
               <SidebarAccountMenu
                 isOpen={isAccountMenuOpen}
-                onClose={() => setIsAccountMenuOpen(false)}
+                onClose={() => toggleAccountMenu(false)}
                 onItemClick={key => {
                   if (key === 'logout') user.onSignOut?.();
                 }}
@@ -746,7 +788,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               {resolvedProfile}
               <SidebarAccountMenu
                 isOpen={isAccountMenuOpen}
-                onClose={() => setIsAccountMenuOpen(false)}
+                onClose={() => toggleAccountMenu(false)}
                 onItemClick={key => {
                   if (key === 'logout') user.onSignOut?.();
                 }}

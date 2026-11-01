@@ -9,6 +9,7 @@ import {
   type SidebarTheme,
 } from './Sidebar';
 import { Icon } from '../../foundations/icons';
+import defaultAvatar from '../../assets/avatar-marvin.png';
 
 const meta: Meta<typeof Sidebar> = {
   title: 'Components/🍺 Sidebar',
@@ -592,11 +593,44 @@ export const AccountMenuStandalone: Story = {
   render: () => (
     <div style={{ padding: '40px', backgroundColor: 'var(--color-neutral-100)', minHeight: '400px' }}>
       <h3 style={{ margin: '0 0 16px 0', fontFamily: 'var(--font-family-primary)' }}>
-        Sidebar / Account Menu (Figma 10322:286059)
+        Sidebar / Account Menu (Figma 10322:286695)
       </h3>
       <div style={{ position: 'relative', width: '248px' }}>
         <SidebarAccountMenu isOpen={true} onClose={() => {}} />
       </div>
+    </div>
+  ),
+};
+
+export const AccountMenuOpenMsgAdmin: Story = {
+  name: 'Variant 2 / Account Menu Open (MSG Admin)',
+  render: () => (
+    <div style={{ display: 'flex', width: '272px', height: '100vh', backgroundColor: '#001633' }}>
+      <Sidebar
+        variant="2"
+        theme="dark-blue"
+        defaultAccountMenuOpen={true}
+        user={{
+          name: 'Marvin Marvin Ogah',
+          email: 'MSG Admin',
+          avatarSrc: defaultAvatar,
+        }}
+        hasSearch={true}
+      >
+        <SidebarMenuItem
+          id="dashboard"
+          theme="dark-blue"
+          label="Dashboard"
+          icon={<Icon name="home" variant="bold" size={20} />}
+        />
+        <SidebarMenuItem
+          id="approvals"
+          theme="dark-blue"
+          label="Approvals"
+          icon={<Icon name="check-circle" variant="bold" size={20} />}
+          counter={42}
+        />
+      </Sidebar>
     </div>
   ),
 };

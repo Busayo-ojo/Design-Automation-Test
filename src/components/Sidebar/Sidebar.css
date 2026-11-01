@@ -798,7 +798,7 @@
 }
 
 /* ==========================================================================
-   SIDEBAR ACCOUNT FLYOUT MENU (Figma 10322:286059)
+   SIDEBAR ACCOUNT FLYOUT MENU (Figma 10322:286695 & 10322:286139)
    ========================================================================== */
 
 .fmdqui-sidebar-account-menu__backdrop {
@@ -810,25 +810,31 @@
 
 .fmdqui-sidebar-account-menu {
   position: absolute;
-  bottom: 70px;
-  left: 16px;
+  bottom: 76px;
+  left: 12px;
   width: 248px;
   background-color: var(--color-neutral-white, #FFFFFF);
   border: 1px solid var(--color-neutral-200, #E4E7EC);
   border-radius: var(--radius-12, 12px);
-  box-shadow: var(--shadow-soft-lg);
-  padding: 8px;
+  box-shadow: 0px 4px 6px -2px rgba(16, 25, 40, 0.03), 0px 16px 24px -4px rgba(16, 25, 40, 0.08);
+  padding: 6px;
   box-sizing: border-box;
   z-index: 201;
   display: flex;
   flex-direction: column;
+  gap: 2px;
   animation: fmdquiSidebarAccountMenuFadeIn 0.15s ease-out;
 }
 
-/* When profile is at top (Variant 2), account menu drops below it */
+/* Variant 2: Profile is at top -> flyout menu is at top: 92px, left: 12px */
+.fmdqui-sidebar--variant-2 .fmdqui-sidebar__profile-container {
+  position: static;
+}
+
 .fmdqui-sidebar--variant-2 .fmdqui-sidebar-account-menu {
   bottom: auto;
-  top: 76px;
+  top: 92px;
+  left: 12px;
 }
 
 @keyframes fmdquiSidebarAccountMenuFadeIn {
@@ -857,22 +863,35 @@
 }
 
 .fmdqui-sidebar-account-menu__name {
-  font-family: var(--font-family-primary);
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
   font-size: var(--font-size-p-sm, 14px);
   font-weight: 600;
-  color: var(--color-neutral-900, #101928);
+  color: var(--color-neutral-900, #101828);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
 }
 
 .fmdqui-sidebar-account-menu__email {
-  font-family: var(--font-family-primary);
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
   font-size: var(--font-size-p-xs, 12px);
   color: var(--color-neutral-500, #667185);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
 }
 
 .fmdqui-sidebar-account-menu__divider {
+  height: 9px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 4px 0;
+  width: 100%;
+}
+
+.fmdqui-sidebar-account-menu__divider::after {
+  content: "";
+  display: block;
+  width: 100%;
   height: 1px;
   background-color: var(--color-neutral-200, #E4E7EC);
-  margin: 4px 0;
 }
 
 .fmdqui-sidebar-account-menu__items {
@@ -886,45 +905,77 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 8px 10px;
-  border-radius: var(--radius-8, 8px);
+  height: 36px;
+  padding: 8px 16px;
+  border-radius: var(--radius-6, 6px);
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--color-neutral-700, #344054);
-  font-family: inherit;
+  color: var(--color-neutral-900, #101828);
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  box-sizing: border-box;
   transition: all var(--transition-fast, 0.15s ease);
 }
 
 .fmdqui-sidebar-account-menu__item:hover {
   background-color: var(--color-neutral-50, #F9FAFB);
-  color: var(--color-neutral-900, #101928);
+  color: var(--color-neutral-900, #101828);
 }
 
 .fmdqui-sidebar-account-menu__item-left {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+}
+
+.fmdqui-sidebar-account-menu__item-left svg {
+  color: var(--color-primary-700, #1D326D);
+  flex-shrink: 0;
 }
 
 .fmdqui-sidebar-account-menu__item-label {
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-p-sm, 14px);
-  font-weight: 500;
-}
-
-.fmdqui-sidebar-account-menu__item-shortcut {
-  font-family: var(--font-family-primary);
-  font-size: 11px;
-  color: var(--color-neutral-400, #98A2B3);
-  font-weight: 500;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-900, #101828);
 }
 
 .fmdqui-sidebar-account-menu__item--destructive {
-  color: var(--color-error-500, #D42620);
+  color: var(--color-error-600, #BA110B);
+}
+
+.fmdqui-sidebar-account-menu__item--destructive .fmdqui-sidebar-account-menu__item-label {
+  color: var(--color-error-600, #BA110B);
+}
+
+.fmdqui-sidebar-account-menu__item--destructive .fmdqui-sidebar-account-menu__item-left svg {
+  color: var(--color-error-600, #BA110B);
 }
 
 .fmdqui-sidebar-account-menu__item--destructive:hover {
   background-color: var(--color-error-50, #FBEAE9);
-  color: var(--color-error-700, #9E0A05);
+}
+
+.fmdqui-sidebar-account-menu__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 29px;
+  padding: 8px 10px 6px 10px;
+  background-color: var(--color-neutral-100, #F0F2F5);
+  border-radius: var(--radius-8, 8px);
+  box-sizing: border-box;
+  margin-top: 2px;
+}
+
+.fmdqui-sidebar-account-menu__footer-text {
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+  white-space: nowrap;
 }
