@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Flow1Prototype } from './Flow1Prototype';
 
 const meta: Meta<typeof Flow1Prototype> = {
-  title: 'Layout/Flow 1 - Prototype',
+  title: 'Flows/Authentication/Flow 1 - Prototype',
   component: Flow1Prototype,
   parameters: {
     layout: 'fullscreen',

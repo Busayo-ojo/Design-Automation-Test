@@ -27,8 +27,8 @@
 | Breadcrumbs | Complete | Components/🍞 Breadcrumbs | 2026-10-31 | Figma 2031:39144 & 2031:39096; 4 variant states (default, hover, active, disabled) + demo trail, custom separator, icon swap; borders in Grey/200 (#E4E7EC) |
 | Pagination | Complete | Components/📄 Pagination | 2026-10-27 | Figma 347:10062; rebuild from lowest base elements: PageNumber (2608:66376, 12 variants), TruncatedPages (2775:76546), PageIndicator (2609:67848), NavigationControls (2607:66246, 15 variants), PaginationList (2767:76342, 15 variants), full Pagination bar (2767:76362, 15 variants with 5 variations and 4 alignments) |
 | DRP / Dashboard | Complete | Layout/📊 Dashboard | 2026-11-01 | Figma 10301:78467; full responsive desktop layout assembling Sidebar (v2, dark-blue), MetricsCard (×4), Approvals Table Card, Contributions ProgressBar Card, Recent Activity, and Quick Actions grid |
-| 1.15 Welcome email | Complete | Layout/WelcomeEmail | 2026-11-01 | Figma 10306:12506; email envelope header, logo, salutation, summary box, CTA button, disclaimer, and automated footer |
-| Flow 1 Prototype Orchestrator | Complete | Layout/Flow 1 - Prototype | 2026-11-01 | Figma 10303:161102 & 10306:12506; client-side interactive journey connecting Welcome Email → Password Setup → 2FA Setup → Sign In → 2FA OTP → DRP Dashboard, with reviewer controls toolbar |
+| 1.15 Welcome email | Complete | Layout/✉️ WelcomeEmail | 2026-11-01 | Figma 10306:12506; email envelope header, logo, salutation, summary box, CTA button, disclaimer, and automated footer |
+| Flow 1 Prototype Orchestrator | Complete | Flows/Authentication/Flow 1 - Prototype | 2026-11-01 | Figma 10303:161102 & 10306:12506; client-side interactive journey connecting Welcome Email → Password Setup → 2FA Setup → Sign In → 2FA OTP → DRP Dashboard, with reviewer controls toolbar |
 
 ## Reuse mapping — Pagination (2026-10-27)
 

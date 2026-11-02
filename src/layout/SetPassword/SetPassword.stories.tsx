@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { SetPassword } from './SetPassword';
 
 const meta: Meta<typeof SetPassword> = {
-  title: 'Layout/🔐 SetPassword',
+  title: 'Flows/Authentication/SetPassword',
   component: SetPassword,
   parameters: {
     layout: 'fullscreen',

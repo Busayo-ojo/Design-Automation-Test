@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ForgotPassword } from './ForgotPassword';
 
 const meta: Meta<typeof ForgotPassword> = {
-  title: 'Layout/🔐 ForgotPassword',
+  title: 'Flows/Authentication/ForgotPassword',
   component: ForgotPassword,
   parameters: {
     layout: 'fullscreen',

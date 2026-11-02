@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AccountLocked } from './AccountLocked';
 
 const meta: Meta<typeof AccountLocked> = {
-  title: 'Layout/🔐 AccountLocked',
+  title: 'Flows/Authentication/AccountLocked',
   component: AccountLocked,
   parameters: {
     layout: 'fullscreen',

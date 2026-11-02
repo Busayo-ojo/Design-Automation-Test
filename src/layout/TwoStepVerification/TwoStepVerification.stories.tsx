@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TwoStepVerification } from './TwoStepVerification';
 
 const meta: Meta<typeof TwoStepVerification> = {
-  title: 'Layout/🔐 TwoStepVerification',
+  title: 'Flows/Authentication/TwoStepVerification',
   component: TwoStepVerification,
   parameters: {
     layout: 'fullscreen',

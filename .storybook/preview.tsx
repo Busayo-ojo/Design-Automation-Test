@@ -28,6 +28,7 @@ const preview: Preview = {
           'Elements',
           'Components',
           'Layout',
+          'Flows',
         ];
 
         const aRootRaw = a.title.split('/')[0];
@@ -52,6 +53,8 @@ const preview: Preview = {
 
         if (aTitle === 'Start Here') return -1;
         if (bTitle === 'Start Here') return 1;
+        if (aTitle.includes('Prototype') || aTitle.includes('Flow 1')) return -1;
+        if (bTitle.includes('Prototype') || bTitle.includes('Flow 1')) return 1;
 
         return aTitle.localeCompare(bTitle);
       },
