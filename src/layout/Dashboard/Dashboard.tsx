@@ -7,12 +7,6 @@ import {
 } from '../../components/Sidebar';
 import { MetricsCard } from '../../components/Metrics';
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardBody,
-} from '../../components/Card';
-import {
   TableContainer,
   TableElement,
   TableHead,
@@ -534,12 +528,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
           {/* 3. Middle Content Row (Approvals Table + Contributions Progress) */}
           <section className="fmdqui-dashboard-layout__content-grid">
             {/* Left: Awaiting your approval table card */}
-            <Card className="fmdqui-dashboard-card fmdqui-dashboard-card--approvals">
+            <div className="fmdqui-dashboard-card fmdqui-dashboard-card--approvals">
               <div className="fmdqui-dashboard-card__header">
                 <div>
-                  <CardTitle className="fmdqui-dashboard-card__title">
+                  <h3 className="fmdqui-dashboard-card__title">
                     Awaiting your approval
-                  </CardTitle>
+                  </h3>
                   <p className="fmdqui-dashboard-card__subtitle">
                     Oldest first · 42 items across 6 modules
                   </p>
@@ -602,21 +596,21 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   </TableBody>
                 </TableElement>
               </TableContainer>
-            </Card>
+            </div>
 
             {/* Right: Today's contributions card */}
-            <Card className="fmdqui-dashboard-card fmdqui-dashboard-card--contributions">
-              <CardHeader className="fmdqui-dashboard-card__header-flush">
+            <div className="fmdqui-dashboard-card fmdqui-dashboard-card--contributions">
+              <div className="fmdqui-dashboard-card__header-flush">
                 <div>
-                  <CardTitle className="fmdqui-dashboard-card__title">
+                  <h3 className="fmdqui-dashboard-card__title">
                     Today&apos;s contributions
-                  </CardTitle>
+                  </h3>
                   <p className="fmdqui-dashboard-card__subtitle">
                     Received against expected contributors
                   </p>
                 </div>
-              </CardHeader>
-              <CardBody className="fmdqui-dashboard-card__contributions-body">
+              </div>
+              <div className="fmdqui-dashboard-card__contributions-body">
                 <div className="fmdqui-dashboard-card__progress-list">
                   {contributions.map(c => (
                     <ProgressBar
@@ -640,17 +634,17 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     <Icon name="arrow-right" variant="linear" size={14} />
                   </button>
                 </div>
-              </CardBody>
-            </Card>
+              </div>
+            </div>
           </section>
 
           {/* 4. Bottom Row (Recent Activity + Quick Actions) */}
           <section className="fmdqui-dashboard-layout__activity-grid">
             {/* Left: Your recent activity */}
-            <Card className="fmdqui-dashboard-card fmdqui-dashboard-card--activity">
-              <CardTitle className="fmdqui-dashboard-card__title">
+            <div className="fmdqui-dashboard-card fmdqui-dashboard-card--activity">
+              <h3 className="fmdqui-dashboard-card__title">
                 Your recent activity
-              </CardTitle>
+              </h3>
               <div className="fmdqui-dashboard-card__activity-body">
                 {recentActivity.map(act => (
                   <div key={act.id} className="fmdqui-dashboard-activity-row">
@@ -668,13 +662,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   </div>
                 ))}
               </div>
-            </Card>
+            </div>
 
             {/* Right: Quick actions */}
-            <Card className="fmdqui-dashboard-card fmdqui-dashboard-card--quick-actions">
-              <CardTitle className="fmdqui-dashboard-card__title">
+            <div className="fmdqui-dashboard-card fmdqui-dashboard-card--quick-actions">
+              <h3 className="fmdqui-dashboard-card__title">
                 Quick actions
-              </CardTitle>
+              </h3>
               <div className="fmdqui-dashboard-card__quick-actions-body">
                 <div className="fmdqui-dashboard-quick-actions-grid">
                   <button
@@ -711,7 +705,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   </button>
                 </div>
               </div>
-            </Card>
+            </div>
           </section>
         </div>
       </main>

@@ -1,5 +1,16 @@
 [
   {
+    "hash": "d96569b",
+    "date": "2026-11-02",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "docs: scope Figma embeds to inner Container nodes excluding header and footer",
+    "category": "docs",
+    "scope": "",
+    "message": "scope Figma embeds to inner Container nodes excluding header and footer",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/d96569b"
+  },
+  {
     "hash": "3e3893b",
     "date": "2026-11-02",
     "author": "dudesoamazing",
