@@ -1,5 +1,16 @@
 [
   {
+    "hash": "3e3893b",
+    "date": "2026-11-02",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "docs: remove Overview subheadings from component docs and update rules",
+    "category": "docs",
+    "scope": "",
+    "message": "remove Overview subheadings from component docs and update rules",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/3e3893b"
+  },
+  {
     "hash": "ef0d3e7",
     "date": "2026-11-02",
     "author": "dudesoamazing",

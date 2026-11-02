@@ -80,5 +80,5 @@ When implementing any component from Figma (see `rules/FIGMA_STORYBOOK_RULES.md`
 3. Map all colors to `tokens.css` variables; add new tokens if needed rather than hardcoding.
 4. Every Figma variant must have a corresponding Storybook story. Variant prop names must mirror Figma property names exactly.
 5. Run `figma_check_design_parity` before marking a component complete.
-6. Every component requires a `.docs.mdx` page following the standard hierarchy: Component Title (no `## Overview` subheading), overview description, `## Figma Reference` iframe embed (width 100%, height 450), Canvas/Playground, Props Table, and variant sections with `sourceState="shown"`. Companion CSF `.stories.tsx` files must NOT specify `tags: ['autodocs']` when a `.docs.mdx` file exists.
+6. Every component requires a `.docs.mdx` page following the standard hierarchy: Component Title (no `## Overview` subheading), overview description, `## Figma Reference` iframe embed (width 100%, height 450, targeting the inner `Container` node rather than outer document headers/footers), Canvas/Playground, Props Table, and variant sections with `sourceState="shown"`. Companion CSF `.stories.tsx` files must NOT specify `tags: ['autodocs']` when a `.docs.mdx` file exists.
 7. Update `rules/FIGMA_STORYBOOK_MAPPING.md` with the status and last parity check date.
