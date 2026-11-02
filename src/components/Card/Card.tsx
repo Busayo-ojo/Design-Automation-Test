@@ -2,11 +2,28 @@ import React from 'react';
 import type { HTMLAttributes } from 'react';
 import './Card.css';
 
-export const Card: React.FC<HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
-  <div className={`fmdqui-card ${className}`} {...props}>
-    {children}
-  </div>
-);
+export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * Card elevation variant:
+   * - 'default': flat with 1px border and no box-shadow
+   * - 'elevated': with drop shadow
+   */
+  variant?: 'default' | 'elevated';
+}
+
+export const Card: React.FC<CardProps> = ({ variant = 'default', className = '', children, ...props }) => {
+  const classes = [
+    'fmdqui-card',
+    variant === 'elevated' ? 'fmdqui-card--elevated' : '',
+    className,
+  ].filter(Boolean).join(' ');
+
+  return (
+    <div className={classes} {...props}>
+      {children}
+    </div>
+  );
+};
 
 export const CardHeader: React.FC<HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
   <div className={`fmdqui-card-header ${className}`} {...props}>

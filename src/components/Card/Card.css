@@ -1,16 +1,24 @@
 .fmdqui-card {
-  background-color: var(--color-neutral-white);
-  border-radius: var(--radius-16);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: var(--shadow-md);
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border-radius: var(--radius-16, 16px);
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   font-family: var(--font-family-primary);
-  transition: box-shadow var(--transition-smooth);
+  transition: box-shadow var(--transition-smooth, 0.2s ease), border-color var(--transition-smooth, 0.2s ease);
 }
 
 .fmdqui-card:hover {
+  box-shadow: var(--shadow-soft-xsm, 0px 2px 4px -1px rgba(16, 25, 40, 0.02), 0px 5px 13px -5px rgba(16, 25, 40, 0.05));
+}
+
+.fmdqui-card--elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.fmdqui-card--elevated:hover {
   box-shadow: var(--shadow-lg);
 }
 

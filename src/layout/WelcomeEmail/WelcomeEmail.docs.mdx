@@ -1,0 +1,17 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as WelcomeEmailStories from './WelcomeEmail.stories';
+
+<Meta of={WelcomeEmailStories} />
+
+# Welcome Email (1.15)
+
+The `WelcomeEmail` layout represents the onboarding email notification sent to new FMDQ Data Reporting Portal (DRP) users, corresponding to Flow 1 (Figma node `10306:12506`).
+
+It contains the invitation envelope header, FMDQ brand logo, personalized salutation, institutional role summary table, and single-use account activation call-to-action button.
+
+<Canvas of={WelcomeEmailStories.Default} />
+
+## Properties
+
+<Controls of={WelcomeEmailStories.Default} />
+

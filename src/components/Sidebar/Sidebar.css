@@ -15,7 +15,7 @@
   width: 272px;
   min-height: 100vh;
   height: 100%;
-  border-radius: var(--radius-12, 12px);
+  border-radius: 0 var(--radius-12, 12px) var(--radius-12, 12px) 0;
   overflow: hidden;
   box-sizing: border-box;
   font-family: var(--font-family-primary, "DM Sans", sans-serif);
@@ -29,6 +29,7 @@
 
 .fmdqui-sidebar--collapsed {
   width: 82px;
+  cursor: pointer;
 }
 
 /* ─── Themes ──────────────────────────────────────────────────────────── */
@@ -109,25 +110,25 @@
   background: transparent;
   border: none;
   border-radius: var(--radius-8, 8px);
-  color: var(--color-neutral-700, #344054);
+  color: var(--color-secondary-500, #CC9933);
   cursor: pointer;
   transition: all var(--transition-fast, 0.15s ease);
 }
 
 .fmdqui-sidebar__menu-collapsed-btn:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(204, 153, 51, 0.12);
 }
 
 .fmdqui-sidebar--theme-blue .fmdqui-sidebar__menu-collapsed-btn,
 .fmdqui-sidebar--theme-dark-blue .fmdqui-sidebar__menu-collapsed-btn,
 .fmdqui-sidebar--theme-dark-grey .fmdqui-sidebar__menu-collapsed-btn {
-  color: var(--color-neutral-white, #FFFFFF);
+  color: var(--color-secondary-500, #CC9933);
 }
 
 .fmdqui-sidebar--theme-blue .fmdqui-sidebar__menu-collapsed-btn:hover,
 .fmdqui-sidebar--theme-dark-blue .fmdqui-sidebar__menu-collapsed-btn:hover,
 .fmdqui-sidebar--theme-dark-grey .fmdqui-sidebar__menu-collapsed-btn:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(204, 153, 51, 0.12);
 }
 
 /* ── Search Container (Figma: padding 0 16px) ────────────────────────── */
@@ -234,32 +235,6 @@
   border-radius: 4px;
 }
 
-/* ── Collapse Toggle Floating Button ─────────────────────────────────── */
-.fmdqui-sidebar__collapse-btn {
-  position: absolute;
-  top: 24px;
-  right: -12px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: var(--color-neutral-white, #FFFFFF);
-  border: 1px solid var(--color-neutral-300, #D0D5DD);
-  color: var(--color-neutral-700, #344054);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  z-index: 105;
-  transition: all var(--transition-fast, 0.15s ease);
-  padding: 0;
-}
-
-.fmdqui-sidebar__collapse-btn:hover {
-  background-color: var(--color-neutral-50, #F9FAFB);
-  border-color: var(--color-primary-600, #034592);
-  color: var(--color-primary-600, #034592);
-}
 
 /* ==========================================================================
    SIDEBAR SECTION COMPONENT (Figma 3167:122883)
@@ -709,6 +684,12 @@
   padding: 0;
   background: transparent;
   border: none;
+  width: 100%;
+}
+
+.fmdqui-sidebar-profile--collapsed .fmdqui-sidebar-profile__button {
+  justify-content: center;
+  width: 100%;
 }
 
 /* Themes for Profile block: transparent, no border or box */
@@ -858,14 +839,14 @@
   animation: fmdquiSidebarAccountMenuFadeIn 0.15s ease-out;
 }
 
-/* Variant 2: Profile is at top -> flyout menu is at top: 92px, left: 12px */
+/* Variant 2: Profile is at top -> flyout menu is placed 12px below the profile (matching Figma avatar bottom to menu top) */
 .fmdqui-sidebar--variant-2 .fmdqui-sidebar__profile-container {
-  position: static;
+  position: relative;
 }
 
 .fmdqui-sidebar--variant-2 .fmdqui-sidebar-account-menu {
   bottom: auto;
-  top: 92px;
+  top: calc(100% + 12px);
   left: 12px;
 }
 
@@ -960,8 +941,10 @@
   gap: 12px;
 }
 
+.fmdqui-sidebar-account-menu__item-left .fmdq-icon,
 .fmdqui-sidebar-account-menu__item-left svg {
-  color: var(--color-primary-700, #1D326D);
+  color: var(--color-primary-700, #1D326D) !important;
+  --icon-color: var(--color-primary-700, #1D326D) !important;
   flex-shrink: 0;
 }
 
@@ -982,8 +965,10 @@
   color: var(--color-error-600, #BA110B);
 }
 
+.fmdqui-sidebar-account-menu__item--destructive .fmdqui-sidebar-account-menu__item-left .fmdq-icon,
 .fmdqui-sidebar-account-menu__item--destructive .fmdqui-sidebar-account-menu__item-left svg {
-  color: var(--color-error-600, #BA110B);
+  color: var(--color-error-600, #BA110B) !important;
+  --icon-color: var(--color-error-600, #BA110B) !important;
 }
 
 .fmdqui-sidebar-account-menu__item--destructive:hover {

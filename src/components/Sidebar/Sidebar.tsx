@@ -561,7 +561,12 @@ export const SidebarAccountMenu: React.FC<SidebarAccountMenuProps> = ({
                     <Icon
                       name={item.icon}
                       variant={item.iconVariant ?? 'bold'}
-                      size={20}
+                      size="20px"
+                      color={
+                        item.destructive
+                          ? 'var(--color-error-600, #BA110B)'
+                          : 'var(--color-primary-700, #1D326D)'
+                      }
                     />
                   )}
                   <span className="fmdqui-sidebar-account-menu__item-label">
@@ -684,6 +689,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   const resolvedProfile = profile ?? defaultProfile;
 
+  const handleAsideClick = (e: React.MouseEvent<HTMLElement>) => {
+    props.onClick?.(e);
+    if (isCollapsed && onToggleCollapse) {
+      onToggleCollapse();
+    }
+  };
+
   return (
     <SidebarContext.Provider
       value={{
@@ -694,24 +706,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         variant,
       }}
     >
-      <aside className={classNames} {...props}>
-        {/* Collapse toggle button */}
-        {onToggleCollapse && (
-          <button
-            type="button"
-            className="fmdqui-sidebar__collapse-btn"
-            onClick={onToggleCollapse}
-            aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          >
-            <Icon
-              name={isCollapsed ? 'chevron-right' : 'chevron-left'}
-              variant="linear"
-              size={16}
-            />
-          </button>
-        )}
-
+      <aside className={classNames} onClick={handleAsideClick} {...props}>
         {/* ── Top Section ── */}
         <div className="fmdqui-sidebar__top-section">
           {variant === '1' ? (
@@ -720,11 +715,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <button
                   type="button"
                   className="fmdqui-sidebar__menu-collapsed-btn"
-                  onClick={onToggleCollapse}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggleCollapse?.();
+                  }}
                   aria-label="Expand sidebar"
                   title="Expand sidebar"
                 >
-                  <Icon name="align-justify" variant="linear" size={24} />
+                  <Icon
+                    name="chevron-right"
+                    variant="linear"
+                    size={24}
+                    color="var(--color-secondary-500, #CC9933)"
+                  />
                 </button>
               </div>
             ) : (
@@ -765,7 +768,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <button
               type="button"
               className="fmdqui-sidebar__search-collapsed-btn"
-              onClick={onToggleCollapse}
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleCollapse?.();
+              }}
               aria-label="Search"
               title="Search"
             >
@@ -799,11 +805,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <button
                 type="button"
                 className="fmdqui-sidebar__menu-collapsed-btn"
-                onClick={onToggleCollapse}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleCollapse?.();
+                }}
                 aria-label="Expand sidebar"
                 title="Expand sidebar"
               >
-                <Icon name="align-justify" variant="linear" size={24} />
+                <Icon
+                  name="chevron-right"
+                  variant="linear"
+                  size={24}
+                  color="var(--color-secondary-500, #CC9933)"
+                />
               </button>
             </div>
           ) : (

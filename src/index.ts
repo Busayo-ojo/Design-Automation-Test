@@ -40,6 +40,8 @@ export * from './layout/TwoStepVerification';
 export * from './layout/ForgotPassword';
 export * from './layout/SetPassword';
 export * from './layout/AccountLocked';
+export * from './layout/WelcomeEmail';
 export * from './layout/Dashboard';
+export * from './layout/Flow1Prototype';
 
 

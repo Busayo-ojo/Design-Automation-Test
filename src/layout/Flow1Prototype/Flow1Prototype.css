@@ -1,0 +1,229 @@
+@import '../../tokens.css';
+
+/* ==========================================================================
+   FMDQ Flow 1 Interactive Prototype Orchestrator
+   ========================================================================== */
+
+.fmdqui-flow1-prototype {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ─── Floating Reviewer Toolbar ─────────────────────────────────────────── */
+.fmdqui-flow1-toolbar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  border-radius: var(--radius-12, 12px);
+  box-shadow: 0px 8px 24px -4px rgba(16, 25, 40, 0.15), 0px 2px 6px -1px rgba(16, 25, 40, 0.08);
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  width: auto;
+  max-width: min(520px, calc(100vw - 32px));
+  transition: box-shadow var(--transition-fast, 0.15s ease), border-color var(--transition-fast, 0.15s ease);
+  backdrop-filter: blur(8px);
+}
+
+.fmdqui-flow1-toolbar--open {
+  box-shadow: 0px 16px 36px -4px rgba(16, 25, 40, 0.22), 0px 4px 12px -2px rgba(16, 25, 40, 0.12);
+  width: min(480px, calc(100vw - 32px));
+}
+
+.fmdqui-flow1-toolbar--minimized {
+  border-radius: 999px;
+  box-shadow: 0px 4px 12px rgba(16, 25, 40, 0.12);
+}
+
+.fmdqui-flow1-toolbar__restore-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: var(--color-neutral-700, #344054);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color var(--transition-fast, 0.15s ease);
+}
+
+.fmdqui-flow1-toolbar__restore-btn:hover {
+  background-color: var(--color-neutral-100, #F0F2F5);
+  color: var(--color-neutral-900, #101928);
+}
+
+.fmdqui-flow1-toolbar__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-6, 6px);
+  color: var(--color-neutral-500, #667185);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.fmdqui-flow1-toolbar__icon-btn:hover {
+  background-color: var(--color-neutral-100, #F0F2F5);
+  color: var(--color-neutral-900, #101928);
+}
+
+.fmdqui-flow1-toolbar__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border-radius: var(--radius-12, 12px);
+}
+
+.fmdqui-flow1-toolbar__toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-8, 8px);
+  color: var(--color-neutral-900, #101928);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  flex: 1;
+  min-width: 0;
+  transition: background-color var(--transition-fast, 0.15s ease);
+}
+
+.fmdqui-flow1-toolbar__toggle:hover {
+  background-color: var(--color-neutral-100, #F0F2F5);
+}
+
+.fmdqui-flow1-toolbar__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary-800, #012657);
+  background-color: var(--color-primary-50, #EBF3FC);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.fmdqui-flow1-toolbar__current-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  color: var(--color-neutral-700, #344054);
+}
+
+.fmdqui-flow1-toolbar__reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  border: 1px solid var(--color-neutral-300, #D0D5DD);
+  border-radius: var(--radius-6, 6px);
+  padding: 4px 10px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-neutral-700, #344054);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.fmdqui-flow1-toolbar__reset-btn:hover {
+  background-color: var(--color-neutral-100, #F0F2F5);
+  border-color: var(--color-neutral-400, #98A2B3);
+  color: var(--color-neutral-900, #101928);
+}
+
+/* ─── Expandable Body ───────────────────────────────────────────────────── */
+.fmdqui-flow1-toolbar__body {
+  border-top: 1px solid var(--color-neutral-200, #E4E7EC);
+  padding: 12px 14px;
+  max-height: 380px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fmdqui-flow1-toolbar__section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-neutral-500, #667185);
+  margin-bottom: 4px;
+}
+
+.fmdqui-flow1-toolbar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fmdqui-flow1-toolbar__item-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-6, 6px);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--color-neutral-700, #344054);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.fmdqui-flow1-toolbar__item-btn:hover {
+  background-color: var(--color-neutral-100, #F0F2F5);
+  color: var(--color-neutral-900, #101928);
+}
+
+.fmdqui-flow1-toolbar__item-btn--active {
+  background-color: var(--color-primary-50, #EBF3FC);
+  color: var(--color-primary-700, #1D326D);
+  font-weight: 600;
+}
+
+.fmdqui-flow1-toolbar__item-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-neutral-300, #D0D5DD);
+  flex-shrink: 0;
+}
+
+.fmdqui-flow1-toolbar__item-btn--active .fmdqui-flow1-toolbar__item-dot {
+  background-color: var(--color-secondary-500, #CC9933);
+}
+

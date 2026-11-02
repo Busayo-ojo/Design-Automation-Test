@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 import {
   Sidebar,
@@ -49,7 +49,38 @@ export interface RecentActivityItem {
   status: 'Approved' | 'Rejected';
   description: string;
   timestamp: string;
+  category?: string;
+  detail?: string;
 }
+
+const renderActivityDescription = (act: RecentActivityItem) => {
+  if (act.category && act.detail) {
+    return (
+      <span className="fmdqui-dashboard-activity-row__description">
+        <span className="fmdqui-dashboard-activity-row__category">{act.category}</span>
+        <span className="fmdqui-dashboard-activity-row__detail">
+          {act.detail.startsWith(' · ') ? act.detail : ` · ${act.detail}`}
+        </span>
+      </span>
+    );
+  }
+  const dotIndex = act.description.indexOf(' · ');
+  if (dotIndex !== -1) {
+    const category = act.description.slice(0, dotIndex);
+    const detail = act.description.slice(dotIndex);
+    return (
+      <span className="fmdqui-dashboard-activity-row__description">
+        <span className="fmdqui-dashboard-activity-row__category">{category}</span>
+        <span className="fmdqui-dashboard-activity-row__detail">{detail}</span>
+      </span>
+    );
+  }
+  return (
+    <span className="fmdqui-dashboard-activity-row__description">
+      {act.description}
+    </span>
+  );
+};
 
 export interface DashboardMetrics {
   awaitingApproval: {
@@ -78,6 +109,7 @@ export interface DashboardProps extends React.HTMLAttributes<HTMLDivElement> {
     name: string;
     email: string;
     avatarSrc?: string;
+    onSignOut?: () => void;
   };
   dateText?: string;
   metrics?: DashboardMetrics;
@@ -92,6 +124,8 @@ export interface DashboardProps extends React.HTMLAttributes<HTMLDivElement> {
   onViewContributions?: () => void;
   onReviewItem?: (id: string) => void;
   onQuickAction?: (actionKey: string) => void;
+  sidebarCollapsed?: boolean;
+  onToggleSidebar?: () => void;
   className?: string;
 }
 
@@ -245,16 +279,50 @@ export const Dashboard: React.FC<DashboardProps> = ({
   onViewContributions,
   onReviewItem,
   onQuickAction,
+  sidebarCollapsed: propSidebarCollapsed,
+  onToggleSidebar,
   className = '',
   ...props
 }) => {
+  const [internalSidebarCollapsed, setInternalSidebarCollapsed] = useState(false);
+  const isSidebarCollapsed =
+    propSidebarCollapsed !== undefined ? propSidebarCollapsed : internalSidebarCollapsed;
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(max-width: 960px)');
+    const handleMedia = (e: MediaQueryListEvent | MediaQueryList) => {
+      if (propSidebarCollapsed === undefined) {
+        setInternalSidebarCollapsed(e.matches);
+      }
+    };
+    handleMedia(mq);
+    mq.addEventListener?.('change', handleMedia);
+    return () => mq.removeEventListener?.('change', handleMedia);
+  }, [propSidebarCollapsed]);
+
   return (
     <div className={`fmdqui-dashboard-layout ${className}`.trim()} {...props}>
       {/* ─── Sidebar Navigation (Variant 2, Theme Dark Blue) ─────────────── */}
-      <aside className="fmdqui-dashboard-layout__sidebar">
+      <aside
+        className={`fmdqui-dashboard-layout__sidebar ${
+          isSidebarCollapsed ? 'fmdqui-dashboard-layout__sidebar--collapsed' : ''
+        }`.trim()}
+        onClick={() => {
+          if (isSidebarCollapsed) {
+            setInternalSidebarCollapsed(false);
+            onToggleSidebar?.();
+          }
+        }}
+      >
         <Sidebar
           variant="2"
           theme="dark-blue"
+          collapsed={isSidebarCollapsed}
+          onToggleCollapse={
+            onToggleSidebar ??
+            (() => setInternalSidebarCollapsed(!isSidebarCollapsed))
+          }
           activeId={activeMenuId}
           onActiveChange={onMenuSelect}
           user={user}
@@ -593,9 +661,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     >
                       {act.status}
                     </Badge>
-                    <span className="fmdqui-dashboard-activity-row__description">
-                      {act.description}
-                    </span>
+                    {renderActivityDescription(act)}
                     <span className="fmdqui-dashboard-activity-row__timestamp">
                       {act.timestamp}
                     </span>

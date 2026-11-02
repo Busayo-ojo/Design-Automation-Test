@@ -80,28 +80,30 @@ export const MetricsCard: React.FC<MetricsCardProps> = ({
           <span className="fmdqui-metrics-card__title">{title}</span>
         </div>
 
-        <div className="fmdqui-metrics-card__value">{value}</div>
+        <div className="fmdqui-metrics-card__metrics-container">
+          <div className="fmdqui-metrics-card__value">{value}</div>
 
-        {showSubtextRow && (
-          <div className="fmdqui-metrics-card__subtext-row">
-            {showBadge && (
-              badge && typeof badge === 'object' && 'label' in badge ? (
-                <Badge
-                  color={badge.color ?? 'success'}
-                  type={badge.type ?? 'accent'}
-                  size="sm"
-                >
-                  {badge.label}
-                </Badge>
-              ) : (
-                (badge as React.ReactNode)
-              )
-            )}
-            {showSubtext && (
-              <span className="fmdqui-metrics-card__subtext">{subtext}</span>
-            )}
-          </div>
-        )}
+          {showSubtextRow && (
+            <div className="fmdqui-metrics-card__subtext-row">
+              {showBadge && (
+                badge && typeof badge === 'object' && 'label' in badge ? (
+                  <Badge
+                    color={badge.color ?? 'success'}
+                    type={badge.type ?? 'accent'}
+                    size="sm"
+                  >
+                    {badge.label}
+                  </Badge>
+                ) : (
+                  (badge as React.ReactNode)
+                )
+              )}
+              {showSubtext && (
+                <span className="fmdqui-metrics-card__subtext">{subtext}</span>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {showCta && (

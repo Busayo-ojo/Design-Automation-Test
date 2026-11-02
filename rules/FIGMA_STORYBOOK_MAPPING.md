@@ -27,6 +27,8 @@
 | Breadcrumbs | Complete | Components/🍞 Breadcrumbs | 2026-10-31 | Figma 2031:39144 & 2031:39096; 4 variant states (default, hover, active, disabled) + demo trail, custom separator, icon swap; borders in Grey/200 (#E4E7EC) |
 | Pagination | Complete | Components/📄 Pagination | 2026-10-27 | Figma 347:10062; rebuild from lowest base elements: PageNumber (2608:66376, 12 variants), TruncatedPages (2775:76546), PageIndicator (2609:67848), NavigationControls (2607:66246, 15 variants), PaginationList (2767:76342, 15 variants), full Pagination bar (2767:76362, 15 variants with 5 variations and 4 alignments) |
 | DRP / Dashboard | Complete | Layout/📊 Dashboard | 2026-11-01 | Figma 10301:78467; full responsive desktop layout assembling Sidebar (v2, dark-blue), MetricsCard (×4), Approvals Table Card, Contributions ProgressBar Card, Recent Activity, and Quick Actions grid |
+| 1.15 Welcome email | Complete | Layout/WelcomeEmail | 2026-11-01 | Figma 10306:12506; email envelope header, logo, salutation, summary box, CTA button, disclaimer, and automated footer |
+| Flow 1 Prototype Orchestrator | Complete | Layout/Flow 1 - Prototype | 2026-11-01 | Figma 10303:161102 & 10306:12506; client-side interactive journey connecting Welcome Email → Password Setup → 2FA Setup → Sign In → 2FA OTP → DRP Dashboard, with reviewer controls toolbar |
 
 ## Reuse mapping — Pagination (2026-10-27)
 
@@ -187,5 +189,193 @@ Curvature refinement (2026-10-31): reduced spatial frequency, domain-warp streng
 - **Figma Design Pattern**: In Figma, all content icons and form field icons (e.g., `user`, `lock`, `eye`, `eye-slash`, `mail-check`, `shield-tick`, `clock`, `check-circle`) use the **bold** variant. Directional controls (`arrow-left`, `arrow-right`, `chevron-left`, `chevron-right`, `chevron-down`) and dismissal (`close`) use the **linear** variant.
 - **Code Default Pitfall**: The `<Icon />` component in `src/foundations/icons/` defaults to `variant="linear"` when the `variant` prop is omitted.
 - **Mandatory Practice**: Always check the Figma icon variant style. When implementing form inputs, cards, or status indicators where Figma uses bold icons, explicitly pass `variant="bold"` (e.g. `<Icon name="user" variant="bold" size={20} />`) to maintain 1:1 visual parity and prevent regression back to thin stroke icons.
+
+---
+
+# FMDQ Design System Global Engineering Guidelines
+*(Auto-Layout, Spacing, Responsiveness & Visual Parity Standards)*
+
+These rules apply universally across all components, patterns, and composite page layouts in the FMDQ Design System. They codify critical engineering corrections and prevent design drift during implementation.
+
+---
+
+### 1. Auto-Layout Intermediate Containers & Vertical Spacing
+
+- **Figma Auto-Layout Hierarchy Must Be Preserved in DOM**:
+  In Figma, vertical cards and compound components group related elements inside intermediate sub-frames (e.g. an internal `Metrics Container` holding a metric value and its subtext/badge with a 12px gap, placed 32px below the header).
+- **The `justify-content: space-between` Anti-Pattern**:
+  Never flatten intermediate sub-frames into direct siblings and apply CSS `justify-content: space-between`. When cards have fixed heights or flexible grid heights, `space-between` distributes remaining space equally among all children, causing values and badges to float away from each other and creating severe vertical drift (e.g., 15px top / 29px bottom instead of Figma's 32px top / 12px internal gap).
+- **Mandatory Implementation Rule**:
+  Always mirror Figma's sub-frame structure with semantic container elements:
+  ```css
+  /* Container maintains explicit Figma spacing tokens */
+  .fmdqui-<component>__metrics-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-12, 12px);
+    margin-top: auto; /* Or exact margin-top: var(--spacing-32, 32px) matching Figma */
+  }
+  ```
+  Only use `justify-content: space-between` if the Figma design inspect clearly shows the parent frame layout mode is set to "Space between" (`SPACE_BETWEEN`).
+
+---
+
+### 2. Cross-Axis Alignment & Unwanted Bottom Spacing
+
+- **The Flex Stretch Pitfall (`align-items: stretch`)**:
+  When placing cards side-by-side in flex or grid rows, CSS defaults to `align-items: stretch`. If one card expands because of multi-line wrapping, dynamic data, or taller content, the adjacent card stretches downwards to match its height. This creates empty, unstyled whitespace at the bottom of the shorter card (often misdiagnosed as unintended extra padding).
+- **Mandatory Implementation Rule**:
+  Row containers pairing asymmetric or independent content cards must explicitly set `align-items: flex-start;`. Shorter cards should specify `height: fit-content;`:
+  ```css
+  .fmdqui-<layout>__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-24, 24px);
+    align-items: flex-start; /* Prevents shorter cards stretching artificially */
+  }
+
+  .fmdqui-<component>--compact {
+    height: fit-content;
+  }
+  ```
+  Never leave arbitrary gaps or allow flex stretch to create artificial whitespace at the bottom of card panels.
+
+---
+
+### 3. Multi-Breakpoint Responsive Strategy & Grid Degradation
+
+High-density financial and administrative layouts require a structured, multi-tier degradation model rather than a simplistic two-state mobile/desktop switch.
+
+| Breakpoint Tier | Viewport Width | Layout Behaviour & Transformations |
+| :--- | :--- | :--- |
+| **Wide Desktop** | `> 1360px` | Full 4-column metric grid (`repeat(4, 1fr)`). Split content rows (e.g. 2fr / 1fr). Parallel activity and action panels side-by-side. Navigation expanded (272px). |
+| **Compact Desktop** | `961px – 1360px` | Metric cards switch to a balanced **2×2 grid** (`repeat(2, 1fr)`). Primary tables expand to 100% width. Secondary summary/progress cards stack underneath. Recent activity and quick action panels remain side-by-side (50/50) with clean text wrap. |
+| **Tablet / Rail Collapse** | `681px – 960px` | Navigation sidebar collapses to an **82px icon rail** to preserve content canvas width. Activity and quick action cards stack into a **1×2 vertical column**. Action buttons in headers wrap below title rows before squishing. |
+| **Mobile / Compact** | `≤ 680px` | Metric cards collapse to a **1×4 single-column stack** (`1fr`). Button groups expand to full-width touch targets. Container paddings adjust to compact tokens (`--spacing-16` / `--spacing-12`). |
+
+- **Mandatory Implementation Rule**:
+  Plan and test responsive degradation at each threshold. Ensure that every multi-column grid has an intermediate 2×2 or 2-column fallback before dropping to single-column mobile viewports.
+
+---
+
+### 4. Button Typography & Flex Integrity in Responsive Contexts
+
+- **The Text Wrapping Defect**:
+  In flex headers, toolbars, and search bars, browser flex algorithms will shrink action buttons before media queries trigger, causing button text to wrap into awkward multiple lines (e.g. `"Download\nsummary"` or `"Review\napprovals →"`).
+- **Mandatory Implementation Rule**:
+  All button components in `.fmdqui-button` must enforce:
+  ```css
+  .fmdqui-button {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+  ```
+- **Header & Toolbar Wrapping Rule**:
+  Containers holding buttons alongside titles or filter bars must set `display: flex; flex-wrap: wrap; gap: <px>; flex-shrink: 0;`. Set responsive breakpoints early enough (e.g. `@media (max-width: 800px)`) so that action groups cleanly wrap below the title block before any horizontal compression or clipping occurs.
+
+---
+
+### 5. Composite & Two-Tone Typography Parity (`getStyledTextSegments`)
+
+- **Figma Design Pattern**:
+  Figma frequently formats a single text layer with multiple styled text runs (e.g. an Activity row with `"Category · "` in Grey/500 Regular, followed by `"Item Name"` in Grey/900 Medium/Bold, and a timestamp in Grey/400).
+- **The Flat Text Anti-Pattern**:
+  Treating composite text as a single string and applying a uniform color loses the entire visual hierarchy designed in Figma.
+- **Mandatory Implementation Rule**:
+  Always inspect text nodes for styled segments using `getStyledTextSegments` in Figma MCP. When multi-color text runs are present, structure them in markup as distinct spans with exact semantic tokens:
+  ```tsx
+  <span className="fmdqui-activity-row__text">
+    <span className="fmdqui-activity-row__category">{category} · </span>
+    <span className="fmdqui-activity-row__detail">{detail}</span>
+  </span>
+  ```
+  ```css
+  .fmdqui-activity-row__category {
+    color: var(--color-neutral-500, #667185);
+  }
+  .fmdqui-activity-row__detail {
+    color: var(--color-neutral-900, #101928);
+  }
+  ```
+
+---
+
+### 6. Navigation Rails & Collapsed Item Centering
+
+- **Centering Inside Collapsed Frames (82px Rail)**:
+  When a navigation bar or sidebar collapses into an icon-only rail (82px width), child items (profile avatars, menu items, toggles) must be strictly centered.
+- **The Align-Items Pitfall**:
+  Setting `align-items: center` on the rail container is insufficient because child `<button>`, `<a>`, or `<div>` elements typically default to `width: 100%; display: flex; justify-content: flex-start;`. This pushes icons against the left edge with standard left padding.
+- **Mandatory Implementation Rule**:
+  In collapsed navigation states, explicitly center every child interactive element:
+  ```css
+  .fmdqui-sidebar--collapsed .fmdqui-sidebar__item-button,
+  .fmdqui-sidebar--collapsed .fmdqui-sidebar__profile {
+    width: 100%;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 auto !important;
+  }
+  ```
+- **Ergonomics & Expand Affordance**:
+  Collapsed navigation rails should allow clicking anywhere on the collapsed surface to re-expand the navigation, complemented by an explicit chevron affordance in brand gold (`--color-secondary-500` / `#CC9933`).
+
+---
+
+### 7. Sidebar Geometry & Corner Radius Asymmetry
+
+- **Viewport Boundary Rule**:
+  Navigation panels and structural sidebars docked to the edge of the viewport must **never** have uniform border-radius on all four corners. Corners touching the window or viewport edge must be `0px`.
+- **Mandatory Implementation Rule**:
+  For left-anchored sidebars, apply:
+  ```css
+  .fmdqui-sidebar {
+    border-radius: 0 var(--radius-12, 12px) var(--radius-12, 12px) 0;
+  }
+  ```
+  Top-left and bottom-left radii must remain `0px` to maintain seamless edge alignment with the screen.
+
+---
+
+### 8. Card Elevation & Hover State Synchronization
+
+- **Unified Card Elevation Standards**:
+  All card containers (standard content cards, metric cards, table wrappers) within the design system must follow consistent rest and hover elevation rules.
+- **Elevation Tokens**:
+  - **Rest / Default State**: Light soft elevation (`box-shadow: var(--shadow-soft-xsm, 0px 1px 2px 0px rgba(16, 24, 40, 0.05));`) with a subtle 1px border (`var(--color-neutral-200, #E4E7EC)`).
+  - **Hover State**: Suppress the drop shadow (`box-shadow: none;`) and highlight the border (`border-color: var(--color-primary-600, #0D5EBA);`).
+- **Mandatory Implementation Rule**:
+  Never invert this pattern by leaving a card flat at rest and adding an abrupt shadow on hover, unless explicitly dictated by a unique modal/popover spec. All card components in a layout must share identical elevation tokens and hover dynamics.
+
+---
+
+### 9. Action Grids & Micro-Interactions
+
+- **Exact Grid Gaps**:
+  Matrices of action buttons (e.g. 2×2 quick action grids) must strictly match Figma's auto-layout gaps:
+  ```css
+  .fmdqui-action-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px; /* Exact 4px horizontal and vertical gap from Figma */
+  }
+  ```
+- **Border Tokens on Tinted Buttons**:
+  Secondary light-tinted buttons used in quick actions or toolbars must use the exact primary border token (`--color-primary-75` / `#C6DDF7`), rather than defaulting to generic neutral gray borders (`#E4E7EC`).
+
+---
+
+### 10. Icon Color Inheritance in Popovers & Dark Backgrounds
+
+- **Explicit Icon Color Prop**:
+  Icons inside flyout menus, account selectors, and contextual popovers must explicitly declare their token color via the `color` prop or targeted CSS rules, rather than relying on ambiguous text color cascades.
+- **Mandatory Practice**:
+  - Primary menu items: `color="var(--color-primary-700)"` (`#1D326D`).
+  - Destructive / Log out actions: `color="var(--color-error-600)"` (`#D42620` / `#BA110B`).
+  - Active navigation indicators: `color="var(--color-secondary-500)"` (`#CC9933`).
+
 
 

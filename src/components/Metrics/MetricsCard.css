@@ -9,22 +9,24 @@
   overflow: hidden;
   box-sizing: border-box;
   font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  box-shadow: var(--shadow-soft-xsm, 0px 2px 4px -1px rgba(16, 25, 40, 0.02), 0px 5px 13px -5px rgba(16, 25, 40, 0.05));
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
   width: 100%;
 }
 
 .fmdqui-metrics-card:hover {
   border-color: var(--color-neutral-300, #D0D5DD);
-  box-shadow: 0 4px 12px rgba(16, 24, 40, 0.05);
+  box-shadow: none !important;
 }
 
 /* ── Metrics Body ── */
 .fmdqui-metrics-card__body {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  gap: 16px;
+  padding: 16px;
+  gap: 32px;
   flex: 1;
+  box-sizing: border-box;
 }
 
 .fmdqui-metrics-card--center .fmdqui-metrics-card__body {
@@ -37,6 +39,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  height: 32px;
 }
 
 .fmdqui-metrics-card__icon-box {
@@ -45,7 +48,7 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  border-radius: 8px;
+  border-radius: 6px;
   background-color: var(--color-neutral-white, #FFFFFF);
   border: 1px solid var(--color-neutral-200, #E4E7EC);
   color: var(--color-fmdq-blue);
@@ -55,17 +58,29 @@
 .fmdqui-metrics-card__title {
   font-size: var(--font-size-p-sm, 14px);
   font-weight: 500;
-  line-height: var(--font-line-height-paragraph, 1.4);
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-neutral-500, #667185);
   margin: 0;
 }
 
+/* ── Metrics Container (Value + Subtext) ── */
+.fmdqui-metrics-card__metrics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fmdqui-metrics-card--center .fmdqui-metrics-card__metrics-container {
+  align-items: center;
+}
+
 /* ── Value / Data Display ── */
 .fmdqui-metrics-card__value {
-  font-size: var(--font-size-h3, 32px);
+  font-size: 28px;
   font-weight: 700;
-  line-height: var(--font-line-height-heading, 1.2);
-  letter-spacing: var(--font-letter-spacing-heading-large, -0.06em);
+  line-height: 120%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-neutral-900, #101928);
   margin: 0;
 }
@@ -74,14 +89,15 @@
 .fmdqui-metrics-card__subtext-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   flex-wrap: wrap;
 }
 
 .fmdqui-metrics-card__subtext {
   font-size: var(--font-size-p-xs, 12px);
-  font-weight: 400;
-  line-height: var(--font-line-height-paragraph, 1.4);
+  font-weight: 500;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
   color: var(--color-neutral-500, #667185);
 }
 
