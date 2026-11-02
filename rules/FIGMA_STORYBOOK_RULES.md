@@ -119,7 +119,7 @@ Reuse first. Query Figma second. Build third. Verify always. Never guess or inve
        allowFullScreen
      />
      ```
-     - **Container Selection Rule**: Embed the inner `Container` frame (or component set) containing the actual components and variants, NOT the outer document sheet with `_Document heading` and `Page Footer`. This keeps embeds focused tightly on the components without redundant headers and footers.
+     - **Component Set Selection Rule**: Embed the inner `COMPONENT_SET` node ID directly (e.g. the purple dashed component set bounding box) rather than the outer sheet or `Container` frame. This ensures the embed camera centers strictly on the component variants and keeps the document heading (`_Document heading`) and footer (`Page Footer`) completely out of view.
   4. **Primary Canvas / Playground**: `<Canvas of={...Stories.Default} />` or `<Canvas of={...Stories.Playground} />`.
   5. **Props / Controls Table**: `<Controls of={...Stories.Default} />`.
   6. **Variant Breakdown**: Sections for each variant, state, and option with `sourceState="shown"`.
