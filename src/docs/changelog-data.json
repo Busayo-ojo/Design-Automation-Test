@@ -1,5 +1,16 @@
 [
   {
+    "hash": "ddf7b47",
+    "date": "2026-11-02",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "feat(table): align table header, leading, and content cell variants with Figma structure",
+    "category": "feat",
+    "scope": "table",
+    "message": "align table header, leading, and content cell variants with Figma structure",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/ddf7b47"
+  },
+  {
     "hash": "3f7cfe7",
     "date": "2026-11-02",
     "author": "dudesoamazing",
