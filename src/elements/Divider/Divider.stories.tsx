@@ -5,7 +5,6 @@ import { Button } from '../Button';
 const meta: Meta<typeof Divider> = {
   title: 'Elements/➖ Divider',
   component: Divider,
-  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {

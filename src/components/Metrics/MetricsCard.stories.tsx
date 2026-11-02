@@ -29,7 +29,6 @@ const ShieldIcon = () => (
 const meta: Meta<typeof MetricsCard> = {
   title: 'Components/📈 Metrics',
   component: MetricsCard,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },

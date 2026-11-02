@@ -6,7 +6,6 @@ import type { ButtonGroupState, ButtonGroupIcon } from './ButtonGroup';
 const meta: Meta<typeof ButtonGroupItem> = {
   title: 'Elements/🚥 Tabbed Buttons',
   component: ButtonGroupItem,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },

@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ModalStories from './Modal.stories';
+
+<Meta of={ModalStories} />
+
+# Modal
+
+## Overview
+
+Modal dialogs provide critical focused workflows, confirmations, dual-control authorizations, summary reviews, and alerts.
+Built on accessible dialog primitives with backdrop dimming, focus trapping, keyboard Escape dismissal, and 9 specialized workflow types.
+
+## Figma Reference
+
+<iframe
+  title="Modals Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=10379-339470&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={ModalStories.ReactivateUser} />
+
+## Properties
+
+<Controls of={ModalStories.ReactivateUser} />

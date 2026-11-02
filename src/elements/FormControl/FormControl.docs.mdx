@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as FormControlStories from './FormControl.stories';
+
+<Meta of={FormControlStories} />
+
+# Form Controls
+
+## Overview
+
+Form Controls provide selection and toggling inputs across application forms and configuration dialogs.
+Includes Checkbox, Radio, Switch, Checkcircle, and Toggle elements with full interactive state support.
+
+## Figma Reference
+
+<iframe
+  title="Form Controls Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=2739-67949&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={FormControlStories.Default} />
+
+## Properties
+
+<Controls of={FormControlStories.Default} />

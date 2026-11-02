@@ -1,5 +1,16 @@
 [
   {
+    "hash": "8b9732e",
+    "date": "2026-11-02",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "feat(storybook): introduce Flows category, move auth pages to Authentication, add emoji to WelcomeEmail, remove layout placeholders",
+    "category": "feat",
+    "scope": "storybook",
+    "message": "introduce Flows category, move auth pages to Authentication, add emoji to WelcomeEmail, remove layout placeholders",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/8b9732e"
+  },
+  {
     "hash": "0f9d996",
     "date": "2026-11-02",
     "author": "dudesoamazing",

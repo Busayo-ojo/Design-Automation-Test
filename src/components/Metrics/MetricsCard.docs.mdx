@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as MetricsStories from './MetricsCard.stories';
+
+<Meta of={MetricsStories} />
+
+# Metrics
+
+## Overview
+
+Metrics cards present key performance indicators, trading volumes, and operational counts.
+Features leading icon badges, bold formatted values, percentage trend indicators with directional arrows, and contextual subtext.
+
+## Figma Reference
+
+<iframe
+  title="Metrics Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=6291-30391&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={MetricsStories.Default} />
+
+## Properties
+
+<Controls of={MetricsStories.Default} />

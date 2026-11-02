@@ -6,7 +6,6 @@ import { Icon } from '../../foundations/icons/Icon';
 const meta: Meta<TabsProps & { hasIcon?: boolean, hasNumberTag?: boolean }> = {
   title: 'Components/🗂️ Tabs',
   component: Tabs,
-  tags: ['autodocs'],
   argTypes: {
     style: {
       control: 'select',

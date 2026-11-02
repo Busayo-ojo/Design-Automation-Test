@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TabsStories from './Tabs.stories';
+
+<Meta of={TabsStories} />
+
+# Tabs
+
+## Overview
+
+Tabs organize content across different screens, data sets, and other interactions.
+Supports Line and Pill presentation styles, icon integration, badge/number tags, and accessible keyboard navigation.
+
+## Figma Reference
+
+<iframe
+  title="Tabs Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=1685-18536&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={TabsStories.LineStyle} />
+
+## Properties
+
+<Controls of={TabsStories.LineStyle} />

@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TableStories from './Table.stories';
+
+<Meta of={TableStories} />
+
+# Table
+
+## Overview
+
+Data tables organize complex collections of structured records for operational scanning, comparison, and action execution.
+Provides flexible cell primitives (`TextStackCell`, `AvatarCell`, `BadgeCell`, `ProgressCell`, `MoreMenuCell`) with interactive sorting and bulk selection.
+
+## Figma Reference
+
+<iframe
+  title="Tables Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=347-10049&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={TableStories.DeclarativeDataTable} />
+
+## Properties
+
+<Controls of={TableStories.DeclarativeDataTable} />

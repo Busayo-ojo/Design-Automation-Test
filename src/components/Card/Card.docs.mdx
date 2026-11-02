@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as CardStories from './Card.stories';
+
+<Meta of={CardStories} />
+
+# Card
+
+## Overview
+
+Cards group related information, metrics, and actions into structured surface containers.
+Composed of `CardHeader`, `CardTitle`, `CardBody`, and `CardFooter` elements with standard elevation and border radius tokens.
+
+## Figma Reference
+
+<iframe
+  title="Cards Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=8017-134918&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={CardStories.Default} />
+
+## Properties
+
+<Controls of={CardStories.Default} />

@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as DrawerStories from './Drawer.stories';
+
+<Meta of={DrawerStories} />
+
+# Drawer
+
+## Overview
+
+Drawers slide in from the screen edge to present supplementary information, filter panels, or sub-tasks without navigating away from the current page.
+Supports customizable headers, scrollable body content, and action footers with keyboard and overlay dismissal.
+
+## Figma Reference
+
+<iframe
+  title="Drawers Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=10379-339470&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={DrawerStories.Default} />
+
+## Properties
+
+<Controls of={DrawerStories.Default} />

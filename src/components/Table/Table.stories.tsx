@@ -39,7 +39,6 @@ The Table component follows the Figma design specification closely:
       },
     },
   },
-  tags: ['autodocs'],
 };
 
 export default meta;

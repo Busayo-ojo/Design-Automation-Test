@@ -27,7 +27,6 @@ const ILLUSTRATION_TYPES: EmptyStateType[] = [
 const meta: Meta<typeof EmptyState> = {
   title: 'Layout/📭 Empty State',
   component: EmptyState,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     docs: {

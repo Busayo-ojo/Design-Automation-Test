@@ -1,0 +1,31 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as EmptyStateStories from './EmptyState.stories';
+
+<Meta of={EmptyStateStories} />
+
+# Empty State
+
+## Overview
+
+The `EmptyState` component displays helpful fallback content when data, search results, notifications, or user records are empty.
+Features all 19 official vector illustrations from the FMDQ Design System with full support for:
+- **Color Variant** (`color: true`): Rich, vibrant branded palette.
+- **Monochrome Variant** (`color: false`): Subtle greyscale outline for minimal or compact UI contexts.
+
+## Figma Reference
+
+<iframe
+  title="Empty State Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=5140-5571&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={EmptyStateStories.Default} />
+
+## Properties
+
+<Controls of={EmptyStateStories.Default} />

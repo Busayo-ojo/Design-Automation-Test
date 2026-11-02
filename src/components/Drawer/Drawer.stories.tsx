@@ -8,7 +8,6 @@ import { Input } from '../../elements/Input';
 const meta: Meta<typeof Drawer> = {
   title: 'Components/Drawer',
   component: Drawer,
-  tags: ['autodocs'],
 };
 
 export default meta;

@@ -29,7 +29,6 @@ const col: React.CSSProperties = {
 const meta: Meta<typeof FormControl> = {
   title: 'Elements/🎛️ Form Controls',
   component: FormControl,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },

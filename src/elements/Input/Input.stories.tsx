@@ -30,7 +30,6 @@ const gridStyle: React.CSSProperties = {
 const meta: Meta<typeof Input> = {
   title: 'Elements/🔠 Input',
   component: Input,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },

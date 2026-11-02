@@ -5,7 +5,6 @@ import { ProgressCircle } from './ProgressCircle';
 const meta: Meta<typeof ProgressBar> = {
   title: 'Components/📊 Progress Indicators',
   component: ProgressBar,
-  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {

@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as InputStories from './Input.stories';
+
+<Meta of={InputStories} />
+
+# Input
+
+## Overview
+
+Text input fields allow users to enter, edit, and search data.
+Supports single-line inputs, leading and trailing icons, password toggles, clear buttons, inline helper notes, and integrated error/warning/success states.
+
+## Figma Reference
+
+<iframe
+  title="Input Fields Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=2148-62354&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={InputStories.Default} />
+
+## Properties
+
+<Controls of={InputStories.Default} />
