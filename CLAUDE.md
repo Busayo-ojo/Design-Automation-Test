@@ -57,7 +57,7 @@ Each component lives in its own folder with: `ComponentName.tsx`, `ComponentName
 - **Preview frame customizations** (story canvas): `.storybook/preview-head.html` — applies `* { font-family: "DM Sans" !important }` to override Storybook's default docs fonts.
 - **Theme**: `.storybook/fmdqTheme.ts` — Storybook manager theme (colors, fonts, brand).
 - **Preview wrapper**: `.storybook/preview.tsx` — wraps all stories in `<BrowserRouter>`.
-- Story titles follow the pattern `<Group>/<emoji> <Name>`, where the group matches the source folder: `Elements/➡️ Button`, `Components/🪟 Modal`, `Layout/✨ PageHeader`, `Foundations/🌈 Colors`.
+- Story titles follow the pattern `<Group>/<emoji> <Name>`, where the group matches the source folder or flow: `Elements/➡️ Button`, `Components/🪟 Modal`, `Layout/📊 Dashboard`, `Flows/🔐 Flow 1 - Authentication`, `Foundations/🌈 Colors`. Standalone layouts live in `Layout/` without placeholder prefixes (no `✨`). Multi-step end-to-end user journeys live in `Flows/`.
 - Story sort order is configured in `preview.tsx`/`preview.ts` via `storySort`.
 
 ### Figma-to-code pipeline
@@ -80,5 +80,5 @@ When implementing any component from Figma (see `rules/FIGMA_STORYBOOK_RULES.md`
 3. Map all colors to `tokens.css` variables; add new tokens if needed rather than hardcoding.
 4. Every Figma variant must have a corresponding Storybook story. Variant prop names must mirror Figma property names exactly.
 5. Run `figma_check_design_parity` before marking a component complete.
-6. Every component requires a `.docs.mdx` with: Overview, Figma embed, all variants with `sourceState="shown"`, Props Table, and Usage Guidelines.
+6. Every component requires a `.docs.mdx` page following the standard hierarchy: Component Title (no `## Overview` subheading), overview description, `## Figma Reference` iframe embed (width 100%, height 450), Canvas/Playground, Props Table, and variant sections with `sourceState="shown"`. Companion CSF `.stories.tsx` files must NOT specify `tags: ['autodocs']` when a `.docs.mdx` file exists.
 7. Update `rules/FIGMA_STORYBOOK_MAPPING.md` with the status and last parity check date.

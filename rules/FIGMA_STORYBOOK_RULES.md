@@ -80,11 +80,15 @@ Reuse first. Query Figma second. Build third. Verify always. Never guess or inve
 - Folder, file and export names match the Figma component name (`src/<group>/<Name>/<Name>.tsx`).
 - Prop names mirror Figma property names, or the props in the component's "Storybook:" description line.
 - CSS classes use the `fmdqui-` prefix with BEM-like modifiers (`fmdqui-button`, `fmdqui-button--primary`, `fmdqui-button--sm`).
-- Story titles follow the existing pattern `<Group>/<emoji> <Name>`, where the group matches the folder:
+- Story titles follow the existing pattern `<Group>/<emoji> <Name>`, where the group matches the folder or flow:
   - `Elements/➡️ Button`
   - `Components/🪟 Modal`
-  - `Layout/✨ PageHeader`
+  - `Layout/📊 Dashboard`
+  - `Layout/🔐 Sign In`
+  - `Layout/✉️ Welcome Email`
+  - `Flows/🔐 Flow 1 - Authentication`
   - `Foundations/🌈 Colors`
+- Note: Standalone layouts belong in `Layout/` without placeholder prefixes (e.g., no `✨` placeholders). Multi-step end-to-end user journeys belong in `Flows/`.
 - Record the same title in `rules/FIGMA_STORYBOOK_MAPPING.md`.
 
 ## 9. Verification (mandatory before marking a component complete)
@@ -98,6 +102,24 @@ Reuse first. Query Figma second. Build third. Verify always. Never guess or inve
 ## 10. Documentation (mandatory for every component)
 
 - Every component MUST have a `.docs.mdx` page.
-- Sections: Overview, Figma embed, all variants with `sourceState="shown"`, Props table, Usage guidelines.
-- The overview comes from Figma's component description, not invented text.
-- Every variant shows its React code permanently (`sourceState="shown"`).
+- Exclude Foundations stories (`Foundations/`) from Figma iframe embeds (Foundations document design tokens, colors, icons, and type scales).
+- **Standard Document Structure (Title > Overview copy > Figma Reference > Canvas > Controls > Variants)**:
+  1. **Component Title**: `# <ComponentName>` or `<Title><ComponentName></Title>`.
+     - **NO `## Overview` subheading**: The component or element name is sufficient as the heading; do not put an "Overview" subtitle under it.
+  2. **Overview Description**: The component overview copy or Figma description directly underneath the title.
+  3. **Figma Reference**: `## Figma Reference` heading immediately under the overview copy, containing the responsive Figma iframe embed:
+     ```mdx
+     ## Figma Reference
+
+     <iframe
+       title="<ComponentName> Figma reference"
+       width="100%"
+       height="450"
+       src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=<node-id>&embed-host=share"
+       allowFullScreen
+     />
+     ```
+  4. **Primary Canvas / Playground**: `<Canvas of={...Stories.Default} />` or `<Canvas of={...Stories.Playground} />`.
+  5. **Props / Controls Table**: `<Controls of={...Stories.Default} />`.
+  6. **Variant Breakdown**: Sections for each variant, state, and option with `sourceState="shown"`.
+- **CSF Autodocs Rule**: Do **NOT** include `tags: ['autodocs']` in the companion `<Name>.stories.tsx` file when a custom `<Name>.docs.mdx` file exists. Storybook 8's indexer throws an indexing collision error if both are present.
