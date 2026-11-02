@@ -9,17 +9,17 @@ import {
   TableRow,
   TableHeaderCell,
   TableCell,
+  LeadingCell,
+  ContentCell,
   TextStackCell,
   AvatarCell,
   ControlCell,
-  BadgeCell,
   ProgressCell,
   MoreMenuCell,
   type ColumnDef,
 } from './Table';
 import { Badge } from '../../elements/Badge';
 import { Button } from '../../elements/Button';
-import { Chip } from '../../elements/Chip';
 
 const meta: Meta<typeof Table> = {
   title: 'Components/🔳 Table',
@@ -28,13 +28,13 @@ const meta: Meta<typeof Table> = {
     docs: {
       description: {
         component: `
-### Granular, Cell-by-Cell Table Architecture (Matching Figma \`✤ Tables\`)
+### Modular Table Architecture (Matching Figma \`✤ Tables\`)
 
-The Table component follows the Figma design specification closely:
-- **Granular Cell Sub-components**: Plain text, Text stack (primary above, supporting below), Form controls (checkbox, radio, switch), Avatars & Avatar groups, Badges, Chips, Progress bars, Actions, and More menus.
-- **Header Cells**: With selection checkboxes, sort direction indicators, and separators.
-- **Row States**: Default, Hover, and Selected states (highlighted in Figma blue \`#F0F4FE\`).
-- **Flexible Composition**: Usable both as declarative compound JSX (\`<Table><TableHead>...<TableBody>...\`) and data-driven (\`columns\` + \`data\`).
+The Table architecture directly mirrors the Figma component hierarchy on page \`✤ Tables\` (Node ID: \`347:10049\`):
+- **Header Cells (\`2804:80528\`)**: Standalone header cell component set (30 variants) supporting Default, Hover, and Selected states, selection checkboxes, label visibility, trailing sort indicators, and separators.
+- **Leading Cells (\`5604:43632\`)**: Leading cell component set (12 variants) combining form controls (radio, toggle, checkbox), leading media (featured icon, avatar), and two-line text (label + description).
+- **Content Cells (\`5604:44353\`)**: Granular content cell component set (16 variants) covering Avatar + Text, Action Icons, Status Badges, Action Buttons, Avatar Groups, Progress Bars, Star Ratings, and More Menus.
+- **Composed Tables**: Real-world operational financial tables assembling Header, Leading, and Content cells.
         `,
       },
     },
@@ -44,195 +44,531 @@ The Table component follows the Figma design specification closely:
 export default meta;
 type Story = StoryObj<typeof Table>;
 
-// ─── 1. Granular Cell Types Showcase ──────────────────────────────────────────
+// ─── 1. Header Variants (Figma Node 2804:80528, 30 Variants) ─────────────────
 
-export const GranularCellTypes: Story = {
-  render: () => (
-    <TableContainer>
-      <TableElement>
-        <TableHead>
-          <TableRow>
-            <TableHeaderCell>Cell Type</TableHeaderCell>
-            <TableHeaderCell>Granular Output / Preview</TableHeaderCell>
-            <TableHeaderCell>Figma Variant & Description</TableHeaderCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {/* Plain Text */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              Plain Text
-            </TableCell>
-            <TableCell variant="text" text="NGN 1,250,000,000.00" />
-            <TableCell variant="text" muted>
-              Single-line text with configurable font weight and alignment
-            </TableCell>
-          </TableRow>
+export const HeaderVariants: Story = {
+  name: 'Header Cells',
+  render: () => {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+        <div>
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: 600, color: '#101828' }}>
+            State: Default (Variants by Checkbox, Label, Trailing Icon & Separator)
+          </h4>
+          <p style={{ margin: '0 0 16px 0', fontSize: '13px', color: '#667085' }}>
+            Matches Figma <code>Header</code> component set (2804:80528) with white background, DM Sans 12px uppercase medium text, and Grey/200 bottom border.
+          </p>
+          <TableContainer>
+            <TableElement>
+              <TableHead>
+                <TableRow>
+                  <TableHeaderCell state="default" checkbox checked={false} trailingIcon hasSeparator>
+                    Checkbox + Label + Sort
+                  </TableHeaderCell>
+                  <TableHeaderCell state="default" checkbox checked={true} hasSeparator>
+                    Checkbox + Label
+                  </TableHeaderCell>
+                  <TableHeaderCell state="default" sortable sortDirection="asc" hasSeparator>
+                    Sort Ascending
+                  </TableHeaderCell>
+                  <TableHeaderCell state="default" sortable sortDirection="desc" hasSeparator>
+                    Sort Descending
+                  </TableHeaderCell>
+                  <TableHeaderCell state="default" hasSeparator>
+                    Label Only
+                  </TableHeaderCell>
+                  <TableHeaderCell state="default" align="center" hasSeparator>
+                    Centered
+                  </TableHeaderCell>
+                  <TableHeaderCell state="default" align="right" hasSeparator>
+                    Right Aligned
+                  </TableHeaderCell>
+                  <TableHeaderCell state="default" checkbox checked={false} hasLabel={false} hasSeparator style={{ width: '48px' }} />
+                  <TableHeaderCell state="default" hasSeparator={false}>
+                    No Separator
+                  </TableHeaderCell>
+                </TableRow>
+              </TableHead>
+            </TableElement>
+          </TableContainer>
+        </div>
 
-          {/* Text Stack */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              Text Stack
-            </TableCell>
-            <TableCell
-              variant="text-stack"
-              primaryText="FGN 13.53% 23-MAR-2027"
-              secondaryText="Bond • ISIN: NGB2027S2"
-            />
-            <TableCell variant="text" muted>
-              Primary heading above secondary supporting metadata
-            </TableCell>
-          </TableRow>
+        <div>
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: 600, color: '#101828' }}>
+            State: Hover (Figma Grey/50 #F9FAFB Background)
+          </h4>
+          <p style={{ margin: '0 0 16px 0', fontSize: '13px', color: '#667085' }}>
+            Interactive cursor hover feedback tint applied to header cells.
+          </p>
+          <TableContainer>
+            <TableElement>
+              <TableHead>
+                <TableRow>
+                  <TableHeaderCell state="hover" checkbox checked={false} trailingIcon hasSeparator>
+                    Checkbox + Label + Sort
+                  </TableHeaderCell>
+                  <TableHeaderCell state="hover" checkbox checked={true} hasSeparator>
+                    Checkbox + Label
+                  </TableHeaderCell>
+                  <TableHeaderCell state="hover" sortable sortDirection="asc" hasSeparator>
+                    Sort Ascending
+                  </TableHeaderCell>
+                  <TableHeaderCell state="hover" sortable sortDirection="desc" hasSeparator>
+                    Sort Descending
+                  </TableHeaderCell>
+                  <TableHeaderCell state="hover" hasSeparator>
+                    Label Only
+                  </TableHeaderCell>
+                  <TableHeaderCell state="hover" align="center" hasSeparator>
+                    Centered
+                  </TableHeaderCell>
+                  <TableHeaderCell state="hover" align="right" hasSeparator>
+                    Right Aligned
+                  </TableHeaderCell>
+                  <TableHeaderCell state="hover" checkbox checked={false} hasLabel={false} hasSeparator style={{ width: '48px' }} />
+                  <TableHeaderCell state="hover" hasSeparator={false}>
+                    No Separator
+                  </TableHeaderCell>
+                </TableRow>
+              </TableHead>
+            </TableElement>
+          </TableContainer>
+        </div>
 
-          {/* Form Control (Checkbox) */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              Form Control (Checkbox)
-            </TableCell>
-            <TableCell
-              variant="control"
-              controlType="checkbox"
-              controlChecked={true}
-              onControlChange={() => {}}
-            />
-            <TableCell variant="text" muted>
-              Row selection checkbox with checked/unchecked states
-            </TableCell>
-          </TableRow>
-
-          {/* Form Control (Radio & Switch) */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              Form Control (Switch / Radio)
-            </TableCell>
-            <TableCell style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-              <TableCell variant="control" controlType="switch" controlChecked={true} hasSeparator={false} />
-              <TableCell variant="control" controlType="radio" controlChecked={true} hasSeparator={false} />
-            </TableCell>
-            <TableCell variant="text" muted>
-              Inline toggles or single-choice radio controls
-            </TableCell>
-          </TableRow>
-
-          {/* Avatar + Text */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              Avatar + Text
-            </TableCell>
-            <TableCell
-              variant="avatar-text"
-              avatarInitials="AO"
-              primaryText="Amara Okafor"
-              secondaryText="Surveillance Officer • amara@fmdqgroup.com"
-            />
-            <TableCell variant="text" muted>
-              Avatar image or initials with two-line user details
-            </TableCell>
-          </TableRow>
-
-          {/* Avatar Group */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              Avatar Group
-            </TableCell>
-            <TableCell
-              variant="avatar-group"
-              avatars={[
-                { initials: 'AO' },
-                { initials: 'KB' },
-                { initials: 'TA' },
-                { initials: 'CE' },
-                { initials: 'FO' },
-                { initials: 'DA' },
-              ]}
-              maxAvatars={4}
-            />
-            <TableCell variant="text" muted>
-              Overlapping circular avatar cluster with +N overflow badge
-            </TableCell>
-          </TableRow>
-
-          {/* Status Badge */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              Badge / Chip
-            </TableCell>
-            <TableCell>
-              <div style={{ display: 'inline-flex', gap: '8px', alignItems: 'center' }}>
-                <Badge color="success">Approved</Badge>
-                <Badge color="warning">Pending Review</Badge>
-                <Chip label="Derivatives" hasCloseButton={false} />
-              </div>
-            </TableCell>
-            <TableCell variant="text" muted>
-              Status indicators and categorization chips
-            </TableCell>
-          </TableRow>
-
-          {/* Progress Bar */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              Progress Bar
-            </TableCell>
-            <TableCell
-              variant="progress"
-              progress={78}
-              progressLabel="Reporting"
-              progressColor="primary"
-            />
-            <TableCell variant="text" muted>
-              Horizontal track with label and dynamic percentage
-            </TableCell>
-          </TableRow>
-
-          {/* Action Buttons */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              Actions
-            </TableCell>
-            <TableCell variant="actions">
-              <Button size="sm" variant="primary">
-                View Trade
-              </Button>
-              <Button size="sm" variant="secondary">
-                Export
-              </Button>
-            </TableCell>
-            <TableCell variant="text" muted>
-              Contextual action triggers inside row cells
-            </TableCell>
-          </TableRow>
-
-          {/* More Menu */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              More Menu
-            </TableCell>
-            <TableCell variant="more-menu" onMenuClick={() => alert('Menu clicked')} />
-            <TableCell variant="text" muted>
-              Three-dots vertical overflow action button
-            </TableCell>
-          </TableRow>
-
-          {/* Rating */}
-          <TableRow>
-            <TableCell variant="text" textWeight="medium">
-              Rating
-            </TableCell>
-            <TableCell variant="rating" rating={4} maxRating={5} />
-            <TableCell variant="text" muted>
-              Star ratings for dealer performance or audits
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </TableElement>
-    </TableContainer>
-  ),
+        <div>
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: 600, color: '#101828' }}>
+            State: Selected (Figma Primary/50 #F0F4FE Background)
+          </h4>
+          <p style={{ margin: '0 0 16px 0', fontSize: '13px', color: '#667085' }}>
+            Active column or batch-selected header cell state.
+          </p>
+          <TableContainer>
+            <TableElement>
+              <TableHead>
+                <TableRow>
+                  <TableHeaderCell state="selected" checkbox checked={true} trailingIcon hasSeparator>
+                    Checkbox + Label + Sort
+                  </TableHeaderCell>
+                  <TableHeaderCell state="selected" checkbox checked={true} hasSeparator>
+                    Checkbox + Label
+                  </TableHeaderCell>
+                  <TableHeaderCell state="selected" sortable sortDirection="asc" hasSeparator>
+                    Sort Ascending
+                  </TableHeaderCell>
+                  <TableHeaderCell state="selected" sortable sortDirection="desc" hasSeparator>
+                    Sort Descending
+                  </TableHeaderCell>
+                  <TableHeaderCell state="selected" hasSeparator>
+                    Label Only
+                  </TableHeaderCell>
+                  <TableHeaderCell state="selected" align="center" hasSeparator>
+                    Centered
+                  </TableHeaderCell>
+                  <TableHeaderCell state="selected" align="right" hasSeparator>
+                    Right Aligned
+                  </TableHeaderCell>
+                  <TableHeaderCell state="selected" checkbox checked={true} hasLabel={false} hasSeparator style={{ width: '48px' }} />
+                  <TableHeaderCell state="selected" hasSeparator={false}>
+                    No Separator
+                  </TableHeaderCell>
+                </TableRow>
+              </TableHead>
+            </TableElement>
+          </TableContainer>
+        </div>
+      </div>
+    );
+  },
 };
 
-// ─── 2. Granular Composed Table (Figma Specification) ─────────────────────────
+// ─── 2. Leading Cell Variants (Figma Node 5604:43632, 12 Variants) ───────────
+
+export const LeadingCellVariants: Story = {
+  name: 'Leading Cells',
+  render: () => {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div>
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: 600, color: '#101828' }}>
+            Leading Cell Component Set (Node 5604:43632)
+          </h4>
+          <p style={{ margin: '0 0 16px 0', fontSize: '13px', color: '#667085' }}>
+            Modular cell with control (Radio, Toggle, Checkbox), leading media (Featured Icon, Avatar), and text pair (Label + Description) in Default and Selected states.
+          </p>
+          <TableContainer>
+            <TableElement>
+              <TableHead>
+                <TableRow>
+                  <TableHeaderCell>Control Type</TableHeaderCell>
+                  <TableHeaderCell>Leading Media</TableHeaderCell>
+                  <TableHeaderCell>State: Default</TableHeaderCell>
+                  <TableHeaderCell>State: Selected</TableHeaderCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {/* Radio + Featured Icon */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Radio Button</TableCell>
+                  <TableCell variant="text" muted>Featured Icon</TableCell>
+                  <LeadingCell
+                    state="default"
+                    control="radio-button"
+                    media="featured-icon"
+                    iconName="star"
+                    label="Featured Asset"
+                    description="Fixed Income • Primary Dealer"
+                    hasSeparator
+                  />
+                  <LeadingCell
+                    state="selected"
+                    control="radio-button"
+                    controlChecked={true}
+                    media="featured-icon"
+                    iconName="star"
+                    label="Featured Asset"
+                    description="Fixed Income • Primary Dealer"
+                    hasSeparator
+                  />
+                </TableRow>
+
+                {/* Radio + Avatar */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Radio Button</TableCell>
+                  <TableCell variant="text" muted>Avatar</TableCell>
+                  <LeadingCell
+                    state="default"
+                    control="radio-button"
+                    media="avatar"
+                    avatarInitials="ST"
+                    label="Stanbic IBTC Bank"
+                    description="RC-129482 • Tier 1 Member"
+                    hasSeparator
+                  />
+                  <LeadingCell
+                    state="selected"
+                    control="radio-button"
+                    controlChecked={true}
+                    media="avatar"
+                    avatarInitials="ST"
+                    label="Stanbic IBTC Bank"
+                    description="RC-129482 • Tier 1 Member"
+                    hasSeparator
+                  />
+                </TableRow>
+
+                {/* Toggle + Featured Icon */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Toggle Switch</TableCell>
+                  <TableCell variant="text" muted>Featured Icon</TableCell>
+                  <LeadingCell
+                    state="default"
+                    control="toggle"
+                    controlChecked={false}
+                    media="featured-icon"
+                    iconName="shield-tick"
+                    label="Automated Matching"
+                    description="Real-time order validation"
+                    hasSeparator
+                  />
+                  <LeadingCell
+                    state="selected"
+                    control="toggle"
+                    controlChecked={true}
+                    media="featured-icon"
+                    iconName="shield-tick"
+                    label="Automated Matching"
+                    description="Real-time order validation"
+                    hasSeparator
+                  />
+                </TableRow>
+
+                {/* Toggle + Avatar */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Toggle Switch</TableCell>
+                  <TableCell variant="text" muted>Avatar</TableCell>
+                  <LeadingCell
+                    state="default"
+                    control="toggle"
+                    controlChecked={false}
+                    media="avatar"
+                    avatarInitials="AC"
+                    label="Access Bank Plc"
+                    description="Settlement Bank Agent"
+                    hasSeparator
+                  />
+                  <LeadingCell
+                    state="selected"
+                    control="toggle"
+                    controlChecked={true}
+                    media="avatar"
+                    avatarInitials="AC"
+                    label="Access Bank Plc"
+                    description="Settlement Bank Agent"
+                    hasSeparator
+                  />
+                </TableRow>
+
+                {/* Checkbox + Featured Icon */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Checkbox</TableCell>
+                  <TableCell variant="text" muted>Featured Icon</TableCell>
+                  <LeadingCell
+                    state="default"
+                    control="checkbox"
+                    controlChecked={false}
+                    media="featured-icon"
+                    iconName="building-1"
+                    label="FBNQuest Merchant Bank"
+                    description="Liquidity Provider Desk"
+                    hasSeparator
+                  />
+                  <LeadingCell
+                    state="selected"
+                    control="checkbox"
+                    controlChecked={true}
+                    media="featured-icon"
+                    iconName="building-1"
+                    label="FBNQuest Merchant Bank"
+                    description="Liquidity Provider Desk"
+                    hasSeparator
+                  />
+                </TableRow>
+
+                {/* Checkbox + Avatar */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Checkbox</TableCell>
+                  <TableCell variant="text" muted>Avatar</TableCell>
+                  <LeadingCell
+                    state="default"
+                    control="checkbox"
+                    controlChecked={false}
+                    media="avatar"
+                    avatarInitials="ZE"
+                    label="Zenith Bank Plc"
+                    description="Clearing Member Tier 1"
+                    hasSeparator
+                  />
+                  <LeadingCell
+                    state="selected"
+                    control="checkbox"
+                    controlChecked={true}
+                    media="avatar"
+                    avatarInitials="ZE"
+                    label="Zenith Bank Plc"
+                    description="Clearing Member Tier 1"
+                    hasSeparator
+                  />
+                </TableRow>
+              </TableBody>
+            </TableElement>
+          </TableContainer>
+        </div>
+      </div>
+    );
+  },
+};
+
+// ─── 3. Content Cell Variants (Figma Node 5604:44353, 16 Variants) ───────────
+
+export const ContentCellVariants: Story = {
+  name: 'Content Cells',
+  render: () => {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div>
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: 600, color: '#101828' }}>
+            Content Cell Component Set (Node 5604:44353)
+          </h4>
+          <p style={{ margin: '0 0 16px 0', fontSize: '13px', color: '#667085' }}>
+            All 8 content cell types mapped 1:1 to Figma, displayed in both Default and Selected states.
+          </p>
+          <TableContainer>
+            <TableElement>
+              <TableHead>
+                <TableRow>
+                  <TableHeaderCell style={{ width: '160px' }}>Content Type</TableHeaderCell>
+                  <TableHeaderCell>State: Default</TableHeaderCell>
+                  <TableHeaderCell>State: Selected</TableHeaderCell>
+                  <TableHeaderCell style={{ width: '220px' }}>Figma Description</TableHeaderCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {/* 1. Avatar + Text */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Avatar + Text</TableCell>
+                  <ContentCell
+                    content="avatar + text"
+                    state="default"
+                    avatarInitials="AO"
+                    primaryText="Amara Okafor"
+                    secondaryText="Surveillance Officer • amara@fmdqgroup.com"
+                    hasSeparator
+                  />
+                  <ContentCell
+                    content="avatar + text"
+                    state="selected"
+                    avatarInitials="AO"
+                    primaryText="Amara Okafor"
+                    secondaryText="Surveillance Officer • amara@fmdqgroup.com"
+                    hasSeparator
+                  />
+                  <TableCell variant="text" muted>User details with circular avatar & two-line stack</TableCell>
+                </TableRow>
+
+                {/* 2. Icons */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Icons</TableCell>
+                  <ContentCell
+                    content="icons"
+                    state="default"
+                    hasSeparator
+                  />
+                  <ContentCell
+                    content="icons"
+                    state="selected"
+                    hasSeparator
+                  />
+                  <TableCell variant="text" muted>Action icons (pencil, bin, heart) for quick mutations</TableCell>
+                </TableRow>
+
+                {/* 3. Badge */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Badge</TableCell>
+                  <ContentCell content="badge" state="default" hasSeparator>
+                    <div style={{ display: 'inline-flex', gap: '6px' }}>
+                      <Badge color="success">Approved</Badge>
+                      <Badge color="warning">Pending</Badge>
+                    </div>
+                  </ContentCell>
+                  <ContentCell content="badge" state="selected" hasSeparator>
+                    <div style={{ display: 'inline-flex', gap: '6px' }}>
+                      <Badge color="success">Approved</Badge>
+                      <Badge color="warning">Pending</Badge>
+                    </div>
+                  </ContentCell>
+                  <TableCell variant="text" muted>Status pill indicators with 8px horizontal padding</TableCell>
+                </TableRow>
+
+                {/* 4. Actions */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Actions</TableCell>
+                  <ContentCell content="actions" state="default" hasSeparator>
+                    <Button size="sm" variant="primary">View Trade</Button>
+                    <Button size="sm" variant="secondary">Export</Button>
+                  </ContentCell>
+                  <ContentCell content="actions" state="selected" hasSeparator>
+                    <Button size="sm" variant="primary">View Trade</Button>
+                    <Button size="sm" variant="secondary">Export</Button>
+                  </ContentCell>
+                  <TableCell variant="text" muted>Inline contextual button actions</TableCell>
+                </TableRow>
+
+                {/* 5. Avatar Group */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Avatar Group</TableCell>
+                  <ContentCell
+                    content="avatar group"
+                    state="default"
+                    avatars={[
+                      { initials: 'AO' },
+                      { initials: 'KB' },
+                      { initials: 'TA' },
+                      { initials: 'CE' },
+                      { initials: 'FO' },
+                    ]}
+                    maxAvatars={3}
+                    hasSeparator
+                  />
+                  <ContentCell
+                    content="avatar group"
+                    state="selected"
+                    avatars={[
+                      { initials: 'AO' },
+                      { initials: 'KB' },
+                      { initials: 'TA' },
+                      { initials: 'CE' },
+                      { initials: 'FO' },
+                    ]}
+                    maxAvatars={3}
+                    hasSeparator
+                  />
+                  <TableCell variant="text" muted>Overlapping circular user cluster with +N overflow</TableCell>
+                </TableRow>
+
+                {/* 6. Progress Bar */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Progress Bar</TableCell>
+                  <ContentCell
+                    content="progress bar"
+                    state="default"
+                    progress={78}
+                    progressLabel="Reporting"
+                    progressColor="primary"
+                    showPercentage
+                    hasSeparator
+                  />
+                  <ContentCell
+                    content="progress bar"
+                    state="selected"
+                    progress={78}
+                    progressLabel="Reporting"
+                    progressColor="primary"
+                    showPercentage
+                    hasSeparator
+                  />
+                  <TableCell variant="text" muted>Linear progress indicator with label and percentage</TableCell>
+                </TableRow>
+
+                {/* 7. Rating */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">Rating</TableCell>
+                  <ContentCell
+                    content="rating"
+                    state="default"
+                    rating={4}
+                    maxRating={5}
+                    hasSeparator
+                  />
+                  <ContentCell
+                    content="rating"
+                    state="selected"
+                    rating={4}
+                    maxRating={5}
+                    hasSeparator
+                  />
+                  <TableCell variant="text" muted>Star rating indicators for member scoring</TableCell>
+                </TableRow>
+
+                {/* 8. More Menu */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">More Menu</TableCell>
+                  <ContentCell
+                    content="more menu"
+                    state="default"
+                    onMenuClick={() => alert('Menu clicked')}
+                    hasSeparator
+                  />
+                  <ContentCell
+                    content="more menu"
+                    state="selected"
+                    onMenuClick={() => alert('Menu clicked')}
+                    hasSeparator
+                  />
+                  <TableCell variant="text" muted>Three-dots vertical overflow trigger</TableCell>
+                </TableRow>
+              </TableBody>
+            </TableElement>
+          </TableContainer>
+        </div>
+      </div>
+    );
+  },
+};
+
+// ─── 4. Granular Composed Table (Assembled from Header, Leading & Content) ────
 
 export const GranularComposedTable: Story = {
+  name: 'Composed Table',
   render: () => {
     return (
       <TableContainer>
@@ -249,7 +585,7 @@ export const GranularComposedTable: Story = {
               <TableHeaderCell align="right">Traded Volume</TableHeaderCell>
               <TableHeaderCell>Verification Status</TableHeaderCell>
               <TableHeaderCell>SLA Completion</TableHeaderCell>
-              <TableHeaderCell align="center" style={{ width: '60px' }}>
+              <TableHeaderCell align="center" style={{ width: '80px' }}>
                 Actions
               </TableHeaderCell>
             </TableRow>
@@ -365,9 +701,10 @@ export const GranularComposedTable: Story = {
   },
 };
 
-// ─── 3. Interactive Row Selection with State ──────────────────────────────────
+// ─── 5. Interactive Row Selection with State ──────────────────────────────────
 
 export const InteractiveRowSelection: Story = {
+  name: 'Interactive Selection',
   render: () => {
     const initialRows = [
       { id: '1', name: 'Chapel Hill Denham', category: 'Brokers', volume: '₦2.4B', status: 'Active' },
@@ -399,14 +736,29 @@ export const InteractiveRowSelection: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ fontSize: '14px', color: '#667185' }}>
+        <div
+          style={{
+            padding: '12px 16px',
+            backgroundColor: '#F9FAFB',
+            borderRadius: '8px',
+            border: '1px solid #E4E7EC',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <span style={{ fontSize: '14px', color: '#344054' }}>
             Selected: <strong>{selectedIds.length}</strong> of {initialRows.length} institutions
-          </div>
+          </span>
           {selectedIds.length > 0 && (
-            <Button size="sm" variant="secondary" onClick={() => setSelectedIds([])}>
-              Clear Selection
-            </Button>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <Button size="sm" variant="secondary" onClick={() => setSelectedIds([])}>
+                Clear Selection
+              </Button>
+              <Button size="sm" variant="primary" onClick={() => alert(`Exporting ${selectedIds.length} rows`)}>
+                Export Selected
+              </Button>
+            </div>
           )}
         </div>
 
@@ -425,6 +777,9 @@ export const InteractiveRowSelection: Story = {
                 <TableHeaderCell>Category</TableHeaderCell>
                 <TableHeaderCell align="right">Reported Volume</TableHeaderCell>
                 <TableHeaderCell>Status</TableHeaderCell>
+                <TableHeaderCell align="center" style={{ width: '60px' }}>
+                  Action
+                </TableHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -440,11 +795,7 @@ export const InteractiveRowSelection: Story = {
                     <ControlCell
                       controlType="checkbox"
                       controlChecked={isSelected}
-                      onControlChange={(e) => {
-                        e.stopPropagation();
-                        toggleRow(row.id);
-                      }}
-                      style={{ width: '48px' }}
+                      onControlChange={() => toggleRow(row.id)}
                     />
                     <TableCell variant="text" textWeight="medium">
                       {row.name}
@@ -455,11 +806,17 @@ export const InteractiveRowSelection: Story = {
                     <TableCell variant="text" align="right" textWeight="semibold">
                       {row.volume}
                     </TableCell>
-                    <BadgeCell>
+                    <TableCell>
                       <Badge color={row.status === 'Active' ? 'success' : 'warning'}>
                         {row.status}
                       </Badge>
-                    </BadgeCell>
+                    </TableCell>
+                    <MoreMenuCell
+                      onMenuClick={(e) => {
+                        e.stopPropagation();
+                        alert(`Action for ${row.name}`);
+                      }}
+                    />
                   </TableRow>
                 );
               })}
@@ -471,149 +828,159 @@ export const InteractiveRowSelection: Story = {
   },
 };
 
-// ─── 4. Declarative Data Table with Design System Pagination ──────────────────
+// ─── 6. High-level Declarative Table with Sorting & Pagination ────────────────
 
 interface TradeRecord {
   id: string;
-  ref: string;
-  dealer: string;
-  initials: string;
-  instrument: string;
-  subType: string;
-  amount: number;
-  status: 'Matched' | 'Pending' | 'Flagged';
-  progress: number;
+  reference: string;
+  counterparty: string;
+  product: string;
+  amount: string;
+  status: 'matched' | 'unmatched' | 'settled';
+  timestamp: string;
 }
 
-const mockTrades: TradeRecord[] = Array.from({ length: 35 }).map((_, i) => ({
-  id: `TRD-${1000 + i}`,
-  ref: `FMDQ/TRD/2026/${1000 + i}`,
-  dealer: ['Stanbic IBTC', 'Access Bank', 'Guaranty Trust Bank', 'Zenith Bank', 'Citi Nigeria'][i % 5],
-  initials: ['SB', 'AC', 'GT', 'ZE', 'CI'][i % 5],
-  instrument: i % 2 === 0 ? 'FGN Bond 13.53% 2027' : 'Treasury Bill 364D',
-  subType: i % 2 === 0 ? 'Fixed Income' : 'Money Market',
-  amount: (i + 1) * 250_000_000,
-  status: i % 3 === 0 ? 'Pending' : i % 5 === 0 ? 'Flagged' : 'Matched',
-  progress: Math.min(25 + i * 8, 100),
-}));
+const sampleTrades: TradeRecord[] = [
+  {
+    id: 'TR-9021',
+    reference: 'FMDQ/TRD/2026/0491',
+    counterparty: 'Stanbic IBTC Bank',
+    product: 'FGN Bond 2027',
+    amount: '₦2,500,000,000.00',
+    status: 'settled',
+    timestamp: '10:45 AM',
+  },
+  {
+    id: 'TR-9022',
+    reference: 'FMDQ/TRD/2026/0492',
+    counterparty: 'Access Bank Plc',
+    product: 'NTB 182-Day',
+    amount: '₦750,000,000.00',
+    status: 'matched',
+    timestamp: '11:12 AM',
+  },
+  {
+    id: 'TR-9023',
+    reference: 'FMDQ/TRD/2026/0493',
+    counterparty: 'Guaranty Trust Bank',
+    product: 'FX Futures FEB 2027',
+    amount: '$1,200,000.00',
+    status: 'matched',
+    timestamp: '11:30 AM',
+  },
+  {
+    id: 'TR-9024',
+    reference: 'FMDQ/TRD/2026/0494',
+    counterparty: 'Zenith Bank Plc',
+    product: 'Commercial Paper 90D',
+    amount: '₦500,000,000.00',
+    status: 'unmatched',
+    timestamp: '12:05 PM',
+  },
+  {
+    id: 'TR-9025',
+    reference: 'FMDQ/TRD/2026/0495',
+    counterparty: 'United Bank for Africa',
+    product: 'FGN Bond 2032',
+    amount: '₦1,800,000,000.00',
+    status: 'settled',
+    timestamp: '12:40 PM',
+  },
+];
 
 export const DeclarativeDataTable: Story = {
+  name: 'Data-driven Table',
   render: () => {
-    const [selectedKeys, setSelectedKeys] = useState<string[]>(['TRD-1000', 'TRD-1002']);
-
     const columns: ColumnDef<TradeRecord>[] = [
       {
-        header: 'Counterparty',
-        accessorKey: 'dealer',
-        sortable: true,
-        cell: ({ row }) => (
-          <AvatarCell
-            avatarInitials={row.initials}
-            primaryText={row.dealer}
-            secondaryText={row.ref}
-            hasSeparator={false}
-          />
-        ),
-      },
-      {
-        header: 'Security / Product',
-        accessorKey: 'instrument',
+        id: 'reference',
+        header: 'Trade Reference',
         sortable: true,
         cell: ({ row }) => (
           <TextStackCell
-            primaryText={row.instrument}
-            secondaryText={row.subType}
-            hasSeparator={false}
+            primaryText={row.reference}
+            secondaryText={row.id}
           />
         ),
       },
       {
-        header: 'Face Value (NGN)',
+        id: 'counterparty',
+        header: 'Counterparty',
+        sortable: true,
+        cell: ({ row }) => (
+          <AvatarCell
+            avatarInitials={row.counterparty.slice(0, 2).toUpperCase()}
+            primaryText={row.counterparty}
+            secondaryText="Member"
+          />
+        ),
+      },
+      {
+        accessorKey: 'product',
+        header: 'Instrument',
+        sortable: true,
+      },
+      {
         accessorKey: 'amount',
+        header: 'Volume / Amount',
         align: 'right',
         sortable: true,
-        cell: ({ row }) => (
-          <TableCell
-            variant="text"
-            textWeight="semibold"
-            align="right"
-            hasSeparator={false}
-          >
-            ₦{row.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-          </TableCell>
-        ),
       },
       {
+        id: 'status',
         header: 'Status',
-        accessorKey: 'status',
-        sortable: true,
-        cell: ({ row }) => (
-          <BadgeCell hasSeparator={false}>
-            <Badge
-              color={
-                row.status === 'Matched'
-                  ? 'success'
-                  : row.status === 'Pending'
-                  ? 'warning'
-                  : 'error'
-              }
-            >
-              {row.status}
-            </Badge>
-          </BadgeCell>
-        ),
+        cell: ({ row }) => {
+          const colorMap = {
+            settled: 'success' as const,
+            matched: 'blue' as const,
+            unmatched: 'warning' as const,
+          };
+          return <Badge color={colorMap[row.status]}>{row.status.toUpperCase()}</Badge>;
+        },
       },
       {
-        header: 'Audit SLA',
-        accessorKey: 'progress',
-        sortable: true,
-        cell: ({ row }) => (
-          <ProgressCell
-            progress={row.progress}
-            progressColor={row.progress >= 90 ? 'success' : row.progress >= 50 ? 'primary' : 'warning'}
-            showPercentage
-            hasSeparator={false}
-          />
-        ),
-      },
-      {
-        header: '',
-        id: 'actions',
+        accessorKey: 'timestamp',
+        header: 'Time',
         align: 'right',
-        cell: () => <MoreMenuCell onMenuClick={() => {}} hasSeparator={false} />,
+      },
+      {
+        id: 'actions',
+        header: '',
+        align: 'center',
+        cell: () => <MoreMenuCell onMenuClick={() => alert('Row action clicked')} />,
       },
     ];
 
     return (
-      <Table<TradeRecord>
-        data={mockTrades}
+      <Table
+        data={sampleTrades}
         columns={columns}
-        pagination={true}
-        defaultPageSize={8}
-        selectable={true}
-        selectedRowKeys={selectedKeys}
-        onSelectionChange={setSelectedKeys}
-        getRowId={(row: TradeRecord) => row.id}
+        pagination={{
+          currentPage: 1,
+          totalPages: 5,
+          totalItems: 25,
+          pageSize: 5,
+          variation: '2',
+        }}
       />
     );
   },
 };
 
-// ─── 5. Empty State Showcase ──────────────────────────────────────────────────
+// ─── 7. Empty State ───────────────────────────────────────────────────────────
 
 export const EmptyState: Story = {
-  render: () => {
-    return (
-      <Table
-        data={[]}
-        columns={[
-          { header: 'ID', accessorKey: 'id' },
-          { header: 'Instrument', accessorKey: 'instrument' },
-          { header: 'Status', accessorKey: 'status' },
-        ]}
-        emptyTitle="No Market Records Available"
-        emptyDescription="There are currently no surveillance trade logs for the selected date range."
-      />
-    );
-  },
+  render: () => (
+    <Table
+      data={[]}
+      columns={[
+        { id: '1', header: 'Reference' },
+        { id: '2', header: 'Counterparty' },
+        { id: '3', header: 'Instrument' },
+        { id: '4', header: 'Volume', align: 'right' },
+      ]}
+      emptyMessage="No trading records found"
+      emptyDescription="Try clearing active filters or searching for a different dealer counterparty."
+    />
+  ),
 };

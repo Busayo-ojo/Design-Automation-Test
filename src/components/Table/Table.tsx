@@ -131,13 +131,17 @@ TableRow.displayName = 'TableRow';
 // ─── TableHeaderCell Component ────────────────────────────────────────────────
 
 export type TableSortDirection = 'asc' | 'desc' | 'none' | null;
+export type TableHeaderState = 'default' | 'hover' | 'selected';
 
 export interface TableHeaderCellProps
   extends React.ThHTMLAttributes<HTMLTableHeaderCellElement> {
+  state?: TableHeaderState;
   checkbox?: boolean;
   checked?: boolean;
   indeterminate?: boolean;
   onCheckboxChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  hasLabel?: boolean;
+  trailingIcon?: boolean;
   sortable?: boolean;
   sortDirection?: TableSortDirection;
   onSort?: () => void;
@@ -148,10 +152,13 @@ export interface TableHeaderCellProps
 export const TableHeaderCell = forwardRef<HTMLTableHeaderCellElement, TableHeaderCellProps>(
   (
     {
+      state = 'default',
       checkbox = false,
       checked = false,
       indeterminate,
       onCheckboxChange,
+      hasLabel = true,
+      trailingIcon = false,
       sortable = false,
       sortDirection = 'none',
       onSort,
@@ -171,9 +178,13 @@ export const TableHeaderCell = forwardRef<HTMLTableHeaderCellElement, TableHeade
       }
     }, [indeterminate]);
 
+    const showSortIcon = sortable || trailingIcon;
+
     const classes = [
       'fmdqui-table-header-cell',
       `fmdqui-table-header-cell--align-${align}`,
+      state === 'hover' ? 'fmdqui-table-header-cell--state-hover' : '',
+      state === 'selected' ? 'fmdqui-table-header-cell--state-selected' : '',
       !hasSeparator ? 'fmdqui-table-header-cell--no-separator' : '',
       className,
     ].filter(Boolean).join(' ');
@@ -220,11 +231,14 @@ export const TableHeaderCell = forwardRef<HTMLTableHeaderCellElement, TableHeade
               className="fmdqui-table-header-cell__sort-btn"
               onClick={onSort}
             >
-              <span>{children}</span>
-              {renderSortIcon()}
+              {hasLabel && children && <span>{children}</span>}
+              {showSortIcon && renderSortIcon()}
             </button>
           ) : (
-            children && <span>{children}</span>
+            <>
+              {hasLabel && children && <span>{children}</span>}
+              {showSortIcon && renderSortIcon()}
+            </>
           )}
         </div>
       </th>
@@ -250,6 +264,7 @@ export type TableCellVariant =
   | 'actions'
   | 'more-menu'
   | 'rating'
+  | 'icons'
   | 'custom';
 
 export interface AvatarGroupItem {
@@ -565,6 +580,27 @@ export const TableCell = forwardRef<HTMLTableDataCellElement, TableCellProps>(
         );
       }
 
+      // 12. Icons (Group of action icons matching Figma)
+      if (variant === 'icons') {
+        return (
+          <div className="fmdqui-table-cell__icons">
+            {children || (
+              <>
+                <button type="button" className="fmdqui-table-cell__icon-btn" aria-label="Edit">
+                  <Icon name="pencil" variant="linear" size={16} />
+                </button>
+                <button type="button" className="fmdqui-table-cell__icon-btn" aria-label="Delete">
+                  <Icon name="bin" variant="linear" size={16} />
+                </button>
+                <button type="button" className="fmdqui-table-cell__icon-btn" aria-label="Favorite">
+                  <Icon name="heart" variant="linear" size={16} />
+                </button>
+              </>
+            )}
+          </div>
+        );
+      }
+
       // Default / Custom
       return children;
     };
@@ -619,6 +655,211 @@ export const ActionCell: React.FC<TableCellProps> = (props) => (
 export const MoreMenuCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="more-menu" {...props} />
 );
+
+export const IconsCell: React.FC<TableCellProps> = (props) => (
+  <TableCell variant="icons" {...props} />
+);
+
+// ─── LeadingCell Component (Matching Figma `✤ Tables` Leading Cell) ───────────
+
+export type LeadingCellMedia = 'featured-icon' | 'avatar' | 'none';
+export type LeadingCellControl = 'radio-button' | 'toggle' | 'checkbox' | 'none';
+export type LeadingCellState = 'default' | 'selected';
+
+export interface LeadingCellProps
+  extends Omit<React.TdHTMLAttributes<HTMLTableDataCellElement>, 'onChange'> {
+  state?: LeadingCellState;
+  media?: LeadingCellMedia;
+  control?: LeadingCellControl;
+  hasControl?: boolean;
+  hasLeadingMedia?: boolean;
+  hasTexts?: boolean;
+  hasLabel?: boolean;
+  hasDescription?: boolean;
+  hasSeparator?: boolean;
+  label?: React.ReactNode;
+  description?: React.ReactNode;
+  iconName?: string;
+  avatarInitials?: string;
+  avatarSrc?: string;
+  controlChecked?: boolean;
+  onControlChange?: (checked: boolean) => void;
+  controlDisabled?: boolean;
+  controlAriaLabel?: string;
+  align?: 'left' | 'center' | 'right';
+}
+
+export const LeadingCell = forwardRef<HTMLTableDataCellElement, LeadingCellProps>(
+  (
+    {
+      state = 'default',
+      media = 'featured-icon',
+      control = 'radio-button',
+      hasControl = true,
+      hasLeadingMedia = true,
+      hasTexts = true,
+      hasLabel = true,
+      hasDescription = true,
+      hasSeparator = false,
+      label = 'Leading text',
+      description = 'Description',
+      iconName = 'star',
+      avatarInitials,
+      avatarSrc,
+      controlChecked = false,
+      onControlChange,
+      controlDisabled = false,
+      controlAriaLabel,
+      align = 'left',
+      className = '',
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const classes = [
+      'fmdqui-table-cell',
+      'fmdqui-table-leading-cell',
+      `fmdqui-table-cell--align-${align}`,
+      state === 'selected' ? 'fmdqui-table-cell--selected fmdqui-table-leading-cell--state-selected' : '',
+      hasSeparator ? 'fmdqui-table-leading-cell--has-separator' : 'fmdqui-table-cell--no-separator',
+      className,
+    ].filter(Boolean).join(' ');
+
+    const showControl = hasControl && control !== 'none';
+    const showMedia = hasLeadingMedia && media !== 'none';
+    const showTexts = hasTexts && (hasLabel || hasDescription || children);
+
+    return (
+      <td ref={ref} className={classes} {...props}>
+        <div className="fmdqui-table-leading-cell__container">
+          {showControl && (
+            <span className="fmdqui-table-cell__control">
+              {control === 'radio-button' && (
+                <Radio
+                  checked={controlChecked}
+                  onChange={(e) => onControlChange?.(e.target.checked)}
+                  disabled={controlDisabled}
+                  aria-label={controlAriaLabel || 'Select option'}
+                />
+              )}
+              {control === 'toggle' && (
+                <Switch
+                  checked={controlChecked}
+                  onChange={(e) => onControlChange?.(e.target.checked)}
+                  disabled={controlDisabled}
+                  aria-label={controlAriaLabel || 'Toggle option'}
+                />
+              )}
+              {control === 'checkbox' && (
+                <Checkbox
+                  checked={controlChecked}
+                  onChange={(e) => onControlChange?.(e.target.checked)}
+                  disabled={controlDisabled}
+                  aria-label={controlAriaLabel || 'Select item'}
+                />
+              )}
+            </span>
+          )}
+
+          {showMedia && (
+            <span className="fmdqui-table-leading-cell__media-wrap">
+              {media === 'avatar' ? (
+                <Avatar
+                  size="sm"
+                  type={avatarSrc ? 'Image' : avatarInitials ? 'Initials' : 'Icon'}
+                  imageUrl={avatarSrc}
+                  initials={avatarInitials || 'JD'}
+                />
+              ) : (
+                <span className="fmdqui-table-leading-cell__media">
+                  <Icon name={iconName} variant="linear" size={16} />
+                </span>
+              )}
+            </span>
+          )}
+
+          {showTexts && (
+            <div className="fmdqui-table-leading-cell__text">
+              {hasLabel && (
+                <div className="fmdqui-table-leading-cell__label">
+                  {children ?? label}
+                </div>
+              )}
+              {hasDescription && description && (
+                <div className="fmdqui-table-leading-cell__description">
+                  {description}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </td>
+    );
+  }
+);
+LeadingCell.displayName = 'LeadingCell';
+
+// ─── ContentCell Component (Matching Figma `✤ Tables` Content Cell) ───────────
+
+export type ContentType =
+  | 'avatar + text'
+  | 'icons'
+  | 'badge'
+  | 'actions'
+  | 'avatar group'
+  | 'progress bar'
+  | 'rating'
+  | 'more menu';
+
+export interface ContentCellProps extends TableCellProps {
+  content?: ContentType;
+  state?: 'default' | 'selected';
+}
+
+export const ContentCell = forwardRef<HTMLTableDataCellElement, ContentCellProps>(
+  ({ content, state, selected, ...props }, ref) => {
+    let resolvedVariant = props.variant;
+    if (content) {
+      switch (content) {
+        case 'avatar + text':
+          resolvedVariant = 'avatar-text';
+          break;
+        case 'icons':
+          resolvedVariant = 'icons';
+          break;
+        case 'badge':
+          resolvedVariant = 'badge';
+          break;
+        case 'actions':
+          resolvedVariant = 'actions';
+          break;
+        case 'avatar group':
+          resolvedVariant = 'avatar-group';
+          break;
+        case 'progress bar':
+          resolvedVariant = 'progress';
+          break;
+        case 'rating':
+          resolvedVariant = 'rating';
+          break;
+        case 'more menu':
+          resolvedVariant = 'more-menu';
+          break;
+      }
+    }
+    const isSelected = selected ?? state === 'selected';
+    return (
+      <TableCell
+        ref={ref}
+        variant={resolvedVariant}
+        selected={isSelected}
+        {...props}
+      />
+    );
+  }
+);
+ContentCell.displayName = 'ContentCell';
 
 // ─── Composed Data Table Implementation ───────────────────────────────────────
 

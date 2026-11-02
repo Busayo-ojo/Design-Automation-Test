@@ -1,5 +1,16 @@
 [
   {
+    "hash": "3f7cfe7",
+    "date": "2026-11-02",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "docs: target COMPONENT_SET nodes directly to eliminate header bleed in embeds",
+    "category": "docs",
+    "scope": "",
+    "message": "target COMPONENT_SET nodes directly to eliminate header bleed in embeds",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/3f7cfe7"
+  },
+  {
     "hash": "a926813",
     "date": "2026-11-02",
     "author": "dudesoamazing",

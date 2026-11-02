@@ -1,4 +1,4 @@
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 import * as TableStories from './Table.stories';
 
 <Meta of={TableStories} />
@@ -6,7 +6,7 @@ import * as TableStories from './Table.stories';
 # Table
 
 Data tables organize complex collections of structured records for operational scanning, comparison, and action execution.
-Provides flexible cell primitives (`TextStackCell`, `AvatarCell`, `BadgeCell`, `ProgressCell`, `MoreMenuCell`) with interactive sorting and bulk selection.
+Mirrors Figma's modular structure on `✤ Tables`, featuring standalone Header Cells (`2804:80528`), Leading Cells (`5604:43632`), and Content Cells (`5604:44353`), composable into flexible operational tables.
 
 ## Figma Reference
 
@@ -14,14 +14,22 @@ Provides flexible cell primitives (`TextStackCell`, `AvatarCell`, `BadgeCell`, `
   title="Tables Figma reference"
   width="100%"
   height="450"
-  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=5604-44353&embed-host=share"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=2804-80528&embed-host=share"
   allowFullScreen
 />
 
 ## Default View
 
-<Canvas of={TableStories.DeclarativeDataTable} />
+<Canvas of={TableStories.GranularComposedTable} />
 
-## Properties
+## Header Cells
 
-<Controls of={TableStories.DeclarativeDataTable} />
+<Canvas of={TableStories.HeaderVariants} />
+
+## Leading Cells
+
+<Canvas of={TableStories.LeadingCellVariants} />
+
+## Content Cells
+
+<Canvas of={TableStories.ContentCellVariants} />
