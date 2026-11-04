@@ -44,3 +44,6 @@ FMDQ Design System
 # DRP (Internal draft specs)
 docs/drp/
 
+# Portfolio password gate (Personal deployment only)
+src/portfolio-gate/
+
