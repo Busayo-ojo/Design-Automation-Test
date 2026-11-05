@@ -85,17 +85,16 @@ export const ChangelogComponent: React.FC = () => {
     return groups;
   }, {});
 
-  // Format date header (e.g. "May 18, 2026")
+  // Format date header according to Brand & UI Quality Checklist: "Mon. D, YYYY" (e.g. "Nov. 4, 2026")
+  const SHORT_MONTHS = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May.', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
   const formatDate = (dateStr: string) => {
     if (!dateStr) return 'Unknown Date';
     try {
       const [year, month, day] = dateStr.split('-');
-      const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
+      const mIdx = parseInt(month, 10) - 1;
+      const dNum = parseInt(day, 10);
+      const monthLabel = SHORT_MONTHS[mIdx] ?? month;
+      return `${monthLabel} ${dNum}, ${year}`;
     } catch {
       return dateStr;
     }
@@ -358,7 +357,7 @@ export const ChangelogComponent: React.FC = () => {
         </div>
       ) : (
         <div className="changelog-empty">
-          <Heading level={6} style={{ margin: '0 0 12px 0' }}>No changes found</Heading>
+          <Heading level={6} style={{ margin: '0 0 12px 0' }}>No Data Available</Heading>
           <Text size="md" style={{ margin: 0 }}>Try clearing your search query or choosing another filter.</Text>
           <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '16px' }}>
             <Button

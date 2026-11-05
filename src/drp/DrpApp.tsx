@@ -36,7 +36,7 @@ export const DrpApp: React.FC = () => {
           <div style={{ padding: '32px', backgroundColor: '#FFFFFF', borderRadius: '16px', border: '1px solid var(--color-neutral-200)' }}>
             <Heading level={2}>Users & Dealing Member Institutions</Heading>
             <Text size="md" color="secondary" style={{ marginTop: '8px' }}>
-              Member institution registration, role assignments, security levels, and authorization matrices.
+              Member institution registration, role assignments, security levels, and authorisation matrices.
             </Text>
           </div>
         );

@@ -904,7 +904,7 @@ export function Table<T extends object = Record<string, unknown>>({
   variant = 'default',
   density = 'default',
   emptyMessage,
-  emptyTitle = 'No results found',
+  emptyTitle = 'No Data Available',
   emptyDescription = 'There is currently no data to display.',
   selectable = false,
   selectedRowKeys = [],

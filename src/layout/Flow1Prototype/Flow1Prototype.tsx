@@ -410,7 +410,7 @@ export const Flow1Prototype: React.FC<Flow1PrototypeProps> = ({
               title="Minimize reviewer toolbar"
               aria-label="Minimize reviewer toolbar"
             >
-              <Icon name="close" variant="linear" size={12} />
+              <Icon name="multiply" variant="linear" size={12} />
             </button>
           </div>
 

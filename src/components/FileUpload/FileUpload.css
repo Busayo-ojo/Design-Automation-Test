@@ -1,0 +1,393 @@
+@import '../../tokens.css';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   File Upload — 1:1 with Figma "✤ File Upload ⚜️"
+
+   Every colour mapped to a token. Five had no existing match and were added to
+   tokens.css: --color-file-jpg, --color-file-mp3 and the three tinted dropzone
+   surfaces (--color-dropzone-{uploading,success,error}-surface).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELEMENT — FileTypeBadge     Figma: file type 3355:170664 · 24×24
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-fileupload-badge {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  font-family: var(--font-family-primary);
+}
+
+.fmdqui-fileupload-badge svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.fmdqui-fileupload-badge__page {
+  fill: var(--color-neutral-white);
+  stroke: var(--color-neutral-300);
+  stroke-width: 1.5;
+}
+
+.fmdqui-fileupload-badge__fold {
+  fill: var(--color-neutral-100);
+}
+
+/* Figma "Attachment Format" chip — 22×10 at base scale, r1, 2px inset */
+.fmdqui-fileupload-badge__format {
+  position: absolute;
+  left: 0;
+  bottom: 12.5%;
+  width: 92%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8%;
+  box-sizing: border-box;
+  border-radius: var(--radius-4);
+  color: var(--color-neutral-white);
+  font-size: 0.3em;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELEMENT — UploadStateIcon   Figma: file upload states 3355:171475 · 32×32
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-fileupload-state {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+}
+
+.fmdqui-fileupload-state--default {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-600);
+}
+
+.fmdqui-fileupload-state--success {
+  background-color: var(--color-success-50);
+  color: var(--color-success-400);
+}
+
+.fmdqui-fileupload-state--warning {
+  background-color: var(--color-warning-50);
+  color: var(--color-warning-500);
+}
+
+.fmdqui-fileupload-state--error {
+  background-color: var(--color-error-50);
+  color: var(--color-error-500);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELEMENT — UploadProgressRing
+   Figma: primary-400 arc on a neutral-100 track, percentage centred.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-fileupload-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-family-primary);
+}
+
+.fmdqui-fileupload-ring__track {
+  fill: none;
+  stroke: var(--color-neutral-100);
+}
+
+.fmdqui-fileupload-ring__arc {
+  fill: none;
+  stroke: var(--color-primary-400);
+  stroke-linecap: round;
+  transition: stroke-dashoffset var(--transition-smooth);
+}
+
+.fmdqui-fileupload-ring__label {
+  position: absolute;
+  font-size: 12px;                 /* Figma: DM Sans SemiBold 12px */
+  font-weight: 600;
+  color: var(--color-neutral-black);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FULL — FileUploadRow        Figma: Small upload 6092:3073 · 450×48 · gap 16
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-fileupload-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  width: 450px;
+  max-width: 100%;
+  min-height: 48px;
+  font-family: var(--font-family-primary);
+  box-sizing: border-box;
+}
+
+.fmdqui-fileupload-row__left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);          /* Figma gap 16 */
+  min-width: 0;
+}
+
+.fmdqui-fileupload-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);           /* Figma gap 4 */
+  min-width: 0;
+}
+
+.fmdqui-fileupload-row__title {
+  font-size: 16px;                 /* Figma: DM Sans SemiBold 16px */
+  font-weight: 600;
+  line-height: var(--font-line-height-paragraph);
+  color: var(--color-neutral-black);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Figma meta row — HORIZONTAL, gap 6, with a 4px neutral-400 dot */
+.fmdqui-fileupload-row__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-sm);  /* 14px */
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph);
+  color: var(--color-neutral-400);
+}
+
+.fmdqui-fileupload-row__dot {
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-neutral-400);
+  flex-shrink: 0;
+}
+
+.fmdqui-fileupload-row__size {
+  font-weight: 500;                /* Figma: DM Sans Medium */
+}
+
+.fmdqui-fileupload-row__error {
+  font-size: var(--font-size-sm);
+  font-weight: 500;                /* Figma: DM Sans Medium 14px */
+  line-height: var(--font-line-height-paragraph);
+  color: var(--color-error-500);
+}
+
+.fmdqui-fileupload-row__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  flex-shrink: 0;
+}
+
+.fmdqui-fileupload-row__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-neutral-400);
+  border-radius: var(--radius-4);
+}
+
+/* Figma colours the delete action error-500 */
+.fmdqui-fileupload-row__icon-btn--danger {
+  color: var(--color-error-500);
+}
+
+.fmdqui-fileupload-row--complete .fmdqui-fileupload-row__icon-btn:not(.fmdqui-fileupload-row__icon-btn--danger) {
+  color: var(--color-neutral-600);
+}
+
+.fmdqui-fileupload-row__icon-btn:focus-visible {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FULL — FileDropzone         Figma: Big Upload 6100:14546 · 400×264
+   Dashed 1.5px border with a 4/4 pattern, 16px radius, 28/24 padding.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-fileupload-dropzone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  max-width: 100%;
+  min-height: 264px;
+  padding: 28px var(--spacing-24);
+  box-sizing: border-box;
+  border-radius: var(--radius-16);
+  /* Figma: 1.5px dashed stroke, 4px dash / 4px gap */
+  border: 1.5px dashed var(--color-neutral-300);
+  background-color: var(--color-neutral-white);
+  font-family: var(--font-family-primary);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.fmdqui-fileupload-dropzone__input {
+  display: none;
+}
+
+.fmdqui-fileupload-dropzone__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-16);          /* Figma default gap 16 */
+  width: 100%;
+}
+
+/* ── State surfaces ── */
+.fmdqui-fileupload-dropzone--uploading {
+  background-color: var(--color-dropzone-uploading-surface);
+  border-color: var(--color-primary-200);
+  padding: 56px var(--spacing-24); /* Figma uses 56px vertical while uploading */
+}
+
+.fmdqui-fileupload-dropzone--uploading .fmdqui-fileupload-dropzone__content {
+  gap: 20px;                       /* Figma gap 20 */
+}
+
+.fmdqui-fileupload-dropzone--success {
+  background-color: var(--color-dropzone-success-surface);
+  border-color: var(--color-success-200);
+}
+
+.fmdqui-fileupload-dropzone--error {
+  background-color: var(--color-dropzone-error-surface);
+  border-color: var(--color-destructive-light);
+}
+
+.fmdqui-fileupload-dropzone--success .fmdqui-fileupload-dropzone__content,
+.fmdqui-fileupload-dropzone--error .fmdqui-fileupload-dropzone__content {
+  gap: var(--spacing-24);          /* Figma Content gap 24 */
+}
+
+.fmdqui-fileupload-dropzone--dragging {
+  border-color: var(--color-primary-400);
+  background-color: var(--color-primary-50);
+}
+
+/* ── Texts ── */
+.fmdqui-fileupload-dropzone__texts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;                        /* Figma gap 2 */
+  text-align: center;
+  width: 100%;
+}
+
+.fmdqui-fileupload-dropzone__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);           /* Figma gap 4 */
+}
+
+.fmdqui-fileupload-dropzone__drag {
+  font-size: var(--font-size-sm);  /* Figma: DM Sans Regular 14px */
+  color: var(--color-neutral-600);
+}
+
+.fmdqui-fileupload-dropzone__title {
+  font-size: var(--font-size-sm);  /* Figma: DM Sans SemiBold 14px */
+  font-weight: 600;
+  color: var(--color-neutral-800);
+}
+
+.fmdqui-fileupload-dropzone__hint {
+  font-size: 12px;                 /* Figma: DM Sans Regular 12px */
+  color: var(--color-neutral-400);
+}
+
+/* ── Uploading block ── */
+.fmdqui-fileupload-dropzone__uploading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-8);           /* Figma gap 8 */
+  width: 100%;
+}
+
+.fmdqui-fileupload-dropzone__pct {
+  font-size: 16px;                 /* Figma: DM Sans SemiBold 16px */
+  font-weight: 600;
+  color: var(--color-neutral-400);
+}
+
+.fmdqui-fileupload-dropzone__bar {
+  width: 313px;                    /* Figma bar width */
+  max-width: 100%;
+}
+
+/* Figma's bar is 6px tall; the shared ProgressBar ships 8px at size="sm" */
+.fmdqui-fileupload-dropzone__bar .fmdqui-progress-bar__track,
+.fmdqui-fileupload-dropzone__bar .fmdqui-progress-bar__fill {
+  height: 6px;
+}
+
+/* ── "OR" divider — Figma instances the shared Divider with a title ── */
+.fmdqui-fileupload-dropzone__divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 24px;
+}
+
+.fmdqui-fileupload-dropzone__divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background-color: var(--color-neutral-100);
+}
+
+.fmdqui-fileupload-dropzone__divider-label {
+  position: relative;
+  padding: 0 var(--spacing-8);     /* Figma pad 0/8 */
+  background-color: inherit;
+  font-size: 12px;                 /* Figma: DM Sans SemiBold 12px */
+  font-weight: 600;
+  color: var(--color-neutral-400);
+}
+
+/* The label sits on the dropzone surface, so match it per state */
+.fmdqui-fileupload-dropzone .fmdqui-fileupload-dropzone__divider-label {
+  background-color: var(--color-neutral-white);
+}
+
+/* Figma colours the dropzone's Try Again label primary-400, unlike the row */
+.fmdqui-fileupload-dropzone__retry.fmdqui-button--text.fmdqui-button--type-primary {
+  color: var(--color-primary-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FULL — FileUploadList       Figma: Mutilple Uploads 6100:15099
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-fileupload-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  width: 450px;
+  max-width: 100%;
+}

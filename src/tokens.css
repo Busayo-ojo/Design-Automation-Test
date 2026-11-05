@@ -202,6 +202,27 @@
   --shadow-glow-error: 0 0 0 3px rgba(212, 38, 32, 0.15);
   --color-focus-ring: #E7E8F1;
 
+  /* ── Calendar / date selector surfaces ──
+     Figma page "✤ Calendar & Date Selectors" uses raw hex, not variables.
+     These two had no existing token match; every other colour on the page
+     resolved to the scales above. */
+  --color-date-cell-disabled: #F7F9FC;   /* Date 6335:28092, State=Disabled fill */
+  --color-date-section-label: #666666;   /* "Month" / "Year" section labels */
+
+  /* ── Tooltip ──
+     Figma "✤ Tooltip" (6237:23991) puts a 4px spread-only ring on the dark
+     theme container. No existing token matched this value. */
+  --shadow-tooltip-dark: 0px 0px 0px 4px #FBF1F1;
+
+  /* ── File Upload ──
+     Figma "✤ File Upload" uses raw hex. These five had no existing token:
+     two file-type badge colours and three tinted dropzone surfaces. */
+  --color-file-jpg: #C548F1;                  /* file type 3355:170664, type=JPG */
+  --color-file-mp3: #6D56F8;                  /* file type 3355:170664, type=MP3 */
+  --color-dropzone-uploading-surface: #FFFBFA; /* Big Upload 6100:14546, uploading */
+  --color-dropzone-success-surface: #FBFEFC;   /* Big Upload 6100:14546, success */
+  --color-dropzone-error-surface: #FEFBFB;     /* Big Upload 6100:14546, error */
+
   /* ── Dropdown menu popover elevation ──
      Figma: Dropdown / menu items (node 2190:54213) — 3-layer drop shadow.
      Distinct from --shadow-normal-md: adds a 1px hairline ring as the 3rd layer. */

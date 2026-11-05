@@ -46,11 +46,23 @@ export type { LogoProps };
 
 // ─── 1. Sub-Menu Item Atom (Figma 2437:57101) ────────────────────────────────
 
-export interface SidebarSubMenuItemProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export type SubMenuItemState = 'default' | 'selected';
+export type SubMenuItemTheme =
+  | 'light'
+  | 'secondary blue'
+  | 'dark blue'
+  | 'dark'
+  | 'blue'
+  | 'dark-blue'
+  | 'dark-grey';
+
+export interface SidebarSubMenuItemProps
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'label'> {
   id?: string;
   label: ReactNode;
+  state?: SubMenuItemState;
   selected?: boolean;
-  theme?: SidebarTheme;
+  theme?: SubMenuItemTheme;
   badge?: ReactNode;
   onSelect?: () => void;
 }
@@ -60,6 +72,7 @@ export const SidebarSubMenuItem = forwardRef<HTMLAnchorElement, SidebarSubMenuIt
     {
       id,
       label,
+      state: propState,
       selected: propSelected,
       theme: propTheme,
       badge,
@@ -72,8 +85,20 @@ export const SidebarSubMenuItem = forwardRef<HTMLAnchorElement, SidebarSubMenuIt
     ref
   ) => {
     const context = useSidebar();
-    const isSelected = propSelected ?? (id && context.activeId === id);
-    const effectiveTheme = propTheme ?? context.theme;
+    const isSelected =
+      propState === 'selected' ||
+      (propState === undefined && (propSelected ?? (id && context.activeId === id)));
+    const effectiveState: SubMenuItemState = isSelected ? 'selected' : 'default';
+
+    const rawTheme = propTheme ?? context.theme;
+    const normalizedTheme =
+      rawTheme === 'secondary blue' || rawTheme === 'blue'
+        ? 'secondary-blue'
+        : rawTheme === 'dark blue' || rawTheme === 'dark-blue'
+        ? 'dark-blue'
+        : rawTheme === 'dark' || rawTheme === 'dark-grey'
+        ? 'dark'
+        : 'light';
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
       if (id) context.setActiveId(id);
@@ -83,7 +108,10 @@ export const SidebarSubMenuItem = forwardRef<HTMLAnchorElement, SidebarSubMenuIt
 
     const classNames = [
       'fmdqui-sidebar-sub-item',
-      `fmdqui-sidebar-sub-item--theme-${effectiveTheme.replace(' ', '-')}`,
+      `fmdqui-sidebar-sub-item--theme-${normalizedTheme}`,
+      rawTheme === 'blue' || rawTheme === 'secondary blue' ? 'fmdqui-sidebar-sub-item--theme-blue' : '',
+      rawTheme === 'dark' || rawTheme === 'dark-grey' ? 'fmdqui-sidebar-sub-item--theme-dark-grey' : '',
+      `fmdqui-sidebar-sub-item--state-${effectiveState}`,
       isSelected ? 'fmdqui-sidebar-sub-item--selected' : '',
       className,
     ].filter(Boolean).join(' ');
@@ -97,8 +125,9 @@ export const SidebarSubMenuItem = forwardRef<HTMLAnchorElement, SidebarSubMenuIt
         aria-current={isSelected ? 'page' : undefined}
         {...props}
       >
-        <span className="fmdqui-sidebar-sub-item__bullet" aria-hidden="true" />
-        <span className="fmdqui-sidebar-sub-item__label fmdq-text fmdq-text--size-sm">{label}</span>
+        <span className="fmdqui-sidebar-sub-item__content">
+          <span className="fmdqui-sidebar-sub-item__label">{label}</span>
+        </span>
         {badge && <span className="fmdqui-sidebar-sub-item__badge">{badge}</span>}
       </a>
     );
@@ -200,6 +229,8 @@ export const SidebarMenuItem = forwardRef<HTMLElement, SidebarMenuItemProps>(
       className,
     ].filter(Boolean).join(' ');
 
+    const isIconOnly = effectiveType === 'icon-only' || isCollapsed;
+
     const defaultIcon = <Icon name="hashtag" variant="linear" size={20} />;
 
     const content = (
@@ -208,14 +239,14 @@ export const SidebarMenuItem = forwardRef<HTMLElement, SidebarMenuItemProps>(
           <span className="fmdqui-sidebar-menu-item__icon" aria-hidden="true">
             {icon ?? defaultIcon}
           </span>
-          {!isCollapsed && (
+          {!isIconOnly && (
             <span className="fmdqui-sidebar-menu-item__label fmdq-text fmdq-text--size-sm">
               {label}
             </span>
           )}
         </span>
 
-        {!isCollapsed && (
+        {!isIconOnly && (
           <span className="fmdqui-sidebar-menu-item__right">
             {showCounter && (
               <span className="fmdqui-sidebar-menu-item__counter">
@@ -249,7 +280,7 @@ export const SidebarMenuItem = forwardRef<HTMLElement, SidebarMenuItemProps>(
       </>
     );
 
-    const subContent = (subItems || children) && isExpanded && !isCollapsed && (
+    const subContent = (subItems || children) && isExpanded && !isIconOnly && (
       <div className="fmdqui-sidebar-menu-item__sub-menu" role="group">
         {subItems || children}
       </div>
@@ -468,6 +499,7 @@ export interface SidebarAccountMenuProps {
   };
   items?: SidebarAccountMenuItem[];
   showHeader?: boolean;
+  hasBackdrop?: boolean;
   lastSignedInText?: string;
   onItemClick?: (key: string) => void;
   className?: string;
@@ -494,6 +526,7 @@ export const SidebarAccountMenu: React.FC<SidebarAccountMenuProps> = ({
   },
   items = DEFAULT_ACCOUNT_MENU_ITEMS,
   showHeader = false,
+  hasBackdrop = true,
   lastSignedInText = 'Last signed in 26 Oct 2026, 08:12 · Lagos',
   onItemClick,
   className = '',
@@ -502,7 +535,9 @@ export const SidebarAccountMenu: React.FC<SidebarAccountMenuProps> = ({
 
   return (
     <>
-      <div className="fmdqui-sidebar-account-menu__backdrop" onClick={onClose} />
+      {hasBackdrop && (
+        <div className="fmdqui-sidebar-account-menu__backdrop" onClick={onClose} />
+      )}
       <div
         className={`fmdqui-sidebar-account-menu ${className}`.trim()}
         role="dialog"

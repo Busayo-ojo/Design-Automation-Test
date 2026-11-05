@@ -14,6 +14,7 @@ const meta: Meta<typeof AccountLocked> = {
     },
   },
   argTypes: {
+    pausedBackground: { control: 'boolean' },
     onEmailSupport: { action: 'emailSupport' },
     onBackToSignIn: { action: 'backToSignIn' },
   },

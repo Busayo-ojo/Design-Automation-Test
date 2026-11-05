@@ -117,7 +117,7 @@ export const ToastError: Story = {
     type: 'toasts',
     state: 'error',
     title: 'Connection Gateway Disrupted',
-    subtext: 'Unable to synchronize with FMDQ depository.',
+    subtext: 'Unable to synchronise with FMDQ depository.',
     hasTitle: true,
     hasSubtext: true,
     hasIcon: true,

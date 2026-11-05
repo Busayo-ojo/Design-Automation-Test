@@ -230,13 +230,13 @@ export const FormControlRows: Story = {
         <FormControl
           type="checkbox"
           heading="Two-Factor SMS Verification"
-          description="Send one-time passcodes to authorized dealer phone on login."
+          description="Send one-time passcodes to authorised dealer phone on login."
           defaultChecked
         />
         <FormControl
           type="toggle"
           heading="Instant Trade Execution Alerts"
-          description="Notify Chief Dealer when trade exceeds ₦500M threshold."
+          description="Notify Chief Dealer when trade exceeds ₦500,000,000.00 threshold."
           defaultChecked
         />
 
@@ -255,7 +255,7 @@ export const FormControlRows: Story = {
           position="right"
           name="approvalMode"
           heading="Straight-Through Processing"
-          description="Auto-authorize trade reporting from certified Bloomberg terminal."
+          description="Auto-authorise trade reporting from certified Bloomberg terminal."
           checked={selected === 'stp'}
           onChange={() => setSelected('stp')}
         />

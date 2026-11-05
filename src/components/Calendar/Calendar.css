@@ -1,0 +1,309 @@
+@import '../../tokens.css';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Date Selectors — 1:1 with the Figma page
+   "✤ Calendar & Date Selectors ⚜️" (file Hq7luvf787VJlCj1d3YJYw)
+
+   Every value below was read from Figma via MCP and mapped to a token in
+   src/tokens.css. Two colours had no match and were added there:
+   --color-date-cell-disabled (#F7F9FC) and --color-date-section-label (#666666).
+
+   Figma scales this component set by 0.9517, which is why its inspector shows
+   9.52px padding and 0.95px strokes. The rendered geometry is what matters:
+   38×38 cells, 10px radius, 1px borders.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.fmdqui-dateselectors {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);          /* Figma root gap */
+  width: 300px;                    /* Figma component width */
+  font-family: var(--font-family-primary);
+  box-sizing: border-box;
+}
+
+.fmdqui-dateselectors__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);          /* Figma inner frame gap */
+  align-items: center;
+  width: 100%;
+}
+
+/* Figma's "Date Picker + Last Day" stacks header and grid with no gap. */
+.fmdqui-dateselectors--date-picker---last-day {
+  gap: 0;
+}
+
+.fmdqui-dateselectors--date-picker---last-day .fmdqui-dateselectors__body {
+  gap: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELEMENT — DateSelectorCell     Figma: Date 6335:28092 · 38×38 · r10
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dateselectors-cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  /* Figma reports 9.52px padding (10px scaled by 0.9517). With a fixed 38×38
+     box and centred content this is visually inert, but it keeps the geometry
+     literally equal to the Figma frame. */
+  padding: 9.52px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 10px;             /* Figma corner radius */
+  background-color: transparent;
+  cursor: pointer;
+  font-family: var(--font-family-primary);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.fmdqui-dateselectors-cell__day {
+  font-size: 12px;                 /* Figma: DM Sans 12px */
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  font-weight: 400;
+  color: var(--color-neutral-black);
+  text-align: center;
+}
+
+/* Figma `Position=Last Day` is a double-width cell carrying a word, not a number */
+.fmdqui-dateselectors-cell--pos-last-day {
+  width: 72px;
+}
+
+/* ── State=Default ── 1px neutral-100 border, no fill ── */
+.fmdqui-dateselectors-cell--default {
+  border-color: var(--color-neutral-100);
+}
+
+.fmdqui-dateselectors-cell--default:hover {
+  background-color: var(--color-neutral-50);
+}
+
+/* ── State=Disabled ── */
+.fmdqui-dateselectors-cell--disabled {
+  background-color: var(--color-date-cell-disabled);
+  border-color: transparent;
+  cursor: not-allowed;
+}
+
+.fmdqui-dateselectors-cell--disabled .fmdqui-dateselectors-cell__day {
+  color: var(--color-neutral-300);
+}
+
+/* ── State=Single Selected ── primary-50 fill + 1.5px primary-400 ring ── */
+.fmdqui-dateselectors-cell--single-selected {
+  background-color: var(--color-primary-50);
+  border: 1.5px solid var(--color-primary-400);
+}
+
+.fmdqui-dateselectors-cell--single-selected .fmdqui-dateselectors-cell__day {
+  font-weight: 600;                /* Figma: DM Sans SemiBold */
+}
+
+/* ── State=Multi-Selected ── primary-50 band across the range ── */
+.fmdqui-dateselectors-cell--multi-selected {
+  background-color: var(--color-primary-50);
+  border-color: transparent;
+}
+
+.fmdqui-dateselectors-cell--multi-selected .fmdqui-dateselectors-cell__day {
+  font-weight: 600;
+}
+
+/* Figma rings only the two range endpoints — not start-mid / end-mid / middle */
+.fmdqui-dateselectors-cell--multi-selected.fmdqui-dateselectors-cell--pos-start,
+.fmdqui-dateselectors-cell--multi-selected.fmdqui-dateselectors-cell--pos-end {
+  border: 1.5px solid var(--color-primary-400);
+}
+
+/* ── Show Today ── 4px primary-400 dot, bottom-centred (Figma x17 y27) ── */
+.fmdqui-dateselectors-cell__today {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-400);
+}
+
+/* ── Show Status ── 10px bold check-circle in success-400 (Figma x14 y25) ── */
+.fmdqui-dateselectors-cell__status {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  color: var(--color-success-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELEMENT — DateSelectorHeader   Figma: Month & Year 6335:28189
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dateselectors-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);           /* Figma gap 8 */
+  width: 100%;
+}
+
+.fmdqui-dateselectors-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /* Figma SPACE_BETWEEN */
+  width: 100%;
+}
+
+.fmdqui-dateselectors-header__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);           /* Figma gap 8 */
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-family-primary);
+  font-size: 16px;                 /* Figma: DM Sans SemiBold 16px */
+  font-weight: 600;
+  color: var(--color-neutral-black);
+  /* The chevron is primary-400 while the label stays black */
+  --icon-color: var(--color-primary-400);
+}
+
+.fmdqui-dateselectors-header__label svg {
+  color: var(--color-primary-400);
+}
+
+.fmdqui-dateselectors-header__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;                        /* Figma nav gap 6 */
+}
+
+.fmdqui-dateselectors-header__nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--color-primary-400);
+  border-radius: var(--radius-4);
+}
+
+.fmdqui-dateselectors-header__nav-btn:focus-visible {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 2px;
+}
+
+/* ── Weekday row — 7 × 40×40, SPACE_BETWEEN ── */
+.fmdqui-dateselectors-header__weekdays {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.fmdqui-dateselectors-header__weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 12px;                 /* Figma: DM Sans SemiBold 12px */
+  font-weight: 600;
+  line-height: var(--font-line-height-paragraph);
+  color: var(--color-neutral-black);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NESTED — DateGrid
+   Figma lays the dates out as 7 columns, SPACE_BETWEEN, with an 8px row gap.
+   Column gap is set inline (4 on Date Picker, 0 on Date Picker + Last Day).
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dateselectors-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 38px);
+  justify-content: space-between;
+  row-gap: var(--spacing-8);       /* Figma row gap 8 */
+  width: 100%;
+}
+
+/* The double-width Last Day cell spans the two final columns */
+.fmdqui-dateselectors-grid .fmdqui-dateselectors-cell--pos-last-day {
+  grid-column: span 2;
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NESTED — MonthYearPanel
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dateselectors-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);          /* Figma gap 32 between Month and Year */
+  width: 100%;
+}
+
+.fmdqui-dateselectors-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);          /* Figma gap 16 */
+  width: 100%;
+}
+
+.fmdqui-dateselectors-section__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.fmdqui-dateselectors-section__label {
+  font-size: 12px;                 /* Figma: DM Sans Bold 12px */
+  font-weight: 700;
+  color: var(--color-date-section-label);
+}
+
+.fmdqui-dateselectors-section__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Figma keeps the month and year pills on a single row and lets the frame
+   overflow the 300px card (its Month row measures 363px), so don't wrap. */
+.fmdqui-dateselectors-section__chips {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);           /* Figma chip row gap 8 */
+  flex-wrap: nowrap;
+}
+
+.fmdqui-dateselectors-section__chips > * {
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CTAs — Figma "button frame": HORIZONTAL, gap 16, two 142px buttons
+   The buttons themselves are the shared Button element; only the row is here.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dateselectors__ctas {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  width: 100%;
+}
+
+.fmdqui-dateselectors__ctas > .fmdqui-button {
+  flex: 1 1 0;
+  width: 142px;                    /* Figma button width */
+}

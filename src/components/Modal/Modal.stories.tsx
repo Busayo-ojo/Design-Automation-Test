@@ -24,7 +24,7 @@ const meta: Meta<typeof Modal> = {
         component: `
 ### FMDQ Design System - Modal (Matching Figma \`✤ Modals\` 10378:339469 & 10379:339480)
 
-Modal dialogs provide critical focused workflows, confirmations, dual-control authorizations, summary reviews, and alerts.
+Modal dialogs provide critical focused workflows, confirmations, dual-control authorisations, summary reviews, and alerts.
 - **Source of Truth**: Figma \`Modals\` node \`10379:339470\` / component set \`10378:339469\`.
 - **Accurate Icon Specs**:
   - Featured icons are **ONLY** present where specified in Figma (\`success\` with green \`check-circle\`, \`session-timeout\` with orange \`info-triangle\`).

@@ -15,6 +15,7 @@ const meta: Meta<typeof SetPassword> = {
     },
   },
   argTypes: {
+    pausedBackground: { control: 'boolean' },
     onSubmit: { action: 'submit' },
     onRequestNewLink: { action: 'requestNewLink' },
     onBackToSignIn: { action: 'backToSignIn' },

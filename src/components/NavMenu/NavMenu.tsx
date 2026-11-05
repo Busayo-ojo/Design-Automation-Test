@@ -1,4 +1,8 @@
 import './NavMenu.css';
+/**
+ * @deprecated Replaced by `Sidebar` component (matching Figma Sidebar component set).
+ * Will be removed in the next release.
+ */
 export {
   Sidebar as NavMenu,
   SidebarSection as NavGroup,

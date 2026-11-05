@@ -15,6 +15,7 @@ const meta: Meta<typeof TwoStepVerification> = {
     },
   },
   argTypes: {
+    pausedBackground: { control: 'boolean' },
     onCodeChange: { action: 'codeChange' },
     onComplete: { action: 'complete' },
     onSubmit: { action: 'submit' },

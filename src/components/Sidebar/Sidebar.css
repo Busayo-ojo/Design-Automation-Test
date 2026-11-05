@@ -411,10 +411,10 @@
   transform: rotate(180deg);
 }
 
-/* ── Type: icon-only (collapsed mode: 82px) ── */
+/* ── Type: icon-only (collapsed mode: 82px or standalone component) ── */
 .fmdqui-sidebar-menu-item--type-icon-only {
   justify-content: center;
-  padding: 12px;
+  padding: 12px 16px;
   height: 44px;
 }
 
@@ -423,13 +423,17 @@
   flex: initial;
 }
 
-/* ── Sub-menu Container (for multi-layered) ── */
+.fmdqui-sidebar-menu-item--type-icon-only.fmdqui-sidebar-menu-item--selected,
+.fmdqui-sidebar-menu-item--type-icon-only.fmdqui-sidebar-menu-item--state-selected {
+  border-radius: var(--radius-4, 4px) !important;
+}
+
+/* ── Sub-menu Container (for multi-layered, Figma Frame 3: itemSpacing 2, padding 8 0) ── */
 .fmdqui-sidebar-menu-item__sub-menu {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding-left: 12px;
-  margin-top: 2px;
+  padding: 8px 0;
   box-sizing: border-box;
 }
 
@@ -562,10 +566,10 @@
 .fmdqui-sidebar-sub-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
   width: 100%;
-  height: 38px;
-  padding: 8px 12px 8px 24px;
+  height: 44px;
+  padding: 12px 16px 12px 48px;
   border-radius: var(--radius-4, 4px);
   box-sizing: border-box;
   text-decoration: none;
@@ -573,13 +577,12 @@
   transition: all var(--transition-fast, 0.15s ease);
 }
 
-.fmdqui-sidebar-sub-item__bullet {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background-color: currentColor;
-  opacity: 0.6;
-  flex-shrink: 0;
+.fmdqui-sidebar-sub-item__content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
 }
 
 .fmdqui-sidebar-sub-item__label {
@@ -587,64 +590,82 @@
   font-size: var(--font-size-p-sm, 14px);
   font-weight: 400;
   line-height: var(--font-line-height-paragraph, 1.45);
-  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  letter-spacing: -0.04em;
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.fmdqui-sidebar-sub-item--selected .fmdqui-sidebar-sub-item__label {
-  font-weight: 600;
-}
-
-/* Light Theme Sub-item */
+/* 1. Light Theme Sub-item */
 .fmdqui-sidebar-sub-item--theme-light {
   color: var(--color-neutral-600, #475367);
+  background-color: transparent;
 }
-.fmdqui-sidebar-sub-item--theme-light:hover {
+.fmdqui-sidebar-sub-item--theme-light:hover,
+.fmdqui-sidebar-sub-item--theme-light.fmdqui-sidebar-sub-item--state-hover {
   color: var(--color-neutral-900, #101928);
 }
-.fmdqui-sidebar-sub-item--theme-light.fmdqui-sidebar-sub-item--selected {
-  color: var(--color-primary-600, #034592);
+.fmdqui-sidebar-sub-item--theme-light.fmdqui-sidebar-sub-item--selected,
+.fmdqui-sidebar-sub-item--theme-light.fmdqui-sidebar-sub-item--state-selected {
+  color: var(--color-neutral-900, #101928);
   background-color: var(--color-primary-50, #E3EFFC);
 }
 
-/* Blue Theme Sub-item */
+/* 2. Secondary Blue Theme Sub-item (Figma exact tokens: default=#1D326D, selected=#034592, text=white) */
+.fmdqui-sidebar-sub-item--theme-secondary-blue,
 .fmdqui-sidebar-sub-item--theme-blue {
-  color: rgba(255, 255, 255, 0.7);
-}
-.fmdqui-sidebar-sub-item--theme-blue:hover {
-  color: var(--color-neutral-white, #FFFFFF);
-}
-.fmdqui-sidebar-sub-item--theme-blue.fmdqui-sidebar-sub-item--selected {
   color: var(--color-neutral-white, #FFFFFF);
   background-color: var(--color-primary-700, #1D326D);
 }
-
-/* Dark Blue Theme Sub-item */
-.fmdqui-sidebar-sub-item--theme-dark-blue {
-  color: var(--color-primary-75, #C6DDF7);
-  opacity: 0.8;
-}
-.fmdqui-sidebar-sub-item--theme-dark-blue:hover {
+.fmdqui-sidebar-sub-item--theme-secondary-blue:hover,
+.fmdqui-sidebar-sub-item--theme-blue:hover,
+.fmdqui-sidebar-sub-item--theme-secondary-blue.fmdqui-sidebar-sub-item--state-hover,
+.fmdqui-sidebar-sub-item--theme-blue.fmdqui-sidebar-sub-item--state-hover {
   color: var(--color-neutral-white, #FFFFFF);
-  opacity: 1;
+  background-color: var(--color-primary-600, #034592);
 }
-.fmdqui-sidebar-sub-item--theme-dark-blue.fmdqui-sidebar-sub-item--selected {
+.fmdqui-sidebar-sub-item--theme-secondary-blue.fmdqui-sidebar-sub-item--selected,
+.fmdqui-sidebar-sub-item--theme-secondary-blue.fmdqui-sidebar-sub-item--state-selected,
+.fmdqui-sidebar-sub-item--theme-blue.fmdqui-sidebar-sub-item--selected,
+.fmdqui-sidebar-sub-item--theme-blue.fmdqui-sidebar-sub-item--state-selected {
+  color: var(--color-neutral-white, #FFFFFF);
+  background-color: var(--color-primary-600, #034592);
+}
+
+/* 3. Dark Blue Theme Sub-item (Figma exact tokens: default=#001633 bg with #FBE2B7 Secondary/75 text; selected=#012657 bg with #FFFFFF text) */
+.fmdqui-sidebar-sub-item--theme-dark-blue {
+  color: var(--color-secondary-75, #FBE2B7);
+  background-color: var(--color-primary-900, #001633);
+}
+.fmdqui-sidebar-sub-item--theme-dark-blue:hover,
+.fmdqui-sidebar-sub-item--theme-dark-blue.fmdqui-sidebar-sub-item--state-hover {
   color: var(--color-neutral-white, #FFFFFF);
   background-color: var(--color-primary-800, #012657);
-  opacity: 1;
+}
+.fmdqui-sidebar-sub-item--theme-dark-blue.fmdqui-sidebar-sub-item--selected,
+.fmdqui-sidebar-sub-item--theme-dark-blue.fmdqui-sidebar-sub-item--state-selected {
+  color: var(--color-neutral-white, #FFFFFF);
+  background-color: var(--color-primary-800, #012657);
 }
 
-/* Dark Grey Theme Sub-item */
+/* 4. Dark / Dark Grey Theme Sub-item (Figma exact tokens: default=#101928, selected=#1D2739, text=white) */
+.fmdqui-sidebar-sub-item--theme-dark,
 .fmdqui-sidebar-sub-item--theme-dark-grey {
-  color: var(--color-neutral-400, #98A2B3);
-}
-.fmdqui-sidebar-sub-item--theme-dark-grey:hover {
   color: var(--color-neutral-white, #FFFFFF);
+  background-color: var(--color-neutral-900, #101928);
 }
-.fmdqui-sidebar-sub-item--theme-dark-grey.fmdqui-sidebar-sub-item--selected {
+.fmdqui-sidebar-sub-item--theme-dark:hover,
+.fmdqui-sidebar-sub-item--theme-dark-grey:hover,
+.fmdqui-sidebar-sub-item--theme-dark.fmdqui-sidebar-sub-item--state-hover,
+.fmdqui-sidebar-sub-item--theme-dark-grey.fmdqui-sidebar-sub-item--state-hover {
+  color: var(--color-neutral-white, #FFFFFF);
+  background-color: var(--color-neutral-800, #1D2739);
+}
+.fmdqui-sidebar-sub-item--theme-dark.fmdqui-sidebar-sub-item--selected,
+.fmdqui-sidebar-sub-item--theme-dark.fmdqui-sidebar-sub-item--state-selected,
+.fmdqui-sidebar-sub-item--theme-dark-grey.fmdqui-sidebar-sub-item--selected,
+.fmdqui-sidebar-sub-item--theme-dark-grey.fmdqui-sidebar-sub-item--state-selected {
   color: var(--color-neutral-white, #FFFFFF);
   background-color: var(--color-neutral-800, #1D2739);
 }
@@ -822,9 +843,7 @@
 }
 
 .fmdqui-sidebar-account-menu {
-  position: absolute;
-  bottom: 76px;
-  left: 12px;
+  position: relative;
   width: 248px;
   background-color: var(--color-neutral-white, #FFFFFF);
   border: 1px solid var(--color-neutral-200, #E4E7EC);
@@ -837,6 +856,13 @@
   flex-direction: column;
   gap: 2px;
   animation: fmdquiSidebarAccountMenuFadeIn 0.15s ease-out;
+}
+
+/* Variant 1: Profile is at bottom -> flyout menu is placed 76px above bottom inside sidebar */
+.fmdqui-sidebar__profile-container .fmdqui-sidebar-account-menu {
+  position: absolute;
+  bottom: 76px;
+  left: 12px;
 }
 
 /* Variant 2: Profile is at top -> flyout menu is placed 12px below the profile (matching Figma avatar bottom to menu top) */

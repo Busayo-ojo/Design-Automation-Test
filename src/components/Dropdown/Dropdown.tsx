@@ -268,6 +268,10 @@ export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   children?: ReactNode;
 }
 
+/**
+ * @deprecated Replaced by `Dropdowns` component (matching Figma Dropdowns component set).
+ * Will be removed in the next release.
+ */
 export const Dropdown: React.FC<DropdownProps> = ({
   type = 'default',
   state: stateProp,

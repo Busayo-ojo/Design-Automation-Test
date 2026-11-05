@@ -1,0 +1,75 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as TooltipStories from './Tooltip.stories';
+
+<Meta of={TooltipStories} />
+
+# Tooltip
+
+From the Figma page **"✤ Tooltip ⚜️"**. Per the Figma documentation frame, tooltips are *"small, informative overlays or pop-up windows that appear when users hover over an element… used to provide additional context, explanations, or brief descriptions of interface elements."*
+
+**24 Figma variants** — `pointer position` (12) × `theme` (2) — plus five boolean properties.
+
+## Figma Reference
+
+<iframe
+  title="Tooltip Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=6237-23991&embed-host=share"
+  allowFullScreen
+/>
+
+---
+
+## Playground
+
+<Canvas of={TooltipStories.Playground} />
+<Controls of={TooltipStories.Playground} />
+
+---
+
+## All 24 variants
+
+Figma reads the two position tokens differently depending on the edge: `top-left` means the pointer is on the **top edge, at the left**, while `left-top` means the **left edge, at the top**. The second token is always an alignment, never an edge.
+
+<Canvas of={TooltipStories.AllVariants} />
+
+## Boolean properties
+
+`has buttons` gates the whole CTA row; the two CTA booleans gate each button individually.
+
+<Canvas of={TooltipStories.BooleanProperties} />
+
+## Interactive
+
+<Canvas of={TooltipStories.Interactive} />
+
+---
+
+## Figma source
+
+| Figma node | Variants | React |
+| :--- | :--- | :--- |
+| `Tool tip` `6237:23991` | 24 | `Tooltip` |
+| — (behaviour layer) | — | `TooltipTrigger` |
+
+## Notes
+
+- **Reuse.** The CTAs are the existing `Button` element (`variant="text"`, `buttonType="secondary" \| "primary"`, `size="sm"`), matching Figma's `Button / texts` instances. The close affordance is the `multiply` icon from `foundations/icons`.
+- **Theme colours.** The shared Button already matches Figma on the light theme (text+primary is `primary-700`, text+secondary is `neutral-500`), so nothing is overridden there. The dark theme recolours both labels — secondary to `neutral-200` and **primary to `secondary-400` (gold)** — which is scoped to the tooltip, leaving the shared Button untouched.
+- **Pointer.** Figma draws a 20×12 vector with a 1.5px rounded apex, inset 16px from the edge, overlapping the container by 1px. One upward SVG is rotated per edge; the rotation also swaps the footprint to 12×20 on the left and right edges, exactly as Figma specifies.
+- **Token added.** `--shadow-tooltip-dark` (`0 0 0 4px #FBF1F1`) — the dark container's ring. Every other colour mapped to an existing token. Note the ring is near-white, so it is effectively invisible on a white page; that is what the Figma file specifies.
+
+## Behaviour
+
+`TooltipTrigger` implements all five rules from Figma's Best Practices frame:
+
+- *"Tooltips should only appear when the user has paused on the target element"* — `openDelay`, default 400ms.
+- *"They should remain visible if the user briefly moves the mouse off and back on"* — the layer keeps the hover alive.
+- *"Tooltips should not immediately disappear"* — `closeDelay`, default 200ms.
+- *"When the user scrolls … immediately hide the tooltip"* — a capture-phase scroll listener.
+- *"Tooltips do not receive input focus"* — the layer is not focusable.
+
+## Usage
+
+From Figma's When-to-use frame: use tooltips to identify or add a small amount of information to an element — to help users understand the meaning or purpose of icons, to show the full version of truncated text, or to display alternative text for an image. They replace standard browser tooltips when more emphasis is required.

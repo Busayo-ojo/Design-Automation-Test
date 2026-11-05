@@ -31,7 +31,7 @@
     "figma:dry-run": "node scripts/figma-extractor.mjs --dry-run",
     "sync:git": "node scripts/git-sync.mjs",
     "sync:git:dry": "node scripts/git-sync.mjs --dry-run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc -b --noEmit"
   },
   "peerDependencies": {
     "react": "^19.2.0",

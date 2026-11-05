@@ -15,6 +15,7 @@ const meta: Meta<typeof ForgotPassword> = {
     },
   },
   argTypes: {
+    pausedBackground: { control: 'boolean' },
     onRequestReset: { action: 'requestReset' },
     onBackToSignIn: { action: 'backToSignIn' },
     onResendLink: { action: 'resendLink' },

@@ -76,14 +76,14 @@ export const Default: Story = {
   args: {
     type: 'search-results',
     color: true,
-    title: 'No Dealing Member Trades Found',
+    title: 'No Orders Available',
     description: 'We couldn’t find any transactions matching your filter criteria. Try adjusting the date range or ticker symbol.',
     action: <Button variant="primary" size="sm">Clear All Filters</Button>,
     secondaryAction: <Button variant="secondary" size="sm">Submit New Trade</Button>,
   },
   decorators: [
     (Story) => (
-      <div style={{ width: '600px', background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E7EC' }}>
+      <div style={{ width: '100%', maxWidth: '600px', boxSizing: 'border-box', background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E7EC' }}>
         <Story />
       </div>
     ),
@@ -97,13 +97,13 @@ export const Monochrome: Story = {
   args: {
     type: 'search-results',
     color: false,
-    title: 'No Records Available',
+    title: 'No Data Available',
     description: 'This table currently has no historical entries. Once trades are processed, they will appear here.',
     action: <Button variant="secondary" size="sm">Refresh Table</Button>,
   },
   decorators: [
     (Story) => (
-      <div style={{ width: '600px', background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E7EC' }}>
+      <div style={{ width: '100%', maxWidth: '600px', boxSizing: 'border-box', background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E7EC' }}>
         <Story />
       </div>
     ),
@@ -116,13 +116,13 @@ export const EmptyDashboard: Story = {
   args: {
     type: 'dashboard',
     color: true,
-    title: 'No Market Metrics Yet',
+    title: 'No Data Available',
     description: 'Configure your custom trading widgets and market tickers to view real-time market data.',
-    action: <Button variant="primary" size="sm">Customize Dashboard</Button>,
+    action: <Button variant="primary" size="sm">Customise Dashboard</Button>,
   },
   decorators: [
     (Story) => (
-      <div style={{ width: '600px', background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E7EC' }}>
+      <div style={{ width: '100%', maxWidth: '600px', boxSizing: 'border-box', background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E7EC' }}>
         <Story />
       </div>
     ),
@@ -135,12 +135,12 @@ export const NoNotifications: Story = {
   args: {
     type: 'notifications',
     color: true,
-    title: 'No New Notifications',
+    title: 'No Data Available',
     description: 'You are completely caught up on daily fixing bulletins, circulars, and dealing member communications.',
   },
   decorators: [
     (Story) => (
-      <div style={{ width: '600px', background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E7EC' }}>
+      <div style={{ width: '100%', maxWidth: '600px', boxSizing: 'border-box', background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E7EC' }}>
         <Story />
       </div>
     ),
@@ -153,13 +153,13 @@ export const NoPendingApprovals: Story = {
   args: {
     type: 'tasks',
     color: true,
-    title: 'All Dual-Control Submissions Approved',
-    description: 'The maker-checker authorization queue is completely clear for the current trading session.',
+    title: 'No Orders Available',
+    description: 'The maker-checker authorisation queue is completely clear for the current trading session.',
     action: <Button variant="secondary" size="sm">View Audit Trail</Button>,
   },
   decorators: [
     (Story) => (
-      <div style={{ width: '600px', background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E7EC' }}>
+      <div style={{ width: '100%', maxWidth: '600px', boxSizing: 'border-box', background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E4E7EC' }}>
         <Story />
       </div>
     ),

@@ -955,13 +955,9 @@ export const DeclarativeDataTable: Story = {
       <Table
         data={sampleTrades}
         columns={columns}
-        pagination={{
-          currentPage: 1,
-          totalPages: 5,
-          totalItems: 25,
-          pageSize: 5,
-          variation: '2',
-        }}
+        pagination
+        pageSize={5}
+        totalItems={25}
       />
     );
   },
@@ -979,7 +975,8 @@ export const EmptyState: Story = {
         { id: '3', header: 'Instrument' },
         { id: '4', header: 'Volume', align: 'right' },
       ]}
-      emptyMessage="No trading records found"
+      emptyTitle="No Data Available"
+      emptyMessage="No Orders Available"
       emptyDescription="Try clearing active filters or searching for a different dealer counterparty."
     />
   ),

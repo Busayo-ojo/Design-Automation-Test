@@ -7,6 +7,8 @@ import {
   SidebarSubMenuItem,
   SidebarAccountMenu,
   type SidebarTheme,
+  type SubMenuItemState,
+  type SubMenuItemTheme,
 } from './Sidebar';
 import { Icon } from '../../foundations/icons';
 import defaultAvatar from '../../assets/avatar-marvin.png';
@@ -273,7 +275,13 @@ export const AllFigmaVariantsMatrix: Story = {
 export const MenuItemCells: Story = {
   name: 'Cells / Menu Item Matrix',
   render: () => {
-    const themes: SidebarTheme[] = ['light', 'blue', 'dark-blue', 'dark-grey'];
+    const themes: { id: SidebarTheme; label: string; cardBg: string }[] = [
+      { id: 'light', label: 'Theme: Light', cardBg: '#FFFFFF' },
+      { id: 'blue', label: 'Theme: Secondary Blue', cardBg: '#012657' },
+      { id: 'dark-blue', label: 'Theme: Dark Blue', cardBg: '#001633' },
+      { id: 'dark-grey', label: 'Theme: Dark Grey', cardBg: '#101928' },
+    ];
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', padding: '24px' }}>
         <div>
@@ -281,33 +289,25 @@ export const MenuItemCells: Story = {
             Sidebar / Menu Item Cells (Figma 2437:56486)
           </h3>
           <p style={{ margin: 0, color: 'var(--color-neutral-500)', fontSize: '14px' }}>
-            Hierarchical cells showing Default, Hover, Selected, and Multi-Layered states. Note that in Dark Blue theme, icons use official FMDQ Gold (#CC9933) token.
+            Base component set with 36 variants covering Type (Default, Multi-Layered with 6 Sub-Items, Icon-Only) and State (Default, Hover, Selected) across all 4 themes.
           </p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
-          {themes.map(theme => {
+          {themes.map(({ id: theme, label, cardBg }) => {
             const isDark = theme !== 'light';
-            const bg =
-              theme === 'light'
-                ? '#FFFFFF'
-                : theme === 'blue'
-                ? 'var(--color-primary-800)'
-                : theme === 'dark-blue'
-                ? 'var(--color-primary-900)'
-                : 'var(--color-neutral-900)';
 
             return (
               <div
                 key={theme}
                 style={{
-                  backgroundColor: bg,
+                  backgroundColor: cardBg,
                   padding: '20px',
                   borderRadius: '12px',
-                  border: '1px solid var(--color-neutral-200)',
+                  border: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid var(--color-neutral-200)',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '12px',
+                  gap: '16px',
                 }}
               >
                 <span
@@ -319,44 +319,95 @@ export const MenuItemCells: Story = {
                     letterSpacing: '0.05em',
                   }}
                 >
-                  Theme: {theme}
+                  {label}
                 </span>
 
+                {/* 1. Default Text Menu Item States */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  {/* Default State */}
+                  <span style={{ fontSize: '11px', color: isDark ? 'rgba(255,255,255,0.6)' : 'var(--color-neutral-400)' }}>
+                    Type: Default (Default, Hover, Selected)
+                  </span>
                   <SidebarMenuItem
                     id={`cell-def-${theme}`}
                     theme={theme}
+                    state="default"
                     label="Menu title"
                     icon={<Icon name="hashtag" variant="linear" size={20} />}
                     counter={10}
                   />
-
-                  {/* Selected State */}
+                  <SidebarMenuItem
+                    id={`cell-hov-${theme}`}
+                    theme={theme}
+                    state="hover"
+                    label="Menu title"
+                    icon={<Icon name="hashtag" variant="linear" size={20} />}
+                    counter={10}
+                  />
                   <SidebarMenuItem
                     id={`cell-sel-${theme}`}
                     theme={theme}
+                    state="selected"
+                    selected
                     label="Menu title"
                     icon={<Icon name="hashtag" variant="linear" size={20} />}
-                    selected
                     counter={10}
                   />
+                </div>
 
-                  {/* Multi-layered with Sub-menu */}
+                {/* 2. Multi-Layered with 6 Sub-Menu Items (Figma Frame 3) */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <span style={{ fontSize: '11px', color: isDark ? 'rgba(255,255,255,0.6)' : 'var(--color-neutral-400)' }}>
+                    Type: Multi-Layered (Selected with 6 Sub-Items)
+                  </span>
                   <SidebarMenuItem
                     id={`cell-multi-${theme}`}
                     theme={theme}
                     type="multi-layered"
-                    label="Reports & Analytics"
-                    icon={<Icon name="bar-chart-v" variant="linear" size={20} />}
+                    state="selected"
+                    selected
+                    label="Menu title"
+                    icon={<Icon name="hashtag" variant="linear" size={20} />}
+                    counter={10}
                     defaultExpanded
                     subItems={
                       <>
-                        <SidebarSubMenuItem id={`sub-1-${theme}`} label="Turnover Rates" theme={theme} selected />
-                        <SidebarSubMenuItem id={`sub-2-${theme}`} label="Volume Reports" theme={theme} />
-                        <SidebarSubMenuItem id={`sub-3-${theme}`} label="Member Audits" theme={theme} />
+                        <SidebarSubMenuItem id={`sub-1-${theme}`} label="Sub menu 1" theme={theme} state="selected" selected />
+                        <SidebarSubMenuItem id={`sub-2-${theme}`} label="Sub menu 2" theme={theme} state="default" />
+                        <SidebarSubMenuItem id={`sub-3-${theme}`} label="Sub menu 3" theme={theme} state="default" />
+                        <SidebarSubMenuItem id={`sub-4-${theme}`} label="Sub menu 4" theme={theme} state="default" />
+                        <SidebarSubMenuItem id={`sub-5-${theme}`} label="Sub menu 5" theme={theme} state="default" />
+                        <SidebarSubMenuItem id={`sub-6-${theme}`} label="Sub menu 6" theme={theme} state="default" />
                       </>
                     }
+                  />
+                </div>
+
+                {/* 3. Icon-Only States (Default, Hover, Selected) */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <span style={{ fontSize: '11px', color: isDark ? 'rgba(255,255,255,0.6)' : 'var(--color-neutral-400)' }}>
+                    Type: Icon-Only (Default, Hover, Selected)
+                  </span>
+                  <SidebarMenuItem
+                    id={`cell-icon-def-${theme}`}
+                    theme={theme}
+                    type="icon-only"
+                    state="default"
+                    icon={<Icon name="hashtag" variant="linear" size={20} />}
+                  />
+                  <SidebarMenuItem
+                    id={`cell-icon-hov-${theme}`}
+                    theme={theme}
+                    type="icon-only"
+                    state="hover"
+                    icon={<Icon name="hashtag" variant="linear" size={20} />}
+                  />
+                  <SidebarMenuItem
+                    id={`cell-icon-sel-${theme}`}
+                    theme={theme}
+                    type="icon-only"
+                    state="selected"
+                    selected
+                    icon={<Icon name="hashtag" variant="linear" size={20} />}
                   />
                 </div>
               </div>
@@ -373,7 +424,17 @@ export const MenuItemCells: Story = {
 export const SubMenuItemCells: Story = {
   name: 'Cells / Sub-Menu Item Matrix',
   render: () => {
-    const themes: SidebarTheme[] = ['light', 'blue', 'dark-blue', 'dark-grey'];
+    const themes: { id: SubMenuItemTheme; label: string; cardBg: string }[] = [
+      { id: 'light', label: 'Theme: Light', cardBg: '#FFFFFF' },
+      { id: 'secondary blue', label: 'Theme: Secondary Blue', cardBg: '#012657' },
+      { id: 'dark blue', label: 'Theme: Dark Blue', cardBg: '#001633' },
+      { id: 'dark', label: 'Theme: Dark', cardBg: '#101928' },
+    ];
+
+    const states: { id: SubMenuItemState; label: string }[] = [
+      { id: 'default', label: 'state=default' },
+      { id: 'selected', label: 'state=selected' },
+    ];
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', padding: '24px' }}>
@@ -382,33 +443,25 @@ export const SubMenuItemCells: Story = {
             Sidebar / Sub-Menu Item Atom (Figma 2437:57101)
           </h3>
           <p style={{ margin: 0, color: 'var(--color-neutral-500)', fontSize: '14px' }}>
-            Nested sub-items with circular bullet indicator, 14px typography, and hover/selected background tokens.
+            Base component set with 8 variants (2 states × 4 themes). Dimensions: 240px × 44px, 48px left indent, 4px radius, 14px DM Sans Regular text.
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px' }}>
-          {themes.map(theme => {
-            const isDark = theme !== 'light';
-            const bg =
-              theme === 'light'
-                ? '#FFFFFF'
-                : theme === 'blue'
-                ? 'var(--color-primary-800)'
-                : theme === 'dark-blue'
-                ? 'var(--color-primary-900)'
-                : 'var(--color-neutral-900)';
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+          {themes.map(({ id: themeId, label: themeLabel, cardBg }) => {
+            const isDark = themeId !== 'light';
 
             return (
               <div
-                key={theme}
+                key={themeId}
                 style={{
-                  backgroundColor: bg,
+                  backgroundColor: cardBg,
                   padding: '20px',
                   borderRadius: '12px',
-                  border: '1px solid var(--color-neutral-200)',
+                  border: isDark ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid var(--color-neutral-200)',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '8px',
+                  gap: '16px',
                 }}
               >
                 <span
@@ -417,20 +470,32 @@ export const SubMenuItemCells: Story = {
                     fontWeight: 700,
                     textTransform: 'uppercase',
                     color: isDark ? 'var(--color-neutral-300)' : 'var(--color-neutral-500)',
-                    marginBottom: '8px',
+                    letterSpacing: '0.05em',
                   }}
                 >
-                  Theme: {theme}
+                  {themeLabel}
                 </span>
 
-                <SidebarSubMenuItem id={`sub-def-${theme}`} label="Default Sub-item" theme={theme} />
-                <SidebarSubMenuItem id={`sub-sel-${theme}`} label="Selected Sub-item" theme={theme} selected />
-                <SidebarSubMenuItem
-                  id={`sub-badge-${theme}`}
-                  label="With Count Badge"
-                  theme={theme}
-                  badge={<span style={{ fontSize: '11px', opacity: 0.8 }}>NEW</span>}
-                />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {states.map(({ id: stateId, label: stateLabel }) => (
+                    <div key={stateId} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <span
+                        style={{
+                          fontSize: '11px',
+                          color: isDark ? 'rgba(255,255,255,0.6)' : 'var(--color-neutral-500)',
+                        }}
+                      >
+                        {stateLabel}
+                      </span>
+                      <SidebarSubMenuItem
+                        id={`sub-${themeId}-${stateId}`}
+                        label="Search"
+                        theme={themeId}
+                        state={stateId}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             );
           })}
@@ -476,7 +541,7 @@ export const Variant1Light: Story = {
             Active Module: <span style={{ color: 'var(--color-primary-700)' }}>{active}</span>
           </h2>
           <p style={{ color: 'var(--color-neutral-500)', fontSize: 'var(--font-size-p-sm)' }}>
-            Sidebar demonstrates live state synchronization with full design system token adherence.
+            Sidebar demonstrates live state synchronisation with full design system token adherence.
           </p>
         </main>
       </div>
@@ -705,12 +770,15 @@ export const CollapsedState: Story = {
 export const AccountMenuStandalone: Story = {
   name: 'Popover / Account Flyout Menu',
   render: () => (
-    <div style={{ padding: '40px', backgroundColor: 'var(--color-neutral-100)', minHeight: '400px' }}>
+    <div style={{ padding: '40px', backgroundColor: 'var(--color-neutral-100)', minHeight: '420px' }}>
       <h3 style={{ margin: '0 0 16px 0', fontFamily: 'var(--font-family-primary)' }}>
-        Sidebar / Account Menu (Figma 10322:286695)
+        Sidebar / Account Menu (Figma 10322:286059)
       </h3>
-      <div style={{ position: 'relative', width: '248px' }}>
-        <SidebarAccountMenu isOpen={true} onClose={() => {}} />
+      <p style={{ margin: '0 0 20px 0', color: 'var(--color-neutral-500)', fontSize: '14px' }}>
+        Flyout menu opened from the profile selector at the top or bottom of the sidebar. Account, security, help actions, and last signed-in timestamp.
+      </p>
+      <div style={{ width: '248px' }}>
+        <SidebarAccountMenu isOpen={true} onClose={() => {}} hasBackdrop={false} />
       </div>
     </div>
   ),

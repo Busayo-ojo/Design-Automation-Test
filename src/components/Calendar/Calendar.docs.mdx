@@ -1,0 +1,95 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as CalendarStories from './Calendar.stories';
+
+<Meta of={CalendarStories} />
+
+# Calendar & Date Selectors
+
+From the Figma page **"✤ Calendar & Date Selectors ⚜️"**. Per the Figma documentation frame, these *"allow users to choose dates and navigate through calendars… essential for tasks like booking appointments, scheduling events, or setting reminders."*
+
+**14 Figma variants**, each covered by a story.
+
+## Figma Reference
+
+<iframe
+  title="Calendar & Date Selectors Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=6335-28236&embed-host=share"
+  allowFullScreen
+/>
+
+---
+
+## Playground
+
+<Canvas of={CalendarStories.Playground} />
+<Controls of={CalendarStories.Playground} />
+
+### Interactive
+
+`InteractiveDateSelector` adds the behaviour layer on top — single and range selection, month navigation, and the Month & Year picker.
+
+<Canvas of={CalendarStories.InteractivePlayground} />
+
+**Range selection.** The first click arms the start, the second closes the range, a third starts over. The ring lands on the two endpoints only; everything between fills — exactly the `Multi-Selected` positions from the Figma `Date` set.
+
+<Canvas of={CalendarStories.InteractiveRange} />
+
+**Month & Year selection.** Click the month-year label to open the picker, choose from the Chips, then press Done to return to the grid on the chosen month. The section chevrons page through months four at a time and years five at a time, as Figma shows them.
+
+<Canvas of={CalendarStories.InteractiveMonthYear} />
+
+---
+
+## Elements
+
+Figma `Date` (`6335:28092`) defines a curated **10** variants rather than the full State × Position cross product. The primary-400 ring appears only on the two range endpoints — never on `start-mid`, `end-mid` or `middle` — and the text switches to SemiBold in both selected states.
+
+<Canvas of={CalendarStories.ElementsDateCell} />
+
+Figma `Month & Year` (`6335:28189`). The chevron beside the label is `chevron-down` when collapsed and `chevron-up` when the picker is open — two different icons, not a rotation. The header and weekday rows hide independently across the three Calendar variants.
+
+<Canvas of={CalendarStories.ElementsHeader} />
+
+---
+
+## Nested components
+
+<Canvas of={CalendarStories.NestedDateGrid} />
+
+<Canvas of={CalendarStories.NestedMonthYearPanel} />
+
+---
+
+## Full components
+
+<Canvas of={CalendarStories.FullCalendarAllVariants} />
+
+## Anatomy
+
+<Canvas of={CalendarStories.AnatomyBuildUp} />
+
+---
+
+## Figma source
+
+| Figma node | Variants | React |
+| :--- | :--- | :--- |
+| `Date` `6335:28092` | 10 | `DateSelectorCell` |
+| `Month & Year` `6335:28189` | 1 | `DateSelectorHeader` |
+| `Calendar` `6335:28236` | 3 | `DateSelector` |
+| "Dates" frame | — | `DateGrid` |
+| Month / Year sections | — | `MonthYearPanel` |
+
+## Notes
+
+- **Reuse.** The CTAs are the existing `Button` element (text "Cancel" + primary "Done", both `size="lg"`, 142px). The month and year pills are the existing `Chip` element (`Type=Input`, `default` / `focused`). Every icon comes from `foundations/icons`, linear per the directional-icon rule.
+- **Tokens.** Every colour mapped to an existing token except two, which were added: `--color-date-cell-disabled` (`#F7F9FC`) and `--color-date-section-label` (`#666666`).
+- **Variant differences.** `Date Picker + Last Day` hides the header, closes the column gap to 0, ends on a double-width "Last Day" cell, and carries **no CTAs at all**. `Month & Year Picker` hides the weekday row and swaps the grid for the chip sections.
+- **Scale artifact.** Figma's inspector reports 9.52px padding and 0.95px strokes because the set is scaled by 0.9517. The rendered geometry — 38×38 cells, 10px radius, 1px borders — is what the CSS targets.
+- **Known Figma data error.** The reference artwork draws July 2026 starting on a **Saturday** (five leading days). July 1 2026 is actually a **Wednesday**, so the grid here shows two. The component computes real dates; the structure, spacing and styling still match Figma exactly. Worth correcting in the Figma file.
+
+## Usage
+
+Reach for `Date Picker` when a specific date or range is needed, `Date Picker + Last Day` where a period can be closed on its final day, and `Month & Year Picker` to jump the calendar to a different month or year — which is how Figma describes it: *"Users can switch to a different month or year in the calendar in case they need to make modifications."*

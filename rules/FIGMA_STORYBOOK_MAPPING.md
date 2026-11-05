@@ -8,6 +8,7 @@
 | Special Primary Buttons / information | Complete | Elements/➡️ Button → Information | 2026-05-29 | hover + focused states added |
 | Special Primary Buttons / destructive | Complete | Elements/➡️ Button → SpecialDestructive | 2026-05-29 | New variant (error), all 3 states |
 | Sidebars | Complete | Components/🍺 Sidebar | 2026-10-26 | Replaced NavMenu; cell primitives, sections, variants 1 & 2, 4 themes |
+| Sidebar / sub-menu item | Complete | Components/🍺 Sidebar → Cells / Sub-Menu Item Matrix | 2026-11-05 | Figma 2437:57101; 8 variants (2 states × 4 themes); 44px height, 48px left indent, 4px radius, no bullet, exact tokens |
 | Dropdown / Menu | Superseded | Components/🔽 Dropdowns | 2026-10-27 | Earlier singular Dropdown stories removed; use Dropdowns |
 | Dropdown / Selectors | Complete | Elements/🔤 Input → Input Dropdown | 2026-10-27 | Figma 2198:54679; merged into Input with 4 types and 5 states |
 | fmdq-logo | Complete | Elements/🏛️ Logo | 2026-10-26 | Node 6769:1811; Default & DarkBG Card variants |
@@ -30,6 +31,38 @@
 | DRP / Dashboard | Complete | Layout/📊 Dashboard | 2026-11-01 | Figma 10301:78467; full responsive desktop layout assembling Sidebar (v2, dark-blue), MetricsCard (×4), Approvals Table Card, Contributions ProgressBar Card, Recent Activity, and Quick Actions grid |
 | 1.15 Welcome email | Complete | Layout/✉️ WelcomeEmail | 2026-11-01 | Figma 10306:12506; email envelope header, logo, salutation, summary box, CTA button, disclaimer, and automated footer |
 | Flow 1 Prototype Orchestrator | Complete | Flows/Authentication/Flow 1 - Prototype | 2026-11-01 | Figma 10303:161102 & 10306:12506; client-side interactive journey connecting Welcome Email → Password Setup → 2FA Setup → Sign In → 2FA OTP → DRP Dashboard, with reviewer controls toolbar |
+| Calendar & Date Selectors | Complete | Components/📅 Calendar | 2026-11-05 | Figma 6335:28236 (Calendar, 3 variants: Date Picker, Date Picker + Last Day, Month & Year Picker), 6335:28189 (Month & Year, 1 variant), 6335:28092 (Date, 10 variants); composes Button (primary & text), Chip, and foundation icons. `InteractiveDateSelector` / `InteractiveCalendar` adds single + range selection, month navigation and Month & Year picker |
+| Tooltip | Complete | Components/💬 Tooltip | 2026-11-05 | Figma 6237:23991; 24 variants (pointer position 12 × theme 2) + 5 booleans; composes Button (text, primary/secondary, sm) and the multiply icon; added --shadow-tooltip-dark. `TooltipTrigger` implements all five Figma Best-Practice hover rules |
+| File Upload | Complete | Components/📎 File Upload | 2026-11-05 | Figma file type 3355:170664 (6), file upload states 3355:171475 (4), Small upload 6092:3073 (4), Big Upload 6100:14546 (4), Mutilple Uploads 6100:15099 (7 booleans) = 19 variants; composes Button + ProgressBar; added --color-file-jpg, --color-file-mp3 and three dropzone surface tokens |
+
+## Reuse mapping — Tooltip & File Upload (rule §0, recorded before coding)
+
+| Figma element | Decision | Component |
+| :--- | :--- | :--- |
+| `Button / texts` (tooltip CTAs, Try Again, Clear Upload) | existing as-is | `Button` (`variant="text"`, `buttonType="primary" \| "secondary"`, `size="sm"`) |
+| `Button / primary` (Upload, Browse Files) | existing as-is | `Button` (`variant="primary"`, `size="sm"`) |
+| dropzone linear progress bar | existing as-is | `ProgressBar` (`size="sm"`, chrome suppressed, 6px height scoped) |
+| `icon / multiply`, `cloud-upload`, `check-circle`, `info-circle`, `info-triangle`, `bin`, `download`, `refresh` | existing as-is | `Icon` (foundations) |
+| `Tool tip` (`6237:23991`) | genuinely new composite | `Tooltip` + `TooltipTrigger` |
+| `file type` / `file upload states` | genuinely new primitives | `FileTypeBadge`, `UploadStateIcon` |
+| Progress circles instance | genuinely new primitive | `UploadProgressRing` |
+| `Small upload` / `Big Upload` / `Mutilple Uploads` | genuinely new composites | `FileUploadRow`, `FileDropzone`, `FileUploadList` |
+
+> **Note (2026-11-05).** The Tooltip dark theme recolours its CTAs — secondary to neutral-200 and primary to **secondary-400 (gold)**. The shared Button already matches Figma on the light theme, so only the dark theme is overridden, scoped to the tooltip. In File Upload, `Try Again` is primary-700 in the upload row but primary-400 in the dropzone; both are reproduced.
+
+> **Figma correction (2026-11-05).** The reference artwork labelled the grid "July 2026", but the grid as drawn starts on a Saturday — July 1 2026 is a Wednesday. The grid itself is a correct July for 2023 and 2028, so the label was changed to **"July 2028"** in Figma (5 text nodes: source `6335:28193` plus two overriding instances and their Documentation copies). Grid, spacing and structure untouched. The code computes real dates regardless.
+
+## Reuse mapping — Calendar & Date Selectors (rule §0, recorded before coding)
+
+| Figma element | Decision | Component |
+| :--- | :--- | :--- |
+| `Button / texts` + `Button / primary` (Cancel / Done) | existing as-is | `Button` (`variant="text"` / `"primary"`, `size="lg"`, 142px each) |
+| `Chip` (month & year pills) | existing as-is | `Chip` (`type="Input"`, `state="default" \| "focused"`) |
+| `icon / chevron-down`, `chevron-up`, `chevron-left`, `chevron-right`, `check-circle` | existing as-is | `Icon` (foundations) — directional icons linear, `check-circle` bold |
+| `Date` cell (`6335:28092`) | genuinely new primitive | `DateSelectorCell` / `CalendarCell` |
+| `Month & Year` (`6335:28189`) | genuinely new primitive | `DateSelectorHeader` / `CalendarHeader` |
+| "Dates" frame / Month & Year sections | genuinely new composites | `DateGrid`, `MonthYearPanel` |
+| `Calendar` (`6335:28236`) | genuinely new composite | `DateSelector` / `Calendar` + `InteractiveCalendar` |
 
 ## Reuse mapping — Pagination (2026-10-27)
 
