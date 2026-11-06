@@ -436,6 +436,20 @@
   flex-direction: column;
   width: 100%;
   font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  background-color: transparent;
+}
+
+/* ─── Table Footer Edges / Borders (Figma 11145:1003111–1003113) ──────────── */
+.fmdqui-pagination--has-left-stroke {
+  border-left: 1px solid var(--color-neutral-200, #E4E7EC);
+}
+
+.fmdqui-pagination--has-right-stroke {
+  border-right: 1px solid var(--color-neutral-200, #E4E7EC);
+}
+
+.fmdqui-pagination--has-bottom-stroke {
+  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC);
 }
 
 .fmdqui-pagination__divider {

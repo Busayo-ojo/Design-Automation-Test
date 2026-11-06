@@ -539,9 +539,9 @@ export const ContentCellVariants: Story = {
                   <TableCell variant="text" muted>Star rating indicators for member scoring</TableCell>
                 </TableRow>
 
-                {/* 8. More Menu */}
+                {/* 8. More Menu (Default / Transparent) */}
                 <TableRow>
-                  <TableCell variant="text" textWeight="medium">More Menu</TableCell>
+                  <TableCell variant="text" textWeight="medium">More Menu (Default)</TableCell>
                   <ContentCell
                     content="more menu"
                     state="default"
@@ -554,7 +554,27 @@ export const ContentCellVariants: Story = {
                     onMenuClick={() => alert('Menu clicked')}
                     hasSeparator
                   />
-                  <TableCell variant="text" muted>Three-dots vertical overflow trigger</TableCell>
+                  <TableCell variant="text" muted>Default transparent three-dots bold overflow trigger (Figma updated 5604:44736)</TableCell>
+                </TableRow>
+
+                {/* 8b. More Menu (With Background) */}
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">More Menu (With Background)</TableCell>
+                  <ContentCell
+                    content="more menu"
+                    state="default"
+                    menuHasBackground
+                    onMenuClick={() => alert('Menu clicked')}
+                    hasSeparator
+                  />
+                  <ContentCell
+                    content="more menu"
+                    state="selected"
+                    menuHasBackground
+                    onMenuClick={() => alert('Menu clicked')}
+                    hasSeparator
+                  />
+                  <TableCell variant="text" muted>Enclosed 32×32px white box with 1px Grey/200 border (has background)</TableCell>
                 </TableRow>
               </TableBody>
             </TableElement>

@@ -424,12 +424,17 @@
   width: 32px;
   height: 32px;
   padding: 0;
-  background: transparent;
+  background-color: transparent;
   border: 1px solid transparent;
-  border-radius: 6px;
-  color: var(--color-grey-default, #667185);
+  border-radius: var(--radius-8, 8px);
+  color: var(--color-grey-focused, #101928);
   cursor: pointer;
-  transition: all 0.15s ease-in-out;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.fmdqui-table-cell__more-menu-btn--has-background {
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border-color: var(--color-neutral-200, #E4E7EC);
 }
 
 .fmdqui-table-cell__more-menu-btn:hover {
@@ -437,8 +442,18 @@
   color: var(--color-grey-focused, #101928);
 }
 
+.fmdqui-table-cell__more-menu-btn--has-background:hover {
+  background-color: var(--color-neutral-100, #F0F2F5);
+  border-color: var(--color-neutral-300, #D0D5DD);
+}
+
 .fmdqui-table-cell__more-menu-btn:active {
   background-color: var(--color-neutral-200, #E4E7EC);
+}
+
+.fmdqui-table-cell__more-menu-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(29, 50, 109, 0.2);
 }
 
 /* Rating / stars cell */

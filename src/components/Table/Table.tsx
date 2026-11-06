@@ -21,8 +21,8 @@ const ChevronsUpDownIcon = () => (
   <Icon name="chevron-v" variant="linear" size={12} />
 );
 
-const DotsVerticalIcon = () => (
-  <Icon name="dots-v" variant="linear" size={16} />
+const DotsVerticalIcon = ({ variant = 'bold' }: { variant?: 'linear' | 'bold' }) => (
+  <Icon name="dots-v" variant={variant} size={16} />
 );
 
 const StarIcon = ({ filled = true }: { filled?: boolean }) => (
@@ -327,6 +327,10 @@ export interface TableCellProps
   // Variant: 'more-menu'
   onMenuClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   menuAriaLabel?: string;
+  /** Whether the more menu trigger button has a background and border (matching Figma Misc icon "has background", default: false) */
+  menuHasBackground?: boolean;
+  /** Icon variant for the three-dots button ('bold' per Figma spec, or 'linear') */
+  menuIconVariant?: 'linear' | 'bold';
 
   // Variant: 'rating'
   rating?: number;
@@ -368,6 +372,8 @@ export const TableCell = forwardRef<HTMLTableDataCellElement, TableCellProps>(
       actions,
       onMenuClick,
       menuAriaLabel = 'Row actions',
+      menuHasBackground = false,
+      menuIconVariant = 'bold',
       rating = 0,
       maxRating = 5,
       className = '',
@@ -557,14 +563,21 @@ export const TableCell = forwardRef<HTMLTableDataCellElement, TableCellProps>(
 
       // 10. More Menu (Three-dots button)
       if (variant === 'more-menu') {
+        const btnClasses = [
+          'fmdqui-table-cell__more-menu-btn',
+          menuHasBackground ? 'fmdqui-table-cell__more-menu-btn--has-background' : '',
+        ]
+          .filter(Boolean)
+          .join(' ');
+
         return (
           <button
             type="button"
-            className="fmdqui-table-cell__more-menu-btn"
+            className={btnClasses}
             onClick={onMenuClick}
             aria-label={menuAriaLabel}
           >
-            <DotsVerticalIcon />
+            <DotsVerticalIcon variant={menuIconVariant} />
           </button>
         );
       }
@@ -818,8 +831,9 @@ export interface ContentCellProps extends TableCellProps {
 }
 
 export const ContentCell = forwardRef<HTMLTableDataCellElement, ContentCellProps>(
-  ({ content, state, selected, ...props }, ref) => {
+  ({ content, state, selected, align, ...props }, ref) => {
     let resolvedVariant = props.variant;
+    let resolvedAlign = align;
     if (content) {
       switch (content) {
         case 'avatar + text':
@@ -845,6 +859,9 @@ export const ContentCell = forwardRef<HTMLTableDataCellElement, ContentCellProps
           break;
         case 'more menu':
           resolvedVariant = 'more-menu';
+          if (resolvedAlign === undefined) {
+            resolvedAlign = 'right';
+          }
           break;
       }
     }
@@ -853,6 +870,7 @@ export const ContentCell = forwardRef<HTMLTableDataCellElement, ContentCellProps
       <TableCell
         ref={ref}
         variant={resolvedVariant}
+        align={resolvedAlign}
         selected={isSelected}
         {...props}
       />

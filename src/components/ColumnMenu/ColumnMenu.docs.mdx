@@ -1,0 +1,72 @@
+import { Meta, Title, Subtitle, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ColumnMenuStories from './ColumnMenu.stories';
+
+<Meta of={ColumnMenuStories} />
+
+<Title>Table Column Menu</Title>
+<Subtitle>Contextual column header popover for table sorting and multi-type filtering.</Subtitle>
+
+Modeled 1:1 on the Figma component specification on page `✤ Tables` (Node ID: `11185:1015636`).
+It provides a compact 240px wide popover card with sort commands (`Sort ascending`, `Sort descending`), context-dependent filter controls (text query, numeric range, date range, or checkbox options), and clear/apply actions.
+
+## Figma Reference
+
+<iframe
+  title="Table Column Menu Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=11185-1015636&embed-host=share"
+  allowFullScreen
+/>
+
+## Interactive Playground
+
+<Canvas of={ColumnMenuStories.Playground} />
+<Controls of={ColumnMenuStories.Playground} />
+
+---
+
+## Anatomy
+
+1. **Sort Section**:
+   - `DropdownMenuItem` instances for ascending and descending ordering with linear arrow indicators (`arrow-up`, `arrow-down`).
+2. **Dividers**:
+   - 1px neutral-200 separator rules between sections.
+3. **Filter Section**:
+   - 12px caption header `"Filter"`.
+   - Contextual filter controls based on column data type (`text`, `range`, `date`, `options`).
+4. **Actions Section**:
+   - `"Clear"` action text button in error/destructive styling.
+   - `"Apply"` action text button in brand primary blue styling.
+
+---
+
+## Variants
+
+### Text Search Filter (`filter="text"`)
+Standard search input for text columns (e.g., Trade ID, Account Name, Counterparty).
+
+<Canvas of={ColumnMenuStories.FilterText} />
+
+### Numeric Range Filter (`filter="range"`)
+Dual minimum and maximum inputs for numeric metrics, yields, and prices.
+
+<Canvas of={ColumnMenuStories.FilterRange} />
+
+### Date Range Filter (`filter="date"`)
+From and To inputs for date-bound tables and settlement intervals.
+
+<Canvas of={ColumnMenuStories.FilterDate} />
+
+### Options Multi-Select Filter (`filter="options"`)
+Checkbox list for categorical and status filters (e.g., Settled, Pending, Rejected).
+
+<Canvas of={ColumnMenuStories.FilterOptions} />
+
+---
+
+## Table Header Integration
+
+Demonstration of `ColumnMenu` opening from table column headers in operational blotters.
+
+<Canvas of={ColumnMenuStories.TableHeaderIntegration} />

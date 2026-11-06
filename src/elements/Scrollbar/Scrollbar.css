@@ -1,0 +1,206 @@
+@import '../../tokens.css';
+
+/* ==========================================================================
+   SCROLLBAR ELEMENT (Figma 11163:1003629)
+   Orientation (horizontal, vertical) × Size (sm, md) × State (default, hover, dragging) × Theme (light, dark)
+   ========================================================================== */
+
+.fmdqui-scrollbar {
+  position: relative;
+  display: inline-flex;
+  user-select: none;
+  box-sizing: border-box;
+  outline: none;
+  touch-action: none;
+}
+
+.fmdqui-scrollbar:focus-visible {
+  outline: 2px solid var(--color-primary-600, #034592);
+  outline-offset: 2px;
+}
+
+/* ─── Orientation & Sizing ──────────────────────────────────────────────── */
+
+/* Horizontal */
+.fmdqui-scrollbar--horizontal {
+  width: 100%;
+  flex-direction: row;
+}
+
+.fmdqui-scrollbar--horizontal.fmdqui-scrollbar--size-sm {
+  height: 6px;
+}
+
+.fmdqui-scrollbar--horizontal.fmdqui-scrollbar--size-md {
+  height: 8px;
+}
+
+/* Vertical */
+.fmdqui-scrollbar--vertical {
+  height: 100%;
+  flex-direction: column;
+}
+
+.fmdqui-scrollbar--vertical.fmdqui-scrollbar--size-sm {
+  width: 6px;
+}
+
+.fmdqui-scrollbar--vertical.fmdqui-scrollbar--size-md {
+  width: 8px;
+}
+
+/* ─── Track ─────────────────────────────────────────────────────────────── */
+
+.fmdqui-scrollbar__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.fmdqui-scrollbar--size-sm .fmdqui-scrollbar__track {
+  border-radius: 3px;
+}
+
+.fmdqui-scrollbar--size-md .fmdqui-scrollbar__track {
+  border-radius: 4px;
+}
+
+/* Track Colors */
+.fmdqui-scrollbar--theme-light.fmdqui-scrollbar--has-track .fmdqui-scrollbar__track {
+  background-color: var(--color-neutral-100, #F0F2F5);
+}
+
+.fmdqui-scrollbar--theme-dark.fmdqui-scrollbar--has-track .fmdqui-scrollbar__track {
+  background-color: var(--color-primary-800, #012657);
+}
+
+.fmdqui-scrollbar--no-track .fmdqui-scrollbar__track {
+  background-color: transparent;
+}
+
+/* ─── Thumb ─────────────────────────────────────────────────────────────── */
+
+.fmdqui-scrollbar__thumb {
+  position: absolute;
+  cursor: grab;
+  box-sizing: border-box;
+  transition: background-color var(--transition-fast, 0.15s ease);
+}
+
+.fmdqui-scrollbar--state-dragging .fmdqui-scrollbar__thumb {
+  cursor: grabbing;
+}
+
+/* Thumb Geometry */
+.fmdqui-scrollbar--horizontal .fmdqui-scrollbar__thumb {
+  top: 0;
+  bottom: 0;
+  min-width: 24px;
+}
+
+.fmdqui-scrollbar--vertical .fmdqui-scrollbar__thumb {
+  left: 0;
+  right: 0;
+  min-height: 24px;
+}
+
+.fmdqui-scrollbar--size-sm .fmdqui-scrollbar__thumb {
+  border-radius: 3px;
+}
+
+.fmdqui-scrollbar--size-md .fmdqui-scrollbar__thumb {
+  border-radius: 4px;
+}
+
+/* ─── Theme: Light Colors ───────────────────────────────────────────────── */
+
+/* Default State */
+.fmdqui-scrollbar--theme-light .fmdqui-scrollbar__thumb,
+.fmdqui-scrollbar--theme-light.fmdqui-scrollbar--state-default .fmdqui-scrollbar__thumb {
+  background-color: var(--color-neutral-300, #D0D5DD);
+}
+
+/* Hover State */
+.fmdqui-scrollbar--theme-light:hover .fmdqui-scrollbar__thumb,
+.fmdqui-scrollbar--theme-light.fmdqui-scrollbar--state-hover .fmdqui-scrollbar__thumb {
+  background-color: var(--color-neutral-400, #98A2B3);
+}
+
+/* Dragging State */
+.fmdqui-scrollbar--theme-light.fmdqui-scrollbar--state-dragging .fmdqui-scrollbar__thumb {
+  background-color: var(--color-neutral-500, #667185);
+}
+
+/* ─── Theme: Dark Colors ────────────────────────────────────────────────── */
+
+/* Default State */
+.fmdqui-scrollbar--theme-dark .fmdqui-scrollbar__thumb,
+.fmdqui-scrollbar--theme-dark.fmdqui-scrollbar--state-default .fmdqui-scrollbar__thumb {
+  background-color: var(--color-primary-500, #3D89DF);
+}
+
+/* Hover State */
+.fmdqui-scrollbar--theme-dark:hover .fmdqui-scrollbar__thumb,
+.fmdqui-scrollbar--theme-dark.fmdqui-scrollbar--state-hover .fmdqui-scrollbar__thumb {
+  background-color: var(--color-primary-300, #80BBFF);
+}
+
+/* Dragging State */
+.fmdqui-scrollbar--theme-dark.fmdqui-scrollbar--state-dragging .fmdqui-scrollbar__thumb {
+  background-color: var(--color-primary-200, #B6D8FF);
+}
+
+/* ==========================================================================
+   CONTAINER SCROLLER UTILITY (Modern Web Guidance: customize-scrollbar-color-and-thickness)
+   Enables standard scrollbar styling directly on native scroll containers.
+   ========================================================================== */
+
+.fmdqui-scrollable {
+  --scrollbar-track: var(--color-neutral-100, #F0F2F5);
+  --scrollbar-thumb: var(--color-neutral-300, #D0D5DD);
+  --scrollbar-thumb-hover: var(--color-neutral-400, #98A2B3);
+
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+
+.fmdqui-scrollable--dark {
+  --scrollbar-track: var(--color-primary-800, #012657);
+  --scrollbar-thumb: var(--color-primary-500, #3D89DF);
+  --scrollbar-thumb-hover: var(--color-primary-300, #80BBFF);
+
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+
+/* Fallback for WebKit / Blink browsers before native scrollbar-color baseline */
+@supports not (scrollbar-color: auto) {
+  .fmdqui-scrollable::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .fmdqui-scrollable::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: 3px;
+  }
+  .fmdqui-scrollable::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+  }
+  .fmdqui-scrollable::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+
+  .fmdqui-scrollable--size-md::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .fmdqui-scrollable--size-md::-webkit-scrollbar-track,
+  .fmdqui-scrollable--size-md::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+  }
+}
+

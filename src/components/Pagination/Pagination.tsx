@@ -372,7 +372,15 @@ export interface PaginationProps extends Omit<React.HTMLAttributes<HTMLElement>,
   activeVariant?: 'active v1' | 'active v2';
   /** Arrow style for pagination controls: 'outlined' | 'filled-brand' | 'filled-dark' | 'ghost' */
   controlStyle?: NavControlStyle;
-  /** Whether to render top divider line matching Figma layer "Dividers" */
+  /** Whether to render top divider line matching Figma property "has top divider" (default: true) */
+  hasTopDivider?: boolean;
+  /** Whether to render a 1px Grey/200 left stroke matching Figma property "has left stroke" (e.g. for table footer containment, default: false) */
+  hasLeftStroke?: boolean;
+  /** Whether to render a 1px Grey/200 right stroke matching Figma property "has right stroke" (e.g. for table footer containment, default: false) */
+  hasRightStroke?: boolean;
+  /** Whether to render a 1px Grey/200 bottom stroke matching Figma property "has bottom stroke" (e.g. for table footer containment, default: false) */
+  hasBottomStroke?: boolean;
+  /** @deprecated Use `hasTopDivider` instead. Whether to render top divider line matching Figma layer "Dividers" */
   showDivider?: boolean;
   /** Previous button text label */
   prevLabel?: string;
@@ -396,7 +404,11 @@ export const Pagination: React.FC<PaginationProps> = ({
   size = 'large',
   activeVariant = 'active v1',
   controlStyle = 'outlined',
-  showDivider = true,
+  hasTopDivider,
+  showDivider,
+  hasLeftStroke = false,
+  hasRightStroke = false,
+  hasBottomStroke = false,
   prevLabel = 'Previous',
   nextLabel = 'Next',
   type,
@@ -407,6 +419,9 @@ export const Pagination: React.FC<PaginationProps> = ({
   const safeCurrent = Math.max(1, Math.min(currentPage, Math.max(1, totalPages)));
   const isFirst = safeCurrent <= 1;
   const isLast = safeCurrent >= totalPages;
+
+  // Figma property "has top divider" defaults to true; fallback to legacy showDivider if provided
+  const resolvedHasTopDivider = hasTopDivider ?? showDivider ?? true;
 
   // Map legacy type prop if provided
   let effectiveVariation = variation;
@@ -420,15 +435,28 @@ export const Pagination: React.FC<PaginationProps> = ({
     if (!isLast) onPageChange(safeCurrent + 1);
   };
 
+  const paginationClasses = [
+    'fmdqui-pagination',
+    `fmdqui-pagination--var-${effectiveVariation}`,
+    `fmdqui-pagination--${orientation.replace(' ', '-')}`,
+    resolvedHasTopDivider ? 'fmdqui-pagination--has-top-divider' : '',
+    hasLeftStroke ? 'fmdqui-pagination--has-left-stroke' : '',
+    hasRightStroke ? 'fmdqui-pagination--has-right-stroke' : '',
+    hasBottomStroke ? 'fmdqui-pagination--has-bottom-stroke' : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
     <nav
-      className={`fmdqui-pagination fmdqui-pagination--var-${effectiveVariation} fmdqui-pagination--${orientation.replace(' ', '-')} ${className}`}
+      className={paginationClasses}
       style={style}
       aria-label="Pagination Navigation"
       {...props}
     >
-      {/* ── Optional Top Divider (Figma 2609:66656) ── */}
-      {showDivider && <Divider type="default" className="fmdqui-pagination__divider" />}
+      {/* ── Optional Top Divider (Figma 2609:66656 / has top divider) ── */}
+      {resolvedHasTopDivider && <Divider type="default" className="fmdqui-pagination__divider" />}
 
       {/* ── Main Pagination Content Container ── */}
       <div className="fmdqui-pagination__body">

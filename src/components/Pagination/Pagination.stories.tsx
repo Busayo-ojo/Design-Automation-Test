@@ -78,9 +78,37 @@ const meta: Meta<typeof Pagination> = {
       options: ['outlined', 'filled-brand', 'filled-dark', 'ghost'],
       description: 'Visual treatment for navigation buttons',
     },
+    hasTopDivider: {
+      control: 'boolean',
+      description: 'Whether to show the top divider line matching Figma property "has top divider" (default: true)',
+      table: {
+        defaultValue: { summary: 'true' },
+      },
+    },
+    hasLeftStroke: {
+      control: 'boolean',
+      description: 'Whether to add 1px Grey/200 left edge matching Figma property "has left stroke" for table footer containment (default: false)',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hasRightStroke: {
+      control: 'boolean',
+      description: 'Whether to add 1px Grey/200 right edge matching Figma property "has right stroke" for table footer containment (default: false)',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
+    hasBottomStroke: {
+      control: 'boolean',
+      description: 'Whether to add 1px Grey/200 bottom edge matching Figma property "has bottom stroke" for table footer containment (default: false)',
+      table: {
+        defaultValue: { summary: 'false' },
+      },
+    },
     showDivider: {
       control: 'boolean',
-      description: 'Whether to show the top divider rule matching Figma layer "Dividers"',
+      description: 'Legacy alias for hasTopDivider',
     },
     prevLabel: {
       control: 'text',
@@ -126,6 +154,10 @@ export const Playground: Story = {
     size: 'large',
     activeVariant: 'active v1',
     controlStyle: 'outlined',
+    hasTopDivider: true,
+    hasLeftStroke: false,
+    hasRightStroke: false,
+    hasBottomStroke: false,
     showDivider: true,
     prevLabel: 'Previous',
     nextLabel: 'Next',
@@ -618,6 +650,111 @@ export const TableFooterIntegration: Story = {
             showDivider={true}
           />
         </div>
+      </div>
+    );
+  },
+};
+
+// ─── Table Footer With Direct 1px Grey/200 Edge Strokes ───────────────────────
+
+export const TableFooterWithStrokes: StoryObj = {
+  render: () => {
+    const [page, setPage] = useState(1);
+    const sampleRows = [
+      { id: 'TRD-8821', time: '14:22:05', symbol: 'FGN 12.50 2030', rate: '13.45%', amount: '₦ 500,000,000', status: 'Settled' },
+      { id: 'TRD-8822', time: '14:25:30', symbol: 'NTB 04/11/2027', rate: '11.80%', amount: '₦ 120,000,000', status: 'Pending' },
+      { id: 'TRD-8823', time: '14:30:12', symbol: 'FGN 14.80 2039', rate: '14.15%', amount: '₦ 850,000,000', status: 'Settled' },
+      { id: 'TRD-8824', time: '14:38:45', symbol: 'NTB 12/08/2027', rate: '12.05%', amount: '₦ 300,000,000', status: 'Settled' },
+    ];
+
+    return (
+      <div style={{ width: '100%', maxWidth: '880px', margin: '0 auto', fontFamily: 'var(--font-family-primary, DM Sans, sans-serif)' }}>
+        <div style={{ marginBottom: '16px', fontSize: '13px', color: '#667185' }}>
+          <strong>Table Footer Edges (Figma update 11145:275–323):</strong> Pagination sits directly beneath the table with <code>hasTopDivider</code>, <code>hasLeftStroke</code>, <code>hasRightStroke</code>, and <code>hasBottomStroke</code> enabled. It carries no background fill (inheriting the surface beneath it) and wraps seamlessly with 1px Grey/200 borders.
+        </div>
+
+        {/* Table itself has 1px Grey/200 border (top, left, right) */}
+        <div
+          style={{
+            width: '100%',
+            background: '#FFFFFF',
+            border: '1px solid #E4E7EC',
+            borderBottom: 'none',
+            borderTopLeftRadius: '12px',
+            borderTopRightRadius: '12px',
+            overflow: 'hidden',
+          }}
+        >
+          <div style={{ padding: '16px 24px', borderBottom: '1px solid #EAECF0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <div style={{ color: '#101928', fontWeight: 600, fontSize: '16px' }}>Settlement Blotter</div>
+              <div style={{ color: '#667185', fontSize: '13px' }}>Table footer containment with direct border strokes</div>
+            </div>
+            <span style={{ background: '#E3EFFC', color: '#1D326D', padding: '4px 10px', borderRadius: '6px', fontSize: '12px', fontWeight: 600 }}>
+              Page {page} of 10
+            </span>
+          </div>
+
+          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
+            <thead>
+              <tr style={{ background: '#F9FAFB', borderBottom: '1px solid #EAECF0', color: '#475367', fontWeight: 500 }}>
+                <th style={{ padding: '12px 24px' }}>Trade ID</th>
+                <th style={{ padding: '12px 16px' }}>Time</th>
+                <th style={{ padding: '12px 16px' }}>Security</th>
+                <th style={{ padding: '12px 16px' }}>Yield</th>
+                <th style={{ padding: '12px 16px' }}>Notional</th>
+                <th style={{ padding: '12px 24px' }}>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sampleRows.map((row) => (
+                <tr key={row.id} style={{ borderBottom: '1px solid #F0F2F5', color: '#344054' }}>
+                  <td style={{ padding: '12px 24px', fontWeight: 600, color: '#1D326D' }}>{row.id}</td>
+                  <td style={{ padding: '12px 16px' }}>{row.time}</td>
+                  <td style={{ padding: '12px 16px', fontWeight: 500 }}>{row.symbol}</td>
+                  <td style={{ padding: '12px 16px' }}>{row.rate}</td>
+                  <td style={{ padding: '12px 16px' }}>{row.amount}</td>
+                  <td style={{ padding: '12px 24px' }}>
+                    <span
+                      style={{
+                        display: 'inline-block',
+                        padding: '2px 8px',
+                        borderRadius: '12px',
+                        fontSize: '12px',
+                        fontWeight: 500,
+                        background: row.status === 'Settled' ? '#E7F6EC' : '#FEF6E7',
+                        color: row.status === 'Settled' ? '#099137' : '#CC9933',
+                      }}
+                    >
+                      {row.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Pagination component sits directly below table without wrapper div, closing left, right, bottom borders */}
+        <Pagination
+          currentPage={page}
+          totalPages={10}
+          totalItems={40}
+          pageSize={4}
+          variation="2"
+          buttonType="single buttons"
+          onPageChange={setPage}
+          hasTopDivider={true}
+          hasLeftStroke={true}
+          hasRightStroke={true}
+          hasBottomStroke={true}
+          style={{
+            borderBottomLeftRadius: '12px',
+            borderBottomRightRadius: '12px',
+            padding: '12px 24px 16px 24px',
+            backgroundColor: '#FFFFFF',
+          }}
+        />
       </div>
     );
   },

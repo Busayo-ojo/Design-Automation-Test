@@ -8,6 +8,7 @@ export * from './elements/Chip';
 export * from './elements/FormControl';
 export * from './elements/Divider';
 export * from './elements/Logo';
+export * from './elements/Scrollbar';
 export * from './foundations/icons';
 
 // Components
@@ -17,6 +18,7 @@ export * from './components/Typography';
 export * from './components/Dropdown';
 export * from './components/Dropdowns';
 export * from './components/Table';
+export * from './components/ColumnMenu';
 export * from './components/Tabs';
 /** @deprecated Replaced by `Sidebar`. See Migration Guide. */
 export * from './components/NavMenu';
