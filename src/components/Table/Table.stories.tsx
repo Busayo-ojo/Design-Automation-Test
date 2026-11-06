@@ -20,6 +20,7 @@ import {
 } from './Table';
 import { Badge } from '../../elements/Badge';
 import { Button } from '../../elements/Button';
+import { ColumnMenu } from '../ColumnMenu';
 
 const meta: Meta<typeof Table> = {
   title: 'Components/🔳 Table',
@@ -173,6 +174,65 @@ export const HeaderVariants: Story = {
                   </TableHeaderCell>
                 </TableRow>
               </TableHead>
+            </TableElement>
+          </TableContainer>
+        </div>
+
+        <div>
+          <h4 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: 600, color: '#101828' }}>
+            Infused Column Menu (Figma Node 11185:1015636)
+          </h4>
+          <p style={{ margin: '0 0 16px 0', fontSize: '13px', color: '#667085' }}>
+            Interactive popover menu attached directly to table column header cells, providing sorting (asc/desc) and filter controls.
+          </p>
+          <TableContainer style={{ overflow: 'visible', minHeight: '360px' }}>
+            <TableElement>
+              <TableHead>
+                <TableRow>
+                  <TableHeaderCell
+                    sortable
+                    hasColumnMenu
+                    isMenuOpen={true}
+                    columnMenu={
+                      <ColumnMenu
+                        filter="text"
+                        filterTitle="Filter Trade ID"
+                        sortDirection="asc"
+                        textPlaceholder="Search trade reference..."
+                        onSortAscending={() => {}}
+                        onSortDescending={() => {}}
+                        onClear={() => {}}
+                        onApply={() => {}}
+                      />
+                    }
+                  >
+                    Trade ID (Open Menu)
+                  </TableHeaderCell>
+                  <TableHeaderCell sortable hasColumnMenu>
+                    Counterparty
+                  </TableHeaderCell>
+                  <TableHeaderCell sortable hasColumnMenu>
+                    Instrument
+                  </TableHeaderCell>
+                  <TableHeaderCell align="right">
+                    Settlement Amount
+                  </TableHeaderCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">FMDQ/TRD/001</TableCell>
+                  <TableCell variant="text">Stanbic IBTC Bank</TableCell>
+                  <TableCell variant="text">FGN Bond 2027</TableCell>
+                  <TableCell variant="text" align="right" textWeight="semibold">₦2,500,000,000.00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell variant="text" textWeight="medium">FMDQ/TRD/002</TableCell>
+                  <TableCell variant="text">Access Bank Plc</TableCell>
+                  <TableCell variant="text">NTB 182-Day</TableCell>
+                  <TableCell variant="text" align="right" textWeight="semibold">₦750,000,000.00</TableCell>
+                </TableRow>
+              </TableBody>
             </TableElement>
           </TableContainer>
         </div>
@@ -914,8 +974,11 @@ export const DeclarativeDataTable: Story = {
     const columns: ColumnDef<TradeRecord>[] = [
       {
         id: 'reference',
+        accessorKey: 'reference',
         header: 'Trade Reference',
         sortable: true,
+        filterType: 'text',
+        filterTitle: 'Filter Reference',
         cell: ({ row }) => (
           <TextStackCell
             primaryText={row.reference}
@@ -925,8 +988,18 @@ export const DeclarativeDataTable: Story = {
       },
       {
         id: 'counterparty',
+        accessorKey: 'counterparty',
         header: 'Counterparty',
         sortable: true,
+        filterType: 'options',
+        filterTitle: 'Filter Bank',
+        filterOptions: [
+          { id: 'Stanbic IBTC Bank', label: 'Stanbic IBTC Bank' },
+          { id: 'Access Bank Plc', label: 'Access Bank Plc' },
+          { id: 'Guaranty Trust Bank', label: 'Guaranty Trust Bank' },
+          { id: 'Zenith Bank Plc', label: 'Zenith Bank Plc' },
+          { id: 'United Bank for Africa', label: 'United Bank for Africa' },
+        ],
         cell: ({ row }) => (
           <AvatarCell
             avatarInitials={row.counterparty.slice(0, 2).toUpperCase()}
@@ -939,16 +1012,29 @@ export const DeclarativeDataTable: Story = {
         accessorKey: 'product',
         header: 'Instrument',
         sortable: true,
+        filterType: 'text',
+        filterTitle: 'Filter Instrument',
       },
       {
         accessorKey: 'amount',
         header: 'Volume / Amount',
         align: 'right',
         sortable: true,
+        filterType: 'range',
+        filterTitle: 'Filter Amount',
       },
       {
         id: 'status',
+        accessorKey: 'status',
         header: 'Status',
+        sortable: true,
+        filterType: 'options',
+        filterTitle: 'Filter Status',
+        filterOptions: [
+          { id: 'settled', label: 'SETTLED' },
+          { id: 'matched', label: 'MATCHED' },
+          { id: 'unmatched', label: 'UNMATCHED' },
+        ],
         cell: ({ row }) => {
           const colorMap = {
             settled: 'success' as const,
@@ -967,6 +1053,7 @@ export const DeclarativeDataTable: Story = {
         id: 'actions',
         header: '',
         align: 'center',
+        hasColumnMenu: false,
         cell: () => <MoreMenuCell onMenuClick={() => alert('Row action clicked')} />,
       },
     ];
@@ -979,6 +1066,115 @@ export const DeclarativeDataTable: Story = {
         pageSize={5}
         totalItems={25}
       />
+    );
+  },
+};
+
+// ─── 7. Table With Open Column Menu Popover ───────────────────────────────────
+
+export const TableWithOpenColumnMenu: Story = {
+  name: 'Table with Column Menu',
+  render: () => {
+    const columns: ColumnDef<TradeRecord>[] = [
+      {
+        id: 'reference',
+        accessorKey: 'reference',
+        header: 'Trade Reference',
+        sortable: true,
+        filterType: 'text',
+        filterTitle: 'Filter Trade Reference',
+        cell: ({ row }) => (
+          <TextStackCell
+            primaryText={row.reference}
+            secondaryText={row.id}
+          />
+        ),
+      },
+      {
+        id: 'counterparty',
+        accessorKey: 'counterparty',
+        header: 'Counterparty',
+        sortable: true,
+        filterType: 'options',
+        filterTitle: 'Filter Bank',
+        filterOptions: [
+          { id: 'Stanbic IBTC Bank', label: 'Stanbic IBTC Bank' },
+          { id: 'Access Bank Plc', label: 'Access Bank Plc' },
+          { id: 'Guaranty Trust Bank', label: 'Guaranty Trust Bank' },
+          { id: 'Zenith Bank Plc', label: 'Zenith Bank Plc' },
+          { id: 'United Bank for Africa', label: 'United Bank for Africa' },
+        ],
+        cell: ({ row }) => (
+          <AvatarCell
+            avatarInitials={row.counterparty.slice(0, 2).toUpperCase()}
+            primaryText={row.counterparty}
+            secondaryText="Member"
+          />
+        ),
+      },
+      {
+        accessorKey: 'product',
+        header: 'Instrument',
+        sortable: true,
+        filterType: 'text',
+        filterTitle: 'Filter Instrument',
+      },
+      {
+        accessorKey: 'amount',
+        header: 'Volume / Amount',
+        align: 'right',
+        sortable: true,
+        filterType: 'range',
+        filterTitle: 'Filter Amount',
+      },
+      {
+        id: 'status',
+        accessorKey: 'status',
+        header: 'Status',
+        sortable: true,
+        filterType: 'options',
+        filterTitle: 'Filter Status',
+        filterOptions: [
+          { id: 'settled', label: 'SETTLED' },
+          { id: 'matched', label: 'MATCHED' },
+          { id: 'unmatched', label: 'UNMATCHED' },
+        ],
+        cell: ({ row }) => {
+          const colorMap = {
+            settled: 'success' as const,
+            matched: 'blue' as const,
+            unmatched: 'warning' as const,
+          };
+          return <Badge color={colorMap[row.status]}>{row.status.toUpperCase()}</Badge>;
+        },
+      },
+      {
+        accessorKey: 'timestamp',
+        header: 'Time',
+        align: 'right',
+      },
+      {
+        id: 'actions',
+        header: '',
+        align: 'center',
+        hasColumnMenu: false,
+        cell: () => <MoreMenuCell onMenuClick={() => alert('Row action clicked')} />,
+      },
+    ];
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <p style={{ margin: 0, fontSize: '13px', color: '#667085' }}>
+          Click on any column header (e.g. <strong>Trade Reference</strong>, <strong>Counterparty</strong>, <strong>Instrument</strong>, or <strong>Volume / Amount</strong>) to toggle the contextual <code>ColumnMenu</code> popover.
+        </p>
+        <Table
+          data={sampleTrades}
+          columns={columns}
+          pagination
+          pageSize={5}
+          totalItems={25}
+        />
+      </div>
     );
   },
 };

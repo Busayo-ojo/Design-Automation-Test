@@ -1,10 +1,11 @@
-import React, { useState, useMemo, forwardRef } from 'react';
+import React, { useState, useMemo, forwardRef, useEffect } from 'react';
 import './Table.css';
 import { Checkbox, Radio, Switch } from '../../elements/FormControl';
 import { Avatar, type AvatarSize } from '../../elements/Avatar';
 import { Badge, type BadgeColor, type BadgeType } from '../../elements/Badge';
 import { Chip } from '../../elements/Chip';
-import { Pagination } from '../Pagination';
+import { Pagination, type PaginationProps } from '../Pagination';
+import { ColumnMenu, type ColumnMenuFilterType, type ColumnMenuOption } from '../ColumnMenu';
 
 import { Icon } from '../../foundations/icons';
 import { ProgressBar, type ProgressBarColor } from '../ProgressBar';
@@ -147,6 +148,14 @@ export interface TableHeaderCellProps
   onSort?: () => void;
   align?: 'left' | 'center' | 'right';
   hasSeparator?: boolean;
+  /** Whether this header cell has an associated ColumnMenu popover */
+  hasColumnMenu?: boolean;
+  /** Controlled open state for the column menu */
+  isMenuOpen?: boolean;
+  /** Callback when the menu should open/close */
+  onMenuToggle?: () => void;
+  /** Column menu content to render inside the popover */
+  columnMenu?: React.ReactNode;
 }
 
 export const TableHeaderCell = forwardRef<HTMLTableHeaderCellElement, TableHeaderCellProps>(
@@ -164,6 +173,10 @@ export const TableHeaderCell = forwardRef<HTMLTableHeaderCellElement, TableHeade
       onSort,
       align = 'left',
       hasSeparator = true,
+      hasColumnMenu = false,
+      isMenuOpen,
+      onMenuToggle,
+      columnMenu,
       className = '',
       children,
       ...props
@@ -171,6 +184,8 @@ export const TableHeaderCell = forwardRef<HTMLTableHeaderCellElement, TableHeade
     ref
   ) => {
     const checkboxRef = React.useRef<HTMLInputElement>(null);
+    const [internalMenuOpen, setInternalMenuOpen] = React.useState(false);
+    const isMenuVisible = isMenuOpen ?? internalMenuOpen;
 
     React.useEffect(() => {
       if (checkboxRef.current && indeterminate !== undefined) {
@@ -178,16 +193,30 @@ export const TableHeaderCell = forwardRef<HTMLTableHeaderCellElement, TableHeade
       }
     }, [indeterminate]);
 
-    const showSortIcon = sortable || trailingIcon;
+    const showSortIcon = sortable || trailingIcon || hasColumnMenu;
 
     const classes = [
       'fmdqui-table-header-cell',
       `fmdqui-table-header-cell--align-${align}`,
       state === 'hover' ? 'fmdqui-table-header-cell--state-hover' : '',
-      state === 'selected' ? 'fmdqui-table-header-cell--state-selected' : '',
+      state === 'selected' || isMenuVisible ? 'fmdqui-table-header-cell--state-selected' : '',
       !hasSeparator ? 'fmdqui-table-header-cell--no-separator' : '',
+      hasColumnMenu ? 'fmdqui-table-header-cell--has-menu' : '',
       className,
     ].filter(Boolean).join(' ');
+
+    const handleTriggerClick = (e: React.MouseEvent) => {
+      if (hasColumnMenu) {
+        e.stopPropagation();
+        if (onMenuToggle) {
+          onMenuToggle();
+        } else {
+          setInternalMenuOpen((prev) => !prev);
+        }
+      } else if (onSort) {
+        onSort();
+      }
+    };
 
     const renderSortIcon = () => {
       if (sortDirection === 'asc') {
@@ -225,11 +254,13 @@ export const TableHeaderCell = forwardRef<HTMLTableHeaderCellElement, TableHeade
             </span>
           )}
 
-          {sortable ? (
+          {sortable || hasColumnMenu ? (
             <button
               type="button"
               className="fmdqui-table-header-cell__sort-btn"
-              onClick={onSort}
+              onClick={handleTriggerClick}
+              aria-expanded={isMenuVisible}
+              aria-haspopup={hasColumnMenu ? 'dialog' : undefined}
             >
               {hasLabel && children && <span>{children}</span>}
               {showSortIcon && renderSortIcon()}
@@ -241,6 +272,16 @@ export const TableHeaderCell = forwardRef<HTMLTableHeaderCellElement, TableHeade
             </>
           )}
         </div>
+
+        {/* Infused ColumnMenu Popover */}
+        {isMenuVisible && columnMenu && (
+          <div
+            className="fmdqui-table-header-cell__menu-popover"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {columnMenu}
+          </div>
+        )}
       </th>
     );
   }
@@ -632,46 +673,57 @@ TableCell.displayName = 'TableCell';
 export const TextCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="text" {...props} />
 );
+TextCell.displayName = 'TableCell';
 
 export const TextStackCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="text-stack" {...props} />
 );
+TextStackCell.displayName = 'TableCell';
 
 export const AvatarCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="avatar-text" {...props} />
 );
+AvatarCell.displayName = 'TableCell';
 
 export const AvatarGroupCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="avatar-group" {...props} />
 );
+AvatarGroupCell.displayName = 'TableCell';
 
 export const ControlCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="control" {...props} />
 );
+ControlCell.displayName = 'TableCell';
 
 export const BadgeCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="badge" {...props} />
 );
+BadgeCell.displayName = 'TableCell';
 
 export const ChipCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="chip" {...props} />
 );
+ChipCell.displayName = 'TableCell';
 
 export const ProgressCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="progress" {...props} />
 );
+ProgressCell.displayName = 'TableCell';
 
 export const ActionCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="actions" {...props} />
 );
+ActionCell.displayName = 'TableCell';
 
 export const MoreMenuCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="more-menu" {...props} />
 );
+MoreMenuCell.displayName = 'TableCell';
 
 export const IconsCell: React.FC<TableCellProps> = (props) => (
   <TableCell variant="icons" {...props} />
 );
+IconsCell.displayName = 'TableCell';
 
 // ─── LeadingCell Component (Matching Figma `✤ Tables` Leading Cell) ───────────
 
@@ -881,12 +933,56 @@ ContentCell.displayName = 'ContentCell';
 
 // ─── Composed Data Table Implementation ───────────────────────────────────────
 
+function isTableCellElement(element: React.ReactNode): boolean {
+  if (!React.isValidElement(element)) return false;
+  const type = element.type;
+  if (typeof type === 'string') return type === 'td' || type === 'th';
+  if (
+    type === TableCell ||
+    type === LeadingCell ||
+    type === ContentCell ||
+    type === TextCell ||
+    type === TextStackCell ||
+    type === AvatarCell ||
+    type === AvatarGroupCell ||
+    type === ControlCell ||
+    type === BadgeCell ||
+    type === ChipCell ||
+    type === ProgressCell ||
+    type === ActionCell ||
+    type === MoreMenuCell ||
+    type === IconsCell
+  ) {
+    return true;
+  }
+  const displayName = typeof type === 'function' ? (type as { displayName?: string }).displayName : undefined;
+  return (
+    displayName === 'TableCell' ||
+    displayName === 'LeadingCell' ||
+    displayName === 'ContentCell'
+  );
+}
+
+export interface ColumnFilterValue {
+  text?: string;
+  min?: string | number;
+  max?: string | number;
+  startDate?: string;
+  endDate?: string;
+  options?: string[];
+}
+
 export interface ColumnDef<T> {
   header: React.ReactNode;
   accessorKey?: keyof T;
   id?: string;
   align?: 'left' | 'center' | 'right';
   sortable?: boolean;
+  filterType?: ColumnMenuFilterType;
+  filterTitle?: string;
+  filterOptions?: ColumnMenuOption[];
+  hasColumnMenu?: boolean;
+  onFilterChange?: (filterValue: unknown) => void;
   cell?: (info: { row: T; getValue: () => unknown; index: number }) => React.ReactNode;
 }
 
@@ -899,6 +995,7 @@ export interface TableProps<T = Record<string, unknown>> extends React.TableHTML
   totalItems?: number;
   currentPage?: number;
   onPageChange?: (page: number) => void;
+  paginationProps?: Partial<PaginationProps>;
   variant?: 'striped' | 'default';
   density?: 'default' | 'compact';
   emptyMessage?: React.ReactNode;
@@ -919,6 +1016,7 @@ export function Table<T extends object = Record<string, unknown>>({
   totalItems: controlledTotalItems,
   currentPage: controlledCurrentPage,
   onPageChange: controlledOnPageChange,
+  paginationProps,
   variant = 'default',
   density = 'default',
   emptyMessage,
@@ -941,6 +1039,38 @@ export function Table<T extends object = Record<string, unknown>>({
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortDir, setSortDir] = useState<TableSortDirection>('none');
 
+  // Column Menu & Filtering state
+  const [openMenuColumnKey, setOpenMenuColumnKey] = useState<string | null>(null);
+  const [columnFilters, setColumnFilters] = useState<Record<string, ColumnFilterValue>>({});
+
+  // Close column menu when clicking outside or pressing Escape
+  useEffect(() => {
+    if (!openMenuColumnKey) return;
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest('.fmdqui-table-header-cell__menu-popover')) {
+        return;
+      }
+      if (target?.closest('.fmdqui-table-header-cell__sort-btn')) {
+        return;
+      }
+      setOpenMenuColumnKey(null);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpenMenuColumnKey(null);
+      }
+    };
+
+    document.addEventListener('pointerdown', handleDocumentClick);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handleDocumentClick);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [openMenuColumnKey]);
+
   // Helper for row ID
   const resolveRowId = (row: T, index: number): string => {
     if (getRowId) return getRowId(row, index);
@@ -948,10 +1078,68 @@ export function Table<T extends object = Record<string, unknown>>({
     return String(index);
   };
 
+  // Filtered data based on column filters
+  const filteredData = useMemo(() => {
+    if (!data || !columns) return data ?? [];
+    const activeFilterEntries = Object.entries(columnFilters).filter(([, filterVal]) => {
+      if (!filterVal) return false;
+      if (typeof filterVal.text === 'string' && filterVal.text.trim()) return true;
+      if (Array.isArray(filterVal.options) && filterVal.options.length > 0) return true;
+      if ((filterVal.min !== undefined && filterVal.min !== '') || (filterVal.max !== undefined && filterVal.max !== '')) return true;
+      if (filterVal.startDate || filterVal.endDate) return true;
+      return false;
+    });
+
+    if (activeFilterEntries.length === 0) return data;
+
+    return data.filter((row) => {
+      return activeFilterEntries.every(([colKey, filterVal]) => {
+        const colDef = columns.find(c => (c.accessorKey as string) === colKey || c.id === colKey);
+        const cellVal = colDef?.accessorKey
+          ? (row as Record<string, unknown>)[colDef.accessorKey as string]
+          : (row as Record<string, unknown>)[colKey];
+        const cellString = cellVal !== undefined && cellVal !== null ? String(cellVal).toLowerCase() : '';
+
+        // Text filter
+        if (typeof filterVal.text === 'string' && filterVal.text.trim()) {
+          const query = filterVal.text.trim().toLowerCase();
+          if (!cellString.includes(query)) return false;
+        }
+
+        // Options filter
+        if (Array.isArray(filterVal.options) && filterVal.options.length > 0) {
+          const matched = filterVal.options.some((optId: string) => {
+            const opt = colDef?.filterOptions?.find(o => o.id === optId);
+            const optLabel = opt ? opt.label.toLowerCase() : optId.toLowerCase();
+            return cellString.includes(optLabel) || cellString.includes(optId.toLowerCase());
+          });
+          if (!matched) return false;
+        }
+
+        // Range filter
+        if ((filterVal.min !== undefined && filterVal.min !== '') || (filterVal.max !== undefined && filterVal.max !== '')) {
+          const numVal = typeof cellVal === 'number' ? cellVal : parseFloat(String(cellVal).replace(/[^0-9.-]+/g, ''));
+          if (!isNaN(numVal)) {
+            if (filterVal.min !== undefined && filterVal.min !== '') {
+              const min = parseFloat(String(filterVal.min).replace(/[^0-9.-]+/g, ''));
+              if (!isNaN(min) && numVal < min) return false;
+            }
+            if (filterVal.max !== undefined && filterVal.max !== '') {
+              const max = parseFloat(String(filterVal.max).replace(/[^0-9.-]+/g, ''));
+              if (!isNaN(max) && numVal > max) return false;
+            }
+          }
+        }
+
+        return true;
+      });
+    });
+  }, [data, columns, columnFilters]);
+
   // Sorted and Paginated Data
   const sortedData = useMemo(() => {
-    if (!data || !sortKey || sortDir === 'none') return data ?? [];
-    return [...data].sort((a, b) => {
+    if (!filteredData || !sortKey || sortDir === 'none') return filteredData ?? [];
+    return [...filteredData].sort((a, b) => {
       const aVal = (a as Record<string, unknown>)[sortKey];
       const bVal = (b as Record<string, unknown>)[sortKey];
       if (aVal === bVal) return 0;
@@ -960,9 +1148,9 @@ export function Table<T extends object = Record<string, unknown>>({
       const compare = (aVal as number | string) < (bVal as number | string) ? -1 : 1;
       return sortDir === 'asc' ? compare : -compare;
     });
-  }, [data, sortKey, sortDir]);
+  }, [filteredData, sortKey, sortDir]);
 
-  const totalItems = controlledTotalItems ?? (data?.length ?? 0);
+  const totalItems = controlledTotalItems ?? (filteredData.length);
   const totalPages = Math.ceil(totalItems / pageSize) || 1;
 
   const paginatedData = useMemo(() => {
@@ -999,8 +1187,6 @@ export function Table<T extends object = Record<string, unknown>>({
       setSortDir('asc');
     }
   };
-
-
 
   // Handle page change
   const handlePageChange = (newPage: number) => {
@@ -1039,11 +1225,17 @@ export function Table<T extends object = Record<string, unknown>>({
   };
 
   const totalColSpan = columns.length + (selectable ? 1 : 0);
+  const hasFooter = pagination && totalPages > 1;
 
   return (
-    <TableContainer>
+    <TableContainer className={openMenuColumnKey ? 'fmdqui-table-container--has-open-menu' : ''}>
       <div className="fmdqui-table-scroll-wrapper">
-        <TableElement variant={variant} density={density} className={className} {...props}>
+        <TableElement
+          variant={variant}
+          density={density}
+          className={[hasFooter ? 'fmdqui-table--with-footer' : '', className].filter(Boolean).join(' ')}
+          {...props}
+        >
           <TableHead>
             <TableRow>
               {selectable && (
@@ -1058,13 +1250,84 @@ export function Table<T extends object = Record<string, unknown>>({
               {columns.map((col, idx) => {
                 const columnKey = (col.accessorKey as string) || col.id || String(idx);
                 const isColumnSorted = sortKey === columnKey;
+                const columnHasMenu = col.hasColumnMenu ?? (col.sortable !== undefined || !!col.filterType);
+                const isMenuOpen = openMenuColumnKey === columnKey;
+
                 return (
                   <TableHeaderCell
                     key={columnKey}
                     align={col.align}
                     sortable={col.sortable}
                     sortDirection={isColumnSorted ? sortDir : 'none'}
-                    onSort={col.sortable ? () => handleSort(columnKey) : undefined}
+                    hasColumnMenu={columnHasMenu}
+                    isMenuOpen={isMenuOpen}
+                    onSort={col.sortable && !columnHasMenu ? () => handleSort(columnKey) : undefined}
+                    onMenuToggle={columnHasMenu ? () => {
+                      setOpenMenuColumnKey(isMenuOpen ? null : columnKey);
+                    } : undefined}
+                    columnMenu={columnHasMenu ? (
+                      <ColumnMenu
+                        filter={col.filterType ?? 'text'}
+                        filterTitle={col.filterTitle ?? (typeof col.header === 'string' ? col.header : 'Filter')}
+                        sortDirection={isColumnSorted ? (sortDir === 'asc' ? 'asc' : sortDir === 'desc' ? 'desc' : 'none') : 'none'}
+                        onSortAscending={() => {
+                          setSortKey(columnKey);
+                          setSortDir('asc');
+                        }}
+                        onSortDescending={() => {
+                          setSortKey(columnKey);
+                          setSortDir('desc');
+                        }}
+                        textValue={columnFilters[columnKey]?.text ?? ''}
+                        onTextChange={(val) => {
+                          setColumnFilters(prev => ({ ...prev, [columnKey]: { ...prev[columnKey], text: val } }));
+                          col.onFilterChange?.(val);
+                        }}
+                        minValue={columnFilters[columnKey]?.min ?? ''}
+                        maxValue={columnFilters[columnKey]?.max ?? ''}
+                        onMinChange={(val) => {
+                          setColumnFilters(prev => ({ ...prev, [columnKey]: { ...prev[columnKey], min: val } }));
+                          col.onFilterChange?.({ min: val, max: columnFilters[columnKey]?.max });
+                        }}
+                        onMaxChange={(val) => {
+                          setColumnFilters(prev => ({ ...prev, [columnKey]: { ...prev[columnKey], max: val } }));
+                          col.onFilterChange?.({ min: columnFilters[columnKey]?.min, max: val });
+                        }}
+                        startDate={columnFilters[columnKey]?.startDate ?? ''}
+                        endDate={columnFilters[columnKey]?.endDate ?? ''}
+                        onStartDateChange={(val) => {
+                          setColumnFilters(prev => ({ ...prev, [columnKey]: { ...prev[columnKey], startDate: val } }));
+                          col.onFilterChange?.({ startDate: val, endDate: columnFilters[columnKey]?.endDate });
+                        }}
+                        onEndDateChange={(val) => {
+                          setColumnFilters(prev => ({ ...prev, [columnKey]: { ...prev[columnKey], endDate: val } }));
+                          col.onFilterChange?.({ startDate: columnFilters[columnKey]?.startDate, endDate: val });
+                        }}
+                        options={col.filterOptions}
+                        selectedOptions={columnFilters[columnKey]?.options ?? []}
+                        onOptionToggle={(optId, checked) => {
+                          const current = columnFilters[columnKey]?.options ?? [];
+                          const updated = checked ? [...current, optId] : current.filter((id: string) => id !== optId);
+                          setColumnFilters(prev => ({ ...prev, [columnKey]: { ...prev[columnKey], options: updated } }));
+                          col.onFilterChange?.(updated);
+                        }}
+                        onClear={() => {
+                          setColumnFilters(prev => {
+                            const next = { ...prev };
+                            delete next[columnKey];
+                            return next;
+                          });
+                          if (sortKey === columnKey) {
+                            setSortKey(null);
+                            setSortDir('none');
+                          }
+                          col.onFilterChange?.(null);
+                        }}
+                        onApply={() => {
+                          setOpenMenuColumnKey(null);
+                        }}
+                      />
+                    ) : undefined}
                   >
                     {col.header}
                   </TableHeaderCell>
@@ -1091,17 +1354,26 @@ export function Table<T extends object = Record<string, unknown>>({
                       />
                     )}
                     {columns.map((col, colIndex) => {
+                      const colId = col.id || (col.accessorKey as string) || String(colIndex);
                       const value = col.accessorKey
                         ? (row as Record<string, unknown>)[col.accessorKey as string]
                         : undefined;
+                      const rendered = col.cell
+                        ? col.cell({ row, getValue: () => value, index: rowIndex })
+                        : (value as React.ReactNode);
+
+                      // Avoid nested <td> if rendered is already a TableCell atom
+                      if (isTableCellElement(rendered)) {
+                        const cellElem = rendered as React.ReactElement<{ align?: 'left' | 'center' | 'right' }>;
+                        return React.cloneElement(cellElem, {
+                          key: colId,
+                          align: cellElem.props.align ?? col.align,
+                        });
+                      }
+
                       return (
-                        <TableCell
-                          key={col.id || (col.accessorKey as string) || colIndex}
-                          align={col.align}
-                        >
-                          {col.cell
-                            ? col.cell({ row, getValue: () => value, index: rowIndex })
-                            : (value as React.ReactNode)}
+                        <TableCell key={colId} align={col.align}>
+                          {rendered}
                         </TableCell>
                       );
                     })}
@@ -1124,7 +1396,7 @@ export function Table<T extends object = Record<string, unknown>>({
         </TableElement>
       </div>
 
-      {pagination && totalPages > 1 && (
+      {hasFooter && (
         <div className="fmdqui-table-footer">
           <Pagination
             currentPage={activePage}
@@ -1132,8 +1404,14 @@ export function Table<T extends object = Record<string, unknown>>({
             totalItems={totalItems}
             pageSize={pageSize}
             onPageChange={handlePageChange}
-            type="both"
+            variation="2"
+            buttonType="single buttons"
             orientation="full width"
+            hasTopDivider={false}
+            hasLeftStroke={false}
+            hasRightStroke={false}
+            hasBottomStroke={false}
+            {...paginationProps}
           />
         </div>
       )}

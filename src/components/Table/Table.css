@@ -71,6 +71,7 @@
 
 /* ─── Table Header Cell ───────────────────────────────────────────────── */
 .fmdqui-table-header-cell {
+  position: relative;
   height: 44px;
   padding: 12px 24px;
   font-family: var(--font-family-primary, "DM Sans", sans-serif);
@@ -163,6 +164,44 @@
 
 .fmdqui-table-header-cell__sort-icon--active {
   color: var(--color-primary-600, #0857A6);
+}
+
+/* ─── Column Menu Popover ─────────────────────────────────────────────── */
+.fmdqui-table-header-cell__menu-popover {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 1000;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: normal;
+  text-align: left;
+  animation: fmdqui-popover-in 0.15s ease-out;
+}
+
+.fmdqui-table-header-cell--align-right .fmdqui-table-header-cell__menu-popover {
+  left: auto;
+  right: 0;
+}
+
+@keyframes fmdqui-popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fmdqui-table-container--has-open-menu {
+  overflow: visible;
+}
+
+.fmdqui-table-container--has-open-menu .fmdqui-table-scroll-wrapper {
+  overflow: visible;
+  min-height: 380px;
 }
 
 .fmdqui-table-header-cell__checkbox-wrap {
@@ -583,6 +622,15 @@
 
 /* ─── Table Footer & Pagination Wrapper ───────────────────────────────── */
 .fmdqui-table-footer {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 24px 16px 24px;
   border-top: 1px solid var(--color-grey-outline, #E4E7EC);
   background-color: var(--color-neutral-white, #FFFFFF);
+}
+
+/* Eliminate double border between table last row and table footer */
+.fmdqui-table-container:has(.fmdqui-table-footer) .fmdqui-table-body .fmdqui-table-row:last-child .fmdqui-table-cell,
+.fmdqui-table--with-footer .fmdqui-table-body .fmdqui-table-row:last-child .fmdqui-table-cell {
+  border-bottom: none;
 }

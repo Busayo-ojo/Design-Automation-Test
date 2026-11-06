@@ -220,6 +220,8 @@ export const ColumnMenu: React.FC<ColumnMenuProps> = ({
               onChange={handleTextChange}
               hasLabel={false}
               hasHelperText={false}
+              hasLeftIcon={true}
+              hasRightIcon={false}
               aria-label={filterTitle}
             />
           </div>
@@ -232,6 +234,8 @@ export const ColumnMenu: React.FC<ColumnMenuProps> = ({
               onChange={handleMinChange}
               hasLabel={false}
               hasHelperText={false}
+              hasLeftIcon={false}
+              hasRightIcon={false}
               aria-label={`${filterTitle} minimum`}
             />
             <Input
@@ -241,6 +245,8 @@ export const ColumnMenu: React.FC<ColumnMenuProps> = ({
               onChange={handleMaxChange}
               hasLabel={false}
               hasHelperText={false}
+              hasLeftIcon={false}
+              hasRightIcon={false}
               aria-label={`${filterTitle} maximum`}
             />
           </div>
@@ -253,6 +259,8 @@ export const ColumnMenu: React.FC<ColumnMenuProps> = ({
               onChange={handleStartChange}
               hasLabel={false}
               hasHelperText={false}
+              hasLeftIcon={false}
+              hasRightIcon={false}
               aria-label={`${filterTitle} start date`}
             />
             <Input
@@ -262,6 +270,8 @@ export const ColumnMenu: React.FC<ColumnMenuProps> = ({
               onChange={handleEndChange}
               hasLabel={false}
               hasHelperText={false}
+              hasLeftIcon={false}
+              hasRightIcon={false}
               aria-label={`${filterTitle} end date`}
             />
           </div>
