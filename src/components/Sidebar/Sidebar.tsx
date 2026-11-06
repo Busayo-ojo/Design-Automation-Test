@@ -46,7 +46,7 @@ export type { LogoProps };
 
 // ─── 1. Sub-Menu Item Atom (Figma 2437:57101) ────────────────────────────────
 
-export type SubMenuItemState = 'default' | 'selected';
+export type SubMenuItemState = 'default' | 'selected' | 'disabled';
 export type SubMenuItemTheme =
   | 'light'
   | 'secondary blue'
@@ -62,6 +62,7 @@ export interface SidebarSubMenuItemProps
   label: ReactNode;
   state?: SubMenuItemState;
   selected?: boolean;
+  disabled?: boolean;
   theme?: SubMenuItemTheme;
   badge?: ReactNode;
   onSelect?: () => void;
@@ -74,6 +75,7 @@ export const SidebarSubMenuItem = forwardRef<HTMLAnchorElement, SidebarSubMenuIt
       label,
       state: propState,
       selected: propSelected,
+      disabled: propDisabled,
       theme: propTheme,
       badge,
       onSelect,
@@ -85,10 +87,16 @@ export const SidebarSubMenuItem = forwardRef<HTMLAnchorElement, SidebarSubMenuIt
     ref
   ) => {
     const context = useSidebar();
+    const isDisabled = propState === 'disabled' || Boolean(propDisabled);
     const isSelected =
-      propState === 'selected' ||
-      (propState === undefined && (propSelected ?? (id && context.activeId === id)));
-    const effectiveState: SubMenuItemState = isSelected ? 'selected' : 'default';
+      !isDisabled &&
+      (propState === 'selected' ||
+        (propState === undefined && (propSelected ?? (id ? context.activeId === id : false))));
+    const effectiveState: SubMenuItemState = isDisabled
+      ? 'disabled'
+      : isSelected
+      ? 'selected'
+      : 'default';
 
     const rawTheme = propTheme ?? context.theme;
     const normalizedTheme =
@@ -101,6 +109,10 @@ export const SidebarSubMenuItem = forwardRef<HTMLAnchorElement, SidebarSubMenuIt
         : 'light';
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (isDisabled) {
+        e.preventDefault();
+        return;
+      }
       if (id) context.setActiveId(id);
       onSelect?.();
       onClick?.(e);
@@ -113,16 +125,19 @@ export const SidebarSubMenuItem = forwardRef<HTMLAnchorElement, SidebarSubMenuIt
       rawTheme === 'dark' || rawTheme === 'dark-grey' ? 'fmdqui-sidebar-sub-item--theme-dark-grey' : '',
       `fmdqui-sidebar-sub-item--state-${effectiveState}`,
       isSelected ? 'fmdqui-sidebar-sub-item--selected' : '',
+      isDisabled ? 'fmdqui-sidebar-sub-item--disabled' : '',
       className,
     ].filter(Boolean).join(' ');
 
     return (
       <a
         ref={ref}
-        href={href || '#'}
+        href={isDisabled ? undefined : (href || '#')}
         className={classNames}
         onClick={handleClick}
         aria-current={isSelected ? 'page' : undefined}
+        aria-disabled={isDisabled ? true : undefined}
+        tabIndex={isDisabled ? -1 : undefined}
         {...props}
       >
         <span className="fmdqui-sidebar-sub-item__content">

@@ -8,7 +8,7 @@
 | Special Primary Buttons / information | Complete | Elements/➡️ Button → Information | 2026-05-29 | hover + focused states added |
 | Special Primary Buttons / destructive | Complete | Elements/➡️ Button → SpecialDestructive | 2026-05-29 | New variant (error), all 3 states |
 | Sidebars | Complete | Components/🍺 Sidebar | 2026-10-26 | Replaced NavMenu; cell primitives, sections, variants 1 & 2, 4 themes |
-| Sidebar / sub-menu item | Complete | Components/🍺 Sidebar → Cells / Sub-Menu Item Matrix | 2026-11-05 | Figma 2437:57101; 8 variants (2 states × 4 themes); 44px height, 48px left indent, 4px radius, no bullet, exact tokens |
+| Sidebar / sub-menu item | Complete | Components/🍺 Sidebar → Cells / Sub-Menu Item Matrix | 2026-11-06 | Figma 2437:57101; 12 variants (3 states [default, selected, disabled] × 4 themes); 44px height, 48px left indent, 4px radius, exact tokens |
 | Dropdown / Menu | Superseded | Components/🔽 Dropdowns | 2026-10-27 | Earlier singular Dropdown stories removed; use Dropdowns |
 | Dropdown / Selectors | Complete | Elements/🔤 Input → Input Dropdown | 2026-10-27 | Figma 2198:54679; merged into Input with 4 types and 5 states |
 | fmdq-logo | Complete | Elements/🏛️ Logo | 2026-10-26 | Node 6769:1811; Default & DarkBG Card variants |
@@ -32,7 +32,7 @@
 | 1.15 Welcome email | Complete | Layout/✉️ WelcomeEmail | 2026-11-01 | Figma 10306:12506; email envelope header, logo, salutation, summary box, CTA button, disclaimer, and automated footer |
 | Flow 1 Prototype Orchestrator | Complete | Flows/Authentication/Flow 1 - Prototype | 2026-11-01 | Figma 10303:161102 & 10306:12506; client-side interactive journey connecting Welcome Email → Password Setup → 2FA Setup → Sign In → 2FA OTP → DRP Dashboard, with reviewer controls toolbar |
 | Calendar & Date Selectors | Complete | Components/📅 Calendar | 2026-11-05 | Figma 6335:28236 (Calendar, 3 variants: Date Picker, Date Picker + Last Day, Month & Year Picker), 6335:28189 (Month & Year, 1 variant), 6335:28092 (Date, 10 variants); composes Button (primary & text), Chip, and foundation icons. `InteractiveDateSelector` / `InteractiveCalendar` adds single + range selection, month navigation and Month & Year picker |
-| Tooltip | Complete | Components/💬 Tooltip | 2026-11-05 | Figma 6237:23991; 24 variants (pointer position 12 × theme 2) + 5 booleans; composes Button (text, primary/secondary, sm) and the multiply icon; added --shadow-tooltip-dark. `TooltipTrigger` implements all five Figma Best-Practice hover rules |
+| Tooltip & Table Tooltip | Complete | Components/💬 Tooltip | 2026-11-06 | Figma 6237:23991 (24 variants) & 11041:686955 (12 variants: pointer position); composes Button, multiply icon, and table slot with 12px padding; added TableTooltip |
 | File Upload | Complete | Components/📎 File Upload | 2026-11-05 | Figma file type 3355:170664 (6), file upload states 3355:171475 (4), Small upload 6092:3073 (4), Big Upload 6100:14546 (4), Mutilple Uploads 6100:15099 (7 booleans) = 19 variants; composes Button + ProgressBar; added --color-file-jpg, --color-file-mp3 and three dropzone surface tokens |
 | Progress Indicators (Bar & Circles) | Complete | Components/📊 Progress Indicators | 2026-11-06 | Figma 6276:147211 (22 variants: 11 progress × 2 sizes) & 6092:2083 (25 variants: 5 progress × 5 sizes); exact 20px (lg) / 12px (sm) track corner radii and 24px rounded fill ends |
 | Metrics Card & Metrics Compliance Card | Complete | Components/📈 Metrics | 2026-11-06 | Figma 6291:1886 (12 variants) & 11039:683266 (4 variants: status 2 × bar 2); composes Badge + ProgressBar; WRD compliance rule (green >90%, amber below 90%) |
@@ -47,6 +47,10 @@
 | Donut Chart | Complete | Components/📈 Charts → Donut | 2026-11-05 | Figma 6252:41600; 7 variants; the pie with innerRadius 0.8 |
 | Legend & Values | Complete | Components/📈 Charts → Elements / 📐 Legend & Values | 2026-11-05 | Figma 6248:37098; 8 variants (Direction × Quantity); 4px bar + 20px Medium figure |
 | Radar Chart | Complete | Components/📈 Charts → Radar | 2026-11-05 | Figma 6256:41865; 16 variants (Quantity 5/6/7/12 × Chart type × Background); 5 rings, 24% accent fill, 6px points with white ring |
+| Line Chart / Multi-series | Complete | Components/📈 Charts → Multi-series / Default, Wide, Hourly | 2026-11-06 | Figma 11041:684273; 4 variants (interval 2 × size 2); 496px/1062px widths, 416px height, interactive session-stable series filtering, threshold & now lines |
+| Line Chart / Legend item | Complete | Components/📈 Charts → Multi-series / Legend Item Matrix | 2026-11-06 | Figma 11041:684142; 48 variants (6 colors × 4 patterns × 2 selected); Checkbox + 20×12 Swatch + 12px label |
+| Line Chart / Now marker | Complete | Components/📈 Charts → Multi-series / Now Marker & Threshold Atoms | 2026-11-06 | Figma 11041:684143; Standalone marker; 1px neutral-400 vertical line + 10px DM Sans Medium label |
+| Line Chart / Threshold | Complete | Components/📈 Charts → Multi-series / Now Marker & Threshold Atoms | 2026-11-06 | Figma 11041:684146; Standalone threshold; dashed error-500 rule + 10px error-600 alert label, boolean hasLabel |
 
 > **Figma font-drift correction (2026-11-05).** A file-wide audit of 623,401 nodes found 441 text runs not using DM Sans or Rubik. **362 were genuine drift and were normalised to DM Sans** (weight preserved): Helvetica Neue (209) and PingFang SC (72) on chart axis and radar category labels, General Sans (78) mostly in Page Footer instances, Archivo (7), and Helvetica Bold (3) on Footers. 288 were on the Charts page; the remaining 74 spanned 34 other pages. Zero failures; 102 sat inside component instances and now carry local overrides — the source footer component is worth fixing separately so those overrides can be cleared.
 >

@@ -1,8 +1,17 @@
+import React, { useState, useCallback } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Button } from '../../elements/Button';
 import {
   LineChart, BarChart, StackedBarChart, ChartLegend,
   PieChart, DonutChart, RadarChart, LegendValues,
 } from './Charts';
+import {
+  LineChartLegendItem,
+  LineChartNowMarker,
+  LineChartThreshold,
+  MultiSeriesLineChart,
+  type MultiSeriesLineChartProps,
+} from './MultiSeriesLineChart';
 import {
   LINE_CHART_TYPES,
   SERIES_QUANTITIES,
@@ -10,7 +19,11 @@ import {
   CHART_PALETTE_ACCESSIBLE,
   BAR_PALETTE,
   DEMO_SERIES,
+  DEMO_MULTI_SERIES,
+  generateRandomMultiSeries,
   type LineChartType,
+  type MultiSeriesColor,
+  type MultiSeriesPattern,
 } from './chartUtils';
 
 /* ───────────────────────────────────────────────────────────────────────────
@@ -538,3 +551,267 @@ export const RadarInteractive: StoryObj = {
     </Wrap>
   ),
 };
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Multi-series Line Chart — Figma 11041:684273
+   Legend item (11041:684142), Now marker (11041:684143), Threshold (11041:684146)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+export const MultiSeriesLegendItems: StoryObj = {
+  name: 'Multi-series / 🏷️ Legend Item Matrix (48 Variants)',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Figma 11041:684142 — 48 variants across 6 colors × 4 patterns (solid, dashed, dotted, dash-dot) × 2 states (selected, unselected). Composed of Checkbox + 20×12 Swatch + 12px label.',
+      },
+    },
+  },
+  render: () => {
+    const colors: MultiSeriesColor[] = ['1', '2', '3', '4', '5', '6'];
+    const patterns: MultiSeriesPattern[] = ['solid', 'dashed', 'dotted', 'dash-dot'];
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', padding: '24px' }}>
+        <div>
+          <h3 style={{ margin: '0 0 8px 0', fontFamily: 'var(--font-family-primary)' }}>
+            Line Chart / Legend Item Atom (Figma 11041:684142)
+          </h3>
+          <p style={{ margin: 0, color: 'var(--color-neutral-500)', fontSize: '14px' }}>
+            48 variants: 6 colors × 4 patterns × 2 selected states (Yes/No).
+          </p>
+        </div>
+
+        {patterns.map((pattern) => (
+          <div key={pattern} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <span style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-neutral-500)' }}>
+              Pattern: {pattern}
+            </span>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', backgroundColor: '#FFFFFF', padding: '16px', borderRadius: '8px', border: '1px solid var(--color-neutral-200)' }}>
+              {colors.map((color) => (
+                <div key={color} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <LineChartLegendItem
+                    color={color}
+                    pattern={pattern}
+                    selected={true}
+                    label={`Color ${color} · Selected`}
+                  />
+                  <LineChartLegendItem
+                    color={color}
+                    pattern={pattern}
+                    selected={false}
+                    label={`Color ${color} · Unselected`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
+
+export const MultiSeriesAtoms: StoryObj = {
+  name: 'Multi-series / 📐 Now Marker & Threshold Atoms',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Figma 11041:684143 (Line Chart / Now marker) & Figma 11041:684146 (Line Chart / Threshold).',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', padding: '24px', maxWidth: '600px' }}>
+      <div>
+        <h3 style={{ margin: '0 0 8px 0' }}>Chart Atoms</h3>
+        <p style={{ margin: 0, color: 'var(--color-neutral-500)', fontSize: '14px' }}>
+          Standalone vertical and horizontal indicator components.
+        </p>
+      </div>
+
+      <div style={{ position: 'relative', height: '140px', backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '8px', border: '1px solid var(--color-neutral-200)' }}>
+        <LineChartThreshold y={30} label="Alert at +25 bps" hasLabel={true} />
+        <LineChartThreshold y={100} label="Alert at -25 bps" hasLabel={true} />
+        <LineChartNowMarker x={180} height={120} label="Now" />
+      </div>
+    </div>
+  ),
+};
+
+export const MultiSeriesDefault: StoryObj<MultiSeriesLineChartProps> = {
+  name: 'Multi-series / 📊 Default Size (496px)',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Figma 11041:684150 — interval=quarter-hour, size=default (496px). 17 CASS benchmark securities with fixed color/pattern assignments and interactive checkbox toggling.',
+      },
+    },
+  },
+  args: {
+    type: 'Basic',
+    interval: 'quarter-hour',
+    size: 'default',
+    hasLegend: true,
+    hasThreshold: true,
+    thresholdBps: 25,
+    thresholdLabel: 'Alert at ±25 bps',
+    nowIndex: 10,
+  },
+  render: (args) => (
+    <Wrap title="Multi-series Line Chart" note="Figma 11041:684150 · Quarter-hour · Size Default (496px)">
+      <MultiSeriesLineChart {...args} />
+    </Wrap>
+  ),
+};
+
+export const MultiSeriesWide: StoryObj<MultiSeriesLineChartProps> = {
+  name: 'Multi-series / 🖥️ Wide Size (1062px)',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Figma 11041:686956 — interval=quarter-hour, size=wide (1062px). Full-width desk monitor layout with 17 securities and alert thresholds.',
+      },
+    },
+  },
+  args: {
+    type: 'Basic',
+    interval: 'quarter-hour',
+    size: 'wide',
+    hasLegend: true,
+    hasThreshold: true,
+    thresholdBps: 25,
+    thresholdLabel: 'Alert at ±25 bps',
+    nowIndex: 10,
+  },
+  render: (args) => (
+    <Wrap title="Multi-series Line Chart" note="Figma 11041:686956 · Quarter-hour · Size Wide (1062px)">
+      <MultiSeriesLineChart {...args} />
+    </Wrap>
+  ),
+};
+
+export const MultiSeriesHourly: StoryObj<MultiSeriesLineChartProps> = {
+  name: 'Multi-series / ⏱️ Hourly Interval',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Figma 11041:684224 & 11041:687030 — interval=hourly, showing 10 AM, 11 AM, 12 PM, 1 PM, 2 PM ticks.',
+      },
+    },
+  },
+  args: {
+    type: 'Basic',
+    interval: 'hourly',
+    size: 'default',
+    hasLegend: true,
+    hasThreshold: true,
+    thresholdBps: 25,
+    thresholdLabel: 'Alert at ±25 bps',
+    nowIndex: 10,
+  },
+  render: (args) => (
+    <Wrap title="Multi-series Line Chart" note="Figma 11041:684224 · Interval Hourly · Size Default (496px)">
+      <MultiSeriesLineChart {...args} />
+    </Wrap>
+  ),
+};
+
+const MultiSeriesInteractiveStory: React.FC<MultiSeriesLineChartProps> = (args) => {
+  const [dataSeed, setDataSeed] = useState(0);
+  const [seriesData, setSeriesData] = useState(DEMO_MULTI_SERIES);
+
+  const handleRandomize = useCallback(() => {
+    setDataSeed((c) => c + 1);
+    setSeriesData(generateRandomMultiSeries(17, DEMO_MULTI_SERIES));
+  }, []);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '24px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+        <Button variant="secondary" size="sm" onClick={handleRandomize}>
+          🎲 Generate New Random Data
+        </Button>
+        <span style={{ fontSize: '13px', color: 'var(--color-neutral-600)' }}>
+          Every line strictly originates from <strong>0 bps</strong> at 10:00 (matching Figma), diverging intraday.
+        </span>
+      </div>
+      <Wrap
+        title="Multi-series Line Chart"
+        note={`Figma 11041:684273 · Size: ${args.size ?? 'default'} · Interval: ${args.interval ?? 'quarter-hour'}`}
+      >
+        <MultiSeriesLineChart
+          key={dataSeed}
+          {...args}
+          series={seriesData}
+          showRandomizeButton={args.showRandomizeButton ?? true}
+          onRandomize={handleRandomize}
+        />
+      </Wrap>
+    </div>
+  );
+};
+
+export const MultiSeriesInteractive: StoryObj<MultiSeriesLineChartProps> = {
+  name: 'Multi-series / 🎯 Interactive Controls',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Fully interactive Storybook playground: controls panel allows dynamic changes to size (default 496px vs wide 1062px), interval (quarter-hour vs hourly), thresholds, legend visibility, and now marker index. Click "Generate New Random Data" to simulate intraday movements starting strictly from 0 bps.',
+      },
+    },
+  },
+  args: {
+    interval: 'quarter-hour',
+    size: 'default',
+    hasLegend: true,
+    hasThreshold: true,
+    thresholdBps: 25,
+    thresholdLabel: 'Alert at ±25 bps',
+    nowIndex: 10,
+    showRandomizeButton: true,
+  },
+  argTypes: {
+    interval: {
+      control: 'radio',
+      options: ['quarter-hour', 'hourly'],
+      description: 'Time axis ticks',
+    },
+    size: {
+      control: 'radio',
+      options: ['default', 'wide'],
+      description: 'Chart frame width (default: 496px, wide: 1062px)',
+    },
+    hasLegend: {
+      control: 'boolean',
+      description: 'Show / hide the legend section',
+    },
+    hasThreshold: {
+      control: 'boolean',
+      description: 'Show / hide alert threshold lines',
+    },
+    thresholdBps: {
+      control: { type: 'range', min: 5, max: 40, step: 5 },
+      description: 'Alert threshold in basis points (±bps)',
+    },
+    thresholdLabel: {
+      control: 'text',
+      description: 'Label on the upper alert line',
+    },
+    nowIndex: {
+      control: { type: 'range', min: 0, max: 16, step: 1 },
+      description: 'Position index of the vertical Now marker (0 to 16)',
+    },
+    showRandomizeButton: {
+      control: 'boolean',
+      description: 'Show randomize button in legend actions',
+    },
+  },
+  render: (args) => <MultiSeriesInteractiveStory {...args} />,
+};
+

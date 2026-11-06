@@ -1,5 +1,27 @@
 [
   {
+    "hash": "a4a3d8c",
+    "date": "2026-11-06",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "feat: add MetricsComplianceCard component with Figma stories, docs, and design governance rules",
+    "category": "feat",
+    "scope": "",
+    "message": "add MetricsComplianceCard component with Figma stories, docs, and design governance rules",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/a4a3d8c"
+  },
+  {
+    "hash": "7c5eb16",
+    "date": "2026-11-06",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "fix(badge): update accent badge fill colors to match Figma 75-tint ramp",
+    "category": "fix",
+    "scope": "badge",
+    "message": "update accent badge fill colors to match Figma 75-tint ramp",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/7c5eb16"
+  },
+  {
     "hash": "d994934",
     "date": "2026-11-06",
     "author": "dudesoamazing",

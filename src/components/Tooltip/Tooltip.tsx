@@ -40,7 +40,7 @@ const cx = (...parts: Array<string | false | null | undefined>) =>
    upward SVG is rotated per edge, which also swaps its 20×12 footprint to
    12×20 on the left/right edges, matching Figma.                            */
 
-const TooltipPointer: React.FC<{ edge: TooltipEdge }> = ({ edge }) => (
+export const TooltipPointer: React.FC<{ edge: TooltipEdge }> = ({ edge }) => (
   <span className={cx('fmdqui-tooltip__pointer', `fmdqui-tooltip__pointer--${edge}`)} aria-hidden="true">
     <svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

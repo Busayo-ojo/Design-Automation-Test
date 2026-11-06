@@ -197,6 +197,104 @@ export const DEMO_STACK_SERIES: ChartSeries[] = [
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   Multi-series Line Chart — Figma 11041:684273
+   6 colors × 4 stroke patterns = 24 distinct series styles.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+export type MultiSeriesColor = '1' | '2' | '3' | '4' | '5' | '6';
+export type MultiSeriesPattern = 'solid' | 'dashed' | 'dotted' | 'dash-dot';
+export type MultiSeriesInterval = 'quarter-hour' | 'hourly';
+export type MultiSeriesSize = 'default' | 'wide';
+
+export const MULTI_SERIES_COLORS: Record<MultiSeriesColor, string> = {
+  '1': '#6C299E', // Purple
+  '2': '#ED2885', // Pink
+  '3': '#3D89DF', // Blue
+  '4': '#F56630', // Orange
+  '5': '#A77FC5', // Lavender
+  '6': 'var(--color-secondary-500, #CC9933)', // FMDQ Gold
+};
+
+export const MULTI_SERIES_PATTERNS: Record<MultiSeriesPattern, string> = {
+  'solid': 'none',
+  'dashed': '6,3',
+  'dotted': '1.5,3',
+  'dash-dot': '8,3,1.5,3',
+};
+
+export const MULTI_SERIES_QH_TICKS = [
+  '10:00', '10:15', '10:30', '10:45',
+  '11:00', '11:15', '11:30', '11:45',
+  '12:00', '12:15', '12:30', '12:45',
+  '13:00', '13:15', '13:30', '13:45',
+  '14:00',
+];
+
+export const MULTI_SERIES_HOURLY_TICKS = [
+  '10 AM', '11 AM', '12 PM', '1 PM', '2 PM',
+];
+
+export const MULTI_SERIES_Y_TICKS = [40, 20, 0, -20, -40];
+
+export interface MultiSeriesItem {
+  id: string;
+  label: string;
+  color: MultiSeriesColor;
+  pattern: MultiSeriesPattern;
+  selected?: boolean;
+  data: number[]; // bps values (e.g. from -40 to +40)
+}
+
+/** 17 canonical securities from CASS benchmark monitoring — all starting strictly at 0 bps */
+export const DEMO_MULTI_SERIES: MultiSeriesItem[] = [
+  { id: 'sec-1', label: 'NTB 05/05/2027', color: '1', pattern: 'solid', selected: true, data: [0, 1, -2, -4, -4, -6, -8, -8, -8, -9, -9, -10, -11, -12, -14, -13, -15] },
+  { id: 'sec-2', label: 'NTB 07/10/2027', color: '2', pattern: 'solid', selected: true, data: [0, 0, 0, 2, 5, 3, 9, 13, 20, 27, 29, 33, 34, 32, 35, 36, 38] },
+  { id: 'sec-3', label: 'NTB 03/09/2027', color: '3', pattern: 'solid', selected: true, data: [0, 2, 4, 5, 9, 12, 12, 12, 15, 15, 15, 15, 16, 18, 20, 22, 24] },
+  { id: 'sec-4', label: 'NTB 04/02/2027', color: '4', pattern: 'solid', selected: true, data: [0, -1, 1, 1, 2, 4, 1, 0, 0, 0, -1, -2, -3, -1, 0, -2, -3] },
+  { id: 'sec-5', label: 'NTB 08/12/2027', color: '5', pattern: 'solid', selected: true, data: [0, -1, -1, 0, 1, 5, 6, 5, 6, 6, 6, 7, 8, 9, 11, 10, 12] },
+  { id: 'sec-6', label: 'NTB 01/07/2027', color: '6', pattern: 'solid', selected: true, data: [0, 0, 0, -2, 0, -1, 0, 1, 1, 1, 0, 1, 2, 2, 3, 4, 5] },
+  { id: 'sec-7', label: 'NTB 01/21/2027', color: '1', pattern: 'dashed', selected: true, data: [0, 1, 3, 3, 4, 5, 5, 6, 8, 11, 10, 13, 14, 15, 17, 18, 20] },
+  { id: 'sec-8', label: 'NTB 02/04/2027', color: '2', pattern: 'dashed', selected: true, data: [0, -2, -4, -8, -6, -9, -9, -12, -13, -14, -17, -16, -18, -20, -22, -21, -23] },
+  { id: 'sec-9', label: 'NTB 02/18/2027', color: '3', pattern: 'dashed', selected: true, data: [0, 3, 6, 9, 11, 11, 10, 9, 8, 7, 8, 8, 9, 10, 12, 11, 13] },
+  { id: 'sec-10', label: 'NTB 03/04/2027', color: '4', pattern: 'dashed', selected: true, data: [0, 1, 2, 1, 4, 3, 1, 1, -3, -5, -10, -10, -12, -15, -18, -17, -20] },
+  { id: 'sec-11', label: 'NTB 03/18/2027', color: '5', pattern: 'dashed', selected: true, data: [0, 2, 0, 3, 2, 4, 5, 6, 5, 4, 3, 4, 5, 6, 7, 8, 9] },
+  { id: 'sec-12', label: 'NTB 04/15/2027', color: '6', pattern: 'dashed', selected: true, data: [0, 0, 0, 0, -1, -5, -8, -7, -10, -10, -9, -13, -15, -18, -20, -22, -24] },
+  { id: 'sec-13', label: 'NTB 05/13/2027', color: '1', pattern: 'dotted', selected: true, data: [0, 3, 6, 10, 12, 12, 12, 14, 17, 18, 17, 18, 19, 21, 23, 25, 27] },
+  { id: 'sec-14', label: 'NTB 06/10/2027', color: '2', pattern: 'dotted', selected: true, data: [0, 1, 2, 3, 5, 6, 8, 8, 8, 8, 11, 15, 16, 18, 19, 21, 23] },
+  { id: 'sec-15', label: 'NTB 07/08/2027', color: '3', pattern: 'dotted', selected: true, data: [0, 2, 5, 3, 5, 3, 3, 4, 6, 8, 9, 7, 8, 9, 10, 12, 11] },
+  { id: 'sec-16', label: 'NTB 09/09/2027', color: '4', pattern: 'dotted', selected: true, data: [0, -2, -1, -1, -1, -1, 0, -1, 0, -2, -3, -3, -4, -5, -6, -5, -7] },
+  { id: 'sec-17', label: 'NTB 10/07/2027', color: '5', pattern: 'dotted', selected: true, data: [0, 0, -1, -4, -4, -5, -8, -7, -6, -5, -4, -3, -4, -5, -7, -8, -9] },
+];
+
+/**
+ * Generates randomized multi-series data where EVERY series starts strictly at 0 bps.
+ * Simulates realistic intraday basis point movements diverging from market open.
+ */
+export function generateRandomMultiSeries(
+  length = 17,
+  baseSecurities: MultiSeriesItem[] = DEMO_MULTI_SERIES
+): MultiSeriesItem[] {
+  return baseSecurities.map((sec, secIdx) => {
+    const data: number[] = [0]; // Strictly starts at 0 bps
+    let current = 0;
+    // Varied drift trajectory per security
+    const drift = ((secIdx % 5) - 2) * 0.4;
+    const volatility = 1.2 + (secIdx % 3) * 0.5;
+
+    for (let i = 1; i < length; i++) {
+      const delta = (Math.random() - 0.48) * volatility * 2.2 + drift;
+      current = Math.max(-38, Math.min(38, Number((current + delta).toFixed(1))));
+      data.push(current);
+    }
+
+    return {
+      ...sec,
+      data,
+    };
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    Pie / Donut / Radar — variant unions, palettes and geometry.
    Figma: Pie Chart 6252:41592 · Donut Chart 6252:41600 ·
           Legend & Values 6248:37098 · Radar Chart 6256:41865

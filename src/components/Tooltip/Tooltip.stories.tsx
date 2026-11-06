@@ -179,7 +179,7 @@ export const Interactive: StoryObj = {
 };
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   4 · PLAYGROUND
+   4 · PLAYGROUND (Regular Tooltip)
    ═══════════════════════════════════════════════════════════════════════════ */
 
 export const Playground: StoryObj<typeof Tooltip> = {
@@ -199,3 +199,99 @@ export const Playground: StoryObj<typeof Tooltip> = {
     primaryLabel: 'Primary CTA',
   },
 };
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   5 · TOOL TIP / TABLE (Figma COMPONENT_SET 11041:686955 — 12 variants)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+import { TableTooltip, type TableTooltipProps } from './TableTooltip';
+
+const SampleComplianceTable = () => (
+  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11px', fontFamily: 'DM Sans, sans-serif' }}>
+    <thead>
+      <tr style={{ borderBottom: '1px solid #E4E7EC', color: '#667185', textAlign: 'left' }}>
+        <th style={{ padding: '4px 0', fontWeight: 500 }}>Bank</th>
+        <th style={{ padding: '4px 0', fontWeight: 500, textAlign: 'right' }}>Score</th>
+        <th style={{ padding: '4px 0', fontWeight: 500, textAlign: 'right' }}>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style={{ borderBottom: '1px solid #F2F4F7' }}>
+        <td style={{ padding: '4px 0', color: '#101928' }}>Access Bank</td>
+        <td style={{ padding: '4px 0', color: '#101928', textAlign: 'right', fontWeight: 600 }}>98.2%</td>
+        <td style={{ padding: '4px 0', color: '#027A48', textAlign: 'right', fontWeight: 500 }}>Compliant</td>
+      </tr>
+      <tr style={{ borderBottom: '1px solid #F2F4F7' }}>
+        <td style={{ padding: '4px 0', color: '#101928' }}>Zenith Bank</td>
+        <td style={{ padding: '4px 0', color: '#101928', textAlign: 'right', fontWeight: 600 }}>96.5%</td>
+        <td style={{ padding: '4px 0', color: '#027A48', textAlign: 'right', fontWeight: 500 }}>Compliant</td>
+      </tr>
+      <tr>
+        <td style={{ padding: '4px 0', color: '#101928' }}>Fidelity Bank</td>
+        <td style={{ padding: '4px 0', color: '#101928', textAlign: 'right', fontWeight: 600 }}>82.1%</td>
+        <td style={{ padding: '4px 0', color: '#B54708', textAlign: 'right', fontWeight: 500 }}>Below 90%</td>
+      </tr>
+    </tbody>
+  </table>
+);
+
+export const TableTooltipPlayground: StoryObj<TableTooltipProps & Record<string, unknown>> = {
+  name: 'Table Tooltip (Playground)',
+  render: (args) => (
+    <div style={{ padding: 24, background: '#F8F9FA', minHeight: 300 }}>
+      <TableTooltip {...args}>
+        <SampleComplianceTable />
+      </TableTooltip>
+    </div>
+  ),
+  args: {
+    pointerPosition: 'top-left',
+    hasTitle: true,
+    title: 'Top 5 compliant and non-compliant DMBs',
+    hasPointer: true,
+  },
+  argTypes: {
+    pointerPosition: {
+      control: 'select',
+      options: TOOLTIP_POINTER_POSITIONS,
+      description: 'Figma pointer position variant — 12 edge + alignment options',
+      table: { category: 'Variant' },
+    },
+    hasTitle: { control: 'boolean', table: { category: 'Visibility' } },
+    hasPointer: { control: 'boolean', table: { category: 'Visibility' } },
+    title: { control: 'text', table: { category: 'Content' } },
+    // Suppress regular Tooltip controls
+    theme: { table: { disable: true } },
+    hasCloseButton: { table: { disable: true } },
+    hasButtons: { table: { disable: true } },
+    hasSecondaryCta: { table: { disable: true } },
+    hasPrimaryCta: { table: { disable: true } },
+    description: { table: { disable: true } },
+    secondaryLabel: { table: { disable: true } },
+    primaryLabel: { table: { disable: true } },
+  },
+};
+
+export const TableTooltipAllVariants: StoryObj = {
+  name: 'Table Tooltip (All 12 Figma Variants)',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'All 12 pointer position variants of `Tool tip / Table` (node 11041:686955). Holds table header and content rows in the Table slot with 12px container padding, 8px gap, and soft drop shadow.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 40, justifyContent: 'start', padding: 24, background: '#F8F9FA' }}>
+      {TOOLTIP_POINTER_POSITIONS.map((pos) => (
+        <Cell key={pos} label={`pointer position=${pos}`}>
+          <TableTooltip pointerPosition={pos}>
+            <SampleComplianceTable />
+          </TableTooltip>
+        </Cell>
+      ))}
+    </div>
+  ),
+};
+

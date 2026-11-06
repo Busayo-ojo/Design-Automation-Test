@@ -1,0 +1,149 @@
+@import '../../tokens.css';
+
+/* ==========================================================================
+   FMDQ Design System - Tooltip / Table
+   Matches Figma "✤ Tooltip ⚜️" / "Tool tip / Table" (11041:686955)
+   ========================================================================== */
+
+.fmdqui-table-tooltip {
+  --tooltip-surface: var(--color-neutral-white, #FFFFFF);
+  --tooltip-border: var(--color-neutral-100, #F0F2F5);
+  display: inline-flex;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  box-sizing: border-box;
+}
+
+/* ── Edge → Flex Axis ── */
+.fmdqui-table-tooltip--edge-top    { flex-direction: column; }
+.fmdqui-table-tooltip--edge-left   { flex-direction: row; }
+.fmdqui-table-tooltip--edge-bottom { flex-direction: column-reverse; }
+.fmdqui-table-tooltip--edge-right  { flex-direction: row-reverse; }
+
+/* ── Container — Figma: 330px wide, r8, 12px padding, 8px gap ── */
+.fmdqui-table-tooltip__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8, 8px);
+  width: 330px;
+  padding: 12px;
+  box-sizing: border-box;
+  background-color: var(--tooltip-surface);
+  border: 1px solid var(--tooltip-border);
+  border-radius: var(--radius-8, 8px);
+  box-shadow: 0 0 3px -1px rgba(16, 25, 40, 0.04), 0 14px 22px -9px rgba(16, 25, 40, 0.14);
+}
+
+/* ── Title — Figma: DM Sans SemiBold 12px, #101928 ── */
+.fmdqui-table-tooltip__title {
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -0.48px;
+  color: var(--color-neutral-900, #101928);
+  margin: 0;
+}
+
+/* ── Table Slot ── */
+.fmdqui-table-tooltip__table-slot {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Pointer Styling & Alignment
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-table-tooltip .fmdqui-tooltip__pointer {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.fmdqui-table-tooltip .fmdqui-tooltip__pointer-shape {
+  fill: var(--tooltip-surface);
+  stroke: var(--tooltip-border);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+
+/* Top / bottom edges */
+.fmdqui-table-tooltip--edge-top .fmdqui-tooltip__pointer,
+.fmdqui-table-tooltip--edge-bottom .fmdqui-tooltip__pointer {
+  width: 330px;
+  height: 12px;
+  padding: 0 var(--spacing-16, 16px);
+  box-sizing: border-box;
+  align-items: center;
+  margin-bottom: -1px;
+}
+
+.fmdqui-table-tooltip--edge-bottom .fmdqui-tooltip__pointer {
+  margin-bottom: 0;
+  margin-top: -1px;
+  transform: rotate(180deg);
+}
+
+/* Left / right edges */
+.fmdqui-table-tooltip--edge-left .fmdqui-tooltip__pointer,
+.fmdqui-table-tooltip--edge-right .fmdqui-tooltip__pointer {
+  width: 12px;
+  align-self: stretch;
+  padding: var(--spacing-16, 16px) 0;
+  box-sizing: border-box;
+  justify-content: center;
+  margin-right: -1px;
+}
+
+.fmdqui-table-tooltip--edge-right .fmdqui-tooltip__pointer {
+  margin-right: 0;
+  margin-left: -1px;
+}
+
+.fmdqui-table-tooltip--edge-left .fmdqui-tooltip__pointer svg,
+.fmdqui-table-tooltip--edge-right .fmdqui-tooltip__pointer svg {
+  margin: 0 -4px;
+}
+
+.fmdqui-table-tooltip--edge-left .fmdqui-tooltip__pointer svg {
+  transform: rotate(-90deg);
+}
+
+.fmdqui-table-tooltip--edge-right .fmdqui-tooltip__pointer svg {
+  transform: rotate(90deg);
+}
+
+/* Alignment along top/bottom */
+.fmdqui-table-tooltip--edge-top.fmdqui-table-tooltip--align-start .fmdqui-tooltip__pointer,
+.fmdqui-table-tooltip--edge-bottom.fmdqui-table-tooltip--align-start .fmdqui-tooltip__pointer {
+  justify-content: flex-start;
+}
+
+.fmdqui-table-tooltip--edge-top.fmdqui-table-tooltip--align-center .fmdqui-tooltip__pointer,
+.fmdqui-table-tooltip--edge-bottom.fmdqui-table-tooltip--align-center .fmdqui-tooltip__pointer {
+  justify-content: center;
+}
+
+.fmdqui-table-tooltip--edge-top.fmdqui-table-tooltip--align-end .fmdqui-tooltip__pointer,
+.fmdqui-table-tooltip--edge-bottom.fmdqui-table-tooltip--align-end .fmdqui-tooltip__pointer {
+  justify-content: flex-end;
+}
+
+/* Alignment along left/right */
+.fmdqui-table-tooltip--edge-left.fmdqui-table-tooltip--align-start .fmdqui-tooltip__pointer,
+.fmdqui-table-tooltip--edge-right.fmdqui-table-tooltip--align-start .fmdqui-tooltip__pointer {
+  align-items: flex-start;
+}
+
+.fmdqui-table-tooltip--edge-left.fmdqui-table-tooltip--align-center .fmdqui-tooltip__pointer,
+.fmdqui-table-tooltip--edge-right.fmdqui-table-tooltip--align-center .fmdqui-tooltip__pointer {
+  align-items: center;
+}
+
+.fmdqui-table-tooltip--edge-left.fmdqui-table-tooltip--align-end .fmdqui-tooltip__pointer,
+.fmdqui-table-tooltip--edge-right.fmdqui-table-tooltip--align-end .fmdqui-tooltip__pointer {
+  align-items: flex-end;
+}
+

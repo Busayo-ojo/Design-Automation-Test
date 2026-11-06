@@ -60,6 +60,25 @@ Slices start at 12 o'clock and sweep clockwise on the primary ramp used as a seq
 
 <Canvas of={ChartStories.DonutWithValues} />
 
+## Multi-series Line Chart (CASS Benchmarks)
+
+Built for dense benchmark monitoring with 17+ securities. Each security is assigned a persistent color and stroke pattern (6 colors × 4 dash patterns = 24 unique styles) so toggling a series never repaints the remaining lines.
+
+Includes standalone atoms:
+- **`LineChartLegendItem`** (`11041:684142`): 48 variants composed of `Checkbox` + `Swatch` + 12px label.
+- **`LineChartNowMarker`** (`11041:684143`): Vertical indicator line with 10px `"Now"` label.
+- **`LineChartThreshold`** (`11041:684146`): Dashed alert threshold rule with 10px alert copy (e.g. `Alert at ±25 bps`).
+
+<Canvas of={ChartStories.MultiSeriesDefault} />
+
+<Canvas of={ChartStories.MultiSeriesWide} />
+
+<Canvas of={ChartStories.MultiSeriesLegendItems} />
+
+<Canvas of={ChartStories.MultiSeriesAtoms} />
+
+---
+
 ## Radar
 
 <Canvas of={ChartStories.RadarAllVariants} />
@@ -94,6 +113,10 @@ Slices start at 12 o'clock and sweep clockwise on the primary ramp used as a seq
 | `Donut Chart` `6252:41600` | 7 | `DonutChart` |
 | `Legend & Values` `6248:37098` | 8 | `LegendValues` |
 | `Radar Chart` `6256:41865` | 16 | `RadarChart` |
+| `Line Chart / Multi-series` `11041:684273` | 4 | `MultiSeriesLineChart` |
+| `Line Chart / Legend item` `11041:684142` | 48 | `LineChartLegendItem` |
+| `Line Chart / Now marker` `11041:684143` | 1 | `LineChartNowMarker` |
+| `Line Chart / Threshold` `11041:684146` | 1 | `LineChartThreshold` |
 
 ## Palette report
 
