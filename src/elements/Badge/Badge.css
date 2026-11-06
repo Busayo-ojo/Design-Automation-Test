@@ -76,7 +76,7 @@
   color: var(--color-neutral-white);
 }
 .fmdqui-badge--color-blue.fmdqui-badge--type-accent {
-  background-color: var(--color-primary-50);
+  background-color: var(--color-primary-75);
   color: var(--color-fmdq-blue);
 }
 .fmdqui-badge--color-blue.fmdqui-badge--type-outline {
@@ -90,7 +90,7 @@
   color: var(--color-neutral-white);
 }
 .fmdqui-badge--color-orange.fmdqui-badge--type-accent {
-  background-color: var(--color-secondary-50);
+  background-color: var(--color-secondary-75);
   color: var(--color-secondary-700);
 }
 .fmdqui-badge--color-orange.fmdqui-badge--type-outline {
@@ -104,7 +104,7 @@
   color: var(--color-neutral-white);
 }
 .fmdqui-badge--color-success.fmdqui-badge--type-accent {
-  background-color: var(--color-success-50);
+  background-color: var(--color-success-75);
   color: var(--color-success-700);
 }
 .fmdqui-badge--color-success.fmdqui-badge--type-outline {
@@ -118,7 +118,7 @@
   color: var(--color-neutral-white);
 }
 .fmdqui-badge--color-warning.fmdqui-badge--type-accent {
-  background-color: var(--color-warning-50);
+  background-color: var(--color-warning-75);
   color: var(--color-warning-700);
 }
 .fmdqui-badge--color-warning.fmdqui-badge--type-outline {
@@ -132,7 +132,7 @@
   color: var(--color-neutral-white);
 }
 .fmdqui-badge--color-error.fmdqui-badge--type-accent {
-  background-color: var(--color-error-50);
+  background-color: var(--color-error-75);
   color: var(--color-error-700);
 }
 .fmdqui-badge--color-error.fmdqui-badge--type-outline {
@@ -146,7 +146,7 @@
   color: var(--color-neutral-white);
 }
 .fmdqui-badge--color-neutral.fmdqui-badge--type-accent {
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-neutral-200);
   color: var(--color-neutral-700);
 }
 .fmdqui-badge--color-neutral.fmdqui-badge--type-outline {
