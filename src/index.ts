@@ -30,6 +30,7 @@ export * from './components/Breadcrumbs';
 export * from './components/Calendar';
 export * from './components/Tooltip';
 export * from './components/FileUpload';
+export * from './components/Charts';
 
 // Layout
 export * from './layout/AppLayout';

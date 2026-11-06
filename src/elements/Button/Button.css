@@ -211,9 +211,8 @@
     cursor: not-allowed !important;
 }
 
-.fmdqui-button--text:hover:not(:disabled) {
-    text-decoration: underline;
-}
+/* Text buttons do not underline on hover — the colour shift in each
+   `--type-*` rule above carries the hover affordance. */
 
 /* Special Buttons */
 .fmdqui-button--success {

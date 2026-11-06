@@ -223,6 +223,17 @@
   --color-dropzone-success-surface: #FBFEFC;   /* Big Upload 6100:14546, success */
   --color-dropzone-error-surface: #FEFBFB;     /* Big Upload 6100:14546, error */
 
+  /* ── Charts ──
+     Figma "✤ Charts" categorical slots 4–6 had no existing token. Slots 1–3
+     map to primary-400 / secondary-400 / warning-500. */
+  --color-chart-green: #60B527;               /* Legends 6240:33124, slot 4 */
+  --color-chart-navy: #022859;                /* Legends 6240:33124, slot 5 */
+  --color-chart-pink: #EE46BC;                /* Legends 6240:33124, slot 6 */
+  --color-chart-band: #F7F9FC;                /* Radar 6256:41865, alternating ring fill */
+  --color-chart-value-label: #4E5969;         /* Legend & Values 6248:37098, label */
+  --color-chart-value-figure: #1D2129;        /* Legend & Values 6248:37098, figure */
+  --color-chart-value-unit: #86909C;          /* Legend & Values 6248:37098, unit */
+
   /* ── Dropdown menu popover elevation ──
      Figma: Dropdown / menu items (node 2190:54213) — 3-layer drop shadow.
      Distinct from --shadow-normal-md: adds a 1px hairline ring as the 3rd layer. */

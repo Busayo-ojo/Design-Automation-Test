@@ -35,6 +35,35 @@
 | Tooltip | Complete | Components/💬 Tooltip | 2026-11-05 | Figma 6237:23991; 24 variants (pointer position 12 × theme 2) + 5 booleans; composes Button (text, primary/secondary, sm) and the multiply icon; added --shadow-tooltip-dark. `TooltipTrigger` implements all five Figma Best-Practice hover rules |
 | File Upload | Complete | Components/📎 File Upload | 2026-11-05 | Figma file type 3355:170664 (6), file upload states 3355:171475 (4), Small upload 6092:3073 (4), Big Upload 6100:14546 (4), Mutilple Uploads 6100:15099 (7 booleans) = 19 variants; composes Button + ProgressBar; added --color-file-jpg, --color-file-mp3 and three dropzone surface tokens |
 
+| Charts / Legends | Complete | Components/📈 Charts → Elements / 🏷️ Legend | 2026-11-05 | Figma 6240:33124; 2 variants (Orientation); 8px dot + 14px neutral-500 label |
+| Charts / y axis + X-axis | Complete | Components/📈 Charts (ChartGrid, ChartXAxis) | 2026-11-05 | Figma 6240:33372 (4 variants) & 6240:33501 (3 variants); neutral-300 rule, dashed 4/4 when broken |
+| Line Chart | Complete | Components/📈 Charts → Line | 2026-11-05 | Figma 6257:42734; 12 variants (Type 4 × Quantity 3); hand-built SVG, 2px round-join strokes |
+| Basic Bar Chart | Complete | Components/📈 Charts → Bar | 2026-11-05 | Figma 6306:4216; 3 variants; 13px bars, 4px top-rounded ends, blue sequential ramp |
+| Percent Stacked Bar Chart | Complete | Components/📈 Charts → Bar | 2026-11-05 | Figma 6287:6146; 3 variants; columns normalised to 100%, 2px segment gaps |
+
+| Pie Chart | Complete | Components/📈 Charts → Pie | 2026-11-05 | Figma 6252:41592; 14 variants (Quantity 2–8 × Text); starts at 12 o'clock, primary ramp 50→600 as a sequential scale |
+| Donut Chart | Complete | Components/📈 Charts → Donut | 2026-11-05 | Figma 6252:41600; 7 variants; the pie with innerRadius 0.8 |
+| Legend & Values | Complete | Components/📈 Charts → Elements / 📐 Legend & Values | 2026-11-05 | Figma 6248:37098; 8 variants (Direction × Quantity); 4px bar + 20px Medium figure |
+| Radar Chart | Complete | Components/📈 Charts → Radar | 2026-11-05 | Figma 6256:41865; 16 variants (Quantity 5/6/7/12 × Chart type × Background); 5 rings, 24% accent fill, 6px points with white ring |
+
+> **Figma font-drift correction (2026-11-05).** A file-wide audit of 623,401 nodes found 441 text runs not using DM Sans or Rubik. **362 were genuine drift and were normalised to DM Sans** (weight preserved): Helvetica Neue (209) and PingFang SC (72) on chart axis and radar category labels, General Sans (78) mostly in Page Footer instances, Archivo (7), and Helvetica Bold (3) on Footers. 288 were on the Charts page; the remaining 74 spanned 34 other pages. Zero failures; 102 sat inside component instances and now carry local overrides — the source footer component is worth fixing separately so those overrides can be cleared.
+>
+> **Deliberately left alone:** the remaining 79 runs are intentional, not drift — Poppins / Nunito / Sora "Aa" typeface specimens on Typography, Courier Prime on Code Snippets (correctly monospace), SF Pro Text "9:41" iOS status-bar mockups, and Bricolage Grotesque / Syne / Croissant One / Instrument Serif brand display type on Foundations and UI. A blanket fix would have destroyed all of these.
+
+## Charts — approach and palette report (2026-11-05)
+
+**Hand-built SVG, no charting dependency.** Chosen over Recharts so the library adds no bundle cost for consumers and so Figma parity is exact. Consistent with every other component here.
+
+| Figma element | Decision | Component |
+| :--- | :--- | :--- |
+| `Legends` / `y axis` / `X-axis` | genuinely new primitives | `ChartLegend`, `ChartGrid`, `ChartXAxis` |
+| `Line Chart` / `Basic Bar` / `Percent Stacked Bar` | genuinely new composites | `LineChart`, `BarChart`, `StackedBarChart` |
+| scales, spline + rounded-bar path builders | genuinely new utilities | `src/components/Charts/chartUtils.ts` |
+
+> **Palette finding (2026-11-05).** The categorical chart palette fails the colour validator. Amber `#F3A218` ↔ orange `#F56630` measure ΔE **13.7** for normal vision (below the 15 floor), and orange `#F56630` ↔ green `#60B527` measure ΔE **0.9** under deuteranopia — effectively identical for red-green colour blindness. Three slots also fall below 3:1 contrast against the chart surface. Figma is the source of truth so the palette ships unchanged; mitigations are a legend that always renders, an optional `showTable` view, and `CHART_PALETTE_ACCESSIBLE` as a validated opt-in (worst pair ΔE 21.1 deutan / 25.7 normal). The bar ramp (`primary-600/400/200`) passes at ΔE 15.3 deutan and 15.9 normal. Added tokens: `--color-chart-green`, `--color-chart-navy`, `--color-chart-pink`.
+
+> **Page complete (2026-11-05).** All six chart families from "✤ Charts" are built: Line, Basic Bar, Percent Stacked Bar, Pie, Donut and Radar — 63 Figma variants total. Pie and donut use the primary ramp as a sequential scale, so the categorical palette finding above does not affect them. Radar uses two categorical slots (blue/amber), which separate cleanly. Added tokens: `--color-chart-band`, `--color-chart-value-label`, `--color-chart-value-figure`, `--color-chart-value-unit`.
+
 ## Reuse mapping — Tooltip & File Upload (rule §0, recorded before coding)
 
 | Figma element | Decision | Component |

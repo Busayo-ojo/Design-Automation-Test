@@ -25,6 +25,16 @@
    - Every padding, margin, stroke, corner radius, text style, and color token must be derived from existing tokens or master components.
    - If a business requirement or screen interaction is not explicitly documented, leave a `// TODO(design): <question>` and clarify with stakeholders rather than inventing arbitrary visual patterns.
 
+4. **Project Personality & Systematic Variation (Avoiding Cookie-Cutter Interfaces)**:
+   - **Multi-Variant Design Philosophy**: The design system is deliberately architected with rich variant axes across component sets (themes, sizes, density, elevations, hierarchies). When designing a new project or portal from scratch, **it is fully encouraged to vary components and visual attributes** so distinct products across the organization possess their own clear visual identity rather than looking identical.
+   - **Approved Levers of Project Variation**:
+     - **Theme & Color Modes**: Select between *Light Mode*, *Dark Mode*, or branded *Dark Blue / Navy Theme* (e.g., specialized operational desks like DRP vs. general reporting portals vs. public member tools) across sidebars, surfaces, modals, and tooltips.
+     - **Component Sizes & Density**: Choose appropriate density modes (`sm`, `md`, `lg`, or `compact` vs. `default`) matching the target user experience (e.g., dense, high-frequency data grids for traders vs. spacious, breathable layouts for onboarding and compliance submission workflows).
+     - **Corner Radius**: Establish a purposeful curvature profile for the product (e.g., softer `--radius-16` / `--radius-12` for administrative and conversational workflows vs. crisp `--radius-6` / `--radius-8` for dense financial displays), always respecting the *Concentric Corners* rule for nested children.
+     - **Shadows & Elevation**: Modulate visual depth using flat border-only cards (`--color-neutral-200`), soft elevated layers (`--shadow-soft-sm`), or high-contrast floating containers (`--shadow-modal`, `--shadow-tooltip-dark`).
+     - **Navigation & Structural Layouts**: Differentiate platforms by picking the structural layout that best suits their information architecture (e.g., Variant 1 Standard Sidebar, Variant 2 Top-Profile Sidebar, Collapsed 82px Icon-Only Sidebar, or TopBar navigation).
+   - **The Guiding Principle**: *Differentiate through the design system's built-in variants, modes, and tokens—never by inventing detached, unlinked vector shapes.* Every project achieves its own personality by creatively composing the official design system variants while preserving underlying component integrity and code compatibility.
+
 ---
 
 ## 2. Typography Standards & Anti-Rogue Rules
@@ -144,6 +154,29 @@
      - Caption naming: `Caption · <Flow Number>.<Step> <Role> · <Screen Description>`.
      - Screen naming: `<Flow Number>.<Step> <Role> · <Screen Description>`.
 
+3. **Concentric Corners & Nested Border Radius Geometry**:
+   - **Geometric Principle & Visual Harmony**:
+     - Concentric corners refer to the geometric and visual design principle where nested rounded shapes (containers, cards, preview frames, inner input wells) align their outer and inner curves to share a common visual center.
+     - **Why it matters**: Using identical or arbitrary corner radii across nested boxes breaks visual flow — identical radii make inner corners look disproportionately blunt, while arbitrary values make them appear sharp and discordant. Concentric corners scale the inner radius proportionally so that the visual gap (padding) between boundaries remains uniform through the curve.
+   - **Mathematical Rule of Thumb**:
+     - For any two nested rounded rectangles or frames, the inner corner radius ($r_{\text{inner}}$) must be derived from the outer corner radius ($r_{\text{outer}}$) minus the padding or inset distance ($d$) between them:
+       $$r_{\text{inner}} = \max(0, r_{\text{outer}} - d)$$
+   - **Design Token Application & Practical Examples**:
+     - **Card with Inner Media / Section**:
+       - Outer card radius: `16px` (`--radius-16`), padding: `8px`.
+       - Inner element radius: $16\text{px} - 8\text{px} = \mathbf{8\text{px}}$ (`--radius-8`).
+     - **Modal / Flyout Container**:
+       - Outer container radius: `24px` (`--radius-24`), padding: `12px`.
+       - Inner summary box / banner radius: $24\text{px} - 12\text{px} = \mathbf{12\text{px}}$ (`--radius-12`).
+     - **Form Group / Search Well**:
+       - Outer panel radius: `12px` (`--radius-12`), padding: `8px`.
+       - Inner control radius: $12\text{px} - 8\text{px} = \mathbf{4\text{px}}$ (`--radius-4`).
+     - **When Padding Exceeds or Equals Outer Radius ($d \ge r_{\text{outer}}$)**:
+       - $r_{\text{inner}}$ resolves to `0px` (sharp corner). If subtle visual rounding is strictly required by component guidelines, use a minimal `--radius-4` (4px), but **never** match or exceed the outer radius.
+   - **Strict Anti-Patterns**:
+     - ❌ **Never copy the outer container's radius to inner elements**: e.g., setting both the outer card and the inner child container to `16px`. This produces distorted, pinched corner gutters.
+     - ❌ **No arbitrary radius guesses**: Always derive inner radii via $r_{\text{outer}} - d$ and map to the nearest design token (`--radius-4`, `--radius-6`, `--radius-8`, `--radius-12`, `--radius-16`, `--radius-24`).
+
 ---
 
 ## 6. Color Harmony & Palette Tokens
@@ -206,3 +239,4 @@ Before completing any Figma UI design or flow creation task, execute this checkl
 7. [ ] **Captions Aligned**: Does every screen have its `Caption` frame positioned at `y = 23px` relative to the section top?
 8. [ ] **Action Path Prototyping**: Are primary CTAs, tabs, back buttons, and sidebar items interactive?
 9. [ ] **Audit Table Sync**: Is `Prototype audit · dead ends` updated with the new link count and resolved CTAs?
+10. [ ] **Concentric Corners Check**: Are nested rounded shapes (cards, banners, inner preview boxes, search wells) geometrically concentric using $r_{\text{inner}} = \max(0, r_{\text{outer}} - d)$ instead of duplicating the outer container's radius?
