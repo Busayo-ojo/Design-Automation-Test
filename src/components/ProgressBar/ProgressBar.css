@@ -35,7 +35,7 @@
   color: var(--color-neutral-500, #667185);
 }
 
-/* ── Track & Fill (Figma sizes: sm=8px, lg=12px, track radius=20px, fill radius=0) ── */
+/* ── Track & Fill (Figma sizes: sm=8px, lg=12px; track radius: sm=12px, lg=20px; fill radius=24px pill) ── */
 .fmdqui-progress-bar__track {
   width: 100%;
   background-color: var(--color-neutral-100, #F0F2F5);
@@ -47,15 +47,17 @@
 
 .fmdqui-progress-bar__track--sm {
   height: 8px;
+  border-radius: 12px;
 }
 
 .fmdqui-progress-bar__track--lg {
   height: 12px;
+  border-radius: 20px;
 }
 
 .fmdqui-progress-bar__fill {
   height: 100%;
-  border-radius: 0;
+  border-radius: 24px;
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   background-color: var(--color-fmdq-blue, #1D326D);
 }

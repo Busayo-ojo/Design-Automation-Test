@@ -35,6 +35,17 @@
      - **Navigation & Structural Layouts**: Differentiate platforms by picking the structural layout that best suits their information architecture (e.g., Variant 1 Standard Sidebar, Variant 2 Top-Profile Sidebar, Collapsed 82px Icon-Only Sidebar, or TopBar navigation).
    - **The Guiding Principle**: *Differentiate through the design system's built-in variants, modes, and tokens—never by inventing detached, unlinked vector shapes.* Every project achieves its own personality by creatively composing the official design system variants while preserving underlying component integrity and code compatibility.
 
+5. **New Element Creation — Flag & Approval Protocol (Reusable Component Mandate)**:
+   - **Flag for Attention First**: If you must create anything that does not currently exist in the design system (a new component, composite pattern, control, or layout structure), **you MUST NOT create it silently, ad-hoc, or inline**. First, explicitly flag it for the user's attention and wait for approval, detailing why existing components cannot satisfy the requirement.
+   - **Check for Existing Building Blocks (Hierarchical Composition)**:
+     - **For New Components**: Thoroughly audit and reuse existing foundational elements/primitives (`<Button>`, `<Input>`, `<Badge>`, `<Avatar>`, `<Icon>`, `<Dropdown>`, `<Tabs>`, etc.) as internal building blocks. Always assemble new components by composing these existing primitives instead of building duplicate or redundant inline sub-elements.
+     - **For Layouts**: Thoroughly check for existing structural components and composites (`<Sidebar>`, `<TopBar>`, `<PageHeader>`, `<Table>`, `<Modal>`, `<Metrics Card>`, `<Breadcrumbs>`, `<Pagination>`) that can assemble the layout. Never construct redundant or parallel layout wrappers when existing components can be composed to form the page structure.
+   - **Mandatory Reusable Component Architecture Upon Approval**: When the user approves creation, you must build it as a **first-class, reusable design system component**—never as a one-off frame, screen-specific patch, or detached vector approximation.
+   - **Required Component Anatomy**:
+     - **Variants**: Define all relevant variant axes systematically (e.g., `size`: `sm` | `md` | `lg`; `type` / `style`: `primary` | `secondary` | `outline` | `ghost`; `state`: `default` | `hover` | `focused` | `disabled` | `error`; `theme`: `light` | `dark` | `dark-blue`).
+     - **Variables & Tokens**: Bind all fills, strokes, corner radii, padding, and typography strictly to design system tokens and variables (never hardcoded arbitrary hex or pixel values).
+     - **Boolean Properties**: Expose explicit boolean property flags for toggleable child elements (e.g., `hasIcon`, `hasBadge`, `hasHelperText`, `hasLabel`, `isClosable`).
+
 ---
 
 ## 2. Typography Standards & Anti-Rogue Rules
@@ -240,3 +251,4 @@ Before completing any Figma UI design or flow creation task, execute this checkl
 8. [ ] **Action Path Prototyping**: Are primary CTAs, tabs, back buttons, and sidebar items interactive?
 9. [ ] **Audit Table Sync**: Is `Prototype audit · dead ends` updated with the new link count and resolved CTAs?
 10. [ ] **Concentric Corners Check**: Are nested rounded shapes (cards, banners, inner preview boxes, search wells) geometrically concentric using $r_{\text{inner}} = \max(0, r_{\text{outer}} - d)$ instead of duplicating the outer container's radius?
+11. [ ] **New Component Creation & Composition Governance**: If anything new was introduced, was it flagged and approved by the user first? Were existing elements reused as building blocks for the component, and existing components reused to assemble layouts (avoiding redundant creations)? Is it architected as a reusable component with relevant variants, variables, and boolean properties?

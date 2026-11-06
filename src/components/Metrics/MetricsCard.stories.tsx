@@ -114,3 +114,163 @@ export const PortalKpiGrid: Story = {
     </div>
   ),
 };
+
+// ─── 3. Metrics Card / Compliance (Figma Node 11039:683266) ───────────────────
+
+import { MetricsComplianceCard, type MetricsComplianceCardProps } from './MetricsComplianceCard';
+
+export const ComplianceCardInteractive: StoryObj<MetricsComplianceCardProps & Record<string, unknown>> = {
+  name: 'Compliance Card (Interactive)',
+  render: (args) => (
+    <div style={{ width: '280px', padding: '16px', background: '#F8F9FA' }}>
+      <MetricsComplianceCard {...args} />
+    </div>
+  ),
+  args: {
+    title: 'Firm order placement',
+    value: '92%',
+    status: 'compliant',
+    bar: 'single',
+    hasBar: true,
+    hasDetails: true,
+    label1: 'Required',
+    figure1: '1,400,000',
+    label2: 'Placed',
+    figure2: '1,290,000',
+  },
+  argTypes: {
+    status: {
+      control: 'radio',
+      options: ['compliant', 'below'],
+      description: 'Compliance status (green compliant >90% vs amber below 90%)',
+      table: { category: 'Variant' },
+    },
+    bar: {
+      control: 'radio',
+      options: ['single', 'split'],
+      description: 'Bar visualization mode: continuous single or dual passed/failed split',
+      table: { category: 'Variant' },
+    },
+    title: {
+      control: 'text',
+      description: 'Metric heading (Figma: "Title")',
+      table: { category: 'Content' },
+    },
+    value: {
+      control: 'text',
+      description: 'Compliance percentage or score (Figma: "Value")',
+      table: { category: 'Content' },
+    },
+    hasBar: {
+      control: 'boolean',
+      description: 'Controls progress bar visibility (Figma: "has bar")',
+      table: { category: 'Visibility' },
+    },
+    hasDetails: {
+      control: 'boolean',
+      description: 'Controls 2-row breakdown visibility (Figma: "has details")',
+      table: { category: 'Visibility' },
+    },
+    badgeLabel: {
+      control: 'text',
+      description: 'Custom override for badge text (defaults to "Compliant" or "Below 90%")',
+      table: { category: 'Content' },
+    },
+    label1: { control: 'text', table: { category: 'Details' } },
+    figure1: { control: 'text', table: { category: 'Details' } },
+    label2: { control: 'text', table: { category: 'Details' } },
+    figure2: { control: 'text', table: { category: 'Details' } },
+    // Suppress inherited controls from MetricsCard
+    type: { table: { disable: true } },
+    orientation: { table: { disable: true } },
+    hasIcon: { table: { disable: true } },
+    hasBadge: { table: { disable: true } },
+    hasSubtext: { table: { disable: true } },
+    ctaLabel: { table: { disable: true } },
+    icon: { table: { disable: true } },
+    badge: { table: { disable: true } },
+    subtext: { table: { disable: true } },
+    onCtaClick: { table: { disable: true } },
+  },
+};
+
+export const ComplianceCardMatrix: StoryObj = {
+  name: 'Compliance Card (All 4 Figma Variants)',
+  render: () => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 264px)',
+        gap: '24px',
+        padding: '24px',
+        background: '#F8F9FA',
+        borderRadius: '16px',
+      }}
+    >
+      <div>
+        <div style={{ fontSize: '11px', fontWeight: 700, color: '#667185', marginBottom: '8px', textTransform: 'uppercase' }}>
+          status=compliant, bar=single
+        </div>
+        <MetricsComplianceCard
+          status="compliant"
+          bar="single"
+          title="Firm order placement"
+          value="92%"
+          label1="Required"
+          figure1="1,400,000"
+          label2="Placed"
+          figure2="1,290,000"
+        />
+      </div>
+
+      <div>
+        <div style={{ fontSize: '11px', fontWeight: 700, color: '#667185', marginBottom: '8px', textTransform: 'uppercase' }}>
+          status=compliant, bar=split
+        </div>
+        <MetricsComplianceCard
+          status="compliant"
+          bar="split"
+          title="Firm order placement"
+          value="92%"
+          label1="Required"
+          figure1="1,400,000"
+          label2="Placed"
+          figure2="1,290,000"
+        />
+      </div>
+
+      <div>
+        <div style={{ fontSize: '11px', fontWeight: 700, color: '#667185', marginBottom: '8px', textTransform: 'uppercase' }}>
+          status=below, bar=single
+        </div>
+        <MetricsComplianceCard
+          status="below"
+          bar="single"
+          title="Firm order placement"
+          value="84%"
+          label1="Required"
+          figure1="1,400,000"
+          label2="Placed"
+          figure2="1,176,000"
+        />
+      </div>
+
+      <div>
+        <div style={{ fontSize: '11px', fontWeight: 700, color: '#667185', marginBottom: '8px', textTransform: 'uppercase' }}>
+          status=below, bar=split
+        </div>
+        <MetricsComplianceCard
+          status="below"
+          bar="split"
+          title="Firm order placement"
+          value="84%"
+          label1="Required"
+          figure1="1,400,000"
+          label2="Placed"
+          figure2="1,176,000"
+        />
+      </div>
+    </div>
+  ),
+};
+

@@ -146,7 +146,8 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         <div
           className={`fmdqui-progress-bar__fill fmdqui-progress-bar__fill--${color}`}
           style={{
-            width: percentString,
+            width: clamped === 0 ? '0%' : percentString,
+            opacity: clamped === 0 ? 0 : 1,
             ...(fillColor ? { backgroundColor: fillColor } : {}),
           }}
         />
