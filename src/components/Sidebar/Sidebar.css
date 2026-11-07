@@ -161,10 +161,15 @@
   color: var(--color-neutral-700, #344054);
 }
 
-/* Search input theming inside dark sidebars */
-.fmdqui-sidebar--theme-blue .fmdqui-input-wrapper,
+/* Search input theming inside dark sidebars (Figma 3167:145002 & 11267:1275309) */
+.fmdqui-sidebar--theme-blue .fmdqui-input-wrapper {
+  background-color: var(--color-primary-600, #034592) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: var(--color-neutral-white, #FFFFFF) !important;
+}
+
 .fmdqui-sidebar--theme-dark-blue .fmdqui-input-wrapper {
-  background-color: var(--color-primary-800, #012657) !important;
+  background-color: var(--color-primary-700, #1D326D) !important;
   border-color: rgba(255, 255, 255, 0.15) !important;
   color: var(--color-neutral-white, #FFFFFF) !important;
 }
@@ -173,6 +178,15 @@
   background-color: var(--color-neutral-800, #1D2739) !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
   color: var(--color-neutral-white, #FFFFFF) !important;
+}
+
+/* Focus inside dark sidebars: the default --color-focus-ring is a pale ring
+   meant for white surfaces and glares on navy/grey. Figma: Focus/Shadow Dark (0 0 0 4px rgba(22, 113, 217, 0.24)) */
+.fmdqui-sidebar--theme-blue .fmdqui-input-wrapper:focus-within,
+.fmdqui-sidebar--theme-dark-blue .fmdqui-input-wrapper:focus-within,
+.fmdqui-sidebar--theme-dark-grey .fmdqui-input-wrapper:focus-within {
+  border-color: var(--color-primary-400, #1671D9) !important;
+  box-shadow: 0 0 0 4px rgba(22, 113, 217, 0.24) !important;
 }
 
 .fmdqui-sidebar--theme-blue .fmdqui-input,
@@ -348,8 +362,22 @@
   outline: none;
 }
 
-.fmdqui-sidebar-menu-item:focus-visible {
+.fmdqui-sidebar-menu-item:focus-visible,
+.fmdqui-sidebar-sub-item:focus-visible {
   outline: 2px solid var(--color-primary-600, #034592);
+  outline-offset: -2px;
+}
+
+/* Focus inside dark sidebars uses Primary/400 (#1671D9) for visible contrast against navy & dark grey */
+.fmdqui-sidebar--theme-blue .fmdqui-sidebar-menu-item:focus-visible,
+.fmdqui-sidebar--theme-dark-blue .fmdqui-sidebar-menu-item:focus-visible,
+.fmdqui-sidebar--theme-dark-grey .fmdqui-sidebar-menu-item:focus-visible,
+.fmdqui-sidebar-sub-item--theme-blue:focus-visible,
+.fmdqui-sidebar-sub-item--theme-secondary-blue:focus-visible,
+.fmdqui-sidebar-sub-item--theme-dark-blue:focus-visible,
+.fmdqui-sidebar-sub-item--theme-dark:focus-visible,
+.fmdqui-sidebar-sub-item--theme-dark-grey:focus-visible {
+  outline: 2px solid var(--color-primary-400, #1671D9);
   outline-offset: -2px;
 }
 
