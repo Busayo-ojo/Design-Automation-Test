@@ -9,6 +9,7 @@ export * from './elements/FormControl';
 export * from './elements/Divider';
 export * from './elements/Logo';
 export * from './elements/Scrollbar';
+export * from './elements/Icon/MiscIcon';
 export * from './foundations/icons';
 
 // Components

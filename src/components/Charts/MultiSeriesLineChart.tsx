@@ -245,8 +245,8 @@ export const MultiSeriesLineChart = forwardRef<HTMLDivElement, MultiSeriesLineCh
     };
 
     // Plot geometry
-    // Figma default size: 496px wide, wide size: 1062px wide.
-    const plotWidth = size === 'wide' ? 1062 : 496;
+    // Figma default size: 510px wide, wide size: 1078px wide (Figma 11041:684273).
+    const plotWidth = size === 'wide' ? 1078 : 510;
     const plotHeight = 264;
     const padLeft = 40;
     const padRight = 16;

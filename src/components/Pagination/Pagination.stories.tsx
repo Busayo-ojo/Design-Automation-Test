@@ -752,7 +752,6 @@ export const TableFooterWithStrokes: StoryObj = {
             borderBottomLeftRadius: '12px',
             borderBottomRightRadius: '12px',
             padding: '12px 24px 16px 24px',
-            backgroundColor: '#FFFFFF',
           }}
         />
       </div>

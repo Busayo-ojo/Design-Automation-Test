@@ -1,5 +1,49 @@
 [
   {
+    "hash": "103b2ad",
+    "date": "2026-11-06",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "feat: integrate ColumnMenu popover into Table header cells and update styling",
+    "category": "feat",
+    "scope": "",
+    "message": "integrate ColumnMenu popover into Table header cells and update styling",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/103b2ad"
+  },
+  {
+    "hash": "c7a5502",
+    "date": "2026-11-06",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "refactor: format ColumnMenu files with trailing newlines",
+    "category": "refactor",
+    "scope": "",
+    "message": "format ColumnMenu files with trailing newlines",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/c7a5502"
+  },
+  {
+    "hash": "78faa5c",
+    "date": "2026-11-06",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "feat: add ColumnMenu and Scrollbar components with table updates",
+    "category": "feat",
+    "scope": "",
+    "message": "add ColumnMenu and Scrollbar components with table updates",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/78faa5c"
+  },
+  {
+    "hash": "00e7ffc",
+    "date": "2026-11-06",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "feat: add multi-series line chart and table tooltip components",
+    "category": "feat",
+    "scope": "",
+    "message": "add multi-series line chart and table tooltip components",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/00e7ffc"
+  },
+  {
     "hash": "a4a3d8c",
     "date": "2026-11-06",
     "author": "dudesoamazing",

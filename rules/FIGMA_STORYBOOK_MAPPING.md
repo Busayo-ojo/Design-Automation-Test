@@ -8,7 +8,7 @@
 | Special Primary Buttons / information | Complete | Elements/➡️ Button → Information | 2026-05-29 | hover + focused states added |
 | Special Primary Buttons / destructive | Complete | Elements/➡️ Button → SpecialDestructive | 2026-05-29 | New variant (error), all 3 states |
 | Sidebars | Complete | Components/🍺 Sidebar | 2026-10-26 | Replaced NavMenu; cell primitives, sections, variants 1 & 2, 4 themes |
-| Sidebar / sub-menu item | Complete | Components/🍺 Sidebar → Cells / Sub-Menu Item Matrix | 2026-11-06 | Figma 2437:57101; 12 variants (3 states [default, selected, disabled] × 4 themes); 44px height, 48px left indent, 4px radius, exact tokens |
+| Sidebar / sub-menu item | Complete | Components/🍺 Sidebar → Cells / Sub-Menu Item Matrix | 2026-11-07 | Figma 2437:57101; 12 variants (3 states [default, selected, disabled] × 4 themes); 208px hug width, 44px height, 16px left/right padding (nested 29px indent in Frame 3), 4px radius, exact tokens |
 | Dropdown / Menu | Superseded | Components/🔽 Dropdowns | 2026-10-27 | Earlier singular Dropdown stories removed; use Dropdowns |
 | Dropdown / Selectors | Complete | Elements/🔤 Input → Input Dropdown | 2026-10-27 | Figma 2198:54679; merged into Input with 4 types and 5 states |
 | fmdq-logo | Complete | Elements/🏛️ Logo | 2026-10-26 | Node 6769:1811; Default & DarkBG Card variants |
@@ -37,7 +37,8 @@
 | Tooltip & Table Tooltip | Complete | Components/💬 Tooltip | 2026-11-06 | Figma 6237:23991 (24 variants) & 11041:686955 (12 variants: pointer position); composes Button, multiply icon, and table slot with 12px padding; added TableTooltip |
 | File Upload | Complete | Components/📎 File Upload | 2026-11-05 | Figma file type 3355:170664 (6), file upload states 3355:171475 (4), Small upload 6092:3073 (4), Big Upload 6100:14546 (4), Mutilple Uploads 6100:15099 (7 booleans) = 19 variants; composes Button + ProgressBar; added --color-file-jpg, --color-file-mp3 and three dropzone surface tokens |
 | Progress Indicators (Bar & Circles) | Complete | Components/📊 Progress Indicators | 2026-11-06 | Figma 6276:147211 (22 variants: 11 progress × 2 sizes) & 6092:2083 (25 variants: 5 progress × 5 sizes); exact 20px (lg) / 12px (sm) track corner radii and 24px rounded fill ends |
-| Metrics Card & Metrics Compliance Card | Complete | Components/📈 Metrics | 2026-11-06 | Figma 6291:1886 (12 variants) & 11039:683266 (4 variants: status 2 × bar 2); composes Badge + ProgressBar; WRD compliance rule (green >90%, amber below 90%) |
+| Misc icon | Complete | Elements/🔘 Misc Icon | 2026-11-07 | Figma 3354:173707; 60 variants (5 sizes [xs 24, sm 32, md 40, lg 48, xl 56] × 6 colors × 2 shapes [Round, Square]) + boolean hasBackground (turns off container fill & border for tight table rows) |
+| Metrics Card, Metrics Compliance Card & Metrics Card Status | Complete | Components/📈 Metrics | 2026-11-07 | Figma 6291:1886 (12 variants), 11039:683266 (4 variants: status 2 × bar 2) & 11145:1002308 (6 variants: status 3 × state 2); 68px height, 24px Rubik value, bold status icons, chevron, divider, Market Participation card |
 
 | Charts / Legends | Complete | Components/📈 Charts → Elements / 🏷️ Legend | 2026-11-05 | Figma 6240:33124; 2 variants (Orientation); 8px dot + 14px neutral-500 label |
 | Charts / y axis + X-axis | Complete | Components/📈 Charts (ChartGrid, ChartXAxis) | 2026-11-05 | Figma 6240:33372 (4 variants) & 6240:33501 (3 variants); neutral-300 rule, dashed 4/4 when broken |
@@ -49,7 +50,7 @@
 | Donut Chart | Complete | Components/📈 Charts → Donut | 2026-11-05 | Figma 6252:41600; 7 variants; the pie with innerRadius 0.8 |
 | Legend & Values | Complete | Components/📈 Charts → Elements / 📐 Legend & Values | 2026-11-05 | Figma 6248:37098; 8 variants (Direction × Quantity); 4px bar + 20px Medium figure |
 | Radar Chart | Complete | Components/📈 Charts → Radar | 2026-11-05 | Figma 6256:41865; 16 variants (Quantity 5/6/7/12 × Chart type × Background); 5 rings, 24% accent fill, 6px points with white ring |
-| Line Chart / Multi-series | Complete | Components/📈 Charts → Multi-series / Default, Wide, Hourly | 2026-11-06 | Figma 11041:684273; 4 variants (interval 2 × size 2); 496px/1062px widths, 416px height, interactive session-stable series filtering, threshold & now lines |
+| Line Chart / Multi-series | Complete | Components/📈 Charts → Multi-series / Default, Wide, Hourly | 2026-11-07 | Figma 11041:684273; 4 variants (interval 2 × size 2); 510px/1078px widths, 416px height, interactive session-stable series filtering, threshold & now lines |
 | Line Chart / Legend item | Complete | Components/📈 Charts → Multi-series / Legend Item Matrix | 2026-11-06 | Figma 11041:684142; 48 variants (6 colors × 4 patterns × 2 selected); Checkbox + 20×12 Swatch + 12px label |
 | Line Chart / Now marker | Complete | Components/📈 Charts → Multi-series / Now Marker & Threshold Atoms | 2026-11-06 | Figma 11041:684143; Standalone marker; 1px neutral-400 vertical line + 10px DM Sans Medium label |
 | Line Chart / Threshold | Complete | Components/📈 Charts → Multi-series / Now Marker & Threshold Atoms | 2026-11-06 | Figma 11041:684146; Standalone threshold; dashed error-500 rule + 10px error-600 alert label, boolean hasLabel |

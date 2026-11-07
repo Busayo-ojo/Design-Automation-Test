@@ -641,12 +641,12 @@ export const MultiSeriesAtoms: StoryObj = {
 };
 
 export const MultiSeriesDefault: StoryObj<MultiSeriesLineChartProps> = {
-  name: 'Multi-series / 📊 Default Size (496px)',
+  name: 'Multi-series / 📊 Default Size (510px)',
   parameters: {
     docs: {
       description: {
         story:
-          'Figma 11041:684150 — interval=quarter-hour, size=default (496px). 17 CASS benchmark securities with fixed color/pattern assignments and interactive checkbox toggling.',
+          'Figma 11041:684150 — interval=quarter-hour, size=default (510px). 17 CASS benchmark securities with fixed color/pattern assignments and interactive checkbox toggling.',
       },
     },
   },
@@ -661,19 +661,19 @@ export const MultiSeriesDefault: StoryObj<MultiSeriesLineChartProps> = {
     nowIndex: 10,
   },
   render: (args) => (
-    <Wrap title="Multi-series Line Chart" note="Figma 11041:684150 · Quarter-hour · Size Default (496px)">
+    <Wrap title="Multi-series Line Chart" note="Figma 11041:684150 · Quarter-hour · Size Default (510px)">
       <MultiSeriesLineChart {...args} />
     </Wrap>
   ),
 };
 
 export const MultiSeriesWide: StoryObj<MultiSeriesLineChartProps> = {
-  name: 'Multi-series / 🖥️ Wide Size (1062px)',
+  name: 'Multi-series / 🖥️ Wide Size (1078px)',
   parameters: {
     docs: {
       description: {
         story:
-          'Figma 11041:686956 — interval=quarter-hour, size=wide (1062px). Full-width desk monitor layout with 17 securities and alert thresholds.',
+          'Figma 11041:686956 — interval=quarter-hour, size=wide (1078px). Full-width desk monitor layout with 17 securities and alert thresholds.',
       },
     },
   },
@@ -688,7 +688,7 @@ export const MultiSeriesWide: StoryObj<MultiSeriesLineChartProps> = {
     nowIndex: 10,
   },
   render: (args) => (
-    <Wrap title="Multi-series Line Chart" note="Figma 11041:686956 · Quarter-hour · Size Wide (1062px)">
+    <Wrap title="Multi-series Line Chart" note="Figma 11041:686956 · Quarter-hour · Size Wide (1078px)">
       <MultiSeriesLineChart {...args} />
     </Wrap>
   ),
@@ -715,7 +715,7 @@ export const MultiSeriesHourly: StoryObj<MultiSeriesLineChartProps> = {
     nowIndex: 10,
   },
   render: (args) => (
-    <Wrap title="Multi-series Line Chart" note="Figma 11041:684224 · Interval Hourly · Size Default (496px)">
+    <Wrap title="Multi-series Line Chart" note="Figma 11041:684224 · Interval Hourly · Size Default (510px)">
       <MultiSeriesLineChart {...args} />
     </Wrap>
   ),
@@ -762,7 +762,7 @@ export const MultiSeriesInteractive: StoryObj<MultiSeriesLineChartProps> = {
     docs: {
       description: {
         story:
-          'Fully interactive Storybook playground: controls panel allows dynamic changes to size (default 496px vs wide 1062px), interval (quarter-hour vs hourly), thresholds, legend visibility, and now marker index. Click "Generate New Random Data" to simulate intraday movements starting strictly from 0 bps.',
+          'Fully interactive Storybook playground: controls panel allows dynamic changes to size (default 510px vs wide 1078px), interval (quarter-hour vs hourly), thresholds, legend visibility, and now marker index. Click "Generate New Random Data" to simulate intraday movements starting strictly from 0 bps.',
       },
     },
   },
@@ -785,7 +785,7 @@ export const MultiSeriesInteractive: StoryObj<MultiSeriesLineChartProps> = {
     size: {
       control: 'radio',
       options: ['default', 'wide'],
-      description: 'Chart frame width (default: 496px, wide: 1062px)',
+      description: 'Chart frame width (default: 510px, wide: 1078px)',
     },
     hasLegend: {
       control: 'boolean',

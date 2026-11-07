@@ -444,7 +444,7 @@ export const SubMenuItemCells: Story = {
             Sidebar / Sub-Menu Item Atom (Figma 2437:57101)
           </h3>
           <p style={{ margin: 0, color: 'var(--color-neutral-500)', fontSize: '14px' }}>
-            Base component set with 12 variants (3 states × 4 themes). Dimensions: 240px × 44px, 48px left indent, 4px radius, 14px DM Sans Regular text.
+            Base component set with 12 variants (3 states × 4 themes). Dimensions: 208px × 44px, 16px left/right padding (nested with 29px indent in sidebar), 4px radius, 14px DM Sans Regular text.
           </p>
         </div>
 
