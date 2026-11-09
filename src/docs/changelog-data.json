@@ -1,5 +1,27 @@
 [
   {
+    "hash": "7cf0d82",
+    "date": "2026-11-07",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "style: update sidebar input and menu item focus styles for dark themes",
+    "category": "style",
+    "scope": "",
+    "message": "update sidebar input and menu item focus styles for dark themes",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/7cf0d82"
+  },
+  {
+    "hash": "3b809d0",
+    "date": "2026-11-07",
+    "author": "dudesoamazing",
+    "email": "marvinogah@gmail.com",
+    "subject": "feat: add MiscIcon and MetricsCardStatus components and update chart sizes",
+    "category": "feat",
+    "scope": "",
+    "message": "add MiscIcon and MetricsCardStatus components and update chart sizes",
+    "url": "https://github.com/WebMaster0-1/Design-Automation-Test/commit/3b809d0"
+  },
+  {
     "hash": "103b2ad",
     "date": "2026-11-06",
     "author": "dudesoamazing",

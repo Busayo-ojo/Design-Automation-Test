@@ -106,6 +106,8 @@
 
 1. **Sidebar Menu Items & Counter Badges**:
    - Standard Sidebar Item Height: Strictly **`44px`**.
+   - **Exception (DRP MSG Admin, 7 Nov 2026)**: when a role's menu plus open sub-items and the Administration section would overflow the sidebar at 44px, reduce item top/bottom padding to `8px` (36px rows) as an instance override on that role's sidebars only. Never pad the master, and never let the sidebar scroll to hide items. Other roles stay at 44px.
+   - **Fields on dark sidebars**: a focused or typing search field on a dark-blue or dark-grey sidebar uses the `Focus/Shadow Dark` effect style (4px ring, Primary/400 at 24%) and a `Primary/400` border, not the pale `Focus/Shadow Hover` ring, which is only for light surfaces.
    - **Preventing Double Badges on Selection**: When setting a `<Sidebar / menu item>` instance to `state = "selected"`, the master component variant exposes its own default badge (e.g., `"10"`). If the item already has a custom badge (e.g., `"12"`), **you must explicitly hide the master's default badge** (`badge.visible = false`) so only one badge remains visible.
    - **Single-Line Text Enforcement**: Never let navigation menu labels wrap onto two lines (which expands item height to 64px and breaks the sidebar grid). Always set `textAutoResize = "WIDTH_AND_HEIGHT"` on the label text node so the text auto-fits on a single line.
 
