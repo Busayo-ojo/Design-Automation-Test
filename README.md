@@ -40,13 +40,27 @@ export default function CustomForm() {
 
 ## Component Inventory
 
+|Everything below is exported from `@fmdq/ui`. The source of truth is [`src/index.ts`](src/index.ts); open Storybook for live examples and props.
+ 
 | Category | Components |
 |----------|-----------|
-| **Form Controls** | Button, Input, Textarea, Select, Checkbox, Radio |
-| **Data Display** | Table, Badge, Typography, Card |
-| **Navigation** | NavMenu, Tabs, Dropdown |
-| **Feedback** | Modal, Toast, Drawer |
-| **Layout** | AppLayout, TopBar, PageHeader |
+| **Form controls** | Button, ButtonGroup, Input, InputDropdown, Textarea, Checkbox, Radio, Checkcircle, Switch, Toggle, Calendar, FileUpload |
+| **Data display** | Table, ColumnMenu, Badge, Chip, Avatar, Typography, Divider, Logo |
+| **Data visualization** | LineChart, MultiSeriesLineChart, BarChart, StackedBarChart, PieChart, DonutChart, RadarChart, MetricsCard, MetricsCardStatus, MetricsComplianceCard |
+| **Navigation** | Sidebar, Tabs, Breadcrumbs, Pagination, Dropdowns |
+| **Feedback & overlays** | Modal, Toast, Tooltip, ProgressBar |
+| **Utilities** | Scrollbar, MiscIcon and the icon set |
+| **Layout** | AppLayout, TopBar, PageHeader, EmptyState, Dashboard |
+| **Page templates** | AuthBackground, SignIn, TwoStepVerification, ForgotPassword, SetPassword, AccountLocked, WelcomeEmail, Flow1Prototype |
+ 
+### Deprecated
+ 
+| Component | Use instead |
+|-----------|-------------|
+| `Dropdown` | `Dropdowns` |
+| `NavMenu` | `Sidebar` |
+ 
+See the Migration Guide in Storybook for upgrade steps.
 
 ---
 
