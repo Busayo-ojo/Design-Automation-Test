@@ -5,6 +5,7 @@ import './Typography.css';
 export const TypographyPlayground: React.FC = () => {
   const [inputText, setInputText] = useState('The quick brown fox jumps over the lazy dog');
   const [selectedStyle, setSelectedStyle] = useState<string>('1');
+  const [fontFamily, setFontFamily] = useState<'dm-sans' | 'rubik'>('dm-sans');
   const [showCode, setShowCode] = useState(false);
 
   const styles = [
@@ -20,6 +21,7 @@ export const TypographyPlayground: React.FC = () => {
     { label: 'Paragraph Medium', value: 'md', type: 'text' },
     { label: 'Paragraph Small', value: 'sm', type: 'text' },
     { label: 'Paragraph XS', value: 'xs', type: 'text' },
+    { label: 'Paragraph XXS (10px)', value: 'xxs', type: 'text' },
     { label: 'Caption Large', value: 'caption-lg', type: 'text' },
     { label: 'Caption Small', value: 'caption-sm', type: 'text' },
     { label: 'Caption XS', value: 'caption-xs', type: 'text' },
@@ -46,14 +48,20 @@ export const TypographyPlayground: React.FC = () => {
     if (currentStyle.type === 'heading') {
       const level = /^[1-6]$/.test(currentStyle.value) ? parseInt(currentStyle.value, 10) : currentStyle.value;
       return (
-        <Heading level={level as 'display-lg' | 'display-sm' | 1 | 2 | 3 | 4 | 5 | 6}>
+        <Heading 
+          level={level as 'display-lg' | 'display-sm' | 1 | 2 | 3 | 4 | 5 | 6}
+          fontFamily={fontFamily}
+        >
           {inputText || 'Please enter some text'}
         </Heading>
       );
     }
 
     return (
-      <Text size={currentStyle.value as 'lg' | 'md' | 'sm' | 'xs' | 'caption-lg' | 'caption-sm' | 'caption-xs'}>
+      <Text 
+        size={currentStyle.value as 'lg' | 'md' | 'sm' | 'xs' | 'xxs' | 'caption-lg' | 'caption-sm' | 'caption-xs'}
+        fontFamily={fontFamily}
+      >
         {inputText || 'Please enter some text'}
       </Text>
     );
@@ -61,12 +69,13 @@ export const TypographyPlayground: React.FC = () => {
 
   const getCodeSnippet = () => {
     if (!currentStyle) return '';
+    const fontProp = fontFamily !== 'dm-sans' ? ` fontFamily="${fontFamily}"` : '';
     if (currentStyle.type === 'heading') {
       const isNumeric = /^[1-6]$/.test(currentStyle.value);
       const levelDisplay = isNumeric ? `{${currentStyle.value}}` : `"${currentStyle.value}"`;
-      return `<Heading level=${levelDisplay}>\n  ${inputText || 'Text content'}\n</Heading>`;
+      return `<Heading level=${levelDisplay}${fontProp}>\n  ${inputText || 'Text content'}\n</Heading>`;
     }
-    return `<Text size="${currentStyle.value}">\n  ${inputText || 'Text content'}\n</Text>`;
+    return `<Text size="${currentStyle.value}"${fontProp}>\n  ${inputText || 'Text content'}\n</Text>`;
   };
 
   return (
@@ -124,7 +133,32 @@ export const TypographyPlayground: React.FC = () => {
               }}
             />
           </div>
-          <div style={{ flex: '1 1 200px', minWidth: 0 }}>
+          <div style={{ flex: '1 1 180px', minWidth: 0 }}>
+            <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: '#475467', fontWeight: '500' }}>Typeface</label>
+            <select
+              value={fontFamily}
+              onChange={(e) => setFontFamily(e.target.value as 'dm-sans' | 'rubik')}
+              style={{
+                width: '100%',
+                boxSizing: 'border-box',
+                padding: '12px 16px',
+                borderRadius: '8px',
+                border: '1px solid #D0D5DD',
+                fontSize: '14px',
+                outline: 'none',
+                backgroundColor: 'white',
+                appearance: 'none',
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23667085'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 12px center',
+                backgroundSize: '16px'
+              }}
+            >
+              <option value="dm-sans">DM Sans (Primary)</option>
+              <option value="rubik">Rubik (FMDQ NEXT)</option>
+            </select>
+          </div>
+          <div style={{ flex: '1 1 180px', minWidth: 0 }}>
             <label style={{ display: 'block', fontSize: '13px', marginBottom: '8px', color: '#475467', fontWeight: '500' }}>Select Style</label>
             <select
               value={selectedStyle}

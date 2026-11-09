@@ -17,6 +17,15 @@ const svgModules = import.meta.glob('./svg/*/*.svg', {
   query: '?react',
 }) as Record<string, { default: React.FC<React.SVGProps<SVGSVGElement>> }>;
 
+// Common aliases for icons whose naming conventions vary across Figma and codebase
+const ICON_ALIASES: Record<string, string> = {
+  close: 'multiply',
+  'close-circle': 'multiply-circle',
+  cross: 'multiply',
+  cancel: 'multiply',
+  x: 'multiply',
+};
+
 export const Icon: React.FC<IconProps> = ({
   name,
   variant = 'linear',
@@ -25,10 +34,11 @@ export const Icon: React.FC<IconProps> = ({
   className,
   ...props
 }) => {
-  const key = `./svg/${name}/${variant}.svg`;
+  const resolvedName = ICON_ALIASES[name.toLowerCase()] ?? name;
+  const key = `./svg/${resolvedName}/${variant}.svg`;
   const mod = svgModules[key];
   if (!mod?.default) {
-    console.warn(`[Icon] "${name}/${variant}" not found`);
+    console.warn(`[Icon] "${name}/${variant}" not found (resolved as "${resolvedName}/${variant}")`);
     return null;
   }
   const SvgIcon = mod.default;

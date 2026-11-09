@@ -1,0 +1,28 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as BadgeStories from './Badge.stories';
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+Badges highlight short status information, numerical counts, tags, and workflow categories.
+Supports filled, accent, and outlined styles across brand and semantic color ramps (`blue`, `orange`, `success`, `warning`, `error`, `neutral`), optional leading/trailing icons, and compact avatar pairings.
+
+## Figma Reference
+
+<iframe
+  title="Badges Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=1911-37813&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={BadgeStories.Default} />
+
+## Properties
+
+<Controls of={BadgeStories.Default} />
+

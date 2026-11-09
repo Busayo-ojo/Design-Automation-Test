@@ -5,7 +5,6 @@ import { Avatar, AvatarGroup } from './Avatar';
 const meta: Meta<typeof Avatar> = {
   title: 'Elements/🌚 Avatars',
   component: Avatar,
-  tags: ['autodocs'],
   argTypes: {
     type: {
       control: 'select',

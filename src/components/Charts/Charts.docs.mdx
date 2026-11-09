@@ -1,0 +1,153 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ChartStories from './Charts.stories';
+
+<Meta of={ChartStories} />
+
+# Charts
+
+From the Figma page **"✤ Charts ⚜️"**. Hand-built SVG — this design system ships no charting dependency, matching how every other component here is built.
+
+**63 Figma variants** across six chart types, plus four shared elements.
+
+## Figma Reference
+
+<iframe
+  title="Charts Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=6257-42734&embed-host=share"
+  allowFullScreen
+/>
+
+---
+
+## Playground
+
+<Canvas of={ChartStories.Playground} />
+<Controls of={ChartStories.Playground} />
+
+---
+
+## Elements
+
+<Canvas of={ChartStories.ElementsLegend} />
+
+---
+
+## Line Chart
+
+The four `Type` variants are four ways of joining the same points: **Basic** straight segments through every point, **Slope** a single line from first to last, **Smooth** a gentle monotone curve, and **Wavy** a looser spline that overshoots into visible waves.
+
+<Canvas of={ChartStories.LineAllVariants} />
+
+<Canvas of={ChartStories.LineAxisOptions} />
+
+## Bar charts
+
+<Canvas of={ChartStories.BarAllVariants} />
+
+<Canvas of={ChartStories.StackedAllVariants} />
+
+## Pie & Donut
+
+Slices start at 12 o'clock and sweep clockwise on the primary ramp used as a sequential scale. With `showText` the percentage sits inside each slice, switching from dark ink on the pale steps to white on the saturated ones.
+
+<Canvas of={ChartStories.PieAllVariants} />
+
+<Canvas of={ChartStories.DonutAllVariants} />
+
+<Canvas of={ChartStories.LegendValuesVariants} />
+
+<Canvas of={ChartStories.DonutWithValues} />
+
+## Multi-series Line Chart (CASS Benchmarks)
+
+Built for dense benchmark monitoring with 17+ securities. Each security is assigned a persistent color and stroke pattern (6 colors × 4 dash patterns = 24 unique styles) so toggling a series never repaints the remaining lines.
+
+Includes standalone atoms:
+- **`LineChartLegendItem`** (`11041:684142`): 48 variants composed of `Checkbox` + `Swatch` + 12px label.
+- **`LineChartNowMarker`** (`11041:684143`): Vertical indicator line with 10px `"Now"` label.
+- **`LineChartThreshold`** (`11041:684146`): Dashed alert threshold rule with 10px alert copy (e.g. `Alert at ±25 bps`).
+
+<Canvas of={ChartStories.MultiSeriesDefault} />
+
+<Canvas of={ChartStories.MultiSeriesWide} />
+
+<Canvas of={ChartStories.MultiSeriesLegendItems} />
+
+<Canvas of={ChartStories.MultiSeriesAtoms} />
+
+---
+
+## Radar
+
+<Canvas of={ChartStories.RadarAllVariants} />
+
+<Canvas of={ChartStories.RadarInteractive} />
+
+## Interaction
+
+<Canvas of={ChartStories.Interactive} />
+
+---
+
+## Accessibility
+
+<Canvas of={ChartStories.PaletteAndAccessibility} />
+
+<Canvas of={ChartStories.TableView} />
+
+---
+
+## Figma source
+
+| Figma node | Variants | React |
+| :--- | :--- | :--- |
+| `Legends` `6240:33124` | 2 | `ChartLegend` |
+| `y axis` `6240:33372` | 4 | `ChartGrid` |
+| `X-axis` `6240:33501` | 3 | `ChartXAxis` |
+| `Line Chart` `6257:42734` | 12 | `LineChart` |
+| `Basic Bar Chart` `6306:4216` | 3 | `BarChart` |
+| `Percent Stacked Bar Chart` `6287:6146` | 3 | `StackedBarChart` |
+| `Pie Chart` `6252:41592` | 14 | `PieChart` |
+| `Donut Chart` `6252:41600` | 7 | `DonutChart` |
+| `Legend & Values` `6248:37098` | 8 | `LegendValues` |
+| `Radar Chart` `6256:41865` | 16 | `RadarChart` |
+| `Line Chart / Multi-series` `11041:684273` | 4 | `MultiSeriesLineChart` |
+| `Line Chart / Legend item` `11041:684142` | 48 | `LineChartLegendItem` |
+| `Line Chart / Now marker` `11041:684143` | 1 | `LineChartNowMarker` |
+| `Line Chart / Threshold` `11041:684146` | 1 | `LineChartThreshold` |
+
+## Palette report
+
+The categorical palette was measured with the colour validator (OKLab ΔE ×100, light surface). **It does not pass:**
+
+| Pair | Normal vision | Deuteranopia | Verdict |
+| :--- | :--- | :--- | :--- |
+| amber `#F3A218` ↔ orange `#F56630` | **13.7** | 9.1 | below the 15 normal-vision floor |
+| orange `#F56630` ↔ green `#60B527` | 22.4 | **0.9** | effectively identical for red-green CVD |
+| `#F3A218`, `#F56630`, `#60B527` contrast | 2.05 / 3.0 / 2.51 | — | below 3:1 against the surface |
+
+Figma is the source of truth, so this palette **ships as the default and is not silently altered**. Three mitigations are in place:
+
+- `ChartLegend` always renders when there is more than one series, so identity is never colour-alone.
+- `showTable` renders the numbers as a table — the relief the contrast warning obligates.
+- `CHART_PALETTE_ACCESSIBLE` is a validated opt-in (`palette={CHART_PALETTE_ACCESSIBLE}`) whose worst adjacent pair measures ΔE 21.1 deutan / 25.7 normal — both pass.
+
+The **bar ramp is fine**: `primary-600 → 400 → 200` measures ΔE 15.3 deutan and 15.9 normal, both passing. Its lightness-band flag is the validator judging a *sequential* ramp by categorical rules, which its own scope note excludes — a sequential ramp is supposed to span light to dark.
+
+## Notes
+
+- **Tokens added.** `--color-chart-green`, `--color-chart-navy`, `--color-chart-pink` for categorical slots 4–6, which had no existing match. Slots 1–3 map to `primary-400` / `secondary-400` / `warning-500`.
+- **Marks.** 2px strokes with round joins, 13px bars with 4px top-rounded ends anchored to the baseline, a 2px surface gap between adjacent bars and stacked segments, and a 2px white ring on hover markers — all per the dataviz mark spec, and all matching Figma.
+- **Hover ships by default.** An SVG chart in a browser is interactive, so `interactive` defaults to true: a crosshair plus a full-series tooltip on lines, and a per-group tooltip on bars where the other groups recede rather than recolour.
+- **Axis rounding.** `niceMax` rounds a peak up to a top whose fifth is also round, so a peak of 880 gives Figma's 0–1000 axis in steps of 200.
+- **One axis only.** None of these components support a second y-scale, by design.
+- **Pie, donut and radar are sequential, not categorical.** Pie and donut draw from the primary ramp 50→600, so the amber/orange separation problem above does not apply to them. Radar uses the categorical palette but only two series, where blue and amber separate cleanly (ΔE 9.1 deutan, 13.1 tritan).
+- **Pie slot picking.** Figma keeps the lightest ramp step as the first slice and takes the darkest steps for the rest, so a 3-slice pie reads 50 / 500 / 600. `pieSlots()` reproduces this exactly for 3 and 8 slices and lands one ramp step lighter than Figma on 2 and 4.
+- **Radar fonts — corrected in Figma (2026-11-05).** The radar labels originally carried Helvetica Neue and PingFang SC, stray editor defaults rather than design intent. Those have been normalised to DM Sans in the Figma file itself, so design and code now agree. Rules §3 fixes the system fonts to DM Sans and Rubik.
+- **Tokens added for the radial charts.** `--color-chart-band` (radar ring fill) and `--color-chart-value-label` / `-figure` / `-unit` for the Legend & Values block.
+
+## Usage
+
+From Figma's documentation frame: a **line chart** suits trends over continuous, sequential data; a **bar chart** suits comparing values between categories; a **percent stacked bar** suits showing composition within a whole and how it shifts across groups. Figma also warns that stacked bars "become cluttered and less effective if you have too many categories or if precise values for individual categories are essential" — reach for `showTable` in that case.

@@ -1,0 +1,39 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as Flow1Stories from './Flow1Prototype.stories';
+
+<Meta of={Flow1Stories} />
+
+# Flow 1: Prototype Orchestrator (New User Setup → Sign In → Dashboard)
+
+This interactive orchestrator composes the screen components of Figma **Flow 1 · Sign in (MSG Admin)** (starting node `10303:161102`) and **Flow 1 · New user set-up from email** (node `10306:12506`) into a cohesive, zero-backend interactive experience for stakeholder presentation.
+
+## Figma Reference
+
+<iframe
+  title="Flow 1 Prototype Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=10303-161102&embed-host=share"
+  allowFullScreen
+/>
+
+---
+
+## Journey Sequence
+
+1. **Welcome Email (1.15)**: Email invitation received by user Adaeze Okafor with role summary and single-use account setup button.
+2. **New User Onboarding (Step 1 of 2)**: Set up account password (`1.16 Set up account · password`) with live 4-point rule validation.
+3. **New User Onboarding (Step 2 of 2)**: Configure two-step verification (`1.17 Set up account · two-step verification`).
+4. **Sign In**: Primary authentication screen (`1.1 Sign in`) using `USR-90412` and secure password.
+5. **Two-Step Verification**: Enter 6-digit confirmation code (`1.4 Two-step verification`).
+6. **Dashboard**: Live DRP Market Service Group Dashboard (`DRP / Dashboard`), featuring live sidebar expansion/collapse and flyout account menu.
+7. **Log Out**: Clicking "Log out" in the sidebar account menu securely returns to the Sign In screen with a logged-out notification (`1.19 Sign in · logged out`).
+
+---
+
+## Interactive Prototype
+
+<Canvas of={Flow1Stories.CompleteJourney} />
+
+<Controls of={Flow1Stories.CompleteJourney} />
+

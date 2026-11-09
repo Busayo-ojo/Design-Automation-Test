@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Icon } from '../foundations/icons';
 import { Badge } from '../elements/Badge';
-import { Toggle } from '../elements/Toggle';
+import { Toggle } from '../elements/FormControl';
 import { Input } from '../elements/Input';
 
 interface IconData {
@@ -787,7 +787,7 @@ export const IconShowcase: React.FC = () => {
 
       {filteredIcons.length === 0 && (
         <div style={{ textAlign: 'center', padding: '48px 0', color: '#667085' }}>
-          <p style={{ fontSize: '16px', fontWeight: '500' }}>No icons found matching "{search}"</p>
+          <p style={{ fontSize: '16px', fontWeight: '500' }}>No Data Available</p>
           <p style={{ fontSize: '14px', marginTop: '4px' }}>Try searching for a different keyword or tag.</p>
         </div>
       )}

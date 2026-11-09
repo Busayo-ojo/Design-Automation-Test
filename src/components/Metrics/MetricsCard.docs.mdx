@@ -1,0 +1,70 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as MetricsStories from './MetricsCard.stories';
+
+<Meta of={MetricsStories} />
+
+# Metrics
+
+Metrics cards present key performance indicators, trading volumes, and operational counts.
+Features leading icon badges, bold formatted values, percentage trend indicators with directional arrows, and contextual subtext.
+
+## Figma Reference
+
+<iframe
+  title="Metrics Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=6291-1886&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={MetricsStories.Default} />
+
+## Properties
+
+<Controls of={MetricsStories.Default} />
+
+## Compliance Summary Card (CASS)
+
+Figma Component: `Metrics Card / Compliance` (`11039:683266`)
+
+Compliance summary card designed for CASS workflows. Status follows the WRD rule (green compliant above 90%, amber below 90%). Supports continuous single progress bar or dual passed/failed split progress bar with 2px gap, plus two-tier breakdown figures.
+
+<iframe
+  title="Metrics Compliance Card Figma reference"
+  width="100%"
+  height="300"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=11039-683266&embed-host=share"
+  allowFullScreen
+/>
+
+<Canvas of={MetricsStories.ComplianceCardMatrix} />
+
+## Status & Market Participation Tile (CASS)
+
+Figma Component: `Metrics Card / Status` (`11145:1002308`)
+
+Compact interactive status count tile with click-to-reveal list for market participation (e.g. DMB live quoting activity).
+Supports 3 semantic status types (`success`, `warning`, `error`) and 2 interactive states (`default`, `selected`).
+Spec: 68px height, 12px outer padding, 24px Rubik SemiBold value, 10px DM Sans Regular label, bold status icons (`check-circle`, `info-circle`, `multiply-circle`), linear directional chevron, and optional vertical divider.
+
+<iframe
+  title="Metrics Card Status Figma reference"
+  width="100%"
+  height="300"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=11145-1002308&embed-host=share"
+  allowFullScreen
+/>
+
+### Status Card Variants Matrix
+
+<Canvas of={MetricsStories.StatusCardMatrix} />
+
+### Interactive Market Participation Grid
+
+<Canvas of={MetricsStories.MarketParticipationInteractive} />
+
+
+

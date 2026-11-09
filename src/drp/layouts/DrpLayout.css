@@ -1,0 +1,77 @@
+.drp-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: 0 var(--spacing-16);
+  height: 100%;
+}
+
+.drp-brand__logo {
+  font-family: var(--font-family-primary);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: var(--font-letter-spacing-heading-large);
+  color: var(--color-primary-700);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.drp-brand__badge {
+  background-color: var(--color-secondary-50);
+  color: var(--color-secondary-700);
+  border: 1px solid var(--color-secondary-100);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.drp-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  padding-right: var(--spacing-16);
+}
+
+.drp-user-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-10);
+  padding: 4px 12px 4px 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-200);
+}
+
+.drp-user-pill__info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.drp-user-pill__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-neutral-900);
+  line-height: 1.2;
+}
+
+.drp-user-pill__role {
+  font-size: 11px;
+  color: var(--color-neutral-500);
+}
+
+.drp-sidebar-header {
+  padding: var(--spacing-16);
+  border-bottom: 1px solid var(--color-neutral-200);
+}
+
+.drp-sidebar-footer {
+  margin-top: auto;
+  padding: var(--spacing-16);
+  border-top: 1px solid var(--color-neutral-200);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}

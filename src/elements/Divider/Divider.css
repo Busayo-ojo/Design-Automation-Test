@@ -1,0 +1,141 @@
+@import '../../tokens.css';
+
+/* ==========================================================================
+   FMDQ Design System - Divider Component
+   Matches Figma "✤ Dividers" Component Set (2200:56191 & 3631:179879)
+   ========================================================================== */
+
+.fmdqui-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  box-sizing: border-box;
+}
+
+/* ── 1. Default Line ── */
+.fmdqui-divider--default {
+  height: 1px;
+  padding: 12px 0;
+}
+
+.fmdqui-divider__line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-neutral-100, #F0F2F5);
+  border: none;
+  margin: 0;
+}
+
+/* ── 2. Centered Variants (with icon, with title only, with button only) ── */
+.fmdqui-divider--centered {
+  justify-content: center;
+}
+
+.fmdqui-divider--with-icon {
+  height: 28px;
+}
+
+.fmdqui-divider--with-title-only {
+  height: 28px;
+}
+
+.fmdqui-divider--with-button-only {
+  height: 36px;
+}
+
+.fmdqui-divider__center-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* Center icon (Figma: padding 2px 4px, color #344054) */
+.fmdqui-divider__center-content--icon {
+  padding: 2px 4px;
+  color: var(--color-neutral-700, #344054);
+}
+
+/* Center title (Figma: padding 0 8px, 18px DM Sans Regular #101928) */
+.fmdqui-divider__center-content--title {
+  padding: 0 8px;
+  font-size: var(--font-size-p-lg, 18px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph, 26px);
+  color: var(--color-neutral-900, #101928);
+  white-space: nowrap;
+}
+
+/* Center button container */
+.fmdqui-divider__center-content--button {
+  padding: 0 8px;
+  background-color: var(--color-neutral-white, #FFFFFF);
+}
+
+/* ── 3. With Label (Figma: Label on Left, Line to Right) ── */
+.fmdqui-divider--with-label {
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.fmdqui-divider__label {
+  padding: 0 8px 0 0;
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph, 20px);
+  color: var(--color-neutral-400, #98A2B3);
+  background-color: var(--color-neutral-white, #FFFFFF);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* If consumer explicitly sets contentPosition="center" for with label */
+.fmdqui-divider--with-label-centered .fmdqui-divider__label {
+  padding: 0 8px;
+}
+
+/* ── 4. With Title and Button (Figma: Title on Left, Line in Middle, Button on Right) ── */
+.fmdqui-divider--with-title-and-button {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fmdqui-divider__left-title {
+  padding: 0 8px 0 0;
+  font-size: var(--font-size-p-lg, 18px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph, 26px);
+  color: var(--color-neutral-900, #101928);
+  white-space: nowrap;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  flex-shrink: 0;
+}
+
+.fmdqui-divider__right-button {
+  padding: 0 0 0 8px;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  flex-shrink: 0;
+}
+
+/* ── 5. Vertical Divider ── */
+.fmdqui-divider--vertical {
+  display: inline-flex;
+  flex-direction: column;
+  width: 1px;
+  height: 100%;
+  min-height: 24px;
+  padding: 0 12px;
+  vertical-align: middle;
+}
+
+.fmdqui-divider--vertical .fmdqui-divider__line {
+  width: 1px;
+  height: 100%;
+}

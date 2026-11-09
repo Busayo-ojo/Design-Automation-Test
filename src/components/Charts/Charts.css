@@ -1,0 +1,632 @@
+@import '../../tokens.css';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Charts — 1:1 with the Figma page "✤ Charts ⚜️"
+
+   Axis, grid and legend values read from the shared Figma elements:
+     y axis  6240:33372 — neutral-300 rule, dashed 4/4 when Type=broken,
+                          12px neutral-600 value label
+     X-axis  6240:33501 — 12px neutral-500 labels
+     Legends 6240:33124 — 8px dot + 14px neutral-500 label, gap 8
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.fmdqui-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  font-family: var(--font-family-primary);
+  width: 100%;
+}
+
+.fmdqui-chart__plot {
+  position: relative;
+  width: 100%;
+}
+
+.fmdqui-chart__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Legend — Figma: Legends 6240:33124
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-chart-legend {
+  display: flex;
+}
+
+/* Figma: Horizontal rows use a 13px gap; Vertical stacks use 4px */
+.fmdqui-chart-legend--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 13px;
+  justify-content: center;
+}
+
+.fmdqui-chart-legend--vertical {
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.fmdqui-chart-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);           /* Figma gap 8 */
+}
+
+.fmdqui-chart-legend__dot {
+  width: 8px;                      /* Figma 8×8 ellipse */
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+/* Text wears text tokens, never the series colour */
+.fmdqui-chart-legend__label {
+  font-size: var(--font-size-sm);  /* Figma: DM Sans Regular 14px */
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph);
+  color: var(--color-neutral-500);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Grid & axes — recessive, never competing with the data
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-chart__gridline {
+  stroke: var(--color-neutral-300);
+  stroke-width: 1;
+}
+
+/* Figma `Type=broken` — a 4/4 dash */
+.fmdqui-chart__gridline--broken {
+  stroke-dasharray: 4 4;
+}
+
+.fmdqui-chart__y-label {
+  font-size: 12px;                 /* Figma: DM Sans Regular 12px */
+  fill: var(--color-neutral-600);
+  font-family: var(--font-family-primary);
+}
+
+.fmdqui-chart__x-label {
+  font-size: 12px;                 /* Figma: DM Sans Regular 12px */
+  fill: var(--color-neutral-500);
+  font-family: var(--font-family-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Marks — Figma: 2px stroke, round joins; bars 13px with 4px rounded ends
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-chart__line {
+  fill: none;
+  stroke-width: 2;                 /* Figma stroke weight */
+  stroke-linejoin: round;          /* Figma join: ROUND */
+  stroke-linecap: round;
+}
+
+.fmdqui-chart__bar {
+  transition: opacity var(--transition-fast);
+}
+
+/* Hovering a group recedes the others rather than recolouring them */
+.fmdqui-chart__bar--dim {
+  opacity: 0.35;
+}
+
+/* 2px surface ring so overlapping marks stay separable */
+.fmdqui-chart__marker {
+  stroke: var(--color-neutral-white);
+  stroke-width: 2;
+}
+
+.fmdqui-chart__crosshair {
+  stroke: var(--color-neutral-300);
+  stroke-width: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Hover tooltip — shipped by default on every chart
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-chart__tooltip {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 132px;
+  padding: var(--spacing-8) var(--spacing-12);
+  background-color: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-normal-sm);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fmdqui-chart__tooltip-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-neutral-900);
+}
+
+.fmdqui-chart__tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  font-size: 12px;
+}
+
+.fmdqui-chart__tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.fmdqui-chart__tooltip-name {
+  color: var(--color-neutral-500);
+  flex: 1;
+}
+
+.fmdqui-chart__tooltip-value {
+  color: var(--color-neutral-900);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Table view — the accessible fallback the dataviz guidance requires
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-chart__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  color: var(--color-neutral-700);
+}
+
+.fmdqui-chart__table th,
+.fmdqui-chart__table td {
+  padding: var(--spacing-4) var(--spacing-8);
+  text-align: right;
+  border-bottom: 1px solid var(--color-neutral-100);
+  font-variant-numeric: tabular-nums;
+}
+
+.fmdqui-chart__table thead th {
+  color: var(--color-neutral-500);
+  font-weight: 600;
+}
+
+.fmdqui-chart__table tbody th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--color-neutral-900);
+  white-space: nowrap;
+}
+
+.fmdqui-chart__table-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: var(--spacing-8);
+  border-radius: var(--radius-full);
+  vertical-align: middle;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Radial charts — Pie / Donut / Radar
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-chart__plot--radial {
+  display: flex;
+  justify-content: center;
+}
+
+.fmdqui-chart__svg--radial {
+  width: auto;
+  max-width: 100%;
+  /* Radial labels sit near the edge — clip rather than bleed into neighbours */
+  overflow: hidden;
+}
+
+/* ── Pie / Donut slices ── */
+.fmdqui-chart__slice {
+  transition: opacity var(--transition-fast);
+  cursor: pointer;
+}
+
+.fmdqui-chart__slice--dim {
+  opacity: 0.45;
+}
+
+/* Figma: DM Sans Medium 14px, dark ink on pale slices, white on saturated */
+.fmdqui-chart__slice-label {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.fmdqui-chart__tooltip--radial {
+  left: 50%;
+  top: auto;
+  bottom: 100%;
+  margin-bottom: var(--spacing-8);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Radar — Figma 6256:41865
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-chart__radar-ring {
+  fill: none;
+  stroke: var(--color-neutral-200);
+  stroke-width: 1;
+}
+
+/* Figma `Background=Fill` alternates a tinted band with white */
+.fmdqui-chart__radar-ring--band {
+  fill: var(--color-chart-band);
+}
+
+.fmdqui-chart__radar-ring--plain {
+  fill: var(--color-neutral-white);
+}
+
+.fmdqui-chart__radar-spoke {
+  stroke: var(--color-neutral-400);
+  stroke-width: 1;
+}
+
+/* Figma mutes the spokes when the rings are filled */
+.fmdqui-chart__radar-spoke--muted {
+  stroke: var(--color-neutral-200);
+}
+
+.fmdqui-chart__radar-area {
+  stroke-width: 2;                 /* Figma series stroke */
+  stroke-linejoin: round;
+  transition: opacity var(--transition-fast);
+}
+
+/* Figma points: 6px with a 1px white ring */
+.fmdqui-chart__radar-point {
+  stroke: var(--color-neutral-white);
+  stroke-width: 1;
+}
+
+.fmdqui-chart__radar-series--dim {
+  opacity: 0.3;
+}
+
+.fmdqui-chart__radar-scale {
+  font-family: var(--font-family-primary);
+  font-size: 10px;                 /* Figma 10px */
+  fill: var(--color-neutral-900);
+}
+
+/* Figma's file shows PingFang SC here, but rules §3 fixes the system fonts to
+   DM Sans and Rubik — that is a stray default in the design file. */
+.fmdqui-chart__radar-label {
+  font-family: var(--font-family-primary);
+  font-size: 12px;                 /* Figma 12px */
+  fill: var(--color-neutral-900);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LegendValues — Figma: Legend & Values 6248:37098
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-chart-values {
+  display: flex;
+}
+
+/* Figma `Direction=Vertical` — label above the figure, items in a row (gap 48) */
+.fmdqui-chart-values--vertical {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing-48);
+}
+
+/* Figma `Direction=Horizontal` — label beside the figure, items stacked (gap 20) */
+.fmdqui-chart-values--horizontal {
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fmdqui-chart-values__item {
+  display: flex;
+  align-items: stretch;
+  gap: var(--spacing-8);           /* Figma gap 8 */
+}
+
+/* Figma: a 4px colour bar running the full height of the item */
+.fmdqui-chart-values__bar {
+  width: 4px;
+  flex-shrink: 0;
+  border-radius: 1px;
+}
+
+.fmdqui-chart-values__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.fmdqui-chart-values--horizontal .fmdqui-chart-values__body {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 54px;                       /* Figma gap 54 */
+  flex: 1;
+}
+
+.fmdqui-chart-values__label {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-sm);  /* Figma: DM Sans Regular 14px */
+  color: var(--color-chart-value-label);
+  white-space: nowrap;
+}
+
+/* Figma: DM Sans Medium 20px, with the unit baseline-aligned beside it */
+.fmdqui-chart-values__figure {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--spacing-2);           /* Figma gap 2 */
+  font-family: var(--font-family-primary);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-chart-value-figure);
+  font-variant-numeric: tabular-nums;
+}
+
+.fmdqui-chart-values__unit {
+  font-size: var(--font-size-sm);  /* Figma: Regular 14px */
+  font-weight: 400;
+  color: var(--color-chart-value-unit);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Multi-Series Line Chart & Atoms (Figma 11041:684273, 11041:684142, 11041:684143, 11041:684146)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 1. Line Chart / Legend Item (Figma 11041:684142) */
+.fmdqui-line-chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 17px;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-family-primary);
+  border-radius: var(--radius-4, 4px);
+  padding: 1px 4px 1px 0;
+  transition: opacity 0.15s ease;
+}
+
+.fmdqui-line-chart-legend-item:focus-visible {
+  outline: 2px solid var(--color-primary-600, #034592);
+  outline-offset: 2px;
+}
+
+.fmdqui-line-chart-legend-item__checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Compact 14×14 Checkbox sizing matching Figma spec */
+.fmdqui-line-chart-legend-item .fmdqui-toggle--checkbox {
+  width: 14px;
+  height: 14px;
+}
+
+.fmdqui-line-chart-legend-item .fmdqui-toggle__track--checkbox {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border-width: 1px;
+}
+
+.fmdqui-line-chart-legend-item .fmdqui-toggle__check-icon {
+  width: 10px;
+  height: 10px;
+}
+
+.fmdqui-line-chart-legend-item__swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.fmdqui-line-chart-legend-item__label {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.fmdqui-line-chart-legend-item--selected .fmdqui-line-chart-legend-item__label {
+  color: var(--color-neutral-900, #101928);
+}
+
+.fmdqui-line-chart-legend-item--unselected .fmdqui-line-chart-legend-item__label {
+  color: var(--color-neutral-500, #667185);
+}
+
+/* 2. Line Chart / Now Marker (Figma 11041:684143) */
+.fmdqui-line-chart-now-marker {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fmdqui-line-chart-now-marker__line {
+  width: 1px;
+  background-color: var(--color-neutral-400, #98A2B3);
+}
+
+.fmdqui-line-chart-now-marker__label {
+  position: absolute;
+  bottom: 6px;
+  left: 4px;
+  font-family: var(--font-family-primary);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-neutral-500, #667185);
+  white-space: nowrap;
+}
+
+/* 3. Line Chart / Threshold (Figma 11041:684146) */
+.fmdqui-line-chart-threshold {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fmdqui-line-chart-threshold__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px dashed var(--color-error-500, #CB1A14);
+}
+
+.fmdqui-line-chart-threshold__label {
+  position: relative;
+  top: -10px;
+  font-family: var(--font-family-primary);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-error-600, #CB1A14);
+  white-space: nowrap;
+}
+
+/* 4. Multi-Series Line Chart Composite (Figma 11041:684273) */
+.fmdqui-multi-series-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: var(--font-family-primary);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fmdqui-multi-series-chart__plot {
+  position: relative;
+  width: 100%;
+}
+
+.fmdqui-multi-series-chart__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.fmdqui-multi-series-chart__grid-line {
+  stroke: var(--color-neutral-200, #E4E7EC);
+  stroke-width: 1;
+}
+
+.fmdqui-multi-series-chart__axis-label {
+  font-family: var(--font-family-primary);
+  font-size: 11px;
+  font-weight: 400;
+  fill: var(--color-neutral-500, #667185);
+}
+
+.fmdqui-multi-series-chart__x-axis-label {
+  font-family: var(--font-family-primary);
+  font-size: 10px;
+  font-weight: 400;
+  fill: var(--color-neutral-500, #667185);
+}
+
+.fmdqui-multi-series-chart__threshold-line {
+  stroke: var(--color-error-500, #CB1A14);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.fmdqui-multi-series-chart__threshold-label {
+  font-family: var(--font-family-primary);
+  font-size: 10px;
+  font-weight: 500;
+  fill: var(--color-error-600, #CB1A14);
+}
+
+.fmdqui-multi-series-chart__now-line {
+  stroke: var(--color-neutral-400, #98A2B3);
+  stroke-width: 1;
+}
+
+.fmdqui-multi-series-chart__now-label {
+  font-family: var(--font-family-primary);
+  font-size: 10px;
+  font-weight: 500;
+  fill: var(--color-neutral-500, #667185);
+}
+
+.fmdqui-multi-series-chart__series-line {
+  transition: opacity 0.2s ease;
+}
+
+.fmdqui-multi-series-chart__legend-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.fmdqui-multi-series-chart__legend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 20px;
+}
+
+.fmdqui-multi-series-chart__legend-title {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-neutral-900, #101928);
+  letter-spacing: -0.02em;
+}
+
+.fmdqui-multi-series-chart__legend-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fmdqui-multi-series-chart__action-btn {
+  padding: 0 4px !important;
+  height: auto !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.fmdqui-multi-series-chart__legend-slot {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 8px;
+  width: 100%;
+}
+

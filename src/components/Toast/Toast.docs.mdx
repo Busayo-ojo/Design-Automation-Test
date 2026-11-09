@@ -1,0 +1,96 @@
+import { Meta, Canvas, Story, Controls } from '@storybook/addon-docs/blocks';
+import * as ToastStories from './Toast.stories';
+
+<Meta of={ToastStories} />
+
+# Toast & Alerts
+
+The `Toast` (also exported as `Alert`) component matches the **FMDQ Design System** `Alert / Toast / Notification` component set in Figma (node `6218:7113`).
+
+It provides both:
+1. **Compact Toasts (`type="toasts"`)**: Lightweight notifications (width 390px) designed for floating updates.
+2. **Alert Banners (`type="banners"`)**: Rich in-flow messages (width 568px) with structured titles, descriptions, and action CTA buttons.
+
+## Figma Reference
+
+<iframe
+  title="Alert & Toast Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=6218-7113&embed-host=share"
+  allowFullScreen
+/>
+
+---
+
+## 1. Toast Variants
+
+<Canvas>
+  <Story of={ToastStories.ToastInformation} />
+</Canvas>
+
+---
+
+## 2. All 4 Semantic States (Toasts)
+
+Supported states:
+- `information`: Dark blue streak (`#1D326D`), light blue badge, info icon.
+- `success`: Green streak (`#04802E`), light green badge, check-circle icon.
+- `warning`: Gold streak (`#DD900D`), light gold badge, warning triangle icon.
+- `error`: Red streak (`#CB1A14`), light red badge, error check/alert icon.
+
+<Canvas>
+  <Story of={ToastStories.AllToastsGallery} />
+</Canvas>
+
+---
+
+## 3. Banner Alerts with CTAs
+
+Banners include dedicated primary and secondary action buttons with custom callbacks.
+
+<Canvas>
+  <Story of={ToastStories.BannerInformation} />
+</Canvas>
+
+<Canvas>
+  <Story of={ToastStories.AllBannersGallery} />
+</Canvas>
+
+---
+
+## 4. Imperative Usage (`useToast`)
+
+You can trigger floating toasts anywhere in your application using `ToastProvider` and the `useToast` hook:
+
+```tsx
+import { ToastProvider, useToast, Button } from '@fmdq/design-system';
+
+function MyComponent() {
+  const { toast } = useToast();
+
+  return (
+    <Button
+      label="Submit"
+      onClick={() =>
+        toast({
+          state: 'success',
+          title: 'Changes Saved',
+          description: 'Your settings have been updated.',
+          duration: 4000,
+        })
+      }
+    />
+  );
+}
+```
+
+<Canvas>
+  <Story of={ToastStories.LiveInteractiveTrigger} />
+</Canvas>
+
+---
+
+## Props
+
+<Controls />

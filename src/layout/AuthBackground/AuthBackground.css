@@ -1,0 +1,54 @@
+/* Figma-derived surface colors. Gold follows the shared FMDQ brand token
+   per the latest art direction; shared design-system tokens remain unchanged. */
+.fmdqui-auth-page {
+  --auth-shader-color1: rgb(32, 32, 32);
+  --auth-shader-color2: var(--color-fmdq-gold);
+  --auth-shader-color3: rgb(215.616, 222.803188, 246.418267);
+  --auth-shader-color4: rgb(222.547385, 230.005519, 248.870199);
+  --auth-shader-focus: rgb(0, 23.9955, 51);
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  min-height: 320px;
+  background-color: var(--color-primary-900);
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.fmdqui-auth-page__shader {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: var(--color-primary-900);
+}
+
+.fmdqui-auth-page__shader canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fmdqui-auth-page__shader[data-fallback='true'] {
+  background-image: radial-gradient(ellipse 3.673525px 3.441174px,
+    var(--auth-shader-color2) 70%, transparent 100%);
+  background-size: 18.3675768px 17.2058038px;
+}
+
+.fmdqui-auth-page__shader[data-fallback='true']::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 38.2% 48.8% at center,
+    rgb(0 23.9955 51 / 92%) 0%, rgb(0 23.9955 51 / 75%) 55%, transparent 100%);
+}
+
+.fmdqui-auth-page__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}

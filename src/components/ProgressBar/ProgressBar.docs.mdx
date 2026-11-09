@@ -1,0 +1,28 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ProgressBarStories from './ProgressBar.stories';
+
+<Meta of={ProgressBarStories} />
+
+# Progress Indicators
+
+Progress Indicators inform users about the status of ongoing processes, task completion ratios, or batch submission progress.
+Provides linear progress bars with label and metadata rows, as well as calibrated progress circles across 5 sizes.
+
+## Figma Reference
+
+<iframe
+  title="Progress Indicators Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=6276-147211&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
+<Canvas of={ProgressBarStories.Default} />
+
+## Properties
+
+<Controls of={ProgressBarStories.Default} />
+

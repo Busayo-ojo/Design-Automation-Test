@@ -1,0 +1,146 @@
+@import '../../tokens.css';
+
+/* ==========================================================================
+   FMDQ UI - Misc Icon Component (Figma Node 3354:173707)
+   ========================================================================== */
+
+.fmdqui-misc-icon {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  font-family: inherit;
+  transition: all var(--transition-fast, 0.15s ease);
+  flex-shrink: 0;
+}
+
+.fmdqui-misc-icon:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(29, 50, 109, 0.2);
+}
+
+.fmdqui-misc-icon:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─── Sizes ──────────────────────────────────────────────────────────────── */
+
+.fmdqui-misc-icon--size-xs {
+  width: 24px;
+  height: 24px;
+}
+
+.fmdqui-misc-icon--size-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.fmdqui-misc-icon--size-md {
+  width: 40px;
+  height: 40px;
+}
+
+.fmdqui-misc-icon--size-lg {
+  width: 48px;
+  height: 48px;
+}
+
+.fmdqui-misc-icon--size-xl {
+  width: 56px;
+  height: 56px;
+}
+
+/* ─── Shapes ─────────────────────────────────────────────────────────────── */
+
+.fmdqui-misc-icon--shape-round {
+  border-radius: var(--radius-full, 9999px);
+}
+
+.fmdqui-misc-icon--shape-square {
+  border-radius: var(--radius-8, 8px);
+}
+
+.fmdqui-misc-icon--size-xs.fmdqui-misc-icon--shape-square {
+  border-radius: var(--radius-6, 6px);
+}
+
+/* ─── Colors (with background) ───────────────────────────────────────────── */
+
+/* Primary */
+.fmdqui-misc-icon--color-primary {
+  background-color: var(--color-primary-50, #E3EFFC);
+  border-color: transparent;
+  color: var(--color-primary-700, #1D326D);
+}
+.fmdqui-misc-icon--color-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-100, #C2DCFA);
+}
+
+/* Gray */
+.fmdqui-misc-icon--color-gray {
+  background-color: var(--color-neutral-100, #F0F2F5);
+  border-color: transparent;
+  color: var(--color-neutral-700, #344054);
+}
+.fmdqui-misc-icon--color-gray:hover:not(:disabled) {
+  background-color: var(--color-neutral-200, #E4E7EC);
+}
+
+/* White (default for table more menu) */
+.fmdqui-misc-icon--color-white {
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border-color: var(--color-neutral-200, #E4E7EC);
+  color: var(--color-neutral-700, #344054);
+}
+.fmdqui-misc-icon--color-white:hover:not(:disabled) {
+  background-color: var(--color-neutral-50, #F9FAFB);
+  border-color: var(--color-neutral-300, #D0D5DD);
+}
+
+/* Error */
+.fmdqui-misc-icon--color-error {
+  background-color: var(--color-error-50, #FBEBE9);
+  border-color: transparent;
+  color: var(--color-error-default, #D42620);
+}
+.fmdqui-misc-icon--color-error:hover:not(:disabled) {
+  background-color: var(--color-error-100, #F6C8C4);
+}
+
+/* Warning */
+.fmdqui-misc-icon--color-warning {
+  background-color: var(--color-warning-50, #FFF3E4);
+  border-color: transparent;
+  color: var(--color-warning-default, #F4A218);
+}
+.fmdqui-misc-icon--color-warning:hover:not(:disabled) {
+  background-color: var(--color-warning-100, #FDE2BE);
+}
+
+/* Success */
+.fmdqui-misc-icon--color-success {
+  background-color: var(--color-success-50, #E7F6EC);
+  border-color: transparent;
+  color: var(--color-success-default, #099137);
+}
+.fmdqui-misc-icon--color-success:hover:not(:disabled) {
+  background-color: var(--color-success-100, #C5ECCE);
+}
+
+/* ─── Boolean: has background = false ────────────────────────────────────── */
+
+.fmdqui-misc-icon--no-background {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.fmdqui-misc-icon--no-background:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+

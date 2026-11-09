@@ -1,0 +1,56 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as AuthBackgroundStories from './AuthBackground.stories';
+
+<Meta of={AuthBackgroundStories} />
+
+# Auth Background
+
+Login and set-up background: Primary/900 with the animated dotted shader from the profile-card exploration. Placed behind the Auth card on every Flow 1 auth screen.
+
+The Figma iframe placeholder has been replaced by a native Three.js GLSL background. No login form or other UI is included. Dot geometry and metallic grain remain fixed while irregular gold folds stretch, bunch, and change direction across the surface.
+
+## Figma reference
+
+<iframe title="Auth background Figma reference" width="100%" height="450" src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=10310-262840&embed-host=share" allowFullScreen />
+
+## Default
+
+<Canvas of={AuthBackgroundStories.Default} sourceState="shown" />
+
+## Paused preview
+
+<Canvas of={AuthBackgroundStories.Paused} sourceState="shown" />
+
+## Mobile preview
+
+<Canvas of={AuthBackgroundStories.Mobile} sourceState="shown" />
+
+Paused and Mobile are developer previews of the same Figma component, which has no component variants.
+
+## Props table
+
+<Controls of={AuthBackgroundStories.Default} />
+
+## Figma shader properties
+
+| Property | Extracted value |
+| --- | --- |
+| bands | 1.2 |
+| definition | 7 |
+| frequency | 1.37 |
+| speed | 0.55 |
+| exposure | 1.41 |
+| saturation | 1.2 |
+| contrastAmt | 2.52 |
+| amplitude | 0.62 |
+| grain | 0.11 |
+| featureScale | 0.7 |
+| seed | 542 |
+
+The surface colors are scoped CSS tokens; gold now follows the shared `--color-fmdq-gold` (#CC9933) token per updated art direction. Primary/900 uses the existing shared token. The focus vignette uses Figma's 1100×1000 reference bounds and 92% / 75% / 0% opacity stops. The procedural contours reconstruct the proprietary Figma SHADER fill: its GLSL source is not exposed. Motion runs at 70% of the previous pace. Gold coverage ebbs through sparse, blue-dominant moments (approximately 90% blue / 10% gold as an art-direction target) and fuller folds. Narrow crease cores coexist with asymmetrically feathered shoulders; edge definition varies locally. Broad spatial scales and restrained domain warping keep bends open and gently rounded rather than tightly curled. Occasional larger draped arcs add a bright hem and a softly shaded face, blending by maximum to avoid accumulating excess gold. Continuous 3D noise and domain warping create non-directional, Brownian-like fold evolution; no repeating stripe phase or frame-randomized jitter is used. This is not a claim of frame-for-frame shader parity.
+
+## Usage guidelines
+
+Use the default story for a background-only full-window preview. Use the object control to edit the named shader properties and `paused` to freeze motion. The native renderer respects reduced-motion preferences, skips drawing in hidden tabs, caps drawing at 30 fps and device pixel ratio at 1.5, and disposes GPU resources on unmount. WebGL-unavailable environments receive a static dotted fallback.
+
+The optional children slot remains available for later integration; all provided stories leave it empty. Color token overrides should be set before mounting the renderer. No Figma login or network request is needed to display the native background.

@@ -1,0 +1,572 @@
+@import '../../tokens.css';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Dropdowns — 1:1 with Figma page "✤ Dropdowns" (file Hq7luvf787VJlCj1d3YJYw)
+
+   Every colour, size, radius, pad and gap below was read from Figma via MCP
+   and mapped to an existing token in src/tokens.css. Figma's text style across
+   this whole page is DM Sans / 14px / 145% / -4% letter-spacing, which is
+   exactly --font-size-sm + --font-line-height-paragraph +
+   --font-letter-spacing-paragraph.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Shared type ramp for every dropdown text node (Figma: DM Sans 14/145%/-4%) */
+.fmdqui-dropdowns-shortcut__key,
+.fmdqui-dropdowns-header__title,
+.fmdqui-dropdowns-header__subtitle,
+.fmdqui-dropdowns-item__text,
+.fmdqui-dropdowns-selitem__text,
+.fmdqui-dropdowns-selitem__supporting,
+.fmdqui-dropdowns-menu__trigger-label {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELEMENT — CommandShortcut        Figma: Command shortcut (2327:77216)
+   Key frame 29×20 · fill neutral-50 · 1px neutral-100 · r4 · pad 0 4px
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dropdowns-shortcut {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+}
+
+.fmdqui-dropdowns-shortcut__key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding: 0 var(--spacing-4);
+  background-color: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-100);
+  border-radius: var(--radius-4);
+  color: var(--color-neutral-600);
+  font-weight: 400;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELEMENT — DropdownMenuItemHeader  Figma: 2159:85848 · 240×56 · pad 8/16 · gap 4
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dropdowns-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8) var(--spacing-16);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Figma `borders=true` — 1px neutral-100 outline, stacked vertically */
+.fmdqui-dropdowns-header--borders {
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px solid var(--color-neutral-100);
+}
+
+.fmdqui-dropdowns-header__heading {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.fmdqui-dropdowns-header__title {
+  font-weight: 600; /* Figma: DM Sans SemiBold */
+  color: var(--color-neutral-900);
+}
+
+.fmdqui-dropdowns-header__subtitle {
+  font-weight: 400;
+  color: var(--color-neutral-500);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELEMENT — DropdownMenuItem        Figma: 2159:51455 · 240×36 · pad 8/16 · gap 4
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dropdowns-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--spacing-4);
+  height: 36px;
+  padding: var(--spacing-8) var(--spacing-16);
+  box-sizing: border-box;
+  width: 100%;
+  list-style: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color var(--transition-fast);
+}
+
+/* Figma: Left Content — HORIZONTAL, gap 12 */
+.fmdqui-dropdowns-item__left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  flex: 1;
+  min-width: 0;
+}
+
+.fmdqui-dropdowns-item__text {
+  font-weight: 400;
+  color: var(--color-neutral-900);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Figma: icon 20px, vector stroke neutral-500 */
+.fmdqui-dropdowns-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--color-neutral-500);
+}
+
+/* Figma: Avatars — type=Image, Size=xs → 20px */
+.fmdqui-dropdowns-item__avatar {
+  flex-shrink: 0;
+}
+
+/* ── States (Figma `state` variant) ───────────────────────────────────────
+   default: transparent · hover: neutral-50 · focused: neutral-100
+   selected: neutral-50 · disabled: neutral-100 + neutral-400 text          */
+.fmdqui-dropdowns-item--hover,
+.fmdqui-dropdowns-item:not(.fmdqui-dropdowns-item--disabled):hover {
+  background-color: var(--color-neutral-50);
+}
+
+.fmdqui-dropdowns-item--focused,
+.fmdqui-dropdowns-item:not(.fmdqui-dropdowns-item--disabled):focus-visible {
+  background-color: var(--color-neutral-100);
+  outline: none;
+}
+
+.fmdqui-dropdowns-item--selected {
+  background-color: var(--color-neutral-50);
+}
+
+.fmdqui-dropdowns-item--disabled {
+  background-color: var(--color-neutral-100);
+  cursor: not-allowed;
+}
+
+.fmdqui-dropdowns-item--disabled .fmdqui-dropdowns-item__text {
+  color: var(--color-neutral-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Scoped Toggle overrides — reuse the Toggle element, match Figma's dropdown
+   context. The shared Toggle is 24px and checks to --color-fmdq-blue; Figma's
+   dropdown Checkcircle is 16px and checks to secondary-400 (selected) or
+   neutral-300 (disabled). Sizes scale proportionally: 14 × (16/24) = 9.33px,
+   which matches Figma's 9px check vector.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dropdowns-item__toggle,
+.fmdqui-dropdowns-selitem__toggle {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.fmdqui-dropdowns-item__toggle .fmdqui-toggle--checkcircle,
+.fmdqui-dropdowns-item__toggle .fmdqui-toggle__track--checkcircle,
+.fmdqui-dropdowns-selitem__toggle .fmdqui-toggle--checkcircle,
+.fmdqui-dropdowns-selitem__toggle .fmdqui-toggle__track--checkcircle {
+  width: 16px;
+  height: 16px;
+}
+
+.fmdqui-dropdowns-item__toggle .fmdqui-toggle__check-icon,
+.fmdqui-dropdowns-selitem__toggle .fmdqui-toggle__check-icon {
+  width: 9.33px;
+  height: 9.33px;
+}
+
+/* selected → secondary-400 (Figma #F3A218) */
+.fmdqui-dropdowns-item--selected .fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkcircle,
+.fmdqui-dropdowns-selitem--selected .fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkcircle {
+  background-color: var(--color-secondary-400);
+  border-color: var(--color-secondary-400);
+}
+
+/* disabled → neutral-300 at full opacity (Figma keeps the white check solid,
+   so the shared Toggle's opacity:0.5 is reset here) */
+.fmdqui-dropdowns-item--disabled .fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkcircle,
+.fmdqui-dropdowns-selitem--disabled .fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkcircle {
+  background-color: var(--color-neutral-300);
+  border-color: var(--color-neutral-300);
+}
+
+.fmdqui-dropdowns-item--disabled .fmdqui-toggle--disabled,
+.fmdqui-dropdowns-selitem--disabled .fmdqui-toggle--disabled {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NESTED — DropdownMenuSection      Figma: 2159:81118 · VERTICAL · pad 4/0
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dropdowns-section {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-4) 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.fmdqui-dropdowns-section__list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NESTED — DropdownMenuList (popover)
+   Figma: fill white · r8 · gap 8 · pad 0 · 3-layer shadow
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dropdowns-menulist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  padding: 0;
+  width: 240px; /* Figma collapsed width; extended variant is 267 */
+  background-color: var(--color-neutral-white);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-dropdown-menu);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Figma: 1px Divider rectangle, neutral-100 */
+.fmdqui-dropdowns-menulist__divider {
+  height: 1px;
+  width: 100%;
+  background-color: var(--color-neutral-100);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELEMENT — SelectorMenuItem        Figma: 2459:70670 · 375×36 · pad 8/16 · gap 4
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dropdowns-selitem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--spacing-4);
+  height: 36px;
+  padding: var(--spacing-8) var(--spacing-16);
+  box-sizing: border-box;
+  width: 100%;
+  list-style: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color var(--transition-fast);
+}
+
+/* Figma: Left Content — HORIZONTAL, gap 12 */
+.fmdqui-dropdowns-selitem__left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  flex: 1;
+  min-width: 0;
+}
+
+/* Figma: Texts — HORIZONTAL, gap 8 (label and supporting text sit side by side) */
+.fmdqui-dropdowns-selitem__texts {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-8);
+  flex: 1;
+  min-width: 0;
+}
+
+.fmdqui-dropdowns-selitem__text {
+  font-weight: 400;
+  color: var(--color-neutral-900);
+  white-space: nowrap;
+}
+
+.fmdqui-dropdowns-selitem__supporting {
+  font-weight: 400;
+  color: var(--color-neutral-500);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fmdqui-dropdowns-selitem__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--color-neutral-500);
+}
+
+.fmdqui-dropdowns-selitem__avatar {
+  flex-shrink: 0;
+}
+
+/* Figma `style=status` — Avatar online indicator, 8px, success-600 */
+.fmdqui-dropdowns-selitem__status,
+.fmdqui-dropdowns-selector__status {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-success-600);
+}
+
+/* ── States ── default transparent · hover neutral-50 · focused neutral-100
+   · disabled neutral-100. Figma keeps neutral-900 text in every state here
+   (unlike DropdownMenuItem, which greys out when disabled).               */
+.fmdqui-dropdowns-selitem--hover,
+.fmdqui-dropdowns-selitem:not(.fmdqui-dropdowns-selitem--disabled):hover {
+  background-color: var(--color-neutral-50);
+}
+
+.fmdqui-dropdowns-selitem--focused,
+.fmdqui-dropdowns-selitem:not(.fmdqui-dropdowns-selitem--disabled):focus-visible {
+  background-color: var(--color-neutral-100);
+  outline: none;
+}
+
+/* Figma: `focused` is the only state that shifts the label to DM Sans Medium */
+.fmdqui-dropdowns-selitem--focused .fmdqui-dropdowns-selitem__text,
+.fmdqui-dropdowns-selitem:not(.fmdqui-dropdowns-selitem--disabled):focus-visible
+  .fmdqui-dropdowns-selitem__text {
+  font-weight: 500;
+}
+
+.fmdqui-dropdowns-selitem--disabled {
+  background-color: var(--color-neutral-100);
+  cursor: not-allowed;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NESTED — SelectorMenuList
+   Figma: .Selector menu / menu list — white · 1px neutral-200 · r8 · pad 4/0
+   shadow is an exact match for --shadow-normal-xsm
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dropdowns-sellist {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: var(--spacing-4) 0;
+  width: 100%;
+  list-style: none;
+  background-color: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-8);
+  box-shadow: var(--shadow-normal-xsm);
+  box-sizing: border-box;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FULL — DropdownsMenu              Figma: Dropdown / Menu (2190:54213)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dropdowns-menu {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  position: relative;
+  font-family: var(--font-family-primary);
+}
+
+/* Figma pairs extended=yes with gap 8 */
+.fmdqui-dropdowns-menu--extended {
+  gap: var(--spacing-8);
+}
+
+/* ── default button — 111×36 · white · 1px neutral-300 · r6 · pad 8/12 · gap 8 ── */
+.fmdqui-dropdowns-menu__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  height: 36px;
+  padding: var(--spacing-8) var(--spacing-12);
+  background-color: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-6);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  color: var(--color-neutral-500);
+}
+
+/* Figma: Container — HORIZONTAL, gap 4 (icon then label) */
+.fmdqui-dropdowns-menu__trigger-container {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.fmdqui-dropdowns-menu__trigger-label {
+  font-weight: 600; /* Figma: DM Sans SemiBold */
+  color: var(--color-neutral-700);
+  white-space: nowrap;
+}
+
+/* ── icon button — 28×28 · r6 · pad 4 ── */
+.fmdqui-dropdowns-menu__icon-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: var(--spacing-4);
+  background-color: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-6);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  color: var(--color-neutral-500);
+}
+
+/* ── avatar trigger — 32×32 (Avatar Size=sm) ── */
+.fmdqui-dropdowns-menu__avatar-trigger {
+  display: inline-flex;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: box-shadow var(--transition-fast);
+}
+
+/* ── Trigger states (Figma `state` variant) ──
+   hover → secondary-100 stroke · active → secondary-300 stroke
+   disabled → neutral-100 fill, neutral-300 stroke                          */
+.fmdqui-dropdowns-menu--hover .fmdqui-dropdowns-menu__trigger,
+.fmdqui-dropdowns-menu--hover .fmdqui-dropdowns-menu__icon-trigger,
+.fmdqui-dropdowns-menu__trigger:hover:not(:disabled),
+.fmdqui-dropdowns-menu__icon-trigger:hover:not(:disabled) {
+  border-color: var(--color-secondary-100);
+}
+
+.fmdqui-dropdowns-menu--active .fmdqui-dropdowns-menu__trigger,
+.fmdqui-dropdowns-menu--active .fmdqui-dropdowns-menu__icon-trigger,
+.fmdqui-dropdowns-menu__trigger:focus-visible,
+.fmdqui-dropdowns-menu__icon-trigger:focus-visible {
+  border-color: var(--color-secondary-300);
+  outline: none;
+}
+
+/* Uncontrolled open — Figma pairs extended=yes with the active stroke */
+.fmdqui-dropdowns-menu--open .fmdqui-dropdowns-menu__trigger,
+.fmdqui-dropdowns-menu--open .fmdqui-dropdowns-menu__icon-trigger {
+  border-color: var(--color-secondary-300);
+}
+
+.fmdqui-dropdowns-menu--open .fmdqui-dropdowns-menu__avatar-trigger {
+  box-shadow: 0 0 0 4px var(--color-secondary-300);
+}
+
+.fmdqui-dropdowns-menu--disabled .fmdqui-dropdowns-menu__trigger,
+.fmdqui-dropdowns-menu--disabled .fmdqui-dropdowns-menu__icon-trigger,
+.fmdqui-dropdowns-menu__trigger:disabled,
+.fmdqui-dropdowns-menu__icon-trigger:disabled {
+  background-color: var(--color-neutral-100);
+  border-color: var(--color-neutral-300);
+  cursor: not-allowed;
+}
+
+/* Figma avatar trigger: hover → 4px primary-50 ring; active → secondary-300 ring */
+.fmdqui-dropdowns-menu--hover .fmdqui-dropdowns-menu__avatar-trigger,
+.fmdqui-dropdowns-menu__avatar-trigger:hover:not(:disabled) {
+  box-shadow: 0 0 0 4px var(--color-primary-50);
+}
+
+.fmdqui-dropdowns-menu--active .fmdqui-dropdowns-menu__avatar-trigger,
+.fmdqui-dropdowns-menu__avatar-trigger:focus-visible {
+  box-shadow: 0 0 0 4px var(--color-secondary-300);
+  outline: none;
+}
+
+/* Figma's `type=avatar, state=disabled` is visually identical to the default
+   variant — no opacity, no ring. Only the cursor changes. */
+.fmdqui-dropdowns-menu--disabled .fmdqui-dropdowns-menu__avatar-trigger {
+  cursor: not-allowed;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FULL — DropdownsSelector          Figma: Dropdown / Selectors (2959:115795)
+
+   The field itself is the shared <Input size="lg"> element. These rules only
+   adapt it to the selector context — they never restyle Input globally.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-dropdowns-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8); /* Figma root gap between field and menu */
+  width: 375px; /* Figma component width */
+  font-family: var(--font-family-primary);
+  position: relative;
+}
+
+/* Input ships a fixed 320px container; the Figma selector is 375px wide. */
+.fmdqui-dropdowns-selector .fmdqui-input-container {
+  width: 100%;
+}
+
+/* Figma: Label + Frame gap is 4 — already Input's container gap. */
+
+/* Figma: Left Content gap is 8 between the leading adornment and the text,
+   while the Input Frame's own gap (icon ↔ trailing) is 12. Input applies a
+   single 12px flex gap, so pull the leading icon in by 4px to land on 8. */
+.fmdqui-dropdowns-selector .fmdqui-input__icon--leading {
+  margin-right: -4px;
+}
+
+/* Figma placeholder is neutral-400 (#98A2B3); the shared Input uses
+   neutral-500. Scoped to the selector so Input is left untouched. */
+.fmdqui-dropdowns-selector .fmdqui-input::placeholder {
+  color: var(--color-neutral-400);
+}
+
+.fmdqui-dropdowns-selector .fmdqui-input:disabled {
+  color: var(--color-neutral-400);
+}
+
+/* The field is a combobox, not a free-text input */
+.fmdqui-dropdowns-selector__field {
+  cursor: pointer;
+}
+
+.fmdqui-dropdowns-selector .fmdqui-input {
+  cursor: pointer;
+}
+
+.fmdqui-dropdowns-selector--disabled .fmdqui-input {
+  cursor: not-allowed;
+}
+
+/* Figma: the status dot mutes to neutral-300 when the field is disabled */
+.fmdqui-dropdowns-selector--disabled .fmdqui-dropdowns-selector__status {
+  background-color: var(--color-neutral-300);
+}
+
+/* Figma `state=filled` keeps the neutral-300 stroke and shows the value */
+.fmdqui-dropdowns-selector--filled .fmdqui-input {
+  color: var(--color-neutral-900);
+}

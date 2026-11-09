@@ -1,0 +1,80 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as FileUploadStories from './FileUpload.stories';
+
+<Meta of={FileUploadStories} />
+
+# File Upload
+
+From the Figma page **"✤ File Upload ⚜️"**. Per the Figma documentation frame, these *"enable users to upload files from their local devices to a web or application interface."*
+
+**19 Figma variants** across five nodes.
+
+## Figma Reference
+
+<iframe
+  title="File Upload Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=6100-14546&embed-host=share"
+  allowFullScreen
+/>
+
+---
+
+## Playground
+
+<Canvas of={FileUploadStories.Playground} />
+<Controls of={FileUploadStories.Playground} />
+
+---
+
+## Elements
+
+<Canvas of={FileUploadStories.ElementsFileType} />
+
+Note `warning` exists in the Figma element set but none of the full compositions use it.
+
+<Canvas of={FileUploadStories.ElementsUploadStates} />
+
+<Canvas of={FileUploadStories.ElementsProgressRing} />
+
+---
+
+## Full components
+
+Each row state swaps both the leading indicator and the trailing actions. `In Progress` is the only state that uses the file-type badge rather than the status circle.
+
+<Canvas of={FileUploadStories.FullUploadRow} />
+
+<Canvas of={FileUploadStories.FullDropzone} />
+
+<Canvas of={FileUploadStories.FullMultiple} />
+
+## Interactive
+
+<Canvas of={FileUploadStories.Interactive} />
+
+---
+
+## Figma source
+
+| Figma node | Variants | React |
+| :--- | :--- | :--- |
+| `file type` `3355:170664` | 6 | `FileTypeBadge` |
+| `file upload states` `3355:171475` | 4 | `UploadStateIcon` |
+| `Small upload` `6092:3073` | 4 | `FileUploadRow` |
+| `Big Upload` `6100:14546` | 4 | `FileDropzone` |
+| `Mutilple Uploads` `6100:15099` | 7 booleans | `FileUploadList` |
+| — (ring inside the row) | — | `UploadProgressRing` |
+
+## Notes
+
+- **Reuse.** CTAs are the existing `Button` element; the dropzone's linear bar is the existing `ProgressBar` (with its label, metadata and footer suppressed, since Figma shows a bare bar with the percentage above it). Every icon comes from `foundations/icons`.
+- **Tokens added.** Five colours had no existing match: `--color-file-jpg` (`#C548F1`), `--color-file-mp3` (`#6D56F8`), and the three tinted dropzone surfaces `--color-dropzone-uploading-surface`, `--color-dropzone-success-surface`, `--color-dropzone-error-surface`.
+- **Scaling.** Figma scales these elements inside their compositions — the 24px file-type badge renders at 48 in the upload row and 45 in the dropzone; the 32px status circle renders at 48 and 56. Both components take a `size` prop and scale their glyph proportionally.
+- **`Try Again` colour differs by context.** Figma uses `primary-700` for the label in the upload row but `primary-400` in the dropzone. Both are reproduced.
+- **Bar height.** Figma's dropzone bar is 6px; the shared `ProgressBar` ships 8px at `size="sm"`, so the height is overridden within the dropzone only.
+
+## Best practices
+
+From Figma's Best Practices frame: keep the process simple with clear instructions; set and communicate file-size limits up front; give clear, immediate error messages; use progress indicators for large files; let users preview files before uploading; and accept a variety of file types while communicating any limitations.

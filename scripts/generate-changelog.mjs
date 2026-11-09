@@ -82,6 +82,17 @@ function generateChangelog() {
       message,
       url: repoUrl ? `${repoUrl}/commit/${hash}` : ''
     };
+  }).filter(c => {
+    // Only design system changes should reflect on the changelog
+    const nonDesignScopes = ['drp', 'portal', 'app', 'application'];
+    if (c.scope && nonDesignScopes.includes(c.scope.toLowerCase())) {
+      return false;
+    }
+    const lowerSubj = c.subject.toLowerCase();
+    if (lowerSubj.includes('drp') || lowerSubj.includes('data reporting portal')) {
+      return false;
+    }
+    return true;
   });
 
   const outputPath = path.join(ROOT, 'src', 'docs', 'changelog-data.json');

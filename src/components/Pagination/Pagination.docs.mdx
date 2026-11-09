@@ -1,0 +1,138 @@
+import { Meta, Title, Subtitle, Description, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as PaginationStories from './Pagination.stories';
+
+<Meta of={PaginationStories} />
+
+<Title>Pagination</Title>
+<Subtitle>Multi-level responsive pagination suite built from Figma primitives.</Subtitle>
+
+The Pagination system is modeled 1:1 on the Figma component specification on page `✤ Pagination` (Node ID: `2767:76362`).
+has top divider shows the line above. has left, right and bottom stroke add a 1px Grey/200 edge, for when it sits as a table footer. No fill, so it takes the surface it sits on.
+
+It provides composable base elements as well as pre-assembled variations for application tables, catalogs, and lists.
+
+## Figma Reference
+
+<iframe
+  title="Pagination Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=2767-76362&embed-host=share"
+  allowFullScreen
+/>
+
+## Interactive Playground
+Experiment with variations, button styles, sizes, and alignments using the live controls below.
+
+<Canvas of={PaginationStories.Playground} />
+<Controls of={PaginationStories.Playground} />
+
+---
+
+## Anatomy & Architecture
+
+The pagination pattern is organised in three composable tiers:
+
+1. **Base Primitives**:
+   - `PageNumber`: 24px/36px circular or square page buttons with 4 interaction states (`inactive`, `hover`, `active v1`, `active v2`).
+   - `TruncatedPages`: Ellipsis spacer (`…`) indicating hidden page intervals.
+   - `PageIndicator`: Formatted text status (`"Page 1 of 30"` or `"Showing 1–10 of 100 entries"`).
+   - `NavigationControls`: Prev/next triggers in 4 presentation types (`single buttons`, `grouped buttons`, `button`, `selector`) across 4 color treatments (`outlined`, `filled-brand`, `filled-dark`, `ghost`).
+
+2. **Composite Row**:
+   - `PaginationList`: An auto-layout row combining page numbers and ellipsis tokens with 2px gap and optional directional arrows.
+
+3. **Full Navigation Bar**:
+   - `Pagination`: Complete responsive bar supporting top divider rules, 5 Figma layout variations, and viewport alignments.
+
+---
+
+## Base Elements
+
+### Page Numbers (`2608:66376`)
+Supports Small (24×24px, 12px text) and Large (36×36px, 14px text) scales with Square (radius 6px) and Round (pill/circle) geometries.
+
+<Canvas of={PaginationStories.BasePageNumbers} />
+
+### Truncated Pages (`2775:76546`)
+Ellipsis markers for collapsed page ranges.
+
+<Canvas of={PaginationStories.BaseTruncatedPages} />
+
+### Page Indicators (`2609:67848`)
+Data count summaries in 14px DM Sans SemiBold.
+
+<Canvas of={PaginationStories.BasePageIndicators} />
+
+### Navigation Controls (`2607:66246`)
+Single icon buttons, linked double buttons, full text labels, and direct jump-to-page numeric inputs.
+
+<Canvas of={PaginationStories.BaseNavigationControls} />
+
+---
+
+## Composite: Pagination List (`2767:76342`)
+
+A flexible standalone row of numbers with built-in truncation logic.
+
+<Canvas of={PaginationStories.CompositePaginationList} />
+
+---
+
+## Full Bar Layout Variations (`2767:76362`)
+
+### Variation 1: Indicator Centered
+Page description text in the center with Previous / Next action buttons on either end.
+
+<Canvas of={PaginationStories.Variation1IndicatorCenter} />
+
+### Variation 2: Numbers Centered
+Numbered page sequence in the center with left and right navigation controls.
+
+<Canvas of={PaginationStories.Variation2NumbersCenter} />
+
+### Variation 3: Left Aligned Cluster
+Status indicator, page numbers, and action buttons aligned together to the left.
+
+<Canvas of={PaginationStories.Variation3LeftAligned} />
+
+### Variation 4: Right Aligned Cluster
+Indicator, page numbers, and navigation grouped to the right side.
+
+<Canvas of={PaginationStories.Variation4RightAligned} />
+
+### Variation 5: Center Aligned Cluster
+Unified cluster centered within the parent container.
+
+<Canvas of={PaginationStories.Variation5CenterAligned} />
+
+---
+
+## Features
+
+### Direct Page Selector
+Allows typing a page number directly into a 48px input field.
+
+<Canvas of={PaginationStories.WithPageSelector} />
+
+### Grouped Buttons
+Linked 72×36px dual-chevron controls for compact interfaces.
+
+<Canvas of={PaginationStories.WithGroupedButtons} />
+
+---
+
+## Table Integration
+
+### Direct Table Footer Containment with Edge Strokes (`11145:275–323`)
+
+When sitting directly below a table, `hasTopDivider`, `hasLeftStroke`, `hasRightStroke`, and `hasBottomStroke` add 1px Grey/200 (`#E4E7EC`) borders to seal the table enclosure without requiring redundant wrapper `<div>`s. Transparent fill ensures it takes the background of whichever card or surface it sits on.
+
+<Canvas of={PaginationStories.TableFooterWithStrokes} />
+
+### Container-Wrapped Table Integration
+
+Demonstration of the Pagination component wrapped within a card footer with live page state updates.
+
+<Canvas of={PaginationStories.TableFooterIntegration} />
+

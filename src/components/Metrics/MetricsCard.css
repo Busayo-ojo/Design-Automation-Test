@@ -1,0 +1,139 @@
+@import '../../tokens.css';
+
+.fmdqui-metrics-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  border-radius: 12px;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  box-shadow: var(--shadow-soft-xsm, 0px 2px 4px -1px rgba(16, 25, 40, 0.02), 0px 5px 13px -5px rgba(16, 25, 40, 0.05));
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  width: 100%;
+}
+
+.fmdqui-metrics-card:hover {
+  border-color: var(--color-neutral-300, #D0D5DD);
+  box-shadow: none !important;
+}
+
+/* ── Metrics Body ── */
+.fmdqui-metrics-card__body {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 32px;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.fmdqui-metrics-card--center .fmdqui-metrics-card__body {
+  align-items: center;
+  text-align: center;
+}
+
+/* ── Header Row (Icon + Title) ── */
+.fmdqui-metrics-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 32px;
+}
+
+.fmdqui-metrics-card__icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  color: var(--color-fmdq-blue);
+  flex-shrink: 0;
+}
+
+.fmdqui-metrics-card__title {
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 500;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+  margin: 0;
+}
+
+/* ── Metrics Container (Value + Subtext) ── */
+.fmdqui-metrics-card__metrics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fmdqui-metrics-card--center .fmdqui-metrics-card__metrics-container {
+  align-items: center;
+}
+
+/* ── Value / Data Display ── */
+.fmdqui-metrics-card__value {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-900, #101928);
+  margin: 0;
+}
+
+/* ── Subtext Row (Badge + Context Text) ── */
+.fmdqui-metrics-card__subtext-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.fmdqui-metrics-card__subtext {
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 500;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+}
+
+/* ── CTA Footer ── */
+.fmdqui-metrics-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background-color: var(--color-neutral-50, #F9FAFB);
+  border-top: 1px solid var(--color-neutral-100, #F0F2F5);
+  min-height: 48px;
+  box-sizing: border-box;
+}
+
+.fmdqui-metrics-card__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 500;
+  color: var(--color-fmdq-blue);
+  transition: color 0.15s ease;
+  width: 100%;
+}
+
+.fmdqui-metrics-card__cta-btn:hover {
+  color: var(--color-primary-800);
+}
+
+.fmdqui-metrics-card__cta-btn:focus-visible {
+  outline: 2px solid var(--color-fmdq-blue);
+  outline-offset: 2px;
+}

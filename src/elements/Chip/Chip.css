@@ -1,90 +1,90 @@
-@import '../../tokens.css';
+    @import '../../tokens.css';
 
-.fmdqui-chip {
-  display: inline-flex;
-  align-items: center;
-  height: 32px;
-  padding: 6px var(--spacing-12) 6px var(--spacing-8);
-  border-radius: var(--radius-8);
-  border: 1px solid var(--color-neutral-300);
-  background-color: var(--color-neutral-white);
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--color-neutral-600);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-  gap: var(--spacing-8);
-  box-sizing: border-box;
-}
+    .fmdqui-chip {
+      display: inline-flex;
+      align-items: center;
+      height: 32px;
+      padding: 6px var(--spacing-12) 6px var(--spacing-8);
+      border-radius: var(--radius-8);
+      border: 1px solid var(--color-neutral-300);
+      background-color: var(--color-neutral-white);
+      font-family: var(--font-family-primary);
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      color: var(--color-neutral-600);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      gap: var(--spacing-8);
+      box-sizing: border-box;
+    }
 
-/* Adjust padding if no left icon */
-.fmdqui-chip:not(:has(.fmdqui-chip__icon--left)) {
-  padding-left: var(--spacing-12);
-}
+    /* Adjust padding if no left icon */
+    .fmdqui-chip:not(:has(.fmdqui-chip__icon--left)) {
+      padding-left: var(--spacing-12);
+    }
 
-/* Adjust padding if no close button */
-.fmdqui-chip:not(:has(.fmdqui-chip__close)) {
-  padding-right: var(--spacing-12);
-}
+    /* Adjust padding if no close button */
+    .fmdqui-chip:not(:has(.fmdqui-chip__close)) {
+      padding-right: var(--spacing-12);
+    }
 
-/* States */
-.fmdqui-chip--focused {
-  background-color: var(--color-secondary-50);
-  border-color: var(--color-secondary-500);
-  color: var(--color-neutral-700);
-}
+    /* States */
+    .fmdqui-chip--focused {
+      background-color: var(--color-secondary-50);
+      border-color: var(--color-secondary-500);
+      color: var(--color-neutral-700);
+    }
 
-.fmdqui-chip--disabled {
-  background-color: var(--color-neutral-white);
-  border-color: var(--color-neutral-300);
-  color: var(--color-neutral-400);
-  cursor: not-allowed;
-  pointer-events: none;
-}
+    .fmdqui-chip--disabled {
+      background-color: var(--color-neutral-white);
+      border-color: var(--color-neutral-300);
+      color: var(--color-neutral-400);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
-/* Internal elements */
-.fmdqui-chip__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-}
+    /* Internal elements */
+    .fmdqui-chip__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
 
-.fmdqui-chip__label {
-  white-space: nowrap;
-  line-height: 20px;
-}
+    .fmdqui-chip__label {
+      white-space: nowrap;
+      line-height: 20px;
+    }
 
-.fmdqui-chip__close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  border-radius: var(--radius-4);
-  transition: background-color 0.2s ease;
-  flex-shrink: 0;
-}
+    .fmdqui-chip__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      border-radius: var(--radius-4);
+      transition: background-color 0.2s ease;
+      flex-shrink: 0;
+    }
 
-.fmdqui-chip__close:hover:not(:disabled) {
-  background-color: rgba(0, 0, 0, 0.05);
-}
+    .fmdqui-chip__close:hover:not(:disabled) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
 
-.fmdqui-chip--focused .fmdqui-chip__close:hover:not(:disabled) {
-  background-color: rgba(223, 153, 22, 0.1);
-}
+    .fmdqui-chip--focused .fmdqui-chip__close:hover:not(:disabled) {
+      background-color: rgba(223, 153, 22, 0.1);
+    }
 
-/* Hover effects for non-disabled chips */
-.fmdqui-chip:hover:not(.fmdqui-chip--disabled):not(.fmdqui-chip--focused) {
-  border-color: var(--color-neutral-400);
-  background-color: var(--color-neutral-50);
-}
+    /* Hover effects for non-disabled chips */
+    .fmdqui-chip:hover:not(.fmdqui-chip--disabled):not(.fmdqui-chip--focused) {
+      border-color: var(--color-neutral-400);
+      background-color: var(--color-neutral-50);
+    }

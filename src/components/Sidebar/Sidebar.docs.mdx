@@ -1,0 +1,78 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as SidebarStories from './Sidebar.stories';
+
+<Meta of={SidebarStories} />
+
+# Sidebar
+
+Matches Figma component sets:
+- **Sidebar**: `3167:145002`
+- **Sidebar / menu item**: `2437:56486`
+- **Sidebar / sub-menu item**: `2437:57101`
+- **Sidebar section**: `3167:122883`
+- **Sidebar / account menu**: `10322:286059`
+- **Brand Logo element**: `6769:1811` (`fmdq-logo`)
+
+## Figma Reference
+
+<iframe
+  title="Sidebar Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=3167-145002&embed-host=share"
+  allowFullScreen
+/>
+
+## All Figma Variants Matrix
+
+Direct 1:1 replica of the 8 canonical variants from the Figma artboard (`347:10108`), covering Variant 1 (Brand Logo top) and Variant 2 (User Profile top with chevron) across Light, Blue, Dark Blue (with gold icons), and Dark Grey in both Default (272px) and Collapsed (82px) modes.
+
+<Canvas of={SidebarStories.AllFigmaVariantsMatrix} />
+
+## Sub-Menu Item Cells (Figma 2437:57101)
+
+Base component atom for sub-navigation items across 4 themes (`light`, `secondary blue`, `dark blue`, `dark`) and 3 states (`default`, `selected`, `disabled`), measuring 208px width, 16px left/right padding (nested with 29px indent in sidebar), 44px height, and 4px corner radius.
+
+<Canvas of={SidebarStories.SubMenuItemCells} />
+
+## Architecture
+
+1. **Brand Logo (`Logo` / `FmdqLogo`)**:
+   - Reusable element exported from `src/elements/Logo`.
+   - Default transparent mode for light surfaces, Card mode (`Property 1=DarkBG`) with clean white container for dark themes.
+2. **Cells (`SidebarMenuItem`, `SidebarSubMenuItem`)**:
+   - Types: `default`, `multi-layered` (with expandable nested tree), `icon-only` (collapsed mode).
+   - States: `default`, `hover`, `selected`.
+   - Themes: `light`, `blue`, `dark-blue` (gold icon strokes `#CC9933`), `dark-grey`.
+   - Counters: Connected to design system `<Badge size="sm" type="accent" color="neutral" />` (#F0F2F5 background, #344054 text).
+   - Typography: 14px DM Sans (`--font-size-p-sm`), 400 default/hover, 600 selected.
+3. **Rows (`SidebarSection`)**:
+   - Section Title: 14px DM Sans Medium (`--font-size-p-sm`, 500) and optional bottom divider.
+4. **Column (`Sidebar`)**:
+   - **Variant 1**: Brand logo top, search bar, menu sections, user profile card & account flyout at bottom.
+   - **Variant 2**: User profile card top with chevron selector, search bar, menu sections, brand logo at bottom.
+   - **Collapsed Mode**: 82px width with `align-justify` (☰) hamburger button and centered icon-only items.
+
+## Variant 1 (Light Theme)
+
+<Canvas of={SidebarStories.Variant1Light} />
+
+## Variant 1 (Dark Blue Theme)
+
+<Canvas of={SidebarStories.Variant1DarkBlue} />
+
+## Variant 2 (Profile Top)
+
+<Canvas of={SidebarStories.Variant2ProfileTop} />
+
+## Collapsed State (82px)
+
+<Canvas of={SidebarStories.CollapsedState} />
+
+## Account Flyout Menu
+
+<Canvas of={SidebarStories.AccountMenuStandalone} />
+
+## Controls
+
+<Controls of={SidebarStories.Playground} />

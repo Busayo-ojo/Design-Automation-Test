@@ -1,93 +1,392 @@
+@import '../../tokens.css';
+
+/* ==========================================================================
+   FMDQ Design System - Modal Component
+   Matches Figma "✤ Modals" Component Set (10378:339469 & 10379:339480)
+   ========================================================================== */
+
+/* ── Overlay Backdrop (Figma: rgba(0, 22, 51, 0.55)) ── */
 .fmdqui-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(10, 15, 25, 0.6);
+  background-color: rgba(0, 22, 51, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(4px);
   padding: var(--spacing-24);
+  box-sizing: border-box;
+  animation: fmdquiModalFadeIn var(--transition-fast) forwards;
 }
 
-@keyframes modalScaleIn {
-  from { opacity: 0; transform: scale(0.96) translateY(10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
+@keyframes fmdquiModalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
+@keyframes fmdquiModalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── Modal Dialog Window (Figma: 16px radius, 28px 28px 24px 28px padding) ── */
 .fmdqui-modal-dialog {
+  position: relative;
   background-color: var(--color-neutral-white);
   border-radius: var(--radius-16);
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-soft-xl);
   display: flex;
   flex-direction: column;
+  gap: 20px;
+  padding: 28px 28px var(--spacing-24) 28px;
   max-height: 90vh;
   width: 100%;
-  animation: modalScaleIn 0.4s var(--transition-smooth) forwards;
+  box-sizing: border-box;
+  overflow: visible;
+  animation: fmdquiModalScaleIn var(--transition-smooth) forwards;
+  font-family: var(--font-family-primary);
 }
 
-.fmdqui-modal-dialog--sm { max-width: 400px; }
-.fmdqui-modal-dialog--md { max-width: 500px; }
-.fmdqui-modal-dialog--lg { max-width: 800px; }
+/* ── Modal Sizes (Figma: sm=400px, md=520px [Standard], lg=640px) ── */
+.fmdqui-modal-dialog--sm {
+  max-width: 400px;
+  gap: var(--spacing-24);
+}
 
-.fmdqui-modal-header {
-  display: flex;
+.fmdqui-modal-dialog--md {
+  max-width: 520px;
+  gap: 20px;
+}
+
+.fmdqui-modal-dialog--lg {
+  max-width: 640px;
+  gap: var(--spacing-24);
+}
+
+/* ── Featured Icon (Figma: 40x40 circle, radius 20px) ── */
+.fmdqui-modal-featured-icon {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-24);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
+.fmdqui-modal-featured-icon--info {
+  background-color: var(--color-primary-50);
+}
+
+.fmdqui-modal-featured-icon--warning {
+  background-color: var(--color-warning-50);
+}
+
+.fmdqui-modal-featured-icon--destructive {
+  background-color: var(--color-error-50);
+}
+
+.fmdqui-modal-featured-icon--success {
+  background-color: var(--color-success-50);
+}
+
+/* ── Header (align=left | align=center) ── */
+.fmdqui-modal-header {
+  position: relative;
+  display: flex;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fmdqui-modal-header--left {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  text-align: left;
+}
+
+.fmdqui-modal-header--center {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-12);
+}
+
+.fmdqui-modal-header__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6, 6px);
+}
+
+/* Figma typography: Title (Heading 6: 20px, 120% line-height, -0.04em letter-spacing) */
 .fmdqui-modal-title {
   margin: 0;
   font-family: var(--font-family-primary);
-  font-size: var(--font-size-p-lg);
+  font-size: var(--font-size-h6);
   font-weight: 600;
-  color: var(--color-grey-focused);
+  line-height: var(--font-line-height-heading);
+  letter-spacing: var(--font-letter-spacing-heading-small);
+  color: var(--color-neutral-900);
 }
 
+/* Figma typography: Description (Paragraph Small: 14px, 145% line-height, -0.04em letter-spacing) */
+.fmdqui-modal-subtitle {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-sm);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  color: var(--color-neutral-500);
+}
+
+/* Figma Header Close Button (32x32, 8px radius) */
 .fmdqui-modal-close-btn {
+  flex-shrink: 0;
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--color-grey-default);
-  padding: var(--spacing-8);
-  margin: calc(-1 * var(--spacing-8));
+  color: var(--color-neutral-500);
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-8);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-fast);
+  line-height: 0;
+  outline: none;
+  padding: 0;
 }
 
 .fmdqui-modal-close-btn:hover {
-  background-color: var(--color-secondary-hover-bg);
-  color: var(--color-grey-focused);
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-700);
 }
 
-.fmdqui-modal-close-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
+/* ── Modal Body ── */
 .fmdqui-modal-body {
-  padding: var(--spacing-24);
-  overflow-y: auto;
+  padding: 4px;
+  margin: -4px;
+  overflow-y: visible;
+  max-height: 60vh;
   font-family: var(--font-family-primary);
-  font-size: var(--font-size-sm);
-  color: var(--color-grey-focused);
-  line-height: var(--font-line-height-standard);
+  font-size: var(--font-size-p-sm);
+  color: var(--color-neutral-700);
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  width: calc(100% + 8px);
 }
 
-.fmdqui-modal-footer {
-  padding: var(--spacing-24);
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
+/* Ensure any form or textarea child takes full modal width */
+.fmdqui-modal-body > * {
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* ── Details Table / Stack (Figma: Modal / Details - 10px radius, #F9FAFB fill) ── */
+.fmdqui-modal-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: var(--spacing-10, 10px);
+  background-color: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-200);
+  overflow: hidden;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.fmdqui-modal-detail-row {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  padding: var(--spacing-12) var(--spacing-16);
+  box-sizing: border-box;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-sm);
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  border-bottom: 1px solid var(--color-neutral-200);
+}
+
+.fmdqui-modal-detail-row:last-child {
+  border-bottom: none;
+}
+
+.fmdqui-modal-detail-row__label {
+  color: var(--color-neutral-500);
+  font-weight: 400;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-sm);
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+}
+
+.fmdqui-modal-detail-row__value {
+  color: var(--color-neutral-900);
+  font-weight: 600;
+  text-align: right;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-sm);
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+}
+
+/* ── Upload Dropzone (Figma: 10378:339405 - 16px radius, 1.5px dashed border) ── */
+.fmdqui-modal-upload-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 264px;
+  border-radius: var(--radius-16);
+  border: 1.5px dashed var(--color-neutral-300);
+  background-color: var(--color-neutral-white);
+  padding: 28px var(--spacing-24);
+  box-sizing: border-box;
+  gap: var(--spacing-16);
+  text-align: center;
+}
+
+.fmdqui-modal-upload-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-neutral-100);
+}
+
+.fmdqui-modal-upload-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.fmdqui-modal-upload-action-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-sm);
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+}
+
+.fmdqui-modal-upload-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-sm);
+  font-weight: 600;
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  color: var(--color-primary-600);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.fmdqui-modal-upload-link:hover {
+  text-decoration: underline;
+}
+
+.fmdqui-modal-upload-supporting-action {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-sm);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  color: var(--color-neutral-600);
+}
+
+.fmdqui-modal-upload-meta {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-xs);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  color: var(--color-neutral-400);
+}
+
+.fmdqui-modal-upload-divider {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--spacing-24);
+}
+
+.fmdqui-modal-upload-divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--color-neutral-200);
+  z-index: 1;
+}
+
+.fmdqui-modal-upload-divider__badge {
+  position: relative;
+  z-index: 2;
+  background-color: var(--color-neutral-white);
+  padding: 0 var(--spacing-8);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-caption-sm);
+  font-weight: 600;
+  line-height: var(--font-line-height-caption);
+  letter-spacing: var(--font-letter-spacing-caption-lg-sm);
+  color: var(--color-neutral-400);
+}
+
+/* ── Modal Footer (Figma: Modal / Footer) ── */
+.fmdqui-modal-footer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
   gap: var(--spacing-12);
-  background-color: var(--color-neutral-50);
+}
+
+.fmdqui-modal-footer--right {
+  justify-content: flex-end;
+}
+
+.fmdqui-modal-footer--center {
+  justify-content: center;
+}
+
+.fmdqui-modal-footer--full,
+.fmdqui-modal-footer--single {
+  justify-content: stretch;
+}
+
+.fmdqui-modal-footer--full > *,
+.fmdqui-modal-footer--single > *,
+.fmdqui-modal-footer .fmdqui-button--full-width {
+  width: 100%;
 }

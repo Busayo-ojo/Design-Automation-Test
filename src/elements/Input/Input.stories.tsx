@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Input } from './Input';
+import { InputDropdown } from './InputDropdown';
 
 // ─── Shared label style for section headers ────────────────────────────────
 const sectionLabel: React.CSSProperties = {
@@ -29,7 +30,6 @@ const gridStyle: React.CSSProperties = {
 const meta: Meta<typeof Input> = {
   title: 'Elements/🔠 Input',
   component: Input,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
@@ -134,8 +134,9 @@ export const Default: Story = {
   name: 'Playground',
 };
 
-export const InputDropdown: Story = {
-  name: 'Input Dropdown',
+// ─── Input Dropdown Stories (Merged from Dropdown / Selectors) ──────────────
+export const InputDropdownNative: Story = {
+  name: 'Input Dropdown (Native Select)',
   args: {
     state: 'input dropdown',
     label: 'Select Option',
@@ -144,9 +145,166 @@ export const InputDropdown: Story = {
   },
 };
 
+export const InputDropdownRich: StoryObj<typeof InputDropdown> = {
+  name: 'Input Dropdown / Playground',
+  render: (args) => (
+    <InputDropdown
+      {...args}
+      options={[
+        { value: 'acc-1', label: 'Treasury Operations', sublabel: 'Operating Account •••• 4912' },
+        { value: 'acc-2', label: 'Fixed Income Clearing', sublabel: 'Settlement Account •••• 8821' },
+        { value: 'acc-3', label: 'FX Liquidity Desk', sublabel: 'Collateral Account •••• 1043' },
+      ]}
+    />
+  ),
+  args: {
+    type: 'default',
+    state: 'default',
+    size: 'lg',
+    label: 'Select Account',
+    placeholder: 'Choose an operational account',
+    hasLabel: true,
+    hasHelperText: true,
+    helperText: 'Select the primary account to debit',
+  },
+};
+
+export const InputDropdownStates: StoryObj<typeof InputDropdown> = {
+  name: 'Input Dropdown / All States',
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', width: '375px' }}>
+      <div>
+        <span style={sectionLabel}>1. Default State (Grey-300 border)</span>
+        <InputDropdown
+          label="Label"
+          placeholder="Placeholder"
+          state="default"
+          options={[{ value: '1', label: 'Option 1' }]}
+        />
+      </div>
+
+      <div>
+        <span style={sectionLabel}>2. Hover State (Primary-600 border)</span>
+        <InputDropdown
+          label="Label"
+          placeholder="Placeholder"
+          state="hover"
+          options={[{ value: '1', label: 'Option 1' }]}
+        />
+      </div>
+
+      <div>
+        <span style={sectionLabel}>3. Active State (Primary-600 border + 4px focus ring)</span>
+        <InputDropdown
+          label="Label"
+          placeholder="Placeholder"
+          state="active"
+          options={[{ value: '1', label: 'Option 1' }]}
+        />
+      </div>
+
+      <div>
+        <span style={sectionLabel}>4. Filled State</span>
+        <InputDropdown
+          label="Label"
+          placeholder="Placeholder"
+          state="filled"
+          defaultValue="filled-val"
+          options={[{ value: 'filled-val', label: 'Selected Treasury Account' }]}
+        />
+      </div>
+
+      <div>
+        <span style={sectionLabel}>5. Disabled State (Grey-100 fill)</span>
+        <InputDropdown
+          label="Label"
+          placeholder="Placeholder"
+          state="disabled"
+          disabled
+          options={[{ value: '1', label: 'Option 1' }]}
+        />
+      </div>
+    </div>
+  ),
+};
+
+export const InputDropdownVariants: StoryObj<typeof InputDropdown> = {
+  name: 'Input Dropdown / Variants Gallery',
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 360px)', gap: '28px' }}>
+      <div>
+        <span style={sectionLabel}>Type: Default</span>
+        <InputDropdown
+          type="default"
+          label="Standard Selector"
+          placeholder="Placeholder"
+          hasHelperText
+          helperText="Standard text-only selector"
+          options={[{ value: '1', label: 'Option 1' }]}
+        />
+      </div>
+
+      <div>
+        <span style={sectionLabel}>Type: Icon Leading</span>
+        <InputDropdown
+          type="icon leading"
+          label="Search Filter"
+          placeholder="Select market sector"
+          hasHelperText
+          helperText="Leading icon prefix"
+          options={[{ value: '1', label: 'Money Market' }]}
+        />
+      </div>
+
+      <div>
+        <span style={sectionLabel}>Type: Avatar Leading</span>
+        <InputDropdown
+          type="avatar leading"
+          label="Assigned Authoriser"
+          placeholder="Select a member"
+          hasHelperText
+          helperText="Leading user identity avatar"
+          options={[{ value: '1', label: 'David Eno' }]}
+        />
+      </div>
+
+      <div>
+        <span style={sectionLabel}>Type: Status</span>
+        <InputDropdown
+          type="status"
+          label="Gateway Status"
+          placeholder="Select gateway"
+          hasHelperText
+          helperText="Live connectivity indicator"
+          statusColor="#04802E"
+          options={[{ value: '1', label: 'Primary Gateway (Active)' }]}
+        />
+      </div>
+    </div>
+  ),
+};
+
+export const InputDropdownRichMenu: StoryObj<typeof InputDropdown> = {
+  name: 'Input Dropdown / Extended Menu',
+  render: () => (
+    <div style={{ width: '375px', minHeight: '320px' }}>
+      <InputDropdown
+        label="Select Department"
+        extended={true}
+        defaultValue="fx"
+        options={[
+          { value: 'fi', label: 'Fixed Income', sublabel: 'Treasury Bills, Bonds, Repo' },
+          { value: 'fx', label: 'Foreign Exchange', sublabel: 'Spot, Forwards, Swaps' },
+          { value: 'mm', label: 'Money Market', sublabel: 'NIBOR, Call, Term placements' },
+          { value: 'risk', label: 'Market Risk', sublabel: 'Surveillance & Limit Monitoring', disabled: true },
+        ]}
+      />
+    </div>
+  ),
+};
+
 // ─── Sizes ─────────────────────────────────────────────────────────────────
 export const Sizes: Story = {
-  name: 'Sizes',
   parameters: { controls: { disable: true } },
   render: () => (
     <div style={gridStyle}>
@@ -168,7 +326,6 @@ export const Sizes: Story = {
 
 // ─── Boolean Controls Showcase ─────────────────────────────────────────────
 export const BooleanControls: Story = {
-  name: 'Boolean Controls',
   parameters: { controls: { disable: true } },
   render: () => (
     <div style={gridStyle}>

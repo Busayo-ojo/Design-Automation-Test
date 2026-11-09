@@ -1,0 +1,156 @@
+@import '../../tokens.css';
+
+/* ==========================================================================
+   FMDQ UI - Table Column Menu Component (Figma Node 11185:1015636)
+   Matches Figma "Table / Column menu" (4 variants: text, range, date, options)
+   ========================================================================== */
+
+.fmdqui-column-menu {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  border-radius: var(--radius-12, 12px);
+  box-shadow: 0 0 3px -1px rgba(16, 25, 40, 0.04), 0 14px 22px -9px rgba(16, 25, 40, 0.14);
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ─── 1. Sort Section ────────────────────────────────────────────────────── */
+
+.fmdqui-column-menu__sort {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Ensure DropdownMenuItem fits perfectly inside 240px shell */
+.fmdqui-column-menu__sort .fmdqui-dropdowns-item {
+  width: 100%;
+}
+
+/* ─── Divider ────────────────────────────────────────────────────────────── */
+
+.fmdqui-column-menu__divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-neutral-200, #E4E7EC);
+  margin: 0;
+}
+
+/* ─── 2. Filter Section ──────────────────────────────────────────────────── */
+
+.fmdqui-column-menu__filter {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+}
+
+.fmdqui-column-menu__filter-title {
+  font-size: var(--font-size-caption-sm, 12px);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--color-grey-default, #667185);
+  letter-spacing: -0.04em;
+}
+
+/* Single Text Filter */
+.fmdqui-column-menu__filter-text {
+  width: 100%;
+}
+
+.fmdqui-column-menu__filter-text .fmdqui-input-container {
+  width: 100%;
+}
+
+/* Range Filter (Min & Max side-by-side) */
+.fmdqui-column-menu__filter-range,
+.fmdqui-column-menu__filter-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.fmdqui-column-menu__filter-range .fmdqui-input-container,
+.fmdqui-column-menu__filter-date .fmdqui-input-container {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Options Filter (Checkbox List) */
+.fmdqui-column-menu__filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.fmdqui-column-menu__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fmdqui-column-menu__option-label {
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--color-grey-focused, #101928);
+}
+
+/* ─── 3. Actions Section ─────────────────────────────────────────────────── */
+
+.fmdqui-column-menu__actions {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+}
+
+.fmdqui-column-menu__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1.45;
+  transition: opacity var(--transition-fast, 0.15s ease);
+}
+
+.fmdqui-column-menu__action-btn:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.fmdqui-column-menu__action-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(29, 50, 109, 0.2);
+  border-radius: var(--radius-4, 4px);
+}
+
+.fmdqui-column-menu__action-btn--clear {
+  color: var(--color-error-500, #EB5017);
+}
+
+.fmdqui-column-menu__action-btn--apply {
+  color: var(--color-primary-700, #1D326D);
+}
+

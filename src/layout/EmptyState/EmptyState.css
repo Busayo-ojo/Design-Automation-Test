@@ -1,0 +1,73 @@
+@import '../../tokens.css';
+
+.fmdqui-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  box-sizing: border-box;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ── Illustration Box ── */
+.fmdqui-empty-state__illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.fmdqui-empty-state__illustration svg {
+  width: 150px;
+  height: 150px;
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.fmdqui-empty-state__image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── Text Container ── */
+.fmdqui-empty-state__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 440px;
+  margin-bottom: 24px;
+}
+
+.fmdqui-empty-state__title {
+  font-size: var(--font-size-p-lg, 18px);
+  font-weight: 600;
+  line-height: var(--font-line-height-heading, 1.35);
+  color: var(--color-neutral-900, #101928);
+  margin: 0;
+}
+
+.fmdqui-empty-state__description {
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph, 1.5);
+  color: var(--color-neutral-500, #667185);
+  margin: 0;
+}
+
+/* ── Actions Container ── */
+.fmdqui-empty-state__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}

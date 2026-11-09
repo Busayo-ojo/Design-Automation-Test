@@ -1,0 +1,42 @@
+@import '../../tokens.css';
+
+/* ── FMDQ Brand Logo Element (Figma: 6769:1811) ────────────────────────────── */
+
+.fmdqui-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast, 0.15s ease);
+}
+
+.fmdqui-logo__svg {
+  display: block;
+  width: auto;
+  height: 24px;
+  max-width: 100%;
+}
+
+/* Card Container for Dark Theme Backgrounds (Figma: Property 1=DarkBG) */
+.fmdqui-logo--card {
+  background-color: var(--color-neutral-white, #ffffff);
+  border-radius: var(--radius-8, 8px);
+  padding: 5px 12px;
+  box-shadow: var(--shadow-soft-xxsm, 0px 1.5px 4px -1px rgba(16, 25, 40, 0.07));
+}
+
+.fmdqui-logo--card .fmdqui-logo__svg {
+  height: 22px;
+}
+
+/* Sizes */
+.fmdqui-logo--sm .fmdqui-logo__svg {
+  height: 18px;
+}
+
+.fmdqui-logo--md .fmdqui-logo__svg {
+  height: 24px;
+}
+
+.fmdqui-logo--lg .fmdqui-logo__svg {
+  height: 32px;
+}

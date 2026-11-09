@@ -7,29 +7,30 @@ import * as TypographyStories from '../components/Typography/Typography.stories'
 
 # Typography
 
-Typography is the foundation of the FMDQ digital experience. It dictates legibility, hierarchy, and brand personality across all platforms. We utilize **DM Sans** as our primary typeface for its modern, clean, and professional aesthetic.
+Typography is the foundation of the FMDQ digital experience. It dictates legibility, hierarchy, and brand personality across all platforms. We utilize **DM Sans** as our primary and default system typeface. **Rubik** is not a secondary font — it is used exclusively for **FMDQ NEXT**.
 
-<div style={{ 
-  padding: '40px', 
-  backgroundColor: '#183972', 
-  borderRadius: '16px', 
-  color: 'white',
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  marginBottom: '64px',
-  marginTop: '32px',
-  boxShadow: '0 8px 32px rgba(24, 57, 114, 0.15)'
-}}>
-  <div>
-    <h3 style={{ margin: 0, color: '#FFFFFF', fontSize: '24px', fontWeight: 'bold' }}>DM Sans Typeface</h3>
+<div style={{ marginBottom: '64px', marginTop: '32px' }}>
+  <div style={{ 
+    padding: '32px', 
+    backgroundColor: '#183972', 
+    borderRadius: '16px', 
+    color: 'white',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    boxShadow: '0 8px 32px rgba(24, 57, 114, 0.15)'
+  }}>
+    <div>
+      <h3 style={{ margin: 0, color: '#FFFFFF', fontSize: '20px', fontWeight: 'bold' }}>DM Sans (Primary)</h3>
+      <p style={{ margin: '4px 0 0 0', color: 'var(--color-primary-100, #B6D8FF)', fontSize: '13px', fontWeight: 500 }}>Default system & UI typeface across all products</p>
+    </div>
+    <Button 
+      label="Download Font" 
+      variant="secondary" 
+      size="sm"
+      onClick={() => window.open('https://fonts.google.com/download?family=DM%20Sans', '_blank')}
+    />
   </div>
-  <Button 
-    label="Download Typeface" 
-    variant="secondary" 
-    size="lg"
-    onClick={() => window.open('https://fonts.google.com/specimen/DM+Sans', '_blank')}
-  />
 </div>
 
 ## Typeface Showcase
@@ -46,19 +47,45 @@ The complete typography scale for the FMDQ Design System 2026. This scale is des
   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginTop: '24px' }}>
     <div style={{ backgroundColor: '#F9FAFB', padding: '24px', borderRadius: '12px', border: '1px solid #EAECF0' }}>
       <h3 style={{ marginTop: 0, color: '#101828', fontSize: '18px' }}>Font Families</h3>
-      | Token | Value |
-      | :--- | :--- |
-      | `--font-family-primary` | `'DM Sans', sans-serif` |
-      | `--font-family-secondary` | `'DM Sans', sans-serif` |
+      | Token | Value | Notes |
+      | :--- | :--- | :--- |
+      | `--font-family-primary` | `'DM Sans', sans-serif` | Default across all UI & components |
+      | `--font-family-rubik` | `'Rubik', sans-serif` | Reserved exclusively for FMDQ NEXT |
     </div>
     <div style={{ backgroundColor: '#F9FAFB', padding: '24px', borderRadius: '12px', border: '1px solid #EAECF0' }}>
       <h3 style={{ marginTop: 0, color: '#101828', fontSize: '18px' }}>Line Heights</h3>
-      | Category | Value |
-      | :--- | :--- |
-      | Display | `100%` |
-      | Heading | `100%` |
-      | Paragraph | `100%` |
-      | Caption | `100%` |
+      | Category | Token | Value |
+      | :--- | :--- | :--- |
+      | Display | `--font-line-height-display` | `100%` |
+      | Heading | `--font-line-height-heading` | `120%` |
+      | Paragraph | `--font-line-height-paragraph` | `145%` |
+      | Paragraph Medium Reg | `--font-line-height-paragraph-medium` | `130%` |
+      | Caption | `--font-line-height-caption` | `120%` |
+    </div>
+  </div>
+
+  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginTop: '24px' }}>
+    <div style={{ backgroundColor: '#F9FAFB', padding: '24px', borderRadius: '12px', border: '1px solid #EAECF0' }}>
+      <h3 style={{ marginTop: 0, color: '#101828', fontSize: '18px' }}>Letter Spacing (DM Sans)</h3>
+      | Scale | Token | Value |
+      | :--- | :--- | :--- |
+      | Display | `--font-letter-spacing-display` | `-0.06em` (-6%) |
+      | Heading H1-H2 | `--font-letter-spacing-heading-large` | `-0.06em` (-6%) |
+      | Heading H3-H6 | `--font-letter-spacing-heading-small` | `-0.04em` (-4%) |
+      | Paragraphs | `--font-letter-spacing-paragraph` | `-0.04em` (-4%) |
+      | Caption Lg/Sm | `--font-letter-spacing-caption-lg-sm` | `+0.12em` (+12%) |
+      | Caption XS | `--font-letter-spacing-caption-xs` | `+0.16em` (+16%) |
+    </div>
+    <div style={{ backgroundColor: '#F9FAFB', padding: '24px', borderRadius: '12px', border: '1px solid #EAECF0' }}>
+      <h3 style={{ marginTop: 0, color: '#101828', fontSize: '18px' }}>Letter Spacing (Rubik — FMDQ NEXT)</h3>
+      | Scale | Token | Value |
+      | :--- | :--- | :--- |
+      | Display | `--font-letter-spacing-rubik-display` | `-0.04em` (-4%) |
+      | Heading H1-H2 | `--font-letter-spacing-rubik-heading-large` | `-0.04em` (-4%) |
+      | Heading H3-H6 | `--font-letter-spacing-rubik-heading-small` | `-0.02em` (-2%) |
+      | Paragraphs | `--font-letter-spacing-rubik-paragraph` | `0em` (0%) |
+      | Caption Lg/Sm | `--font-letter-spacing-caption-lg-sm` | `+0.12em` (+12%) |
+      | Caption XS | `--font-letter-spacing-caption-xs` | `+0.16em` (+16%) |
     </div>
   </div>
 
@@ -84,6 +111,7 @@ The complete typography scale for the FMDQ Design System 2026. This scale is des
         | | `--font-size-p-md` | `16px` |
         | | `--font-size-p-sm` | `14px` |
         | | `--font-size-p-xs` | `12px` |
+        | | `--font-size-p-xxs` | `10px` |
         | **Caption** | `--font-size-caption-lg` | `14px` |
         | | `--font-size-caption-sm` | `12px` |
         | | `--font-size-caption-xs` | `10px` |

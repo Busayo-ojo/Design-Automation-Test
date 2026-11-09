@@ -1,80 +1,289 @@
 @import '../../tokens.css';
+@import '../Typography/Typography.css';
 
+/* ==========================================================================
+   FMDQ Design System - Standalone Dropdown Menu Component
+   Matches Figma "Dropdown / Menu" (2190:52619) & "Dropdown / menu item" (2159:51455)
+   ========================================================================== */
+
+/* ── Main Container ── */
 .fmdqui-dropdown {
-    position: relative;
-    display: inline-block;
-    font-family: var(--font-family-primary);
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-family-primary);
+  box-sizing: border-box;
 }
 
-.fmdqui-dropdown__trigger {
-    cursor: pointer;
-    display: inline-flex;
+.fmdqui-dropdown__trigger-wrapper {
+  display: inline-flex;
 }
 
-.fmdqui-dropdown__menu {
-    position: absolute;
-    top: calc(100% + var(--spacing-8));
-    background: var(--color-neutral-white);
-    border: 1px solid var(--color-neutral-200);
-    box-shadow: var(--shadow-normal-md);
-    border-radius: var(--radius-8);
-    min-width: 200px;
-    z-index: 50;
-    padding: var(--spacing-8) 0;
+/* ── Triggers ── */
+
+/* 1. Default Button Trigger */
+.fmdqui-dropdown__btn-content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8, 8px);
 }
 
-.fmdqui-dropdown__menu--align-left {
-    left: 0;
+.fmdqui-dropdown__chevron {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.fmdqui-dropdown__menu--align-right {
-    right: 0;
+.fmdqui-dropdown__chevron.is-open {
+  transform: rotate(180deg);
 }
 
-.fmdqui-dropdown__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+/* 2. Avatar Trigger (32px) */
+.fmdqui-dropdown__avatar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: var(--radius-full, 9999px);
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
 }
 
-.fmdqui-dropdown__item {
-    display: flex;
-    align-items: center;
-    padding: var(--spacing-12) var(--spacing-16);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    gap: var(--spacing-gap-10);
-    color: var(--color-grey-focused);
-    font-size: var(--font-size-sm);
-    line-height: var(--font-line-height-standard);
+.fmdqui-dropdown__avatar-btn:hover {
+  opacity: 0.9;
+  border-color: var(--color-primary-100, #B6D8FF);
 }
 
-.fmdqui-dropdown__item:hover:not(.is-disabled) {
-    background-color: var(--color-secondary-hover-bg);
+.fmdqui-dropdown__avatar-btn.is-open,
+.fmdqui-dropdown__avatar-btn:focus-visible {
+  outline: none;
+  border-color: var(--color-primary-default, #034592);
+  box-shadow: 0 0 0 4px var(--color-focus-ring, #E7E8F1), 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10);
 }
 
-.fmdqui-dropdown__item.is-disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+/* 3. Icon-only Trigger (28px - 32px) */
+.fmdqui-dropdown__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid var(--color-neutral-300, #D0D5DD);
+  border-radius: var(--radius-8, 8px);
+  color: var(--color-neutral-600, #475367);
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
 }
 
-.fmdqui-dropdown__item.is-destructive {
-    color: var(--color-destructive-default);
+.fmdqui-dropdown__icon-btn:hover {
+  background-color: var(--color-neutral-50, #F9FAFB);
+  border-color: var(--color-primary-default, #034592);
+  color: var(--color-primary-default, #034592);
 }
 
-.fmdqui-dropdown__item.is-destructive:hover:not(.is-disabled) {
-    background-color: var(--color-error-50);
+.fmdqui-dropdown__icon-btn.is-open,
+.fmdqui-dropdown__icon-btn:focus-visible {
+  outline: none;
+  border-color: var(--color-primary-default, #034592);
+  box-shadow: 0 0 0 4px var(--color-focus-ring, #E7E8F1), 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.10);
 }
 
-.fmdqui-dropdown__item-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 16px;
-    height: 16px;
+/* 4. Custom Trigger Wrapper */
+.fmdqui-dropdown__custom-trigger {
+  cursor: pointer;
+  display: inline-flex;
 }
 
-.fmdqui-dropdown__item-icon svg {
-    width: 100%;
-    height: 100%;
+/* ── Menu Popover Container (Figma: 240px width, 8px radius) ── */
+.fmdqui-dropdown-menu {
+  position: absolute;
+  top: calc(100% + var(--spacing-4, 4px));
+  width: 240px;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  border-radius: var(--radius-8, 8px);
+  box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.06), 0px 12px 16px -4px rgba(0, 0, 0, 0.10);
+  z-index: 1000;
+  padding: 4px 0;
+  box-sizing: border-box;
+  animation: fmdqui-dropdown-appear 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fmdqui-dropdown-menu--align-left {
+  left: 0;
+}
+
+.fmdqui-dropdown-menu--align-right {
+  right: 0;
+}
+
+@keyframes fmdqui-dropdown-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Header (Figma 2159:85848) ── */
+.fmdqui-dropdown-header {
+  padding: 8px 16px;
+  box-sizing: border-box;
+}
+
+.fmdqui-dropdown-header--borders {
+  border-bottom: 1px solid var(--color-neutral-100, #F0F2F5);
+  margin-bottom: 4px;
+  padding-bottom: 8px;
+}
+
+.fmdqui-dropdown-header__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fmdqui-dropdown-header__title {
+  color: var(--color-neutral-900, #101928);
+}
+
+.fmdqui-dropdown-header__subtitle {
+  color: var(--color-neutral-500, #667185);
+}
+
+/* ── Section & Items List ── */
+.fmdqui-dropdown-section {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.fmdqui-dropdown-section__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fmdqui-dropdown-section__divider {
+  padding: 4px 0;
+}
+
+/* ── Menu Item (Figma 2159:51455, 240x36px, padding: 8px 16px) ── */
+.fmdqui-dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  width: 100%;
+  height: 36px;
+  padding: 8px 16px;
+  background-color: transparent;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--transition-fast, 0.15s ease);
+}
+
+.fmdqui-dropdown-item__left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8, 8px);
+  flex: 1;
+  min-width: 0;
+}
+
+.fmdqui-dropdown-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-neutral-600, #475367);
+  flex-shrink: 0;
+}
+
+.fmdqui-dropdown-item__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fmdqui-dropdown-item__label {
+  color: var(--color-neutral-900, #101928);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fmdqui-dropdown-item__right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Shortcut badge (Figma 2327:77216) */
+.fmdqui-dropdown-item__shortcut {
+  font-family: var(--font-family-primary);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-neutral-500, #667185);
+  background-color: var(--color-neutral-100, #F0F2F5);
+  padding: 2px 6px;
+  border-radius: var(--radius-4, 4px);
+  line-height: 1;
+}
+
+.fmdqui-dropdown-item__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-default, #034592);
+}
+
+/* ── Item States matching Figma ── */
+.fmdqui-dropdown-item:hover:not(.fmdqui-dropdown-item--disabled),
+.fmdqui-dropdown-item--state-hover:not(.fmdqui-dropdown-item--disabled) {
+  background-color: var(--color-neutral-50, #F9FAFB);
+}
+
+.fmdqui-dropdown-item:focus-visible,
+.fmdqui-dropdown-item--state-focused:not(.fmdqui-dropdown-item--disabled) {
+  background-color: var(--color-neutral-100, #F0F2F5);
+  outline: none;
+}
+
+.fmdqui-dropdown-item--selected {
+  background-color: var(--color-neutral-50, #F9FAFB);
+}
+
+.fmdqui-dropdown-item--selected .fmdqui-dropdown-item__label {
+  font-weight: 600;
+  color: var(--color-primary-default, #034592);
+}
+
+.fmdqui-dropdown-item--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: transparent !important;
+}
+
+.fmdqui-dropdown-item--disabled .fmdqui-dropdown-item__label {
+  color: var(--color-neutral-400, #98A2B3);
+}
+
+.fmdqui-dropdown-item--destructive {
+  color: var(--color-destructive-default, #CB1A14);
+}
+
+.fmdqui-dropdown-item--destructive .fmdqui-dropdown-item__label,
+.fmdqui-dropdown-item--destructive .fmdqui-dropdown-item__icon {
+  color: var(--color-destructive-default, #CB1A14);
+}
+
+.fmdqui-dropdown-item--destructive:hover:not(.fmdqui-dropdown-item--disabled) {
+  background-color: var(--color-error-50, #FBEAE9);
 }

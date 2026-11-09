@@ -2,9 +2,18 @@
 
 .fmdq-heading, .fmdq-text, .fmdq-label {
     margin: 0;
-    font-family: var(--font-family-primary) !important;
+    font-family: var(--font-family-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* Font Family Modifiers */
+.fmdq-typography--font-dmsans {
+    font-family: var(--font-family-dm-sans) !important;
+}
+
+.fmdq-typography--font-rubik {
+    font-family: var(--font-family-rubik) !important;
 }
 
 /* Align */
@@ -38,12 +47,52 @@
     line-height: var(--font-line-height-display) !important;
     letter-spacing: var(--font-letter-spacing-display) !important;
 }
-.fmdq-heading--h1 { font-size: var(--font-size-h1) !important; }
-.fmdq-heading--h2 { font-size: var(--font-size-h2) !important; }
-.fmdq-heading--h3 { font-size: var(--font-size-h3) !important; letter-spacing: var(--font-letter-spacing-heading-small) !important; }
-.fmdq-heading--h4 { font-size: var(--font-size-h4) !important; letter-spacing: var(--font-letter-spacing-heading-small) !important; }
-.fmdq-heading--h5 { font-size: var(--font-size-h5) !important; letter-spacing: var(--font-letter-spacing-heading-small) !important; }
-.fmdq-heading--h6 { font-size: var(--font-size-h6) !important; letter-spacing: var(--font-letter-spacing-heading-small) !important; }
+.fmdq-heading--h1 {
+    font-size: var(--font-size-h1) !important;
+    line-height: var(--font-line-height-heading) !important;
+    letter-spacing: var(--font-letter-spacing-heading-large) !important;
+}
+.fmdq-heading--h2 {
+    font-size: var(--font-size-h2) !important;
+    line-height: var(--font-line-height-heading) !important;
+    letter-spacing: var(--font-letter-spacing-heading-large) !important;
+}
+.fmdq-heading--h3 {
+    font-size: var(--font-size-h3) !important;
+    line-height: var(--font-line-height-heading) !important;
+    letter-spacing: var(--font-letter-spacing-heading-small) !important;
+}
+.fmdq-heading--h4 {
+    font-size: var(--font-size-h4) !important;
+    line-height: var(--font-line-height-heading) !important;
+    letter-spacing: var(--font-letter-spacing-heading-small) !important;
+}
+.fmdq-heading--h5 {
+    font-size: var(--font-size-h5) !important;
+    line-height: var(--font-line-height-heading) !important;
+    letter-spacing: var(--font-letter-spacing-heading-small) !important;
+}
+.fmdq-heading--h6 {
+    font-size: var(--font-size-h6) !important;
+    line-height: var(--font-line-height-heading) !important;
+    letter-spacing: var(--font-letter-spacing-heading-small) !important;
+}
+
+/* Rubik Specific Headings / Display Kerning */
+.fmdq-typography--font-rubik.fmdq-heading--display-lg,
+.fmdq-typography--font-rubik.fmdq-heading--display-sm {
+    letter-spacing: var(--font-letter-spacing-rubik-display) !important;
+}
+.fmdq-typography--font-rubik.fmdq-heading--h1,
+.fmdq-typography--font-rubik.fmdq-heading--h2 {
+    letter-spacing: var(--font-letter-spacing-rubik-heading-large) !important;
+}
+.fmdq-typography--font-rubik.fmdq-heading--h3,
+.fmdq-typography--font-rubik.fmdq-heading--h4,
+.fmdq-typography--font-rubik.fmdq-heading--h5,
+.fmdq-typography--font-rubik.fmdq-heading--h6 {
+    letter-spacing: var(--font-letter-spacing-rubik-heading-small) !important;
+}
 
 /* Text Sizes */
 .fmdq-text {
@@ -57,25 +106,59 @@
 .fmdq-text--size-md { font-size: var(--font-size-p-md) !important; }
 .fmdq-text--size-sm { font-size: var(--font-size-p-sm) !important; }
 .fmdq-text--size-xs { font-size: var(--font-size-p-xs) !important; }
-.fmdq-text--size-caption-lg { font-size: var(--font-size-caption-lg) !important; line-height: var(--font-line-height-caption); letter-spacing: var(--font-letter-spacing-caption-lg-sm); }
-.fmdq-text--size-caption-sm { font-size: var(--font-size-caption-sm) !important; line-height: var(--font-line-height-caption); letter-spacing: var(--font-letter-spacing-caption-lg-sm); }
-.fmdq-text--size-caption-xs { font-size: var(--font-size-caption-xs) !important; line-height: var(--font-line-height-caption); letter-spacing: var(--font-letter-spacing-caption-xs); }
+.fmdq-text--size-xxs {
+    font-size: var(--font-size-p-xxs) !important;
+    letter-spacing: var(--font-letter-spacing-paragraph) !important;
+    line-height: var(--font-line-height-paragraph) !important;
+}
+.fmdq-text--size-caption-lg {
+    font-size: var(--font-size-caption-lg) !important;
+    line-height: var(--font-line-height-caption) !important;
+    letter-spacing: var(--font-letter-spacing-caption-lg-sm) !important;
+}
+.fmdq-text--size-caption-sm {
+    font-size: var(--font-size-caption-sm) !important;
+    line-height: var(--font-line-height-caption) !important;
+    letter-spacing: var(--font-letter-spacing-caption-lg-sm) !important;
+}
+.fmdq-text--size-caption-xs {
+    font-size: var(--font-size-caption-xs) !important;
+    line-height: var(--font-line-height-caption) !important;
+    letter-spacing: var(--font-letter-spacing-caption-xs) !important;
+}
+
+/* Rubik Specific Paragraph Kerning */
+.fmdq-typography--font-rubik.fmdq-text {
+    letter-spacing: var(--font-letter-spacing-rubik-paragraph) !important;
+}
+.fmdq-typography--font-rubik.fmdq-text--size-caption-lg,
+.fmdq-typography--font-rubik.fmdq-text--size-caption-sm {
+    letter-spacing: var(--font-letter-spacing-caption-lg-sm) !important;
+}
+.fmdq-typography--font-rubik.fmdq-text--size-caption-xs {
+    letter-spacing: var(--font-letter-spacing-caption-xs) !important;
+}
 
 /* Text Variants */
 .fmdq-typography--italic { font-style: italic; }
 .fmdq-typography--underline { text-decoration: underline; }
 .fmdq-typography--strikethrough { text-decoration: line-through; }
 
-/* Text Weights */
-.fmdq-text--weight-regular { font-weight: 400; }
-.fmdq-text--weight-medium { font-weight: 500; }
-.fmdq-text--weight-semibold { font-weight: 600; }
-.fmdq-text--weight-bold { font-weight: 700; }
+/* Text & Heading Weights */
+.fmdq-typography--weight-light, .fmdq-text--weight-light { font-weight: 300; }
+.fmdq-typography--weight-regular, .fmdq-text--weight-regular { font-weight: 400; }
+.fmdq-typography--weight-medium, .fmdq-text--weight-medium { font-weight: 500; }
+.fmdq-typography--weight-semibold, .fmdq-text--weight-semibold { font-weight: 600; }
+.fmdq-typography--weight-bold, .fmdq-text--weight-bold { font-weight: 700; }
 
 /* Label Sizes and Weights */
-.fmdq-label { display: inline-block; line-height: var(--font-line-height-paragraph); }
+.fmdq-label {
+    display: inline-block;
+    line-height: var(--font-line-height-paragraph);
+    letter-spacing: var(--font-letter-spacing-paragraph);
+}
 .fmdq-label--size-sm { font-size: var(--font-size-p-xs); }
-.fmdq-label--size-md { font-size: var(--font-size-p-sm); letter-spacing: var(--font-letter-spacing-paragraph); }
+.fmdq-label--size-md { font-size: var(--font-size-p-sm); }
 .fmdq-label--weight-regular { font-weight: 400; }
 .fmdq-label--weight-medium { font-weight: 500; }
 .fmdq-label--weight-semibold { font-weight: 600; }

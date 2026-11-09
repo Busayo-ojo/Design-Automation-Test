@@ -1,0 +1,241 @@
+@import '../../tokens.css';
+
+/* ─── Base container ────────────────────────────────────────────────── */
+.fmdqui-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* Visually-hidden native input — keeps full keyboard & a11y support */
+.fmdqui-toggle__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.fmdqui-toggle--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.fmdqui-toggle--disabled .fmdqui-toggle__input {
+  cursor: not-allowed;
+}
+
+/* ─── Shared track base ─────────────────────────────────────────────── */
+.fmdqui-toggle__track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+  pointer-events: none;
+}
+
+/* ─── Focus ring on keyboard navigation ─────────────────────────────── */
+.fmdqui-toggle__input:focus-visible ~ .fmdqui-toggle__track {
+  outline: 2px solid var(--color-fmdq-blue);
+  outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RADIO  —  24×24 circle
+   ══════════════════════════════════════════════════════════════════════ */
+.fmdqui-toggle--radio {
+  width: 24px;
+  height: 24px;
+}
+
+.fmdqui-toggle__track--radio {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1.5px solid var(--color-neutral-300, #D0D5DD);
+}
+
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--radio {
+  border-color: var(--color-fmdq-blue);
+}
+
+.fmdqui-toggle__radio-inner {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+}
+
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--radio .fmdqui-toggle__radio-inner {
+  background-color: var(--color-fmdq-blue);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CHECKBOX  —  24×24 rounded-square (r=4)
+   ══════════════════════════════════════════════════════════════════════ */
+.fmdqui-toggle--checkbox {
+  width: 24px;
+  height: 24px;
+}
+
+.fmdqui-toggle__track--checkbox {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-4, 4px);
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1.5px solid var(--color-neutral-300, #D0D5DD);
+}
+
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkbox {
+  background-color: var(--color-fmdq-blue);
+  border-color: var(--color-fmdq-blue);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CHECKCIRCLE  —  24×24 full-circle
+   ══════════════════════════════════════════════════════════════════════ */
+.fmdqui-toggle--checkcircle {
+  width: 24px;
+  height: 24px;
+}
+
+.fmdqui-toggle__track--checkcircle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1.5px solid var(--color-neutral-300, #D0D5DD);
+}
+
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkcircle {
+  background-color: var(--color-fmdq-blue);
+  border-color: var(--color-fmdq-blue);
+}
+
+/* ── Shared check icon (used by Checkbox & Checkcircle) ──────────────── */
+.fmdqui-toggle__check-icon {
+  width: 14px;
+  height: 14px;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkbox .fmdqui-toggle__check-icon,
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--checkcircle .fmdqui-toggle__check-icon {
+  opacity: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   SWITCH  —  39×24 pill
+   ══════════════════════════════════════════════════════════════════════ */
+.fmdqui-toggle--switch {
+  width: 39px;
+  height: 24px;
+}
+
+.fmdqui-toggle__track--switch {
+  width: 39px;
+  height: 24px;
+  border-radius: 27px;
+  background-color: var(--color-neutral-200, #E4E7EC);
+  position: relative;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
+
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--switch {
+  background-color: var(--color-fmdq-blue);
+}
+
+/* Knob: 21x21 inside 39x24 track, perfectly centered vertically at top: 1.5px */
+.fmdqui-toggle__knob {
+  position: absolute;
+  top: 1.5px;
+  left: 1.5px;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.15), 0 1px 2px rgba(16, 24, 40, 0.08);
+  transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.fmdqui-toggle__input:checked ~ .fmdqui-toggle__track--switch .fmdqui-toggle__knob {
+  left: 16.5px;
+}
+
+/* ── Hover feedback ─────────────────────────────────────────────────── */
+.fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--radio,
+.fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--checkbox,
+.fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--checkcircle {
+  border-color: var(--color-fmdq-blue);
+}
+
+.fmdqui-toggle:not(.fmdqui-toggle--disabled) .fmdqui-toggle__input:not(:disabled):hover ~ .fmdqui-toggle__track--switch {
+  filter: brightness(0.94);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   FORM CONTROL COMPONENT (Row Layout with Header & Description)
+   ══════════════════════════════════════════════════════════════════════ */
+.fmdqui-form-control {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-sizing: border-box;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+}
+
+.fmdqui-form-control--left {
+  flex-direction: row;
+}
+
+.fmdqui-form-control--right {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.fmdqui-form-control--disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.fmdqui-form-control__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.fmdqui-form-control__heading {
+  font-size: var(--font-size-p-md, 16px);
+  font-weight: 500;
+  line-height: var(--font-line-height-paragraph, 1.45);
+  color: var(--color-neutral-900, #101928);
+  margin: 0;
+}
+
+.fmdqui-form-control__description {
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph, 1.45);
+  color: var(--color-neutral-500, #667185);
+  margin: 0;
+}

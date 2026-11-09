@@ -1,0 +1,225 @@
+@import '../../tokens.css';
+
+/* ==========================================================================
+   Welcome Email Layout Component (Figma node 10306:12506)
+   Simulates the new user invitation email in Flow 1
+   ========================================================================== */
+
+.fmdqui-welcome-email {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: var(--color-neutral-100, #F0F2F5);
+  padding: 56px 20px 48px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fmdqui-welcome-email__container {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+/* ─── Envelope Metadata Header (Figma 10306:12507) ─── */
+.fmdqui-welcome-email__envelope {
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  border-radius: var(--radius-12, 12px);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+.fmdqui-welcome-email__subject {
+  margin: 0;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: var(--font-size-p-lg, 18px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-900, #101928);
+}
+
+.fmdqui-welcome-email__meta {
+  margin: 0;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph, 145%);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+}
+
+/* ─── Main Email Body Card (Figma 10306:12510) ─── */
+.fmdqui-welcome-email__card {
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border-radius: var(--radius-12, 12px);
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.05);
+}
+
+.fmdqui-welcome-email__logo-row {
+  display: flex;
+  align-items: center;
+}
+
+.fmdqui-welcome-email__logo-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.fmdqui-welcome-email__message {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fmdqui-welcome-email__greeting {
+  margin: 0;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: var(--font-size-h6, 20px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: var(--font-letter-spacing-heading-large, -0.06em);
+  color: var(--color-neutral-900, #101928);
+}
+
+.fmdqui-welcome-email__intro {
+  margin: 0;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: var(--font-size-p-md, 16px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph-medium, 130%);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-700, #344054);
+}
+
+/* ─── Account Summary Box (Figma 10306:12531) ─── */
+.fmdqui-welcome-email__summary {
+  background-color: var(--color-neutral-50, #F9FAFB);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.fmdqui-welcome-email__summary-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fmdqui-welcome-email__summary-label {
+  width: 110px;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph, 145%);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+  flex-shrink: 0;
+}
+
+.fmdqui-welcome-email__summary-value {
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 500;
+  line-height: var(--font-line-height-paragraph, 145%);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-900, #101928);
+}
+
+/* ─── Action Callout ─── */
+.fmdqui-welcome-email__action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.fmdqui-welcome-email__instruction {
+  margin: 0;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: var(--font-size-p-md, 16px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph-medium, 130%);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-700, #344054);
+}
+
+.fmdqui-welcome-email__button-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.fmdqui-welcome-email__cta {
+  min-width: 193px;
+}
+
+/* ─── Disclaimer (Figma 10306:12545) ─── */
+.fmdqui-welcome-email__disclaimer {
+  margin: 0;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph, 145%);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+  margin-top: 4px;
+}
+
+/* ─── Global Footer (Figma 10306:12546) ─── */
+.fmdqui-welcome-email__footer {
+  text-align: center;
+  padding: 8px 0;
+}
+
+.fmdqui-welcome-email__copyright {
+  margin: 0;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph, 145%);
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+}
+
+/* ─── Responsive adjustments ─── */
+@media (max-width: 640px) {
+  .fmdqui-welcome-email {
+    padding: 24px 16px;
+  }
+
+  .fmdqui-welcome-email__card {
+    padding: 28px 24px;
+  }
+
+  .fmdqui-welcome-email__summary-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .fmdqui-welcome-email__summary-label {
+    width: auto;
+  }
+}

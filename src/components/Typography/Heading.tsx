@@ -3,12 +3,16 @@ import './Typography.css';
 
 export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   level?: 'display-lg' | 'display-sm' | 1 | 2 | 3 | 4 | 5 | 6;
+  fontFamily?: 'dm-sans' | 'rubik';
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold';
   align?: 'left' | 'center' | 'right' | 'justify';
   color?: 'primary' | 'secondary' | 'default' | 'inherit';
 }
 
 export const Heading: React.FC<HeadingProps> = ({
   level = 1,
+  fontFamily,
+  weight,
   align = 'left',
   color = 'default',
   className = '',
@@ -28,6 +32,8 @@ export const Heading: React.FC<HeadingProps> = ({
   const classNames = [
     'fmdq-heading',
     `fmdq-heading--${typeof normalizedLevel === 'number' ? `h${normalizedLevel}` : normalizedLevel}`,
+    fontFamily && (fontFamily === 'rubik' ? 'fmdq-typography--font-rubik' : 'fmdq-typography--font-dmsans'),
+    weight && `fmdq-typography--weight-${weight}`,
     `fmdq-typography--align-${align}`,
     `fmdq-typography--color-${color}`,
     className

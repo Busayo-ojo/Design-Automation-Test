@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Badge } from '../elements/Badge';
 import { Heading } from '../components/Typography/Heading';
 import { Text } from '../components/Typography/Text';
-import { Toggle } from '../elements/Toggle';
+import { Toggle } from '../elements/FormControl';
 import { Button } from '../elements/Button';
 import { Chip } from '../elements/Chip';
 

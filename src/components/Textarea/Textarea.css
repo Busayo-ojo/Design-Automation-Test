@@ -1,104 +1,220 @@
 @import '../../tokens.css';
 
-/* Container */
+/* ==========================================================================
+   FMDQ Design System - Textarea Component
+   Matches Figma "✤ Textarea" Component Set (10376:338931)
+   ========================================================================== */
+
+/* ── Container ── */
 .fmdqui-textarea-container {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  gap: var(--spacing-4);
   font-family: var(--font-family-primary);
   box-sizing: border-box;
+  width: 100%;
+  position: relative;
 }
 
 .fmdqui-textarea-container--full-width {
-  display: flex;
   width: 100%;
 }
 
-/* Wrapper (holds border and handles focus rings) */
-.fmdqui-textarea-wrapper {
+/* ── Label ── */
+.fmdqui-textarea__label {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-6, 6px);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-sm);
+  font-weight: 500;
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  color: var(--color-neutral-900);
+}
+
+.fmdqui-textarea__label-required {
+  color: var(--color-destructive-default);
+  margin-left: var(--spacing-4);
+}
+
+/* ── Textarea Frame Wrapper ── */
+.fmdqui-textarea-wrapper {
   position: relative;
+  display: flex;
+  width: 100%;
   background-color: var(--color-neutral-white);
-  border: 1px solid var(--color-grey-deactivated);
-  border-radius: var(--radius-8);
-  transition: all 0.2s ease;
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-12);
   box-sizing: border-box;
-  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
 }
 
-/* Default Variant States */
-.fmdqui-textarea-wrapper--default:hover:not(.fmdqui-textarea-wrapper--disabled) {
-  border-color: var(--color-grey-hover);
+/* ── Sizes (Matching Figma frame heights: sm=88px, md=120px, lg=168px) ── */
+.fmdqui-textarea-wrapper--sm {
+  min-height: 88px;
 }
 
-.fmdqui-textarea-wrapper--default:focus-within:not(.fmdqui-textarea-wrapper--disabled) {
-  border-color: var(--color-primary-default);
-  outline: 2px solid var(--color-primary-default);
-  outline-offset: -1px;
+.fmdqui-textarea-wrapper--md {
+  min-height: 120px;
 }
 
-/* Error Variant States */
-.fmdqui-textarea-wrapper--error {
-  border-color: var(--color-destructive-default);
+.fmdqui-textarea-wrapper--lg {
+  min-height: 168px;
 }
 
-.fmdqui-textarea-wrapper--error:hover:not(.fmdqui-textarea-wrapper--disabled) {
-  border-color: var(--color-destructive-hover);
-}
-
-.fmdqui-textarea-wrapper--error:focus-within:not(.fmdqui-textarea-wrapper--disabled) {
-  outline: 2px solid var(--color-destructive-default);
-  outline-offset: -1px;
-}
-
-/* Disabled State */
-.fmdqui-textarea-wrapper--disabled {
-  background-color: var(--color-neutral-100);
-  border-color: var(--color-neutral-200);
-  cursor: not-allowed;
-}
-
-.fmdqui-textarea-container--disabled .fmdqui-textarea__message {
-  color: var(--color-grey-default);
-  opacity: 0.7;
-}
-
-/* Actual textarea field */
+/* ── Actual Textarea Field ── */
 .fmdqui-textarea {
   width: 100%;
-  min-height: 80px;
+  height: 100%;
+  min-height: inherit;
   border: none;
   outline: none;
   background: transparent;
-  padding: var(--spacing-10) var(--spacing-16);
-  font-family: inherit;
-  font-size: var(--font-size-sm);
-  color: var(--color-grey-focused);
+  padding: 12px 16px;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-sm);
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  color: var(--color-neutral-900);
   box-sizing: border-box;
   resize: vertical;
+  border-radius: var(--radius-12);
 }
 
 .fmdqui-textarea::placeholder {
-  color: var(--color-grey-default);
-  opacity: 0.8;
+  color: var(--color-neutral-400);
+  opacity: 1;
+}
+
+/* ── States (Figma 9 states: default, hover, focused, typing, filled, error, success, disabled, read only) ── */
+
+/* Hover */
+.fmdqui-textarea-wrapper:hover:not(.fmdqui-textarea-wrapper--disabled):not(.fmdqui-textarea-wrapper--read-only):not(.fmdqui-textarea-wrapper--error):not(.fmdqui-textarea-wrapper--success) {
+  border-color: var(--color-primary-600);
+}
+
+.fmdqui-textarea-wrapper--state-hover {
+  border-color: var(--color-primary-600) !important;
+}
+
+/* Focused / Typing (Using standard design token for focus ring) */
+.fmdqui-textarea-wrapper:focus-within:not(.fmdqui-textarea-wrapper--disabled):not(.fmdqui-textarea-wrapper--read-only):not(.fmdqui-textarea-wrapper--error):not(.fmdqui-textarea-wrapper--success),
+.fmdqui-textarea-wrapper--state-focused,
+.fmdqui-textarea-wrapper--state-typing {
+  border-color: var(--color-primary-600) !important;
+  box-shadow: 0px 0px 0px 4px var(--color-focus-ring, #E7E8F1), 0px 1px 2px rgba(16, 24, 40, 0.06) !important;
+}
+
+/* Filled */
+.fmdqui-textarea-wrapper--state-filled {
+  border-color: var(--color-neutral-300);
+  color: var(--color-neutral-900);
+}
+
+/* Error */
+.fmdqui-textarea-wrapper--error,
+.fmdqui-textarea-wrapper--state-error {
+  border-color: var(--color-error-300, #DD524D) !important;
+}
+
+.fmdqui-textarea-wrapper--error:focus-within,
+.fmdqui-textarea-wrapper--state-error:focus-within {
+  box-shadow: 0px 0px 0px 4px var(--color-error-50, #FBEAE9), 0px 1px 2px rgba(16, 24, 40, 0.06) !important;
+}
+
+/* Success */
+.fmdqui-textarea-wrapper--success,
+.fmdqui-textarea-wrapper--state-success {
+  border-color: var(--color-success-200, #5FC381) !important;
+}
+
+.fmdqui-textarea-wrapper--success:focus-within,
+.fmdqui-textarea-wrapper--state-success:focus-within {
+  box-shadow: 0px 0px 0px 4px var(--color-success-50, #E7F6EC), 0px 1px 2px rgba(16, 24, 40, 0.06) !important;
+}
+
+/* Disabled */
+.fmdqui-textarea-wrapper--disabled,
+.fmdqui-textarea-wrapper--state-disabled {
+  background-color: var(--color-neutral-50) !important;
+  border-color: var(--color-neutral-200) !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
 }
 
 .fmdqui-textarea:disabled {
   cursor: not-allowed;
-  color: var(--color-grey-default);
+  color: var(--color-neutral-400);
+  -webkit-text-fill-color: var(--color-neutral-400);
 }
 
-/* Helper & Error Messages */
-.fmdqui-textarea__message {
-  font-size: var(--font-size-caption-sm);
-  line-height: var(--font-line-height-standard);
-  margin-left: var(--spacing-2);
+/* Read Only */
+.fmdqui-textarea-wrapper--read-only,
+.fmdqui-textarea-wrapper--state-read-only {
+  background-color: var(--color-neutral-100) !important;
+  border-color: var(--color-neutral-300) !important;
+  box-shadow: none !important;
 }
 
-.fmdqui-textarea__message--helper {
-  color: var(--color-grey-default);
+.fmdqui-textarea:read-only:not(:disabled) {
+  cursor: default;
 }
 
-.fmdqui-textarea__message--error {
+/* ── Footer ── */
+.fmdqui-textarea__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-6, 6px);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-xs);
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  box-sizing: border-box;
+}
+
+.fmdqui-textarea__helper-text {
+  flex: 1;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-xs);
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  color: var(--color-neutral-500);
+  margin: 0;
+  transition: color var(--transition-fast);
+}
+
+.fmdqui-textarea__helper-text--error {
   color: var(--color-destructive-default);
+}
+
+.fmdqui-textarea__helper-text--success {
+  color: var(--color-success-600);
+}
+
+.fmdqui-textarea__helper-text--disabled {
+  color: var(--color-neutral-400);
+}
+
+.fmdqui-textarea__char-count {
+  flex-shrink: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-p-xs);
+  line-height: var(--font-line-height-paragraph);
+  letter-spacing: var(--font-letter-spacing-paragraph);
+  color: var(--color-neutral-500);
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+}
+
+.fmdqui-textarea__char-count--disabled {
+  color: var(--color-neutral-400);
+}
+
+.fmdqui-textarea__char-count--limit {
+  color: var(--color-destructive-default);
+  font-weight: 500;
 }

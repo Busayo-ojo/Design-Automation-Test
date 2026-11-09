@@ -1,0 +1,47 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as MiscIconStories from './MiscIcon.stories';
+
+<Meta of={MiscIconStories} />
+
+# Misc Icon
+
+The `MiscIcon` component encapsulates the icon container primitives used for actions, avatar placeholders, and table cell contextual controls.
+Derived directly from Figma component set `Misc icon` (`3354:173707`).
+
+## Figma Reference
+
+<iframe
+  title="Misc Icon Figma Reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=3354-173707&embed-host=share"
+  allowFullScreen
+/>
+
+## Playground
+
+<Canvas of={MiscIconStories.Playground} />
+
+## Properties
+
+<Controls of={MiscIconStories.Playground} />
+
+## Sizes
+
+Supports 5 sizes: `xs` (24px), `sm` (32px), `md` (40px), `lg` (48px), and `xl` (56px) across `Square` (8px radius, 6px on xs) and `Round` shapes.
+
+<Canvas of={MiscIconStories.SizesMatrix} />
+
+## Colors
+
+Supports 6 palette colors: `Primary`, `Gray`, `White`, `Error`, `Warning`, and `Success`.
+
+<Canvas of={MiscIconStories.ColorsMatrix} />
+
+## Has Background (Table Row Menu Integration)
+
+The `hasBackground` property (boolean, default: `true`) turns container fill and borders off while retaining the exact bounding box and center alignment.
+This is used specifically in data tables where row heights are tight, allowing contextual dropdowns or action triggers without redundant card borders.
+
+<Canvas of={MiscIconStories.HasBackgroundComparison} />
+

@@ -1,0 +1,88 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as ScrollbarStories from './Scrollbar.stories';
+
+<Meta of={ScrollbarStories} />
+
+# Scrollbar
+
+From Figma page **`      ✤  Scrollbar `** (`11163:1003629`).
+
+> *"Shows that content continues beyond the visible area. To set the thumb, use padding on the root: padding start is the scroll position, padding end is the rest. Thumb length is the visible share of the content."*
+
+## Figma Reference
+
+<iframe
+  title="Scrollbar Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=11163-1003629&embed-host=share"
+  allowFullScreen
+/>
+
+---
+
+## Usage Guidance
+
+Wide data tables that scroll sideways, because desktop browsers can hide native scrollbars. Long lists or panels inside a fixed area. Use it only when content really overflows. Show the whole table when it fits.
+
+---
+
+## Playground
+
+<Canvas of={ScrollbarStories.Playground} />
+<Controls of={ScrollbarStories.Playground} />
+
+---
+
+## All Figma Variants (24 Variants)
+
+Direct 1:1 replica of all 24 variants across:
+- **Orientation**: `horizontal` | `vertical`
+- **Size**: `sm` (6px thickness, 3px corner radius) | `md` (8px thickness, 4px corner radius)
+- **State**: `default` | `hover` | `dragging`
+- **Theme**: `light` | `dark`
+
+<Canvas of={ScrollbarStories.AllVariantsMatrix} />
+
+---
+
+## Connected Table Scrollbar (CASS 2 Pattern)
+
+Demonstrates integration with wide overflow data tables (matching Figma frame `11163:1003658` `Scrollbar row` inside `Transactions table`). Passing `targetRef` automatically synchronizes scroll position bidirectionally.
+
+<Canvas of={ScrollbarStories.ConnectedTableScroll} />
+
+---
+
+## Modern CSS Scrollbar Utility (`.fmdqui-scrollable`)
+
+In addition to the `<Scrollbar>` React element, the design system exposes CSS utility classes to style native browser scrollbars using standard CSS properties (`scrollbar-color`, `scrollbar-width`):
+
+```css
+/* Apply to any overflow container */
+.my-scrolling-container {
+  overflow: auto;
+  scrollbar-color: var(--color-neutral-300) var(--color-neutral-100);
+  scrollbar-width: thin;
+}
+```
+
+Or apply the utility class:
+```html
+<div class="fmdqui-scrollable">...</div>
+<div class="fmdqui-scrollable fmdqui-scrollable--dark">...</div>
+```
+
+---
+
+## Figma Source & Tokens
+
+| Property | Light Theme Token | Dark Theme Token |
+| :--- | :--- | :--- |
+| **Track** | `--color-neutral-100` (`#F0F2F5`) | `--color-primary-800` (`#012657`) |
+| **Thumb (Default)** | `--color-neutral-300` (`#D0D5DD`) | `--color-primary-500` (`#3D89DF`) |
+| **Thumb (Hover)** | `--color-neutral-400` (`#98A2B3`) | `--color-primary-300` (`#80BBFF`) |
+| **Thumb (Dragging)** | `--color-neutral-500` (`#667185`) | `--color-primary-200` (`#B6D8FF`) |
+| **Size sm** | Height/Width 6px, Radius 3px | Height/Width 6px, Radius 3px |
+| **Size md** | Height/Width 8px, Radius 4px | Height/Width 8px, Radius 4px |
+

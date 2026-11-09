@@ -1,0 +1,1009 @@
+/* ─── Dashboard Full Page Layout ─────────────────────────────────────────────── */
+
+.fmdqui-dashboard-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--color-neutral-50, #F9FAFB);
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  color: var(--color-neutral-900, #101828);
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Sidebar Column ───────────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-layout__sidebar {
+  flex-shrink: 0;
+  width: 272px;
+  height: 100vh;
+  border-radius: 0 var(--radius-12, 12px) var(--radius-12, 12px) 0;
+  z-index: 30;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: width 0.2s ease;
+}
+
+.fmdqui-dashboard-layout__sidebar--collapsed,
+.fmdqui-dashboard-layout__sidebar:has(.fmdqui-sidebar--collapsed) {
+  width: 82px !important;
+  cursor: pointer;
+}
+
+.fmdqui-dashboard-layout__sidebar .fmdqui-sidebar {
+  height: 100vh;
+}
+
+/* ─── Main Content Canvas ──────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-layout__main {
+  flex: 1 1 0%;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-layout__main-inner {
+  max-width: 1168px;
+  margin: 0 auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* ─── 1. Page Header ───────────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-layout__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  height: 53px;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-layout__title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fmdqui-dashboard-layout__title {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: var(--font-letter-spacing-heading-large, -0.06em);
+  color: var(--color-neutral-900, #101828);
+}
+
+.fmdqui-dashboard-layout__subtitle {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+}
+
+.fmdqui-dashboard-layout__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Download summary secondary action */
+.fmdqui-dashboard-btn--download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 8px 12px;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  background-color: #FFFFFF !important;
+  border: 1.5px solid var(--color-primary-600, #034592) !important;
+  border-radius: var(--radius-12, 12px) !important;
+  color: var(--color-primary-600, #034592) !important;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-btn--download:hover {
+  background-color: var(--color-primary-50, #EBF3FC) !important;
+}
+
+/* Review approvals primary action */
+.fmdqui-dashboard-btn--review-approvals {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 36px;
+  padding: 8px 12px;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  background-color: var(--color-primary-700, #1D326D) !important;
+  border: none !important;
+  border-radius: var(--radius-12, 12px) !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-btn--review-approvals:hover {
+  background-color: var(--color-primary-800, #14234C) !important;
+}
+
+/* ─── 2. Top Metrics Grid ──────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-layout__metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 264px);
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card {
+  border-radius: 16px;
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  background-color: #FFFFFF;
+  box-shadow: var(--shadow-soft-xsm) !important;
+  width: 264px;
+  height: 160px;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card:hover {
+  box-shadow: none !important;
+  border-color: var(--color-neutral-300, #D0D5DD);
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  flex-shrink: 0;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__title {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+  margin: 0;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__metrics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__value {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-900, #101828);
+  margin: 0;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__subtext-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+.fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card__subtext {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+  white-space: nowrap;
+}
+
+/* ─── 3. Content Grid (Approvals & Contributions) ─────────────────────────── */
+
+.fmdqui-dashboard-layout__content-grid {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  height: 452px;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+/* ─── 4. Activity Grid (Recent Activity & Quick Actions) ──────────────────── */
+
+.fmdqui-dashboard-layout__activity-grid {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  height: auto;
+  min-height: 153px;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+/* ─── Shared Card Containers ───────────────────────────────────────────────── */
+
+.fmdqui-dashboard-card {
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border: 1px solid var(--color-neutral-200, #E4E7EC);
+  border-radius: var(--radius-12, 12px);
+  box-shadow: var(--shadow-soft-xsm) !important;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.fmdqui-dashboard-card:hover {
+  box-shadow: none !important;
+  border-color: var(--color-neutral-300, #D0D5DD);
+}
+
+.fmdqui-dashboard-card--approvals {
+  width: 728px;
+  height: 452px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.fmdqui-dashboard-card--contributions {
+  width: 360px;
+  height: 435px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px !important;
+  padding: 20px !important;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.fmdqui-dashboard-card--contributions .fmdqui-card-header,
+.fmdqui-dashboard-card--contributions .fmdqui-dashboard-card__header-flush {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 45px !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+
+.fmdqui-dashboard-card--contributions .fmdqui-dashboard-card__title {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-neutral-900, #101828) !important;
+  margin: 0 0 2px 0 !important;
+}
+
+.fmdqui-dashboard-card--contributions .fmdqui-dashboard-card__subtitle {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-neutral-500, #667185) !important;
+  margin: 0 !important;
+}
+
+.fmdqui-dashboard-card--contributions .fmdqui-card-body,
+.fmdqui-dashboard-card--contributions .fmdqui-dashboard-card__contributions-body {
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  flex: 1 1 auto !important;
+  box-sizing: border-box !important;
+}
+
+.fmdqui-dashboard-card--activity {
+  width: 728px;
+  height: 161px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 12px;
+}
+
+.fmdqui-dashboard-card--quick-actions {
+  width: 360px;
+  height: fit-content;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 12px;
+}
+
+/* ─── Card Headers & Titles ────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px 20px;
+  height: 81px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.fmdqui-dashboard-card__title {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-heading-small, -0.04em);
+  color: var(--color-neutral-900, #101828);
+}
+
+.fmdqui-dashboard-card__subtitle {
+  margin: 4px 0 0 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+}
+
+/* Link-style action buttons ("View all", "View contributions") */
+.fmdqui-dashboard-card__link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-primary-700, #1D326D);
+  transition: color 0.15s ease;
+}
+
+.fmdqui-dashboard-card__link-btn:hover {
+  color: var(--color-primary-900, #001633);
+}
+
+.fmdqui-dashboard-card__link-btn .fmdq-icon,
+.fmdqui-dashboard-card__link-btn svg {
+  color: var(--color-primary-700, #1D326D);
+  width: 16px;
+  height: 16px;
+}
+
+/* ─── Approvals Table Exact Specifications ──────────────────────────────────── */
+
+.fmdqui-dashboard-table-container {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  flex: 1 1 auto;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.fmdqui-dashboard-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  table-layout: fixed !important;
+}
+
+.fmdqui-dashboard-table thead {
+  background-color: var(--color-neutral-50, #F9FAFB) !important;
+}
+
+.fmdqui-dashboard-table thead tr {
+  height: 44px !important;
+}
+
+.fmdqui-dashboard-table thead th,
+.fmdqui-dashboard-table .fmdqui-table-header-cell {
+  background-color: var(--color-neutral-50, #F9FAFB) !important;
+  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC) !important;
+  border-top: 1px solid var(--color-neutral-200, #E4E7EC) !important;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-neutral-500, #667185) !important;
+  box-sizing: border-box !important;
+  height: 44px !important;
+  vertical-align: middle !important;
+}
+
+.fmdqui-dashboard-table thead th:nth-child(1) {
+  width: 136px;
+  padding: 0 12px 0 24px !important;
+}
+
+.fmdqui-dashboard-table thead th:nth-child(2) {
+  width: 196px;
+  padding: 0 12px 0 24px !important;
+}
+
+.fmdqui-dashboard-table thead th:nth-child(3) {
+  width: 208px;
+  padding: 0 12px 0 24px !important;
+}
+
+.fmdqui-dashboard-table thead th:nth-child(4) {
+  width: 112px;
+  padding: 0 12px 0 24px !important;
+}
+
+.fmdqui-dashboard-table thead th:nth-child(5) {
+  width: 74px;
+  padding: 0 20px 0 8px !important;
+}
+
+.fmdqui-dashboard-table tbody tr {
+  height: 54px !important;
+  max-height: 54px !important;
+  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC) !important;
+  box-sizing: border-box !important;
+}
+
+.fmdqui-dashboard-table tbody tr:last-child {
+  border-bottom: none !important;
+}
+
+.fmdqui-dashboard-table tbody td.fmdqui-table-cell {
+  height: 54px !important;
+  max-height: 54px !important;
+  box-sizing: border-box !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid var(--color-neutral-200, #E4E7EC) !important;
+  padding: 0 12px !important;
+}
+
+.fmdqui-dashboard-table tbody tr:last-child td.fmdqui-table-cell {
+  border-bottom: none !important;
+}
+
+.fmdqui-dashboard-table tbody td:nth-child(1) {
+  padding-left: 24px !important;
+  padding-right: 12px !important;
+}
+
+.fmdqui-dashboard-table tbody td:nth-child(2) {
+  padding-left: 24px !important;
+  padding-right: 12px !important;
+}
+
+.fmdqui-dashboard-table tbody td:nth-child(3) {
+  padding-left: 24px !important;
+  padding-right: 12px !important;
+}
+
+.fmdqui-dashboard-table tbody td:nth-child(4) {
+  padding-left: 24px !important;
+  padding-right: 12px !important;
+}
+
+.fmdqui-dashboard-table tbody td:nth-child(5) {
+  padding-left: 8px !important;
+  padding-right: 20px !important;
+  text-align: right !important;
+}
+
+.fmdqui-dashboard-table td:nth-child(5) .fmdqui-table-cell__actions {
+  display: flex !important;
+  justify-content: flex-end !important;
+  width: 100% !important;
+}
+
+/* Table Text typography exactly from Figma */
+.fmdqui-dashboard-table .fmdqui-table-cell__content {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.fmdqui-dashboard-table .fmdqui-table-cell__text-stack {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  line-height: 145% !important;
+}
+
+.fmdqui-dashboard-table .fmdqui-table-cell__primary-text {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-neutral-900, #101828) !important;
+  margin: 0 !important;
+}
+
+.fmdqui-dashboard-table .fmdqui-table-cell__secondary-text {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-neutral-500, #667185) !important;
+  margin: 0 !important;
+}
+
+.fmdqui-dashboard-table .fmdqui-table-cell__text,
+.fmdqui-dashboard-table .fmdqui-table-cell--text,
+.fmdqui-dashboard-table td.fmdqui-table-cell {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-neutral-900, #101828) !important;
+}
+
+/* Review text button inside table */
+.fmdqui-dashboard-table__review-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  color: var(--color-primary-500, #0D5EBA) !important;
+  transition: color 0.15s ease;
+}
+
+.fmdqui-dashboard-table__review-btn:hover {
+  color: var(--color-primary-700, #1D326D) !important;
+  text-decoration: underline;
+}
+
+/* ─── Badge Global Letter Spacing & Sizing in Dashboard ────────────────────── */
+
+.fmdqui-dashboard-layout .fmdqui-badge {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  height: 20px !important;
+  padding: 0 8px !important;
+  border-radius: var(--radius-12, 12px) !important;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-table .fmdqui-badge {
+  height: 18px !important;
+  line-height: 18px !important;
+}
+
+/* ─── Contributions Body ───────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-card__contributions-body {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  flex: 1 1 auto !important;
+  box-sizing: border-box !important;
+}
+
+.fmdqui-dashboard-card__progress-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+.fmdqui-dashboard-card__progress-list .fmdqui-progress-bar__label {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-900, #101828);
+}
+
+.fmdqui-dashboard-card__progress-list .fmdqui-progress-bar__meta {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+}
+
+.fmdqui-dashboard-card__progress-list .fmdqui-progress-bar__percentage {
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+}
+
+.fmdqui-dashboard-card__footer-action {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  height: 20px !important;
+}
+
+/* ─── Recent Activity Body ─────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-card__activity-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-activity-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 20px;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-activity-row__description {
+  flex: 1 1 0%;
+  min-width: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-900, #101828);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fmdqui-dashboard-activity-row__category {
+  color: var(--color-neutral-500, #667185);
+}
+
+.fmdqui-dashboard-activity-row__detail {
+  color: var(--color-neutral-900, #101828);
+}
+
+.fmdqui-dashboard-activity-row__timestamp {
+  flex-shrink: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 145%;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em);
+  color: var(--color-neutral-500, #667185);
+}
+
+/* ─── Quick Actions Body ───────────────────────────────────────────────────── */
+
+.fmdqui-dashboard-card__quick-actions-body {
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 157px);
+  gap: 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  width: 318px;
+  height: 76px;
+  box-sizing: border-box;
+}
+
+.fmdqui-dashboard-quick-actions-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 157px;
+  height: 36px;
+  padding: 8px 12px;
+  background-color: var(--color-primary-50, #EBF3FC) !important;
+  border: 1px solid var(--color-primary-75, #C6DDF7) !important;
+  color: var(--color-primary-700, #1D326D) !important;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 145% !important;
+  letter-spacing: var(--font-letter-spacing-paragraph, -0.04em) !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+/* Figma 2×2 button grid: inner facing center corner of each button has 0px radius */
+.fmdqui-dashboard-quick-actions-grid .fmdqui-dashboard-quick-actions-btn:nth-child(1) {
+  border-radius: 6px 6px 0 6px !important;
+}
+
+.fmdqui-dashboard-quick-actions-grid .fmdqui-dashboard-quick-actions-btn:nth-child(2) {
+  border-radius: 6px 6px 6px 0 !important;
+}
+
+.fmdqui-dashboard-quick-actions-grid .fmdqui-dashboard-quick-actions-btn:nth-child(3) {
+  border-radius: 6px 0 6px 6px !important;
+}
+
+.fmdqui-dashboard-quick-actions-grid .fmdqui-dashboard-quick-actions-btn:nth-child(4) {
+  border-radius: 0 6px 6px 6px !important;
+}
+
+.fmdqui-dashboard-quick-actions-btn:hover {
+  background-color: var(--color-primary-100, #D5E7FA) !important;
+  border-color: var(--color-primary-300, #ADCFF3) !important;
+  color: var(--color-primary-800, #14234C) !important;
+}
+
+.fmdqui-dashboard-quick-actions-btn:active {
+  background-color: var(--color-primary-200, #C6DDF7) !important;
+}
+
+.fmdqui-dashboard-quick-actions-btn svg {
+  color: var(--color-primary-700, #1D326D);
+}
+
+/* ─── Responsive Desktop Breakpoints ───────────────────────────────────────── */
+
+/* Breakpoint 1: Compact Desktop / Tablet (~1360px down to ~960px)
+ * Matches the user specification at e.g. 1195px viewport:
+ * - Metrics: full-width 2x2 grid
+ * - Approvals table: full width
+ * - Today's contributions: stacked under Approvals
+ * - Recent activity and Quick actions: side by side
+ * - Activity row text: broken to the next line respectively
+ */
+@media (max-width: 1360px) {
+  .fmdqui-dashboard-layout__metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+  }
+
+  .fmdqui-dashboard-layout__metrics-grid .fmdqui-metrics-card {
+    width: 100% !important;
+  }
+
+  .fmdqui-dashboard-layout__content-grid {
+    flex-direction: column !important;
+    height: auto !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  .fmdqui-dashboard-card--approvals {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 452px !important;
+  }
+
+  .fmdqui-dashboard-table-container {
+    overflow-x: auto !important;
+    width: 100% !important;
+  }
+
+  .fmdqui-dashboard-table {
+    min-width: 680px !important;
+    width: 100% !important;
+  }
+
+  .fmdqui-dashboard-card--contributions {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 435px !important;
+  }
+
+  .fmdqui-dashboard-layout__activity-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    height: auto !important;
+    gap: 16px !important;
+    align-items: flex-start !important;
+  }
+
+  .fmdqui-dashboard-card--activity {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .fmdqui-dashboard-card--quick-actions {
+    flex-shrink: 0 !important;
+    width: 360px !important;
+    height: fit-content !important;
+    min-height: auto !important;
+  }
+
+  .fmdqui-dashboard-activity-row {
+    height: auto !important;
+    min-height: 20px !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .fmdqui-dashboard-activity-row__description {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: break-word !important;
+    line-height: 145% !important;
+  }
+
+  .fmdqui-dashboard-activity-row__timestamp {
+    margin-top: 1px !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Breakpoint 2: Narrow Desktop / Tablet (~960px down to ~720px)
+ * - Sidebar collapses to 82px icon-only
+ * - Recent activity and Quick actions turn into a 1x2 vertical stack
+ */
+@media (max-width: 960px) {
+
+  .fmdqui-dashboard-layout__sidebar.fmdqui-dashboard-layout__sidebar--collapsed,
+  .fmdqui-dashboard-layout__sidebar:has(.fmdqui-sidebar--collapsed) {
+    width: 82px !important;
+  }
+
+  .fmdqui-dashboard-layout__sidebar:not(.fmdqui-dashboard-layout__sidebar--collapsed) {
+    width: 272px !important;
+    position: relative;
+    z-index: 50;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .fmdqui-dashboard-layout__activity-grid {
+    flex-direction: column !important;
+    height: auto !important;
+    gap: 16px !important;
+  }
+
+  .fmdqui-dashboard-card--activity,
+  .fmdqui-dashboard-card--quick-actions {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .fmdqui-dashboard-quick-actions-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .fmdqui-dashboard-quick-actions-btn {
+    width: 100% !important;
+  }
+}
+
+/* Breakpoint 3: Narrow / Tablet (< 800px)
+ * - Page header stacks cleanly (e.g. at 730px viewport)
+ */
+@media (max-width: 800px) {
+  .fmdqui-dashboard-layout__header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    height: auto !important;
+  }
+
+  .fmdqui-dashboard-layout__actions {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .fmdqui-dashboard-layout__metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Breakpoint 4: Mobile Viewport (< 540px)
+ * - Sidebar stacks or collapses into mobile layout
+ */
+@media (max-width: 540px) {
+  .fmdqui-dashboard-layout {
+    flex-direction: column !important;
+    height: auto !important;
+    overflow-y: auto !important;
+  }
+
+  .fmdqui-dashboard-layout__sidebar {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .fmdqui-dashboard-layout__main-inner {
+    padding: 16px !important;
+  }
+
+  .fmdqui-dashboard-quick-actions-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

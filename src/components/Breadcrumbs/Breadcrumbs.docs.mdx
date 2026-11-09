@@ -1,0 +1,102 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as BreadcrumbsStories from './Breadcrumbs.stories';
+
+<Meta of={BreadcrumbsStories} />
+
+# Breadcrumbs
+
+The `Breadcrumbs` component is an essential navigation element that allows users to keep track of their location within the application hierarchy and navigate backwards easily.
+
+Mapped 1:1 to Figma component set **`Breadcrumb`** (node `2031:39144`) and documentation artboard (node `2031:39096`).
+
+<Canvas of={BreadcrumbsStories.DemoTrail} sourceState="shown" />
+
+## Figma Reference
+
+<iframe
+  title="Breadcrumbs Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=2031-39144&embed-host=share"
+  allowFullScreen
+/>
+
+## All Figma Variants Matrix
+
+The 4 canonical states from master node `2031:39144` showing Default, Hover, Active, and Disabled items with leading icons and divider borders:
+
+<Canvas of={BreadcrumbsStories.AllFigmaVariantsMatrix} sourceState="shown" />
+
+## Individual States
+
+### Default State (2031:39145)
+Resting unselected breadcrumb item with `Grey/500` label (`#667185`) and `Neutral/300` separator (`#D0D5DD`).
+
+<Canvas of={BreadcrumbsStories.StateDefault} sourceState="shown" />
+
+### Hover State (2031:39161)
+Interactive hover state with `Primary/300` blue label and icon (`#3D89DF`) and `Grey/400` separator (`#98A2B3`).
+
+<Canvas of={BreadcrumbsStories.StateHover} sourceState="shown" />
+
+### Active State (2031:39169)
+Current level in the hierarchy with `Secondary/500` FMDQ gold label (`#CC9933`), `Primary/500` blue icon (`#0D5EBA`), and `Grey/400` separator (`#98A2B3`).
+
+<Canvas of={BreadcrumbsStories.StateActive} sourceState="shown" />
+
+### Disabled State (2031:39153)
+De-activated item with `Grey/400` label, icon, and separator (`#98A2B3`), with pointer events disabled.
+
+<Canvas of={BreadcrumbsStories.StateDisabled} sourceState="shown" />
+
+## Variations
+
+### With Leading Icons
+When `hasIcon` is true, items display 20×20px foundation icons with a 4px gap to the label.
+
+<Canvas of={BreadcrumbsStories.WithIcons} sourceState="shown" />
+
+### Without Borders
+When `hasBorders` is false, the top and bottom 1px divider lines are omitted for clean integration inside card headers.
+
+<Canvas of={BreadcrumbsStories.WithoutBorders} sourceState="shown" />
+
+### Custom Chevron Separator
+Supports passing custom separator components such as `<Icon name="chevron-right" size={14} />`.
+
+<Canvas of={BreadcrumbsStories.CustomChevronSeparator} sourceState="shown" />
+
+## Properties
+
+<Controls of={BreadcrumbsStories.Playground} />
+
+## Design Tokens & Specifications
+
+| Property | Figma Specification | Code Implementation / Token |
+| :--- | :--- | :--- |
+| **Typography** | DM Sans Medium (500), 14px / 20.3px (-0.56px) | `font-family: var(--font-family-primary); font-size: var(--font-size-p-sm); font-weight: 500;` |
+| **Default Color** | `Grey/500` (`#667085`) | `var(--color-neutral-500)` (`#667185`) |
+| **Hover Color** | `Primary/300` (`#3D8ADE`) | `var(--color-primary-300)` (`#3D89DF`) |
+| **Active Label Color** | `Secondary/500` (`#CC9933`) | `var(--color-secondary-500)` (`#CC9933`) |
+| **Active Icon Color** | `Primary/500` (`#0D5EBA`) | `var(--color-primary-500)` (`#0D5EBA`) |
+| **Disabled Color** | `Grey/400` (`#98A2B3`) | `var(--color-neutral-400)` (`#98A2B3`) |
+| **Separator** | Text `"/"` in 20×20px box (`Neutral/300` default, `Grey/400` active/hover) | `var(--color-neutral-300)` / `var(--color-neutral-400)` |
+| **Dividers** | 1px top and bottom border in `Grey/200` (`#E4E7EC`) | `border: 1px solid var(--color-neutral-200);` |
+| **Height** | 38px with borders, 20px content | `min-height: 38px; padding: 8px 0;` |
+| **Icon Gap** | 4px gap between icon and label | `gap: var(--spacing-4, 4px);` |
+
+## When to Use
+
+- Breadcrumbs inform visitors of their current location in relation to the entire site hierarchy.
+- Breadcrumbs improve the findability of site pages. The structure of the site is more easily understood because it is laid out in a breadcrumb.
+- You should use breadcrumbs when you have a large amount of content organised in hierarchical structure with defined categories (multiple sections that can be divided into more sub-sections).
+
+## Best Practices
+
+- **Keep it simple**: Breadcrumbs should be simple and easy to understand. Use clear and concise labels that describe the page or section the user is in.
+- **Place it in a prominent location**: Breadcrumbs should be placed in a prominent location on the page, such as near the top or above the main content area.
+- **Use a logical hierarchy**: Use a logical hierarchy for the breadcrumbs that reflects the structure of the website or application. This can help users understand where they are in the overall navigation.
+- **Use proper formatting**: Breadcrumbs should be formatted in a clear and consistent way. Use a clear visual indicator, such as a separator, to distinguish between different levels of the hierarchy.
+- **Make it interactive**: Breadcrumbs should be interactive, allowing users to click on a previous page or section to quickly navigate back.
+- **Don't overuse it**: Breadcrumbs should not be used as a replacement for a primary navigation system. Use them as a supplementary tool to help users keep track of their location.
+

@@ -62,30 +62,30 @@
   margin-bottom: -1px;
 }
 
-.fmdqui-tab--line:hover:not(:disabled) {
+.fmdqui-tab--line:hover:not(:disabled):not(.fmdqui-tab--active) {
   border-bottom-color: var(--color-neutral-500);
 }
 
 .fmdqui-tab--line.fmdqui-tab--active {
-  color: var(--color-primary-800);
-  border-bottom-color: var(--color-primary-800);
+  color: var(--color-primary-700);
+  border-bottom-color: var(--color-primary-700);
 }
 
 /* Pill Style Tab */
 .fmdqui-tab--pill {
-  border-radius: 6px;
-  border: 1px solid var(--color-neutral-200);
+  border-radius: 10px;
+  border: 1px solid var(--color-neutral-300);
   padding: var(--spacing-8) var(--spacing-12);
 }
 
-.fmdqui-tab--pill:hover:not(:disabled) {
+.fmdqui-tab--pill:hover:not(:disabled):not(.fmdqui-tab--active) {
   background-color: var(--color-neutral-50);
-  border-color: var(--color-neutral-300);
+  border-color: transparent;
 }
 
 .fmdqui-tab--pill.fmdqui-tab--active {
   background-color: var(--color-primary-50);
-  color: var(--color-primary-800);
+  color: var(--color-primary-700);
   border-color: transparent;
 }
 
@@ -97,18 +97,23 @@
 
 .fmdqui-tab--line:disabled {
   border-bottom-color: var(--color-neutral-200);
-  opacity: 0.6;
 }
 
 .fmdqui-tab--pill:disabled {
-  background-color: var(--color-neutral-50);
-  border-color: var(--color-neutral-200);
-  opacity: 0.6;
+  background-color: transparent;
+  border-color: var(--color-neutral-300);
 }
 
 .fmdqui-tab__icon {
   display: flex;
   align-items: center;
+}
+
+.fmdqui-tab--line .fmdqui-tab__icon {
+  font-size: 20px;
+}
+
+.fmdqui-tab--pill .fmdqui-tab__icon {
   font-size: 16px;
 }
 

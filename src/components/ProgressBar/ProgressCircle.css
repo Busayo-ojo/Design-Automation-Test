@@ -1,0 +1,107 @@
+/* ==========================================================================
+   FMDQ Design System - Progress Circles
+   Matches Figma "✤ Loading & Progress Indicators" / "Progress circles" (6092:2083)
+   ========================================================================== */
+
+.fmdqui-progress-circle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: var(--font-family-primary, "DM Sans", sans-serif);
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.fmdqui-progress-circle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.fmdqui-progress-circle__track {
+  fill: none;
+  stroke: var(--color-neutral-100, #F0F2F5);
+}
+
+.fmdqui-progress-circle__fill {
+  fill: none;
+  stroke: var(--color-primary-600, #1671D9);
+  transition: stroke-dashoffset 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Variant colors */
+.fmdqui-progress-circle__fill--primary {
+  stroke: var(--color-primary-600, #1671D9);
+}
+.fmdqui-progress-circle__fill--navy {
+  stroke: var(--color-fmdq-blue, #1D326D);
+}
+.fmdqui-progress-circle__fill--success {
+  stroke: var(--color-success-500, #12B76A);
+}
+.fmdqui-progress-circle__fill--warning {
+  stroke: var(--color-warning-500, #F79009);
+}
+.fmdqui-progress-circle__fill--error {
+  stroke: var(--color-error-500, #F04438);
+}
+
+/* Centered label inside circle */
+.fmdqui-progress-circle__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--color-neutral-900, #101928);
+  line-height: 1;
+  user-select: none;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ─── Sizes (Matching Figma 6092:2083 innerRadius 0.8) ─── */
+.fmdqui-progress-circle--xs {
+  width: 48px;
+  height: 48px;
+}
+.fmdqui-progress-circle--xs .fmdqui-progress-circle__text {
+  font-size: var(--font-size-p-xs, 12px);
+}
+
+.fmdqui-progress-circle--sm {
+  width: 56px;
+  height: 56px;
+}
+.fmdqui-progress-circle--sm .fmdqui-progress-circle__text {
+  font-size: var(--font-size-p-xs, 12px);
+}
+
+.fmdqui-progress-circle--md {
+  width: 72px;
+  height: 72px;
+}
+.fmdqui-progress-circle--md .fmdqui-progress-circle__text {
+  font-size: var(--font-size-p-sm, 14px);
+}
+
+.fmdqui-progress-circle--lg {
+  width: 90px;
+  height: 90px;
+}
+.fmdqui-progress-circle--lg .fmdqui-progress-circle__text {
+  font-size: var(--font-size-p-md, 16px);
+}
+
+.fmdqui-progress-circle--xl {
+  width: 120px;
+  height: 120px;
+}
+.fmdqui-progress-circle--xl .fmdqui-progress-circle__text {
+  font-size: var(--font-size-p-lg, 18px);
+}

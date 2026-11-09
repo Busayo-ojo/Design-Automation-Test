@@ -47,7 +47,7 @@ Each component lives in its own folder with: `ComponentName.tsx`, `ComponentName
 
 `src/tokens.css` defines all tokens under `:root`. Key token groups:
 - Colors: `--color-primary-*`, `--color-secondary-*`, `--color-neutral-*`, semantic states (`success`, `error`, `warning`, `info`), brand colors (`--color-fmdq-blue`, `--color-fmdq-gold`)
-- Typography: `--font-family-primary` and `--font-family-secondary` are both `'DM Sans', sans-serif`
+- Typography: `--font-family-primary` is `'DM Sans', sans-serif` and `--font-family-secondary` is `'Rubik', sans-serif`
 - Spacing, shadows, gradients
 
 ### Storybook setup
@@ -57,7 +57,7 @@ Each component lives in its own folder with: `ComponentName.tsx`, `ComponentName
 - **Preview frame customizations** (story canvas): `.storybook/preview-head.html` — applies `* { font-family: "DM Sans" !important }` to override Storybook's default docs fonts.
 - **Theme**: `.storybook/fmdqTheme.ts` — Storybook manager theme (colors, fonts, brand).
 - **Preview wrapper**: `.storybook/preview.tsx` — wraps all stories in `<BrowserRouter>`.
-- Story titles follow the pattern `FMDQ DS/{ComponentName}` (e.g. `FMDQ DS/Button`).
+- Story titles follow the pattern `<Group>/<emoji> <Name>`, where the group matches the source folder or flow: `Elements/➡️ Button`, `Components/🪟 Modal`, `Layout/📊 Dashboard`, `Flows/🔐 Flow 1 - Authentication`, `Foundations/🌈 Colors`. Standalone layouts live in `Layout/` without placeholder prefixes (no `✨`). Multi-step end-to-end user journeys live in `Flows/`.
 - Story sort order is configured in `preview.tsx`/`preview.ts` via `storySort`.
 
 ### Figma-to-code pipeline
@@ -74,10 +74,11 @@ Two MCP servers are available for AI-assisted development:
 
 When implementing any component from Figma (see `rules/FIGMA_STORYBOOK_RULES.md`):
 
+0. Reuse first: check `src/elements/`, `src/components/`, `src/layout/` and the Storybook stories for an existing component, and reuse or extend it. A nested Figma instance means importing the existing React component, never rebuilding it.
 1. Confirm the component is tracked in `rules/FIGMA_STORYBOOK_MAPPING.md` before starting.
 2. Extract the full spec from Figma via MCP tools (`figma_get_component`, `figma_get_component_details`, `figma_get_component_image`) — never guess or invent values.
 3. Map all colors to `tokens.css` variables; add new tokens if needed rather than hardcoding.
 4. Every Figma variant must have a corresponding Storybook story. Variant prop names must mirror Figma property names exactly.
 5. Run `figma_check_design_parity` before marking a component complete.
-6. Every component requires a `.docs.mdx` with: Overview, Figma embed, all variants with `sourceState="shown"`, Props Table, and Usage Guidelines.
+6. Every component requires a `.docs.mdx` page following the standard hierarchy: Component Title (no `## Overview` subheading), overview description, `## Figma Reference` iframe embed (width 100%, height 450, targeting the inner `COMPONENT_SET` node directly rather than outer document headers/footers), Canvas/Playground, Props Table, and variant sections with `sourceState="shown"`. Companion CSF `.stories.tsx` files must NOT specify `tags: ['autodocs']` when a `.docs.mdx` file exists.
 7. Update `rules/FIGMA_STORYBOOK_MAPPING.md` with the status and last parity check date.

@@ -59,11 +59,11 @@ function validateTypeScript() {
 
 // ─── Step 2: Check for changes ────────────────────────────────
 function getChangedFiles() {
-  const status = run('git status --porcelain');
-  if (!status) return [];
+  const status = execSync('git status --porcelain', { cwd: ROOT, encoding: 'utf-8', stdio: 'pipe' });
+  if (!status.trim()) return [];
   return status.split('\n').filter(Boolean).map(line => ({
     status: line.slice(0, 2).trim(),
-    file: line.slice(3)
+    file: line.slice(3).trim()
   }));
 }
 
@@ -72,8 +72,14 @@ function generateCommitMessage(files) {
   const tokenFiles = files.filter(f =>
     f.file.includes('tokens.css') || f.file.includes('tokens.json')
   );
+  const elementFiles = files.filter(f =>
+    f.file.includes('src/elements/')
+  );
   const componentFiles = files.filter(f =>
     f.file.includes('src/components/')
+  );
+  const layoutFiles = files.filter(f =>
+    f.file.includes('src/layout/')
   );
   const storyFiles = files.filter(f =>
     f.file.endsWith('.stories.tsx')
@@ -84,12 +90,16 @@ function generateCommitMessage(files) {
 
   const parts = [];
   if (tokenFiles.length > 0) parts.push(`${tokenFiles.length} token file(s)`);
+  if (elementFiles.length > 0) parts.push(`${elementFiles.length} element file(s)`);
   if (componentFiles.length > 0) parts.push(`${componentFiles.length} component file(s)`);
+  if (layoutFiles.length > 0) parts.push(`${layoutFiles.length} layout file(s)`);
   if (storyFiles.length > 0) parts.push(`${storyFiles.length} story file(s)`);
   if (scriptFiles.length > 0) parts.push(`${scriptFiles.length} automation script(s)`);
 
   const scope = tokenFiles.length > 0 ? 'tokens' :
-    componentFiles.length > 0 ? 'components' : 'automation';
+    elementFiles.length > 0 ? 'elements' :
+    componentFiles.length > 0 ? 'components' :
+    layoutFiles.length > 0 ? 'layout' : 'design-system';
 
   const summary = parts.length > 0 ? parts.join(', ') : `${files.length} file(s)`;
   const timestamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
@@ -99,23 +109,40 @@ function generateCommitMessage(files) {
 
 // ─── Step 4: Stage and commit ─────────────────────────────────
 function stageAndCommit(files, message) {
-  // Stage targeted files (non-destructive: only stage known paths)
+  // Stage targeted design system files (non-destructive: only stage known design system paths)
   const safePatterns = [
     'src/tokens.css',
     'src/tokens.json',
+    'src/foundations/',
+    'src/elements/',
     'src/components/',
+    'src/layout/',
+    'src/docs/',
+    'src/index.ts',
+    'rules/',
+    '.storybook/',
     'scripts/',
     'mcp/',
     '.env.example',
     '.gitignore',
     'package.json',
     'README.md',
+    'design.md',
     '.cursor/mcp.json'
+  ];
+
+  const excludePatterns = [
+    'src/drp/',
+    'index.html',
+    'src/App.tsx',
+    'src/App.css'
   ];
 
   const filesToStage = files
     .map(f => f.file)
-    .filter(f => safePatterns.some(p => f.includes(p) || f === p));
+    .filter(f => safePatterns.some(p => f.includes(p) || f === p))
+    .filter(f => !excludePatterns.some(p => f.includes(p) || f === p))
+    .filter(f => !f.startsWith('docs/'));
 
   if (filesToStage.length === 0) {
     warn('No relevant files to stage. Skipping commit.');
@@ -127,7 +154,11 @@ function stageAndCommit(files, message) {
     if (DRY_RUN) {
       info(`  [dry-run] git add "${file}"`);
     } else {
-      run(`git add "${file}"`);
+      if (fs.existsSync(path.resolve(ROOT, file))) {
+        run(`git add "${file}"`);
+      } else {
+        run(`git rm -r --cached --ignore-unmatch "${file}" 2>/dev/null || true`);
+      }
     }
   }
 
@@ -198,6 +229,13 @@ function main() {
   }
 
   // Check changes
+  info('Synchronizing changelog from Git history...');
+  try {
+    run('node scripts/generate-changelog.mjs');
+  } catch (err) {
+    warn('Could not run generate-changelog: ' + err.message);
+  }
+
   const changes = getChangedFiles();
   if (changes.length === 0) {
     success('No changes detected. Everything is up to date.');
@@ -210,6 +248,18 @@ function main() {
   // Commit
   const message = generateCommitMessage(changes);
   const committed = stageAndCommit(changes, message);
+
+  // If committed, update changelog with the newly created commit and amend
+  if (committed && !DRY_RUN) {
+    try {
+      run('node scripts/generate-changelog.mjs');
+      run('git add src/docs/changelog-data.json');
+      run('git commit --amend --no-edit');
+      success('Dynamic changelog synchronized with new commit');
+    } catch (err) {
+      warn('Could not auto-amend changelog: ' + err.message);
+    }
+  }
 
   // Push
   if (committed) {

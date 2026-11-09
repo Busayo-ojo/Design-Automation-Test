@@ -1,0 +1,277 @@
+@import '../../tokens.css';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Tooltip — 1:1 with Figma "✤ Tooltip ⚜️" (COMPONENT_SET 6237:23991)
+
+   Every value read from Figma via MCP and mapped to a token. One colour had
+   no match and was added to tokens.css: --shadow-tooltip-dark (#FBF1F1 ring).
+
+   Theme is driven by two custom properties so the container, the pointer fill
+   and the pointer stroke always stay in sync.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.fmdqui-tooltip {
+  display: inline-flex;
+  font-family: var(--font-family-primary);
+  box-sizing: border-box;
+}
+
+/* ── Themes ── Figma: light = white on neutral-100; dark = primary-900 ── */
+.fmdqui-tooltip--light {
+  --tooltip-surface: var(--color-neutral-white);
+  --tooltip-border: var(--color-neutral-100);
+  --tooltip-title: var(--color-neutral-800);
+  --tooltip-body: var(--color-neutral-500);
+  --tooltip-close: var(--color-neutral-black);
+  --tooltip-elevation: none;
+}
+
+.fmdqui-tooltip--dark {
+  --tooltip-surface: var(--color-primary-900);
+  /* Figma gives the dark container no stroke — the pointer matches the fill */
+  --tooltip-border: var(--color-primary-900);
+  --tooltip-title: var(--color-neutral-white);
+  --tooltip-body: var(--color-neutral-300);
+  --tooltip-close: var(--color-neutral-200);
+  --tooltip-elevation: var(--shadow-tooltip-dark);
+}
+
+/* ── Dark-theme CTA colours ──
+   The shared Button already matches Figma on the light theme (text+primary is
+   primary-700, text+secondary is neutral-500). On the dark theme Figma recolours
+   both labels, so they are overridden here — scoped to the tooltip only, the
+   shared Button is untouched. */
+.fmdqui-tooltip--dark .fmdqui-tooltip__buttons .fmdqui-button--text.fmdqui-button--type-secondary {
+  color: var(--color-neutral-200);
+}
+
+.fmdqui-tooltip--dark .fmdqui-tooltip__buttons .fmdqui-button--text.fmdqui-button--type-primary {
+  color: var(--color-secondary-400);
+}
+
+/* ── Edge → flex axis and pointer order ──
+   Figma uses a VERTICAL root for the top/bottom edges and HORIZONTAL for
+   left/right, with the pointer placed before or after the Container.        */
+.fmdqui-tooltip--edge-top    { flex-direction: column; }
+.fmdqui-tooltip--edge-left   { flex-direction: row; }
+/* Figma places the Container first on the bottom and right edges */
+.fmdqui-tooltip--edge-bottom { flex-direction: column-reverse; }
+.fmdqui-tooltip--edge-right  { flex-direction: row-reverse; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Container — Figma: 330 wide · r8 · 16px padding · 16px gap
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-tooltip__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  width: 330px;
+  padding: var(--spacing-16);
+  box-sizing: border-box;
+  background-color: var(--tooltip-surface);
+  border: 1px solid var(--tooltip-border);
+  border-radius: var(--radius-8);
+  box-shadow: var(--tooltip-elevation);
+}
+
+/* ── content row — Figma HORIZONTAL, gap 8, align CENTER ── */
+.fmdqui-tooltip__content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.fmdqui-tooltip__texts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);          /* Figma gap 4 */
+  flex: 1;
+  min-width: 0;
+}
+
+.fmdqui-tooltip__title {
+  font-size: var(--font-size-sm);  /* Figma: DM Sans SemiBold 14px */
+  font-weight: 600;
+  line-height: var(--font-line-height-paragraph);
+  color: var(--tooltip-title);
+}
+
+.fmdqui-tooltip__subtitle {
+  font-size: var(--font-size-sm);  /* Figma: DM Sans Regular 14px */
+  font-weight: 400;
+  line-height: var(--font-line-height-paragraph);
+  color: var(--tooltip-body);
+}
+
+/* ── close — Figma aligns the 20px icon to the top of the content row ── */
+.fmdqui-tooltip__close {
+  display: inline-flex;
+  align-items: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--tooltip-close);
+  border-radius: var(--radius-4);
+}
+
+.fmdqui-tooltip__close:focus-visible {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 2px;
+}
+
+/* ── buttons — Figma HORIZONTAL, SPACE_BETWEEN ── */
+.fmdqui-tooltip__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;                       /* Figma gap 10 */
+}
+
+/* When only one CTA is shown, Figma's space-between pushes it to the start */
+.fmdqui-tooltip__buttons > .fmdqui-button:only-child {
+  margin-right: auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Pointer — Figma: 20×12 vector, 1.5px rounded apex, 16px inset from the edge.
+   One upward SVG rotated per edge; rotation also swaps the 20×12 footprint to
+   12×20 on the left/right edges, exactly as Figma draws it.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-tooltip__pointer {
+  display: flex;
+  position: relative;
+  z-index: 1;                      /* sits above the container border */
+  pointer-events: none;
+}
+
+.fmdqui-tooltip__pointer-shape {
+  fill: var(--tooltip-surface);
+  stroke: var(--tooltip-border);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+
+/* ── Top / bottom edges — full-width strip, 16px horizontal inset ── */
+.fmdqui-tooltip--edge-top .fmdqui-tooltip__pointer,
+.fmdqui-tooltip--edge-bottom .fmdqui-tooltip__pointer {
+  width: 330px;
+  height: 12px;
+  padding: 0 var(--spacing-16);    /* Figma pad 0/16 */
+  box-sizing: border-box;
+  align-items: center;
+  /* Figma root gap is -1/-2 so the arrow overlaps the container border */
+  margin-bottom: -1px;
+}
+
+.fmdqui-tooltip--edge-bottom .fmdqui-tooltip__pointer {
+  margin-bottom: 0;
+  margin-top: -1px;
+  transform: rotate(180deg);
+}
+
+/* ── Left / right edges — full-height strip, 16px vertical inset ── */
+.fmdqui-tooltip--edge-left .fmdqui-tooltip__pointer,
+.fmdqui-tooltip--edge-right .fmdqui-tooltip__pointer {
+  width: 12px;
+  align-self: stretch;
+  padding: var(--spacing-16) 0;    /* Figma pad 16/0 */
+  box-sizing: border-box;
+  justify-content: center;
+  margin-right: -1px;
+}
+
+.fmdqui-tooltip--edge-right .fmdqui-tooltip__pointer {
+  margin-right: 0;
+  margin-left: -1px;
+}
+
+/* Rotate the upward arrow onto the side edges. The SVG's layout box stays
+   20×12 and overflows the 12px strip by 4px each side; after rotation the
+   visible arrow is 12×20 and centred, matching Figma's vector dimensions. */
+.fmdqui-tooltip--edge-left .fmdqui-tooltip__pointer svg,
+.fmdqui-tooltip--edge-right .fmdqui-tooltip__pointer svg {
+  margin: 0 -4px;
+}
+
+.fmdqui-tooltip--edge-left .fmdqui-tooltip__pointer svg {
+  transform: rotate(-90deg);
+}
+
+.fmdqui-tooltip--edge-right .fmdqui-tooltip__pointer svg {
+  transform: rotate(90deg);
+}
+
+/* ── Alignment along the edge — Figma MIN / CENTER / MAX ── */
+.fmdqui-tooltip--edge-top.fmdqui-tooltip--align-start .fmdqui-tooltip__pointer,
+.fmdqui-tooltip--edge-bottom.fmdqui-tooltip--align-start .fmdqui-tooltip__pointer {
+  justify-content: flex-start;
+}
+
+.fmdqui-tooltip--edge-top.fmdqui-tooltip--align-center .fmdqui-tooltip__pointer,
+.fmdqui-tooltip--edge-bottom.fmdqui-tooltip--align-center .fmdqui-tooltip__pointer {
+  justify-content: center;
+}
+
+.fmdqui-tooltip--edge-top.fmdqui-tooltip--align-end .fmdqui-tooltip__pointer,
+.fmdqui-tooltip--edge-bottom.fmdqui-tooltip--align-end .fmdqui-tooltip__pointer {
+  justify-content: flex-end;
+}
+
+.fmdqui-tooltip--edge-left.fmdqui-tooltip--align-start .fmdqui-tooltip__pointer,
+.fmdqui-tooltip--edge-right.fmdqui-tooltip--align-start .fmdqui-tooltip__pointer {
+  align-items: flex-start;
+}
+
+.fmdqui-tooltip--edge-left.fmdqui-tooltip--align-center .fmdqui-tooltip__pointer,
+.fmdqui-tooltip--edge-right.fmdqui-tooltip--align-center .fmdqui-tooltip__pointer {
+  align-items: center;
+}
+
+.fmdqui-tooltip--edge-left.fmdqui-tooltip--align-end .fmdqui-tooltip__pointer,
+.fmdqui-tooltip--edge-right.fmdqui-tooltip--align-end .fmdqui-tooltip__pointer {
+  align-items: flex-end;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TooltipTrigger — anchors the tooltip beside the element it describes.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.fmdqui-tooltip-trigger {
+  position: relative;
+  display: inline-flex;
+}
+
+.fmdqui-tooltip-trigger__layer {
+  position: absolute;
+  z-index: 100;
+  display: block;
+}
+
+/* The pointer sits on the tooltip's `edge`, so the tooltip is placed on the
+   opposite side of the trigger. */
+.fmdqui-tooltip-trigger__layer--top {
+  top: 100%;
+  left: 0;
+  padding-top: var(--spacing-8);
+}
+
+.fmdqui-tooltip-trigger__layer--bottom {
+  bottom: 100%;
+  left: 0;
+  padding-bottom: var(--spacing-8);
+}
+
+.fmdqui-tooltip-trigger__layer--left {
+  left: 100%;
+  top: 0;
+  padding-left: var(--spacing-8);
+}
+
+.fmdqui-tooltip-trigger__layer--right {
+  right: 100%;
+  top: 0;
+  padding-right: var(--spacing-8);
+}
+

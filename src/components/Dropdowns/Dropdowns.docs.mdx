@@ -1,0 +1,103 @@
+import { Meta, Canvas, Story, Controls } from '@storybook/addon-docs/blocks';
+import * as DropdownsStories from './Dropdowns.stories';
+
+<Meta of={DropdownsStories} />
+
+# Dropdowns
+
+Two families from the Figma **"✤ Dropdowns"** page. **Menu** is a trigger that opens a command-style popover. **Selectors** is a form field that opens a list of options — per Figma, it *"combines the functionality of input fields and dropdowns"*, so it composes the existing `Input` element rather than re-implementing a field.
+
+**84 Figma variants**, each covered by a story.
+
+## Figma Reference
+
+<iframe
+  title="Dropdowns Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=2190-52619&embed-host=share"
+  allowFullScreen
+/>
+
+---
+
+## Playground — Menu
+
+Click the trigger to open and close. Outside-click and <kbd>Esc</kbd> dismiss. Setting `extended` switches to controlled mode and pins the menu.
+
+<Canvas of={DropdownsStories.MenuPlayground} />
+<Controls of={DropdownsStories.MenuPlayground} />
+
+## Playground — Selector
+
+Click the field, then pick a row — the choice fills the field and the menu closes.
+
+<Canvas of={DropdownsStories.SelectorPlayground} />
+<Controls of={DropdownsStories.SelectorPlayground} />
+
+---
+
+## Elements
+
+The atomic layer, mirroring Figma's "Base components" frames.
+
+<Canvas of={DropdownsStories.ElementsCommandShortcut} />
+
+<Canvas of={DropdownsStories.ElementsMenuItemHeader} />
+
+`type` × `state`. The Checkcircle shows only in `selected` and `disabled`; the shortcut is hidden in `selected`.
+
+<Canvas of={DropdownsStories.ElementsMenuItemAllVariants} />
+
+`type` × `style` × `state`. Two Figma details worth knowing: `focused` is the only state that shifts the label to DM Sans Medium, and the selector keeps neutral-900 text when disabled instead of greying out.
+
+<Canvas of={DropdownsStories.ElementsSelectorItemAllVariants} />
+
+---
+
+## Nested components
+
+<Canvas of={DropdownsStories.NestedMenuSection} />
+
+<Canvas of={DropdownsStories.NestedMenuList} />
+
+<Canvas of={DropdownsStories.NestedSelectorMenuList} />
+
+---
+
+## Full components
+
+<Canvas of={DropdownsStories.FullDropdownsMenu} />
+
+<Canvas of={DropdownsStories.FullDropdownsSelector} />
+
+## Anatomy
+
+<Canvas of={DropdownsStories.AnatomyBuildUp} />
+
+---
+
+## Figma source
+
+| Figma node | Variants | React |
+| :--- | :--- | :--- |
+| `Command shortcut` `2327:77216` | 2 | `CommandShortcut` |
+| `Dropdown / menu item headers` `2159:85848` | 2 | `DropdownMenuItemHeader` |
+| `Dropdown / menu item` `2159:51455` | 15 | `DropdownMenuItem` |
+| `.Selector menu / menu item` `2459:70670` | 32 | `SelectorMenuItem` |
+| `Dropdown / menu items section` `2159:81118` | — | `DropdownMenuSection` |
+| `Dropdown / menu items` | — | `DropdownMenuList` |
+| `.Selector menu / menu list` | — | `SelectorMenuList` |
+| `Dropdown / Menu` `2190:52619` | 12 | `DropdownsMenu` |
+| `Dropdown / Selectors` `2198:54679` | 20 | `DropdownsSelector` |
+
+## Notes
+
+- **Reuse.** The field is `Input size="lg"` (already h56 / r12 / 1px neutral-300 / gap 12). Avatars are `Avatar`, checkmarks are `Toggle type="Checkcircle"`, icons come from `foundations/icons`.
+- **Scoped overrides.** Three, none of which touch the shared components: Toggle 24→16px, Toggle colour fmdq-blue→secondary-400, and the leading-icon gap 12→8px.
+- **Tokens.** Every Figma hex mapped to an existing token. Two were added: `--radius-6` and `--shadow-dropdown-menu`. The selector popover's shadow was an exact `--shadow-normal-xsm` match.
+- **Interaction states.** `hover` / `focused` / `active` work both as props (so every Figma variant has a story) and as real CSS pseudo-classes. `selected`, `disabled` and `filled` are props only.
+
+## Usage
+
+Use **`DropdownsMenu`** for actions and navigation; use **`DropdownsSelector`** for form input that holds a value. Label every selector clearly and keep placeholder text as guidance, never as a substitute for the label. Avoid menus whose options change based on another menu's selection.

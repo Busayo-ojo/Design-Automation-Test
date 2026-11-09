@@ -90,11 +90,13 @@ export const Tab: React.FC<TabProps> = ({
     className
   ].filter(Boolean).join(' ');
 
-  // Dynamic Badge properties based on state
+  // Dynamic Badge properties based on state (from Figma spec)
   // Default: accent/neutral
   // Hover: accent/blue
   // Active: filled/blue
+  // Disabled: filled/disabled
   const getBadgeProps = () => {
+    if (disabled) return { type: 'filled' as const, color: 'disabled' as const };
     if (isActive) return { type: 'filled' as const, color: 'blue' as const };
     if (isHovered) return { type: 'accent' as const, color: 'blue' as const };
     return { type: 'accent' as const, color: 'neutral' as const };
@@ -113,7 +115,15 @@ export const Tab: React.FC<TabProps> = ({
       onMouseLeave={() => setIsHovered(false)}
       {...props}
     >
-      {hasIcon && icon && <span className="fmdqui-tab__icon">{icon}</span>}
+      {hasIcon && icon && (
+        <span className="fmdqui-tab__icon">
+          {React.isValidElement(icon)
+            ? React.cloneElement(icon as React.ReactElement<{ size?: number }>, {
+                size: style === 'Line' ? 20 : 16,
+              })
+            : icon}
+        </span>
+      )}
       <span className="fmdqui-tab__label">{children}</span>
       {hasNumberTag && (
         <Badge 

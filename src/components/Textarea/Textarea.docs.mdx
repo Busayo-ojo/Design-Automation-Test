@@ -1,32 +1,28 @@
-import { Meta, Title, Subtitle, Description, Primary, Controls, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
 import * as TextareaStories from './Textarea.stories';
 
 <Meta of={TextareaStories} />
 
-<Title>Textarea</Title>
-<Subtitle>Standard multi-line text input field for long-form data collection.</Subtitle>
+# Textarea
 
-<Description>
-  The Textarea component shares the same visual language as the Input component (focus states, border radii, brand colors) but is optimized for multi-line content. It allows users to resize the box vertically by default.
-</Description>
+Multi-line text input supporting comprehensive design system states, sizes, labels, helper text, and character counters.
+Features 3 calibrated frame sizes (`sm`, `md`, `lg`) matching input field styling, borders, and focus rings.
 
-## Overview
+## Figma Reference
+
+<iframe
+  title="Textarea Figma reference"
+  width="100%"
+  height="450"
+  src="https://embed.figma.com/design/Hq7luvf787VJlCj1d3YJYw/Design-Automation-Test?node-id=10376-338931&embed-host=share"
+  allowFullScreen
+/>
+
+## Default View
+
 <Canvas of={TextareaStories.Default} />
 
 ## Properties
-<Controls />
 
-## Variants
+<Controls of={TextareaStories.Default} />
 
-### Error State
-Used when the user has entered invalid data or omitted a required long-form field.
-<Canvas of={TextareaStories.ErrorState} />
-
-### Sizing and Length
-Textareas can accept standard HTML layout attributes like `rows` and `cols` to dictate their initial size. You can also make them stretch to fit their container using the `fullWidth` prop.
-<Canvas of={TextareaStories.FullWidth} />
-
-## Usage Guidelines
-- Provide Help Text (`helperText`) to communicate formatting rules or length constraints.
-- **Error States** must be accompanied by an **Error Message** explaining what went wrong and how to fix it.
-- Never use a Textarea for short, single-line data (like names or email addresses). Use the `Input` component instead.

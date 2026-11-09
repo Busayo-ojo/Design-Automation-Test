@@ -1,0 +1,154 @@
+@import '../../tokens.css';
+
+/* ── Container Layout ──────────────────────────────────────────────────────── */
+
+.fmdqui-locked-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.fmdqui-locked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: var(--spacing-24, 24px) var(--spacing-16, 16px);
+  box-sizing: border-box;
+  gap: var(--spacing-24, 24px);
+  overflow-y: auto;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+}
+
+/* ── Auth Card (Figma: Auth card 10303:161404 / 10308:210995) ──────────────── */
+
+.fmdqui-locked__card {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--color-neutral-white, #FFFFFF);
+  border-radius: var(--radius-16, 16px);
+  padding: var(--spacing-40, 40px);
+  box-shadow: var(--shadow-auth-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-24, 24px);
+  box-sizing: border-box;
+}
+
+/* ── Brand Logo ───────────────────────────────────────────────────────────── */
+
+.fmdqui-locked__logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.fmdqui-locked__logo-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.fmdqui-locked__logo-button:focus-visible {
+  outline: 2px solid var(--color-primary-600, #1D326D);
+  outline-offset: 4px;
+  border-radius: var(--radius-4, 4px);
+}
+
+.fmdqui-locked__logo {
+  width: 166px;
+  height: 40px;
+}
+
+.fmdqui-locked__logo .fmdqui-logo__svg {
+  width: 166px !important;
+  height: 40px !important;
+}
+
+/* ── Featured Lock Icon Badge (Error Red #CB1A14 / #FEE4E2) ────────────────── */
+
+.fmdqui-locked__icon-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 28px;
+  background-color: var(--color-error-50, #FEE4E2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Heading Group ── */
+.fmdqui-locked__heading-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.fmdqui-locked__title {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -1.2px;
+  color: var(--color-neutral-900, #101928);
+}
+
+.fmdqui-locked__subtitle {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-sm, 14px);
+  font-weight: 400;
+  line-height: 20.3px;
+  letter-spacing: -0.56px;
+  color: var(--color-neutral-600, #475467);
+}
+
+/* ── Primary Action ── */
+.fmdqui-locked__action {
+  width: 100%;
+  max-width: 400px;
+}
+
+.fmdqui-locked__submit-btn {
+  width: 100% !important;
+  font-weight: 600;
+  letter-spacing: -0.64px;
+}
+
+/* ── Back to Sign In ── */
+.fmdqui-locked__back {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ── Footer Legal ── */
+.fmdqui-locked__footer {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.fmdqui-locked__copyright {
+  margin: 0;
+  font-family: var(--font-family-primary, 'DM Sans', sans-serif);
+  font-size: var(--font-size-p-xs, 12px);
+  font-weight: 400;
+  line-height: 17.4px;
+  letter-spacing: -0.48px;
+  color: var(--color-neutral-400, #98A2B3);
+}
+
